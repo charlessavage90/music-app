@@ -129,3 +129,13 @@ the owner's in-session approval.
   file-specific in practice and the reviewer checked none is unused. **`DLP-S3` must either use one
   allow-file per `--before` file or key entries by file before it runs a multi-file allow-list.**
   Success condition: `DLP-S3.3`'s survival run uses per-file allow-lists.
+
+### 7. Owner follow-up — the prefix dropped from `ml-graph-analyst` and `closeout` too
+
+The owner reversed the §2 "not touched" ruling in-session: *"fix the ml-graph-analyst agent's and
+closeout's commands"*. The agent's bold "Prefix every `uv` command…" sentence is removed (its location
+and `.venv` sentences stay), and the prefix is dropped from its two commands and from `closeout` D4's
+two. The three removed units are in the allow-file under their own header. Survival against each file's
+own `HEAD`: agent **113/113**, `closeout` **516/516**. No `UV_LINK_MODE` remains under `.claude/`
+except `settings.json`'s `env` and the kept prefixed allow rules. Agent and skill bodies only, and no
+description changed, so the unconditional layer is unchanged (conditional −3 lines).

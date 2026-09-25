@@ -691,8 +691,8 @@ analyses.
 ### D4. Run the suites and paste the output
 
 ```bash
-cd builder && UV_LINK_MODE=copy uv run --extra dev pytest -q
-cd ../api  && UV_LINK_MODE=copy uv run --extra dev pytest -q
+cd builder && uv run --extra dev pytest -q
+cd ../api  && uv run --extra dev pytest -q
 cd ../frontend && npm test
 ```
 

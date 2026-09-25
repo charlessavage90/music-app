@@ -18,3 +18,7 @@ Rules here do not expire, and must not be given expiry conditions.
 What grows is not the rule (2 lines, permanent) but the incident narrative attached to it (4–6 lines, and it is load-bearing — knowing what a check is for is what lets you apply it to a case it was not written for).
 That is a real trade-off, not a defect.
 The budget rule prices it by making the cost visible and the decision the owner's; an expiry date would shred the half worth keeping — and so does compressing a narrative to free lines, which is why that is no longer the price of an addition.
+# DLP-Q5 extended by the owner in-session 2026-09-24: the same prefix dropped from ml-graph-analyst and closeout
+Prefix every uv command with UVLINKMODE=copy — not strictly required any more, as uv falls back to copying on its own, but hardlinking still fails here and the prefix skips a doomed attempt.
+bash cd api && UVLINKMODE=copy uv run python eval/runbaseline.py cd builder && UVLINKMODE=copy uv run --extra dev pytest -q
+bash cd builder && UVLINKMODE=copy uv run --extra dev pytest -q cd ../api && UVLINKMODE=copy uv run --extra dev pytest -q cd ../frontend && npm test
