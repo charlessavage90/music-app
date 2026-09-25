@@ -19,6 +19,38 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-25 (later) — the top block as it stood at the `LBA-A6` adoption closeout
+
+**Last updated: 2026-09-25, at the closeout that ADOPTED `LBA-A6`.** The live site is unchanged
+(image and frontend `759e80c`, graph `graph-lux4.bin`). **`ApiConfig.graph_path` now names
+`graph-lba-a6.bin`** on branch `charlessavage90/candidate-map-adoption-decision`. That is an
+address; `git`/`gh` own the merge state.
+
+# THE NEW MAP IS ADOPTED. THE NEXT ACTION IS THE OWNER'S: MERGE, THEN DEPLOY IT.
+
+**`LBA-G5` PASSED and the owner ADOPTED the candidate on 2026-09-25.** His verdict is recorded verbatim,
+with its reading against his pre-written criterion, in
+[`2026-09-21-lbd-s4-a6-adoption-execution-log.md`](2026-09-21-lbd-s4-a6-adoption-execution-log.md) Task 6.
+The artifact's identity is owned by `builder/analysis/2026-09-21-lbd-s4-a6-candidate/README.md`. The
+current handoff is [`2026-09-25-HANDOFF-lba-a6-adoption.md`](2026-09-25-HANDOFF-lba-a6-adoption.md).
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner:** merge the adoption PR (branch above).
+2. **Deploy the new map to production**, which needs his go and his AWS hands. Follow `infra/README.md`
+   §4 exactly as its ⚠ block for this deploy says: `GRAPH=graph-lba-a6.bin`, **both** `s3 cp` lines,
+   and `cdk diff` expected to show the graph variables changing. The image must be built from the
+   merged HEAD, because it carries the search fix the new map needs. Then run the §7 sidecar check
+   and correct §4's served-artifact line. **In the same deploy session:** take the direct p95
+   reading on the container (#142, due now that a larger map ships).
+3. **The owner:** press the two `TEST-QUEUE.md` boxes on unsung.fm after that deploy.
+4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or
+   pick new ones) and #200 (deepen obscurity after several Dig-deeper presses; its step 1 becomes
+   a session's once the PR merges).
+
+---
+
 ## Demoted 2026-09-25 — the top block as it stood from 2026-09-24 (`LBA-G5` started)
 
 **Last updated: 2026-09-24, at the closeout that STARTED `LBA-G5`.** **The live site's CODE changed

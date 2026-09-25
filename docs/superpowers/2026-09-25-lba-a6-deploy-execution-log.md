@@ -1,6 +1,6 @@
 # `LBA-A6` production deploy — execution log, 2026-09-25
 
-**Role: RETAINED REASONING for the deploy that put `LBA-A6` (`graph-lba-a6.bin`) on unsung.fm.**
+**Role: ACTIVE — RETAINED EXECUTION LOG for the deploy that put `LBA-A6` (`graph-lba-a6.bin`) on unsung.fm.**
 What was run, what each gate returned, and what was checked rather than assumed. **It owns no
 status** (`NEXT.md`). **It owns exactly one figure: the #142 production query-cost reading in §5**,
 because the document that owns the stage-2 query-cost figures
@@ -50,7 +50,7 @@ consultant accepted all five, and the owner cleared the run.
 | `npm run test:e2e` | **12 passed**, against a local API booted on `graph-lba-a6.bin` by absolute path (`/health` confirmed the sha before the run) |
 | `snyk container test` | three highs: the `TKB-6` pair (`attr`, `acl`) and `zlib1g` (#225). **All three `fixedIn: []`, `isUpgradable: false`**, so #225's condition (a fixed Debian package exists) has not come due |
 | frontend `npx snyk test` | no vulnerable paths |
-| `snyk_code_scan` on this session's one new script (`prod_p95_probe.py`) | two **Low** `python/PT` findings — a command-line path reaching `open()`. **Accepted, not fixed:** the operator running it by hand supplies both paths, so no trust boundary exists for a guard to defend |
+| `snyk_code_scan` on this session's one new script (`prod_p95_probe.py`) | two **Low** `python/PT` findings — a command-line path reaching `open()`. **Recorded, not fixed; extending the acceptance is the owner's** (`NEXT.md`'s accepted-residuals row for this class under `builder/analysis/`). Same class and same reason as that row's: the operator running it by hand supplies both paths, so no trust boundary exists for a guard to defend |
 
 ## §3 The diff, and the fifth row that was not a change
 
@@ -167,3 +167,23 @@ graph-only rollback recipe. **A session must not propose a revert criterion, or 
 history; §5 gains the four-row rule with the IAM-delta precondition, and the omitted-row check;
 §5's stale "redact `Basic <...>`" note replaced with what was measured; §9 gains a graph-only
 rollback recipe to `graph-lux4.bin` that includes the frontend from `e5d8850`.
+
+## §8 Closeout
+
+- **D6, standing context layer: delta 0** — no `CLAUDE.md`, `.claude/` or memory file in the diff.
+  Totals measured against memory directory `C--dev-music-app`: unconditional **44,498 characters**,
+  conditional **2,953 lines**.
+- **B1:** `scripts/docs-lint.sh` hard checks passed; its candidates are restated-figure matches in
+  older frozen specs, none in this diff. `doc-auditor` over this diff found two, both fixed: a rollback-recipe path missing its
+  `frontend/` prefix (runbook §9, HIGH) and this log's role line disagreeing with its `docs/README.md` row (MEDIUM).
+- **B2/B3 inapplicable:** no module or test added; the one script is an analysis probe nothing
+  imports. **A4 inapplicable:** no config knob added. **D2/D3:** no fixture changed; the deployed
+  artifact's identity is recorded in §2–§4 (sha `28311d81…`, owned by the candidate README).
+- **D4:** builder 292, api 347, frontend 292 (34 files) — all passed after the last code-bearing
+  commit; this branch changes no code.
+- **A5:** ports 8000 and 5173 free; the only server this session started (local API for e2e) was
+  stopped before the deploy.
+- **C1:** nothing new to queue — the three boxes already queued became pressable with this deploy
+  and their "Where" lines now say so. #232's player changes are box 1.
+- **A3:** #142 closed with its reading; #237 filed (the prune); #225's condition re-tested (no
+  Debian fix — not due); #200's condition is met and it already carries `agent-ready`.

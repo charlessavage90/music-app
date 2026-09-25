@@ -778,7 +778,7 @@ refusal does not contain the secret.
   #    The landing page's sample journeys (and its teaser) are MEASURED ON THE MAP — on LBA-A6
   #    Bad Bunny -> Chappell Roan is 3; e5d8850 says 8, measured on graph-msw-tu50.bin, which
   #    routes identically to graph-lux4.bin (L4-T7) — so an API-only revert leaves the landing
-  #    advertising journeys the served map does not build. e2e/landing-samples.spec.ts checks
+  #    advertising journeys the served map does not build. frontend/e2e/landing-samples.spec.ts checks
   #    them against whatever map the local API serves; run it there against graph-lux4.bin.
   git worktree add C:/Users/charl/worktrees/music-app-rollback e5d8850
   cd C:/Users/charl/worktrees/music-app-rollback/frontend && npm ci
