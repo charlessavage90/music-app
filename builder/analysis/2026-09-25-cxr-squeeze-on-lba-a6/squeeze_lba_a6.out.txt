@@ -1,0 +1,58 @@
+sha256 OK  graph-lux4.bin  fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b
+w_known_ramp_fame_pctl = 0.01  (ApiConfig default)
+
+POPULATIONS
+lux4    N=58,838  E(csr)=1,315,684
+lba-a6  N=87,394  E(csr)=2,490,728
+shared 57,909  only-lux4 929  only-lba-a6 29,485
+
+MEASURED NULLS (fame_lb is None)
+lux4    92 of 58,838
+lba-a6  3 of 87,394
+lux4: nulls->0.0 True; NaN none; measured-only frame reproduces shipped pctl exactly: True; max |delta| had nulls been framed as 0: 1.56e-03; min measured pctl 0.0000, max 1.0000; measured artists at pctl 0.0: 54
+lba-a6: nulls->0.0 True; NaN none; measured-only frame reproduces shipped pctl exactly: True; max |delta| had nulls been framed as 0: 3.43e-05; min measured pctl 0.0000, max 1.0000; measured artists at pctl 0.0: 4
+
+shared artists null in lux4 1, in lba-a6 1, in both 1, in EITHER (drop out) 1
+null among only-lba-a6 2, among only-lux4 91
+
+CXR-M3  paired fame-percentile shift (lba-a6 minus lux4, each in own frame)
+[HEADLINE nulls-in-either dropped] n=57,908  median +0.0745  mean +0.0675  rose 99.14%  fell 0.86%  p10 +0.0186  p90 +0.1028
+[CXR-literal all shared] n=57,909  median +0.0745  mean +0.0675  rose 99.14%  fell 0.86%  p10 +0.0186  p90 +0.1028
+
+[HEADLINE nulls-in-either dropped] CXR-M4 by position in the OLD (lux4) frame
+old band             n  old mean  new mean    shift
+0.00-0.20       11,074    0.1042    0.1405  +0.0363
+0.20-0.40       11,656    0.3001    0.3830  +0.0829
+0.40-0.60       11,718    0.5000    0.6024  +0.1024
+0.60-0.80       11,720    0.7000    0.7830  +0.0830
+0.80-0.90        5,869    0.8500    0.8966  +0.0466
+0.90-0.95        2,933    0.9250    0.9491  +0.0240
+0.95-0.99        2,350    0.9700    0.9797  +0.0097
+0.99-1.00          588    0.9950    0.9966  +0.0016
+gap top-1% minus mid-scale: old 0.4950  new 0.3942  (-20.4%)
+   5 presses: old 0.02475  new 0.01971
+  10 presses: old 0.04950  new 0.03942
+  20 presses: old 0.09899  new 0.07884
+top of old frame (>=0.999, n=59): mean shift +0.0002
+
+[CXR-literal all shared] CXR-M4 by position in the OLD (lux4) frame
+old band             n  old mean  new mean    shift
+0.00-0.20       11,075    0.1042    0.1404  +0.0363
+0.20-0.40       11,656    0.3001    0.3830  +0.0829
+0.40-0.60       11,718    0.5000    0.6024  +0.1024
+0.60-0.80       11,720    0.7000    0.7830  +0.0830
+0.80-0.90        5,869    0.8500    0.8966  +0.0466
+0.90-0.95        2,933    0.9250    0.9491  +0.0240
+0.95-0.99        2,350    0.9700    0.9797  +0.0097
+0.99-1.00          588    0.9950    0.9966  +0.0016
+gap top-1% minus mid-scale: old 0.4950  new 0.3942  (-20.4%)
+   5 presses: old 0.02475  new 0.01971
+  10 presses: old 0.04950  new 0.03942
+  20 presses: old 0.09899  new 0.07884
+top of old frame (>=0.999, n=59): mean shift +0.0002
+
+only-lba-a6 artists' fame pctl median 0.3332  vs shared 0.6105 (both in lba-a6 frame)
+sha256 OK  graph-msw-tu50.bin  43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8
+
+comparability: msw-tu50 mbids == lux4 mbids (same order): True;  fame_lb identical: True

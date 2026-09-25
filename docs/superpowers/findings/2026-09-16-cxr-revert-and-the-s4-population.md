@@ -243,6 +243,8 @@ pre-registration §9 bars reading either as a pass or a failure.
 
 Both are **open**. Neither has been run, and this note does not run them or ask for them.
 
+> **Item 2 CLOSED 2026-09-25** by [`../../../builder/analysis/2026-09-25-cxr-squeeze-on-lba-a6/README.md`](../../../builder/analysis/2026-09-25-cxr-squeeze-on-lba-a6/README.md), which owns the figures: §3b is **confirmed with a magnitude** on the adopted `LBA-A6` map. Item 1 remains open.
+
 1. **The cap fields, read from `graph-cxa-adopted.bin`'s own manifest sidecar.** §3a's comparison
    between stage 3 §2a and `CXR-P2` requires that both artifacts were capped by the same rule at
    the same two values. That is asserted by `../plans/2026-08-10-cxa-graph-adoption.md` §0.1's
