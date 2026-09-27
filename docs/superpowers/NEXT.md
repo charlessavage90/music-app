@@ -63,7 +63,11 @@ got.**
 3. **After a few days:** #237 — prune the previous frontend's assets (a session's, with his AWS hands).
 4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or pick
    new ones) and #200 (whether "better" should also prefer less-listened artists; step 1 is done,
-   PR #238, and its options are in that directory's README §4).
+   PR #238, and its options are in that directory's README §4). **Added 2026-09-27:** two descriptive
+   measurements closing step 1's weakest links 1 and 3 —
+   `builder/analysis/2026-09-27-issue-200-graph-descriptives/` (its §4 extends step 1's options; it
+   also marks `PRODUCT-REQUIREMENTS.md` §8's "the barrier is gone" as not holding at the top 1 % on
+   the adopted map, which is his document and unedited).
 
 ---
 
