@@ -1,0 +1,69 @@
+sha256 OK graph-lba-a6.bin 28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+pathfinding: C:\Users\charl\worktrees\music-app\penguin\api\src\artistpath_api\pathfinding.py
+
+## A0 identity-level facts (measured)
+N 87,394  CSR entries 2,490,728  undirected edges 1,245,364  metadata keys ['apple_ids', 'artist_facts', 'deezer_ids', 'disambiguations', 'fame_lb', 'mbids', 'names', 'popularity', 'spotify_ids']
+edge_types unique values: [0]
+degree: min 1 max 50 median 26; nodes at 50: 14,778
+CSR symmetric (u->v iff v->u): True; scores equal both directions: True
+rows sorted by neighbour id: True
+
+## DRP-Q2: pop_raw range and the floor (measured)
+pop_raw dtype float32; min 0.0; max 1.0; count == 1.0: 1; count == 0.0: 12
+cfg.floor_relax_known 0.15; 0.15*6 = 0.8999999999999999; 0.15*7 = 1.05
+  k=0: effective_floor_raw(base=max pop_raw) = 1.0
+  k=1: effective_floor_raw(base=max pop_raw) = 0.85
+  k=2: effective_floor_raw(base=max pop_raw) = 0.7
+  k=3: effective_floor_raw(base=max pop_raw) = 0.55
+  k=4: effective_floor_raw(base=max pop_raw) = 0.4
+  k=5: effective_floor_raw(base=max pop_raw) = 0.25
+  k=6: effective_floor_raw(base=max pop_raw) = 0.10000000000000009
+  k=7: effective_floor_raw(base=max pop_raw) = 0.0
+  k=8: effective_floor_raw(base=max pop_raw) = 0.0
+pools: T1 874  T2 3,496  MID 34,957
+| pool | pop_raw p10 | p50 | p90 | max | min |
+|---|---|---|---|---|---|
+| T1 | 0.575 | 0.704 | 0.855 | 1.000 | 0.466 |
+| T2 | 0.529 | 0.586 | 0.696 | 0.901 | 0.267 |
+| MID | 0.410 | 0.476 | 0.540 | 0.718 | 0.000 |
+
+Share of ALL unordered within-pool pairs whose floor is still NON-ZERO at press k (floor_raw = max(0, min(pop_s, pop_t) - 0.15k) > 0):
+| pool | k=0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|---|
+| T1 | 1.000 | 1.000 | 1.000 | 1.000 | 0.686 | 0.129 | 0.001 | 0.000 |
+| T2 | 1.000 | 1.000 | 0.998 | 0.995 | 0.183 | 0.001 | 0.000 | 0.000 |
+| MID | 1.000 | 0.999 | 0.975 | 0.580 | 0.000 | 0.000 | 0.000 | 0.000 |
+
+## DRP-Q3 support: degree headroom (measured)
+T1 centres: shipped degree min 2 median 49 max 50; headroom to 60 min 10
+possible partners (measured pctl < 0.90, 78,651 nodes): shipped degree p10 8 median 25 p90 50; share with shipped degree <= 49 (headroom > 10 under the 60 bound): 0.8580
+pop_raw by fame band (for the jump/floor price on a famous->partner hop):
+| fame band | n | pop_raw median | p10 | p90 |
+|---|---|---|---|---|
+| [0.99, 1.01) | 874 | 0.704 | 0.575 | 0.855 |
+| [0.95, 0.99) | 3,496 | 0.586 | 0.529 | 0.696 |
+| [0.85, 0.9) | 4,369 | 0.524 | 0.488 | 0.600 |
+| [0.7, 0.85) | 13,103 | 0.504 | 0.467 | 0.574 |
+| [0.5, 0.7) | 17,482 | 0.482 | 0.438 | 0.552 |
+| [0.0, 0.5) | 43,697 | 0.454 | 0.320 | 0.509 |
+
+## DRP-Q4: the committed A0 per-pair output (parsed, not re-run)
+FAMOUS: d10 median 0.992 sd 0.0132 MAD 0.0035; d10-d0 median -0.003 sd 0.0133 MAD 0.0040; pairs with d10 <= d0-0.05: 0; |d10-d0| < 0.015: 34; d10 < 0.94: 0
+MID: d10 median 0.906 sd 0.1007 MAD 0.0755; d10-d0 median -0.005 sd 0.0702 MAD 0.0200; pairs with d10 <= d0-0.05: 11; |d10-d0| < 0.015: 16; d10 < 0.94: 23
+
+## DRP-Q4: what DRP-C1(2) demands of 40 pairs (arithmetic, not a measurement)
+Model: m of 40 pairs have D << -N_noise (movers), the rest D ~ 0. A resampled median of 40
+(mean of order stats 20 and 21) is <= -N_noise iff >= 21 movers are drawn, or exactly 20
+when the movers' D <= -2*N_noise. Pass needs P(bootstrap median > -N_noise) <= alpha.
+  upper bound = 97.5th pct (two-sided 95 %), resample needs >= 21 movers: minimum movers m = 27 of 40
+  upper bound = 97.5th pct (two-sided 95 %), resample needs >= 20 movers: minimum movers m = 26 of 40
+  upper bound = 95th pct (one-sided 95 %), resample needs >= 21 movers: minimum movers m = 26 of 40
+  upper bound = 95th pct (one-sided 95 %), resample needs >= 20 movers: minimum movers m = 25 of 40
+
+## DRP-Q5: the DRP-SW trigger arithmetic
+  n=40: identity share < 0.90 fires at <= 35 identical, i.e. >= 5 changed
+  n=36: identity share < 0.90 fires at <= 32 identical, i.e. >= 4 changed
+  n=30: identity share < 0.90 fires at <= 26 identical, i.e. >= 4 changed
+  Statistic 2 (|median of M_S1P0(0)-M_A0(0)| >= 0.05) requires the median to be non-zero; with
+  >= 21 of 40 differences exactly 0 (identical first paths) the median is 0, so statistic 2 can
+  only fire when <= 20 of 40 are identical: identity share <= 0.50, which already fires statistic 1.
