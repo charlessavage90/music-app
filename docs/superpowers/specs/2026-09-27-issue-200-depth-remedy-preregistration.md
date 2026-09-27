@@ -1,0 +1,872 @@
+# Issue #200 depth remedy — pre-registration (`DRP-`)
+
+**Role: ACTIVE, and GOVERNING for the issue-#200 depth remedy: its arms, measurements, gates,
+reads and staging.** Committed **before anything runs**: no arm is built, no journey is routed on
+any arm, no pair is drawn, no config default is changed, no listen is designed, and the owner's
+use-gate criterion (§9) is **owed and absent**. The git commit timestamp is the evidence that
+every bar and read below preceded every result.
+
+**Where it sits.** Issue #200 is the brief. Its body's step 2 is this document. The owner's three
+rulings of 2026-09-27 (issue comment, quoted verbatim in §1) scope it. The shape follows
+[`2026-09-14-lbd-s4-adoption-preregistration.md`](2026-09-14-lbd-s4-adoption-preregistration.md)
+(`LBA-`): an analyst critique before any arm, the owner's go, the offline lattice, the owner's
+go/no-go, a `REQ-38` blind listen designed cold, then an unblinded use gate on his pre-written
+criterion. **This document governs the #200 remedy and nothing else.** Status is
+[`../NEXT.md`](../NEXT.md)'s and is never restated here.
+
+**It owns no figures.** Every quantity is a bar this document fixes, a value read from source with
+its file and line, or arithmetic over shipped code. Measured figures are **cited by section, never
+restated**, from these five owners (read in this order when designing it):
+
+1. [`builder/analysis/2026-09-25-cxr-squeeze-on-lba-a6/README.md`](../../../builder/analysis/2026-09-25-cxr-squeeze-on-lba-a6/README.md) — the fame-ruler squeeze on the adopted map.
+2. [`builder/analysis/2026-09-25-issue-200-served-fame-vs-listeners/README.md`](../../../builder/analysis/2026-09-25-issue-200-served-fame-vs-listeners/README.md) — the definition agrees with the owner's ear; the question is routing.
+3. [`builder/analysis/2026-09-27-issue-200-graph-descriptives/README.md`](../../../builder/analysis/2026-09-27-issue-200-graph-descriptives/README.md) — the top-1 % wall (§1 A) and Dig deeper on 40 famous and 40 mid-scale pairs (§1 B).
+4. [`builder/analysis/2026-09-27-issue-200-ruler-vs-map/README.md`](../../../builder/analysis/2026-09-27-issue-200-ruler-vs-map/README.md) — the wall is in the map's connections, not the ruler.
+5. [`builder/analysis/2026-09-27-issue-200-trim-supply/README.md`](../../../builder/analysis/2026-09-27-issue-200-trim-supply/README.md) — the wall is made by the fifty-connection trim, not by missing supply (`SUP-R1`).
+
+**Shape precedents, cited and not transferred** (both ran on other archives and other maps):
+[`../findings/2026-07-30-track-b-cap-selection-results.md`](../findings/2026-07-30-track-b-cap-selection-results.md)
+(`CRS-C4`, `CRS-C5`, §4) and
+[`../findings/2026-08-04-cap-reevaluation-results.md`](../findings/2026-08-04-cap-reevaluation-results.md)
+with its pre-registration
+[`2026-08-03-cap-reevaluation-preregistration.md`](2026-08-03-cap-reevaluation-preregistration.md)
+(`CRE-`: §0.3, §3.3, §4 `CRE-D3`, §5 `CRE-C1`/`CRE-C4`); the toll-family closure and `TB-P5H-7`
+from [`../2026-07-29-track3b-execution-log.md`](../2026-07-29-track3b-execution-log.md) §5; the
+depth-gate shape and `AM1.2`/`AM1.3`/`AM1.9` from
+[`2026-08-09-journey-fame-exposure-preregistration.md`](2026-08-09-journey-fame-exposure-preregistration.md)
+(`JFX-`) and its critique README; the `CXR-` history from
+[`builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md`](../../../builder/analysis/2026-09-01-cxr-regression-diagnosis/README.md).
+
+**Requirements.** [`../PRODUCT-REQUIREMENTS.md`](../PRODUCT-REQUIREMENTS.md) governs (Definitions
+including Coherence; `REQ-1`, `REQ-9`, `REQ-13`, `REQ-14`, `REQ-16`, `REQ-17`, `REQ-18`, `REQ-27`,
+`REQ-33`, `REQ-34`, `REQ-35`, `REQ-38`, `REQ-39`, `REQ-41`, `REQ-42`; §8 including its 2026-09-27
+forward note). [`../WHAT-GOOD-LOOKS-LIKE.md`](../WHAT-GOOD-LOOKS-LIKE.md) records preference, not
+evidence: **no threshold below is read off it.**
+
+**Identifiers introduced here: the `DRP-` series** — `DRP-D1`–`DRP-D3` (the owner's rulings),
+`DRP-S0`/`DRP-S1` (supply levels), `DRP-P0`–`DRP-P2` (pricing levels), the six cells
+`DRP-S0P0`…`DRP-S1P2`, `DRP-T1`/`DRP-T2`/`DRP-MID` (pair strata), `DRP-C1`–`DRP-C10` (criteria and
+companions), `DRP-G1`–`DRP-G8` (gates), `DRP-R0`–`DRP-R11` (reads), `DRP-X1`–`DRP-X7` (named
+exposures), `DRP-Q1`–`DRP-Q6` (the analyst's questions), **`DRP-SW` (the pre-committed
+switched-exits amendment slot, §2.10)**, and the amendment register `DRP-AM` (§14). **Collision-checked
+across every ref on 2026-09-27** —
+`git grep -lE '\bDRP-' $(git for-each-ref --format='%(refname)' refs/remotes refs/heads)`, all
+files and `*.md` alone: **zero hits.** ⚠ **Every token is written with its prefix.** Bare `S0`,
+`P1`, `C1`, `G1`, `R1`, `T1` all belong to other series (Track 2, Track B, `CRE-`, `JFX-`, the
+fame strata); this document never uses one bare.
+
+---
+
+## §0 — The question
+
+> **Plain sentence, and it is the whole document: can we make *Dig deeper* take journeys between
+> two famous artists toward less-listened artists — without breaking the journey — by giving
+> famous artists back some of the less-listened connections the map build throws away, by
+> pushing harder per press, or by both?**
+
+It is asked **inside the current definition** (`DRP-D3`): the router steers on `fame_lb_pctl`, the
+adopted proxy for novelty-likelihood. **Nothing here changes what "famous" or "obscure" means.**
+
+---
+
+## §1 — The owner's three rulings, recorded verbatim and not reopened
+
+Given 2026-09-27 on issue #200, *"recorded here so the pre-registration can quote them from the
+record rather than from a conversation"*. Quoted, not paraphrased.
+
+**`DRP-D1` — the unpause, HIS.**
+
+> 1. Path-quality work is unpaused for this issue. "Yes, let's pull the trigger." This unpauses #200 only; nothing else parked in [NEXT.md](http://NEXT.md) is unpaused by it.
+
+*Consequence here:* nothing parked in `NEXT.md` is touched — not Option C, not `SEL-`, not the
+three `CXR-` candidate fixes, not the router-side pricing track in general. This document is the
+#200 remedy only.
+
+**`DRP-D2` — the first-path climb is a conditional residual, HIS.**
+
+> 2. On the finding in builder/analysis/2026-09-27-issue-200-graph-descriptives/[README.md](http://README.md) §1 B that a first path between two mid-scale endpoints already runs through the famous core before any press (against REQ-34): "I consider this acceptable if we can really fix the broader issue." Read that as conditional: the first-path climb is an accepted residual only if the depth remedy succeeds on famous pairs. Until then it is neither accepted nor a target. Depth zero is measured and reported in every arm, not scored.
+
+*Consequence here:* depth 0 is **measured and reported in every cell and scored in none** (§5
+`DRP-C5`). No criterion rewards or penalises a first path. **Whether the condition "the depth
+remedy succeeds on famous pairs" is met is decided at adoption, not by any offline read**: an
+offline pass here is necessary for it and not sufficient (§7 `DRP-R10`).
+
+**`DRP-D3` — the 2026-09-25 pass was on the map, not on depth, HIS.**
+
+> 3. My comment of 2026-09-25 above ("...this is a pass regardless, but in the future, I'd like to explore whether we can 'deepen' obscurity by adjusting the routing within the graph, especially after multiple 'dig deeper' presses") was a pass on adopting the map. It was not a ruling that the depth behaviour is acceptable. The 2026-07-29 famous-to-famous defect ruling in [PRODUCT-REQUIREMENTS.md](http://PRODUCT-REQUIREMENTS.md) §8 stands.
+
+*Consequence here:* the target is the **2026-07-29 famous-to-famous defect** (`REQ-13`,
+`REQ-37`, §8), **in fame currency, within the current definition.** This is a routing-and-map
+remedy, not a definition change; #200's definition question ("should better also prefer
+less-listened artists", in audience size) is not decided or pre-empted here.
+
+**Also from the issue, standing:** step 1 established that the definition agrees with the owner's
+ear and the question is which artists the router picks (served-fame README §2); **`LBA-AM4` bar 1
+still binds** — no figure from the `LBA-G5` period enters any record as a path-quality
+measurement, and nothing here uses one.
+
+---
+
+## §2 — Factor table
+
+### §2.1 The knobs, and what each level is
+
+**Two knobs, crossed: SUPPLY (two levels) × PRICING (three levels) = six cells.** Every cell has a
+baseline differing from it in exactly one column.
+
+| knob | level | plain sentence, fixed here before any result |
+|---|---|---|
+| **supply** | **`DRP-S0`** — the shipped trim | *the map exactly as it is served today.* `graph-lba-a6.bin`, sha-verified against its sidecar. |
+| | **`DRP-S1`** — extra exits, always on | *famous artists get up to ten extra connections to less-listened artists who are already similar to them, and journeys can use them from the very first path.* |
+| **pricing** | **`DRP-P0`** — production | *today's per-press pull toward less-listened artists.* Every `ApiConfig` field at its default. |
+| | **`DRP-P1`** — a stronger pull | *each press pushes twice as hard toward less-listened artists as today.* `w_known_ramp_fame_pctl` = 0.02, every other field default. |
+| | **`DRP-P2`** — the strongest admissible pull | *each press pushes three times as hard toward less-listened artists as today.* `w_known_ramp_fame_pctl` = 0.03, every other field default. |
+
+### §2.2 The six cells, one row each, isolating baseline named per row
+
+| cell | supply | pricing | isolating baseline(s), and how many columns away | what the comparison isolates |
+|---|---|---|---|---|
+| **`DRP-S0P0`** = **A0**, the anchor | S0 | P0 | — (it *is* the anchor: production map, production weights) | — |
+| **`DRP-S0P1`** | S0 | P1 | `DRP-S0P0` — **pricing only** ✓ | a stronger pull on today's map |
+| **`DRP-S0P2`** | S0 | P2 | `DRP-S0P1` — **pricing size only** ✓ | how graded the pull is, on today's map |
+| **`DRP-S1P0`** | S1 | P0 | `DRP-S0P0` — **supply only** ✓ | the extra exits at today's pull |
+| **`DRP-S1P1`** | S1 | P1 | `DRP-S1P0` — **pricing only** ✓; `DRP-S0P1` — **supply only** ✓ | the crossed cell |
+| **`DRP-S1P2`** | S1 | P2 | `DRP-S1P1` — **pricing size only** ✓; `DRP-S0P2` — **supply only** ✓ | the crossed cell at the strongest pull |
+
+The switched-exits variant is **not** in this lattice. It is a pre-committed amendment slot,
+`DRP-SW` (§2.10), with its trigger fixed now.
+
+### §2.3 The supply variant, concretely
+
+**`DRP-S1`'s added edges — the rule, fixed now.** Built by analysis code from the capture the
+trim-supply instrument already uses (`trim_supply.py`: the shipped `build_from_archive` on the
+`S4-A6` archive, reproducing `graph-lba-a6.bin`).
+
+1. **Centres** = lba-a6 nodes with **measured** `fame_lb_pctl` ≥ **0.99** in lba-a6's own frame
+   (the shipped `GraphStore.fame_percentiles`). *Plain: the most-listened 1 % of the map.*
+2. **Candidates for a centre** = its **pre-ceiling union partners** (trim-supply's `SUP-S3`: the
+   centre's own top-50 plus everyone who ranks the centre in *their* top-50) that are **not already
+   its neighbour on lba-a6**, are **lba-a6 nodes**, and have **measured** `fame_lb_pctl` **< 0.90**.
+   *Plain: less-listened artists who already named this famous artist among their fifty most
+   similar, and whom the trim deleted.*
+3. **Selection.** Centres are processed in **ascending node id** (= ascending MBID, as
+   `build_graph` assigns ids, `graph.py:328-329`). Each centre adds, strongest first by the shipped
+   trim's symmetric strength key (the pair's stronger **unclipped** ranking value,
+   `graph.py:238-242`; ties on lowest partner MBID), **up to R = 10 candidates** — skipping any
+   candidate whose current degree (shipped edges plus edges added so far) is already **60**.
+4. **Scores** of an added edge are the pipeline's rescaled score for that pair, symmetrised on the
+   stronger direction, exactly as the shipped union would have emitted it (`graph.py:228-234`).
+   The rescale runs over the whole pre-cap list before any cap (`pipeline.py:369-377`), so it is
+   unaffected by this step.
+5. **Every shipped edge is kept.** Nothing is displaced. **Every edge in the artifact carries
+   `edge_type` 0, the shipped value** — the added edges are not typed in this lattice (§2.10 says
+   why typing is deferred). The artifact is assembled by analysis code as a `Graph` and serialised
+   by the shipped `serialise`; the APG1 format is used unchanged.
+6. **Bound.** Degree ≤ 50 on shipped edges alone (unchanged); ≤ **60** including added edges, for
+   every node. *Plain: no artist gets more than ten connections beyond today's limit.*
+
+**`DRP-S1` is routed by the SHIPPED `find_journey`, unmodified** (§4). No router copy exists in this
+lattice.
+
+**Why R = 10 and the ceiling at 60.** R = 10 is `floor(0.2 × 50)`, Track B's `banded_quota` value
+(`cb_build_variants.py:166`, `:234`) — the only quota with a record, reused rather than invented.
+The 60 bound is the ceiling plus R, so no partner can absorb more added edges than a centre can
+give.
+
+**How this relates to Track B's `banded_quota`** (`builder/analysis/2026-07-30-track-b-cap-selection/cb_build_variants.py`,
+`cap_trimmed_union(trim="banded_quota")`, `:163-256`) — same family, three differences, so **none
+of Track B's `CRS-C5` results transfer**; they are cited for shape only:
+
+| | Track B `banded_quota` | `DRP-S1` |
+|---|---|---|
+| band currency | **`pop_raw` rank**, top decile of **the build's own population** (`:228-233`) | **fame percentile**, lba-a6's frame — possible now because fame ships in the build (`require_fame`) |
+| where it applies | **every** over-degree node | **the top 1 % only** |
+| how the slots are made | **reserved inside** the ceiling — famous edges are **displaced** | **added above** the ceiling — nothing is displaced |
+
+**Why added-above and not reserved-inside.** Three reasons. (1) **Every shipped edge survives**, so
+the node set, the largest component, `pop_raw` and the fame frame equal lba-a6's by construction
+(§2.6) rather than by luck. (2) **Any first-path change is by addition only**, so `DRP-C5` reads
+"did the extra exits pull the first path" cleanly. (3) **It keeps `DRP-SW` buildable**: a
+switched variant can equal today's map before its switch only if no shipped edge was removed. It is,
+in effect, **a raised ceiling for the top 1 % whose extra slots may only be filled by less-listened
+partners**.
+
+**Why not a plain raised ceiling.** The trim ranks on raw co-listening strength with no correction
+for overall play, so a famous artist's strongest connections are other famous artists
+(trim-supply §2, "Why the strongest are the famous ones"). A plain raised ceiling keeps the next
+strongest, which are also famous; `cb_build_variants.py`'s own docstring (`:182-187`) records that
+weakest-first trimming provably deletes the union-added famous→obscure edges wherever a node's own
+list supplies enough. And raising the degree bound raised hub transit in Track B (`CRS-C4`, results
+§1). **The band restriction is what makes the extra slots reach less-listened artists.**
+
+**Why not the third form trim-supply §4 names — ranking with a correction for overall play
+(`similarity_damping` > 0). Out of scope.** It reprices **every** edge's similarity, and therefore
+`w_sim` on every path in every cell, which is a different intervention. It also cannot run at all
+with the adopted clip rescale until the centring term is implemented (`config.py:166-170`).
+`similarity_damping` is **held at 0.0** (§2.6). **If any supply arm ever touches it, it is a knob
+with its own column, not a constant.**
+
+**Why the top 1 % and the 0.90 bar.** The wall is at the top 1 % below 0.9 (graph-descriptives
+§1 A; trim-supply's `SUP-R1` headline was read at exactly that tier and bar). It is only weakly
+present across the wider top decile, so restricting centres there keeps the intervention small:
+the other 99 % of the map is untouched. Whether the top 1 %'s new exits help journeys between
+artists in the **0.95–0.99** tier is what the `DRP-T2` stratum tests (§4).
+
+### §2.4 The pricing levels, concretely — and why the toll is admissible here
+
+**`DRP-P1` = 0.02 and `DRP-P2` = 0.03 for `w_known_ramp_fame_pctl`**, each set by an `ApiConfig`
+override in the harness. The shipped term (`pathfinding.py:130-132`, `:169-170`) adds
+`ramp × k × fame_lb_pctl(v)` per interior artist, target exempt. **No new term.**
+
+- **Why 0.03 is the top.** `CRE-` §3.3 fixed its bracket at 0.01/0.03 after its analyst critique
+  measured the originally drafted 0.05/0.15 far past the point where the obscurity toll outweighs
+  similarity (critique F7,
+  `builder/analysis/2026-08-03-cre-prereg-critique/cre-analyst-critique.md`; its realised
+  chosen-edge similarity costs are cited, not restated). **0.03 is the strongest setting on the
+  record that `CRE-` kept on coherence grounds; anything stronger is barred without new coherence
+  evidence** — the "no viable pricing regime" sub-outcome `CRE-R0` names.
+- **Why 0.02 as well.** `CRE-`'s strong arm on another archive landed its change within a handful of
+  presses rather than building across them (CRE results §3, "What I would abandon cheaply") — a
+  step, where `REQ-42` and `REQ-16` want a gradient. A middle level gives every supply level a
+  pricing-size comparison (`DRP-S0P1`→`P2`, `DRP-S1P1`→`P2`), so the read can see whether the pull is
+  graded or a cliff (`DRP-R8`).
+- **Does `CRE-`'s classification transfer to lba-a6? Half of it.** The toll on a famous interior is in
+  fame-percentile units and the top of the map sits at nearly the same percentile in both frames
+  (squeeze README §1, the by-band table's top row), so **the toll itself transfers**. **The
+  similarity cost it competes with does not** — lba-a6 replaced every similarity score (squeeze
+  README, forward note "Materiality"). So the realised chosen-edge similarity cost is **measured in
+  every cell** (`DRP-C9`) and reported beside `CRE-`'s, **with no bar**, because no offline number
+  here measures coherence (§10).
+- **The squeeze weakens what the toll buys.** On lba-a6 the ramp separates a top-1 % artist from a
+  mid-scale one less strongly than on the previous map (squeeze README §1). That applies equally
+  to every cell (one frame), so it cancels in every comparison here; it is why 0.01 is weaker than
+  it was, not a reason to go past 0.03.
+- **The toll-family ruling.** The ramp **is** toll-shaped — `config.py:93-95` calls it *"a toll on
+  widely-listened-to artists"*. **`NEXT.md` "Closed": the routing-side toll family is closed for
+  descent claims**, because Track 3b found the router prefers dropping famous interiors to replacing
+  them (execution log §5, wording fixed there). **A pricing cell is admissible here only because
+  this design consumes `TB-P5H-7`'s substance — the joint descent × delivered-payload read — through
+  `DRP-C2`, read jointly with `DRP-C1` in every read, as `CRE-` did (§3.3).** A `DRP-C1` pass with a
+  `DRP-C2` failure is **descent by deletion, never success** (`DRP-R6`). **No new toll term is added,
+  and no length-preserving constraint** — that would be a new device needing its own
+  pre-registration.
+- **Not included: a known-graduated relaxation of the jump term.** It does not exist in source (a
+  new term in a router copy), it sits next to Track 2's closed repricing of `w_jump`/`w_floor`
+  (`NEXT.md` "Closed": *"Track 2, Track 2F and the ceiling toll are exhausted nulls"*), and the grid
+  is full. **Deferred with a success condition:** if `DRP-R0` fires (nothing moves) **and**
+  `DRP-C10`'s frontier count shows the band journeys *do* have added exits within one hop on at
+  least half the famous pairs, the exits exist and are being priced away, and a jump-relaxation
+  device is the named next amendment — with its own analyst critique and its own identity gate.
+
+### §2.5 The per-cell prior, written before any run (the `CRE-D3` shape)
+
+**For each cell, what is mechanically possible.** A null the prior predicts is reported **as the
+prior confirmed, never as a finding.**
+
+| cell | prior | basis |
+|---|---|---|
+| `DRP-S0P0` (A0) | **Flat on famous pairs**; replicates graph-descriptives §1 B on a new draw. Descriptive anchor, never scored | graph-descriptives §1 B, §2 second bullet |
+| `DRP-S0P1`, `DRP-S0P2` | **On `DRP-T1`: null predicted.** For the walled top-1 % artists pricing cannot take the first step at all — the connection is not on the map (trim-supply §4, "Treat it as a routing question") — and for the rest the typical artist has a single such exit (same place). `CRE-D3` found the ramp moved nothing at unchanged supply on `ALG-E`. **On `DRP-T2`: open** — the wall is only weakly present below the top 1 % (graph-descriptives §1 A), and that README's §2 fourth bullet infers the cost also favours the famous core; these are the pricing-alone cells whose outcome is not predicted | trim-supply §1, §4; graph-descriptives §1 A, §2; `CRE-D3` |
+| `DRP-S1P0` | **Little or no movement predicted at depth, and a first path close to today's.** Track B found reserved obscure edges present at famous nodes and the router taking none at production weights on `ALG-E` (`CRS-C5`, results §1) — a different map, band currency and slot rule, so **shape only**. `CRE-` found the union rule at production pricing did not pass on either archive | Track B §1 `CRS-C5`; CRE results §1.5 |
+| `DRP-S1P1`, `DRP-S1P2` | **Movement possible; size not predicted.** The untested cells — new supply × stronger pull — are the shape `CRE-` found passing on `ALG-B` (`B-S1-P1a/b`, results §0), with a measurement hole that does not apply here (§3). **At press 0 each equals `DRP-S1P0`** (the ramp is zero at `k` = 0; `DRP-G4`) | CRE results §0, §3 |
+
+### §2.6 Held constant, and why each is genuinely constant under the intervention
+
+| held constant | why the intervention cannot change it |
+|---|---|
+| **The node set** (lba-a6's artists — count owned by the squeeze README §1) | The supply arm only adds edges between lba-a6 nodes and removes none. **Asserted per built cell** (`DRP-G3`), not assumed. |
+| **`pop_raw`, hence `w_jump`'s input and `floor_raw`** | Popularity is summed over the **untrimmed, uncapped** lists (`pipeline.py:379-389`) *before* the cap, and log-scaled over the kept node set (`graph.py:337`, `:285-300`). The supply step runs after both, on the same node set, so **`pop_raw` is identical by construction**. **Asserted** array-equal by MBID (`DRP-G3`), and `_log_scaled`'s `low`/`high` recorded per built cell anyway (`CRE-` §0.3's instrumentation row). |
+| **The fame ruler** — shipped `GraphStore.fame_percentiles` (`graph_store.py:148`) over lba-a6's node set and raw `fame_lb` | Equal node set **and** the same raw `fame_lb` list (the arm artifact carries lba-a6's metadata unchanged) ⇒ identical percentiles. **Asserted** by MBID (`DRP-G3`). No affine or cross-frame correction is built, because none is needed if the assertion holds; if it fails the build fails (`DRP-G3`), and is not corrected around. |
+| **Similarity score of every shipped edge** | The rescale runs over the pre-cap list before any cap (`pipeline.py:369-377`); the supply step reads scores and never recomputes them. **Asserted** equal on every shipped edge (`DRP-G3`). |
+| **`w_sim`, `w_jump`, `w_floor`, `w_hop`, `w_avoid`, `floor_relax_known`, `floor_relax_dislike`** (`config.py:79-83`, `:117-118`, cited never restated) | Identical `ApiConfig` defaults in every cell; `DRP-P1`/`P2` override the ramp alone. **See §2.7 on `w_floor`: identical numbers do not mean identical firing.** |
+| **`w_degree_hub` = 0.0** (`config.py:89`) | **Inert because its coefficient is zero — a decision, not a control.** `DRP-S1` changes the top-1 %-by-degree set (famous centres gain degree), and at a nonzero coefficient that would reprice them; at zero it cannot. Hub behaviour is **measured** (`DRP-C3`), not repriced. |
+| **`w_avoid` and the avoidance map** | Every press is `known`; no `dislike` is ever issued, so the avoidance map is empty in every cell (`pathfinding.py:105-107`). Constant by the ladder's construction. |
+| **`similarity_damping` = 0.0** (`config.py:174`) | Out of scope (§2.3). Constant; if touched, a knob. |
+| **Cap strategy, `union_top_j` 50, `union_degree_ceiling` 50** (`config.py:106`, `:110-111`) for the shipped edges | The shipped edges *are* lba-a6's; the added edges are a separate step above them. |
+| **Largest-component membership** | The shipped edges already connect lba-a6's node set; adding edges among those nodes cannot split it. **Recorded per arm** and asserted equal. |
+| **The archive, the fame overlay, the drop lists, the build config** | `cand_build.py`'s, via `trim_supply.py`'s pinned capture; archive manifest sha asserted before and after, read-only (`GRT-A1`). |
+| **The ladder, both press rules, the pair sets, the band** | Fixed in §4–§5, identical in every cell. |
+| **Router semantics** — journey forced-stop rule, target exempt from the ramp | Shipped `find_journey` (`pathfinding.py:194-231`) in every cell, unmodified. |
+
+### §2.7 Held constant in configuration, NOT constant in effect — the floor at presses 1–6
+
+> **The term a factor table cannot see.** A term inert in the baseline *for a reason the
+> intervention removes* appears only in the arms that succeed.
+
+**`w_floor` is priced identically in every cell and fires differently.** It charges dives below
+`floor_raw` (`pathfinding.py:158`), and diving is what a successful arm does. Its state by press:
+
+- **Presses ≥ 7 (the band, and press 20): dead in every cell for every pair, by arithmetic.**
+  `effective_floor_raw` (`pathfinding.py:25-49`) is `max(0, min(pop_raw[source], pop_raw[target]) −
+  0.15·k)` for `k` known presses (`floor_relax_known`, `config.py:117`), and `pop_raw` is log-scaled
+  into [0, 1] (`graph.py:285-300`). At `k` = 7 the floor is at most 1 − 1.05 < 0, so it is **zero for
+  every possible pair**. Asserted at run time by `DRP-G7`. It contributes nothing to any band journey.
+- **Press 0: live**, identical in configuration across cells. Pricing cells route identically at
+  press 0 (the ramp is zero at `k` = 0, `DRP-G4`); **`DRP-S1` can differ** from A0, and the floor can
+  fire differently there. Press 0 is descriptive only (`DRP-D2`), so no score is exposed.
+- **Presses 1–6: live for some pairs, and NOT constant.** It fires where an arm dives. **And it
+  reaches the band indirectly**: the ladder presses the victim of each journey, so which artists are
+  excluded by press 7 depends on the routes at presses 1–6, which the floor helped shape.
+
+**Handling, fixed here.** (a) **Term-level cost accounting in every cell** (`DRP-C9`, the `CRE-D2`
+shape): per depth, each term's share of the chosen path's cost. (b) **The attribution bar**: a band
+result is a real result of the system — a user reaches press 7 through presses 1–6 too — but **no
+sentence may attribute a band result to one knob alone** if, over presses 1–6, the share of pairs on
+which the floor term fires on the chosen path at any press differs between the cell and its
+isolating baseline by **≥ 10 percentage points** (the **floor-attribution flag**). The 10-point size
+is **a design choice with no prior calibration, stated as one**; the flag bars wording and stops
+nothing.
+
+### §2.8 Named exposures
+
+- **`DRP-X1` — supply counts candidates, not good ones.** Trim-supply §3's weakest link: some added
+  partners may name the famous artist because everyone plays it, not because they sound alike. **No
+  offline number here measures that** (§10). The descriptive that would have measured it (trim-supply
+  §4, "Measure the quality of the discarded candidates first") is **unrun, by the owner's ruling
+  that trim-supply was the last measurement before this pre-registration**, and it is not run here.
+- **`DRP-X2` — the primary press rule is partly mechanical.** `cre_ladder.victim_key` presses the
+  most famous interior first, which no user does on purpose (JFX critique README, `AM1.3`; `JFX-AM1`
+  §`AM1.3`). **The paired design against A0 under the same rule cancels the mechanical component**;
+  absolute descent is descriptive only. The seeded random-interior rule is the companion (`DRP-C7`).
+- **`DRP-X3` — random pairs are not the owner's pairs.** Users pick endpoints they know
+  (graph-descriptives §3, "The pairs are random"). The replication companion (`DRP-C8`) and step 1's
+  served table are the only links to real use, and neither is a draw of his pairs.
+- **`DRP-X4` — the band frame does not exist at build time in a shipped build.** `DRP-S1` selects
+  partners by lba-a6's frame, which analysis can pin because the node set is fixed. **A shipped
+  build computes fame after the cap** (`pipeline.py:448`), so a shipping implementation must
+  define the band on a frame available before it, and must be shown to produce the same edge set or
+  be treated as a different map (§8).
+- **`DRP-X5` — the squeeze** (squeeze README §1). Every cell shares one frame, so it cancels in
+  comparisons; it makes absolute levels on this map less comparable with any earlier map's, and no
+  sentence here compares across maps.
+- **`DRP-X6` — the author has seen A0's famous-pair behaviour.** This document was written by a
+  session that read graph-descriptives §1 B (A0 is flat on famous pairs; mid-scale pairs descend
+  from the top). **Bars below were set knowing A0's gradient on those pairs and knowing no arm's
+  result**, because no arm has ever run. Recorded so a reader can weigh it.
+- **`DRP-X7` — hub transit can rise at the top.** `DRP-S1`'s centres gain degree up to 60. Track B
+  measured hub transit rising when a degree bound rose (`CRS-C4`, results §1). Measured by `DRP-C3`,
+  descriptively.
+
+### §2.9 Why the switched-exits variant is NOT in this lattice
+
+**It is deferred rather than run, for three reasons, each sufficient on its own.**
+
+- **(a) The lattice may show it is unneeded before anything is built for it.** Track B's `R2` found
+  that at production weights the router declined **every** reserved famous-to-obscure edge
+  (`../findings/2026-07-30-track-b-cap-selection-results.md` §1, `CRS-C5`). If that recurs here, the
+  always-on arm's **first paths may already equal today's without any switch**. `DRP-C5` measures
+  exactly that on `DRP-S1` before anything switch-related is built, and `DRP-SW`'s trigger (§2.10)
+  reads it.
+- **(b) A new `edge_type` value changes the APG1 contract.** Builder and api parse the artifact
+  independently and are kept in lockstep by hand (`CLAUDE.md`, "APG1 artifact"). The byte layout
+  would not change — `edge_types` is a `uint8` per edge (`artifact.py:171`), `EdgeType` has
+  `BEHAVIOURAL = 0` and a reserved `STRUCTURAL = 1` (`models.py:9-17`) — but the **meaning** of a new
+  value is part of the contract, and today's api discards the array (`graph_store.py:282`, *"unused
+  in alpha"*). That is a contract change, not an analysis detail.
+- **(c) The router gate is a new instrument.** A press-count gate on edge type lives in a router copy,
+  and a router copy owes its own identity gate with a red control that must fire **before any figure
+  from it is read**. None of that is built or specified as a run here.
+
+### §2.10 `DRP-SW` — the pre-committed switched-exits amendment slot
+
+**Plain sentence, fixed now:** *"famous artists get extra connections to less-listened neighbours,
+but the journey can only use them after you have pressed Dig deeper a few times, so the first path
+never changes."*
+
+**What it is, if it is ever built.** The same added edges as `DRP-S1`, written with a distinct
+`edge_type` (every shipped edge keeping its current type), routed by a router copy that keeps the
+`edge_types` array and **skips the added-type edges while the request's `known` count is below
+`N`**, admitting them from `N` on.
+
+**Its placement — a third factor, not a third supply level.** A press-count gate on edge type is
+router behaviour, not map supply. So it is a factor **routing gate: off / on at `N`**, **defined only
+where supply = `DRP-S1`**. **Its isolating baseline is the `DRP-S1` cell at the same pricing level**,
+differing by the gate alone over an identical edge set. What that comparison licenses: **whether any
+first-path cost of the supply arm is avoidable.**
+
+**The trigger — fixed now, before any arm runs.** `DRP-SW` is designed and run, by amendment, **only
+if** the always-on arm's press-0 famous-pair paths diverge from A0's by more than this bar:
+
+- **Input:** `DRP-C5`, the press-0 descriptive already in the design, read on **`DRP-S1P0`**
+  (press 0 is identical across pricing levels by `DRP-G4`, so one cell carries it).
+- **Strata:** **`DRP-T1` and `DRP-T2`, each read separately.** `DRP-MID` is not read for the trigger.
+- **Statistic — both, either firing:**
+  1. **Path-for-path identity share** — the share of the stratum's pairs whose press-0 journey on
+     `DRP-S1P0` is node-for-node identical to A0's. **Fires if < 0.90** in either famous stratum.
+     *Plain: more than one first path in ten changed.* Deterministic, so no noise floor applies;
+     0.90 is **a choice stated as one**: at 40 pairs it tolerates up to four changed first paths per
+     stratum, so a single odd pair cannot trigger an amendment.
+  2. **Press-0 interior fame** — median over pairs of `M_S1P0(0)` − `M_A0(0)` (§5's `M`). **Fires if
+     |median| ≥ 0.05** in either famous stratum. *Plain: the first path's typical middle artist
+     moved five percentile points or more, either way.* The same magnitude as `DRP-C1`'s material bar,
+     so "the first path moved materially" and "the depth moved materially" use one yardstick.
+- **Run state:** the `DRP-S1P0` cell swept and `DRP-G3`/`DRP-G4` passed. **The trigger is read at
+  stage 3d, reported to the owner at stage 4, and fires nothing on its own authority**: the trigger is
+  a **necessary** condition; spending the amendment is the owner's.
+
+**`N` is NOT chosen now.** Two candidate sources are recorded as the amendment's inputs: **(i) the
+press at which the floor is spent** — for every pair by arithmetic at 7 (§2.7), and for 96–100 % of
+pairs by press five on another map's pairs (`JFX-AM1` §`AM1.9`); **(ii) `REQ-18`'s "handful of
+presses"** (an Expect, calibration never a target). **If `N` is swept, it is a column of its own**, not
+a free parameter.
+
+**What the amendment owes, named now so it cannot be narrowed:**
+
+- **Its own identity gate with a red control that must fire, before any figure from the router copy
+  is read**: below `N` the gated cell reproduces A0 (or, at a stronger pricing level, the `DRP-S0`
+  cell at that level) path for path at every press; with the gate disabled it reproduces the
+  `DRP-S1` cell at every press; the red control is a perturbation the check must detect. Exact
+  identity, the `MSW-G2` and `DRP-G1` shape.
+- **The shape bar.** **A hard switch at press `N` is a step, not a gradient.** `REQ-42` and `REQ-16`
+  want obscurity to build with presses, and `CRE-`'s strong arm was marked down for landing within a
+  handful of presses (CRE results §3). **Any read of the switched arm must report the shape across
+  every depth 0–20, not only the fixed band**, and a step is reported as a step.
+- **Its reads, carried here and NOT in §7's table:**
+  - **Matches always-on at depth ≥ `N` with the first path unchanged** — licenses: any first-path cost
+    of the supply arm is avoidable at no measured depth cost; the price is the deploy obligation below.
+  - **Descends less than always-on at depth ≥ `N`** — the always-on arm's gain partly comes from
+    paths it had already reshaped before `N`: same exits, different history. The trade between
+    first-path identity and depth is the owner's.
+  - **Both null** — closes nothing about the switch: the supply was the binding constraint and the
+    switch had nothing to gate.
+
+> ### ⚠ Deploy obligation — stated, not decided; nothing in this design builds it
+>
+> **Adopting a typed-edge map needs the api to keep the `edge_types` array** (today it discards it,
+> `graph_store.py:282`) **and to gate on it**, **deployed before or with the map**, **plus a boot-time
+> refusal when a map carries typed edges the api does not handle.** Without that, today's api boots
+> on the map and serves the added connections at every press, first path included — the always-on
+> behaviour, not the arm that was tested. Today's reader refuses only on a `FORMAT_VERSION` mismatch
+> (`graph_store.py:247-248`; `artifact.py:85` sets it to 1); which refusal mechanism would be used is
+> part of an adoption decision, not of this document.
+
+**Build nothing for it, write no harness code for it, change no shipped module** — binding on every
+stage of this design.
+
+---
+
+## §3 — Currency, ruler and nulls
+
+- **Primary currency: `fame_lb_pctl`, plain percentile, lba-a6's frame**, via the shipped
+  `GraphStore`. Not `pop_raw`, not degree, not Spotify, not Deezer.
+- **Why plain percentile and not `JFX-AM1` §`AM1.2`'s log-scaled raw count.** `AM1.2` log-scaled
+  for two reasons, and neither applies here. (1) *Cross-arm percentile compares two rulers* — here
+  every cell shares one frame **by assertion** (`DRP-G3`), so there is one ruler. (2) *A pooled median
+  across strata lands in the middle stratum* — here each stratum is read separately (§4). And
+  percentile is **the adopted proxy** (Definitions) and **the unit the ramp prices**, and all five
+  figure owners report in it, so the replication companion is commensurable.
+- **Companion, descriptive only: `log10(1 + fame_lb)`** beside every primary figure. *Plain: the
+  same comparison in listener counts on a log scale*, because near the top of the map a small step in
+  percentile is a large change in audience size, and #200 began as an observation about audience
+  size. A Deezer-fans companion is **not** taken; it would be optional and descriptive, and the served
+  step-1 table already records its agreement (served-fame README §1).
+- **Nulls.** lba-a6 has very few measured nulls (squeeze README §1, "Measured nulls"), and none
+  appeared in any interior at the depths graph-descriptives recorded (its §1 B). **So nulls are a
+  checked non-hazard here, not an assumed one.** Every aggregate still excludes null interiors from
+  the median and counts them per depth (`DRP-C4`), and `CRE-` §0.4's trigger is carried: a cell whose
+  null share rises by more than 0.05 from press 0 to the band has its `DRP-C1` reported as *"descent
+  partly unmeasurable"*, never as a clean pass.
+- **Instrument floor.** Carried from `CRE-` §1: no movement smaller than **0.015** is claimed.
+  That floor was ten times the then-frame's quantisation step; lba-a6's frame is larger and its step
+  smaller, so carrying 0.015 is conservative. It is the lower bound on the noise floor `N_noise`
+  (§5), never the whole of it.
+
+---
+
+## §4 — Pair sets and the ladder
+
+**Fixed by rule and seed here; DRAWN ONLY AFTER THIS DOCUMENT IS COMMITTED, at stage 3a (§8).**
+
+**Strata** — the two famous tiers behave differently (trim-supply §1; graph-descriptives §1 A), so
+they are separate strata and are read separately:
+
+| stratum | both endpoints | plain sentence | role |
+|---|---|---|---|
+| **`DRP-T1`** | measured `fame_lb_pctl` ≥ **0.99** | *two artists from the most-listened 1 % of the map* | primary |
+| **`DRP-T2`** | measured `fame_lb_pctl` in **[0.95, 0.99)** | *two artists from the next four percent* | primary |
+| **`DRP-MID`** | measured `fame_lb_pctl` in **[0.30, 0.70]** | *two artists from the middle of the map* | descriptive only, for `DRP-D2` |
+
+**Draw rule.** Pools are lba-a6's measured nodes in each band, in ascending node id, frame per the
+shipped `GraphStore`. One `random.Random(20260928)` — **a new seed; not graph-descriptives'
+20260927**. Strata drawn in the order `DRP-T1`, `DRP-T2`, `DRP-MID`; each draw is `rng.sample(pool,
+2)` taken as (source, target); a repeated unordered pair is rejected and redrawn. **40 pairs per
+stratum.** The drawn set is committed as a JSON with endpoint MBIDs before any cell is swept.
+
+**Routability.** Every endpoint is an lba-a6 node and every cell has lba-a6's node set (`DRP-G3`), so
+every endpoint is routable in every cell by construction; asserted anyway.
+
+**Replication companion.** graph-descriptives' own draw (seed 20260927, its FAMOUS set, both
+endpoints ≥ 0.95, 40 pairs), regenerated by its script's rule (`graph_descriptives.py`), is run
+under the primary press rule in every cell (`DRP-C8`).
+
+**The ladder.** Presses 0 through 20, every press `known`, exclusions cumulative, every depth
+recorded. Routing is the **shipped `artistpath_api.pathfinding.find_journey`** in every cell, as
+graph-descriptives' "Routing (B)" did (its module-identity asserts carried: `pathfinding` loaded from
+this tree's `api/src`, unchanged after importing `victim_key`).
+
+**Press rules.**
+
+- **Primary: `cre_ladder.victim_key`** (`builder/analysis/2026-08-03-cap-reevaluation/cre_ladder.py:44-53`)
+  — highest fame percentile first, nulls last, ties by `pop_raw` then MBID. **Imported, not
+  retyped.** Its mechanical caveat is `DRP-X2`.
+- **Companion: seeded random interior.** At each press, one interior artist chosen uniformly by
+  `random.Random(f"DRP:{s}:{stratum}:{i}")` for seed `s`, stratum and pair index `i`; nulls eligible.
+  Seed `s` = 1 in every cell; seed `s` = 2 additionally on A0, for the noise floor (§5).
+
+**Uniform drop rule.** A (pair, depth) is infeasible in a cell if the journey is `None`, has no
+interior (`adjacent_only`), or the ladder has stopped. **A (pair, depth) infeasible in any of the six
+cells under a press rule is dropped from all six under that rule**, and **a pair enters the band
+statistic only if all four band depths survive**. The dropped set is committed with the sweep
+outputs.
+
+**Readability** is `DRP-G8`.
+
+---
+
+## §5 — Criteria
+
+Each carries its bar and plain sentence, fixed here before any result. Owner-facing text gives the
+identifier **and** the sentence.
+
+### The depth band, and why
+
+**Band = presses 7, 8, 9 and 10, pooled.** *Plain: the journeys you would see after pressing Dig
+deeper seven to ten times.*
+
+- **Lower edge 7** is where the floor is dead for every pair by arithmetic (§2.7), which splits the
+  two mechanisms `JFX-AM1` §`AM1.9` separates: presses up to the floor's end have the floor and the
+  ramp; after it, only the ramp and accumulating exclusions. The band samples the second mechanism
+  only, and **no read treats it as homogeneous with presses 1–6.**
+- **Upper edge 10.** `REQ-17`: dozens of presses are stress cases and must not shape defaults. `REQ-18`
+  (an Expect, calibration never a target): a handful, not dozens. 7–10 sits inside the depths the
+  owner pressed in real use (served-fame README §1, depth rows).
+- **Press 20 is a stress companion** (`DRP-C1s`), reported beside the band and never a bar. **Presses
+  1–6** are reported per depth, descriptively, with the floor accounting beside them, **so the shape
+  across presses is always visible** (`DRP-R8`).
+
+### `DRP-C1` — primary: do famous-pair journeys get less famous at depth than today's?
+
+*Plain: after seven to ten presses, is the typical artist in the middle of a journey between two
+famous artists noticeably less famous than on the same journey in today's app, pressed the same
+way — and is that because of the pressing, not because the first path already changed?*
+
+Per pair, per cell, `M(depth set)` = the median `fame_lb_pctl` over the **pooled interior slots** of
+those depths (the `CRE-C1` aggregation, fixed here so no result can choose between aggregations).
+
+- **`D`** = `M_cell(band)` − `M_A0(band)`, same pair, same press rule. *Plain: how much less famous
+  the middle of this journey is than today's, at depth.*
+- **`G`** = [`M_cell(band)` − `M_cell(0)`] − [`M_A0(band)` − `M_A0(0)`]. *Plain: how much of that
+  comes from pressing rather than from a different first path.*
+
+**Pass, per famous stratum, per non-anchor cell — a conjunction:**
+
+1. **median over pairs of `D` ≤ −0.05.** *Plain: five percentile points less famous than today's app
+   at the same depth.*
+2. **the 95 % pair-bootstrap upper bound of that median ≤ −`N_noise`.** *Plain: not merely
+   point-estimated past the bar.*
+3. **median over pairs of `G` ≤ −`N_noise`.** *Plain: at least some of the gain comes from pressing.*
+   **This is the conjunct that keeps depth 0 unscored (`DRP-D2`)**: a cell that only made the first
+   path less famous would pass (1) and fail here. `REQ-35`: obscurity is carried by bypass depth, not
+   initial routing. For the pricing-only cells press 0 is identical to A0's by `DRP-G4`, so `G` = `D`.
+4. **Reported beside it, always:** the count of pairs at `D` ≤ −0.05, the count at |`D`| < `N_noise`,
+   and the leave-one-out range of the median.
+
+**Why −0.05.** It is the only bar on this question on the record — `CRE-C1`'s, from Track B's `C6`
+materiality precedent — and three and a third times the carried instrument floor. `REQ-42` says any
+movement with depth counts and sets no floor; the bar exists to separate movement from noise and
+from the mechanical component, not to name a target depth. **It is a pass line, not a goal.**
+
+**Why the comparison is against A0 and not the cell's own depth 0.** Under `victim_key` absolute
+descent is partly mechanical (`DRP-X2`); A0 under the same rule carries the same mechanical
+component, and the difference cancels it.
+
+**Noise floor `N_noise`, derived from the harness, not by feel** (measured at stage 3a on A0 only,
+before any arm is swept):
+
+`N_noise` = max(**0.015**, **U**), per famous stratum, where U is the 97.5th percentile of
+|median over pairs of `Δ`| across 10,000 pair-bootstrap resamples (seed 20260928), and `Δ` =
+`M_A0,rand(s=1)(band)` − `M_A0,rand(s=2)(band)`: *the difference between two runs of today's app that
+differ only in which artist an arbitrary press removes.* Nothing systematic separates them, so this
+is the statistic's sensitivity to arbitrary choices at this draw. `DRP-G6` fires if it is too large
+for the design to see the material bar.
+
+### Companion criteria
+
+| id | plain sentence | statistic | bar / role |
+|---|---|---|---|
+| **`DRP-C1s`** | *the same comparison after twenty presses* | `D` and `G` at press 20 alone | **stress companion; never a bar** (`REQ-17`) |
+| **`DRP-C2`** — delivered payload, **the `TB-P5H-7` consumption** | *after seven to ten presses, is the journey still delivering a comparable number of artists, or has it mostly just got shorter?* | per pair: mean interior count over the band ÷ interior count at press 0; cell statistic = median over pairs | **binding: cell `DRP-C2` ÷ A0's `DRP-C2` ≥ 0.70** (`CRE-C4`'s bar, baseline-relative for the reason `CRE-` §5 gives: the ladder itself lengthens paths). The one-column-baseline ratio and the absolute value are reported beside it. **Read jointly with `DRP-C1` in every read.** A0 carries no binding value (`CRE-AM2`'s anchor rule). Lengthening is reported and never rewarded (`REQ-14`) |
+| **`DRP-C3`** — hub transit (the `CRS-C4` shape) | *as you press, do journeys lean more on the map's most-connected artists?* | share of interior slots in lba-a6's top-1 %-by-**degree** set, by band (0–2, 7–10, 20); the cell's own top-degree set beside it | **descriptive, no bar.** `CRE-C2`'s base rates are cited so a null is not read as reassurance |
+| **`DRP-C4`** — nulls | *how many artists in the middle have no listener measurement?* | null interior count and share, per depth | a **checked non-hazard** (§3); `CRE-` §0.4's 0.05 trigger carried |
+| **`DRP-C5`** — the first path | *what does the first path look like, and did the extra exits change it?* | `M(0)` on `DRP-T1`/`DRP-T2` against `REQ-34`, and on `DRP-MID` against `DRP-D2` (does the first path still climb above both endpoints?); **on `DRP-S1P0`, per famous stratum: the share of pairs whose press-0 journey is node-for-node identical to A0's, and the median of `M_S1P0(0)` − `M_A0(0)`** | **descriptive and unscored** (`DRP-D2`; `NEXT.md` "Closed": famous-pair first-path fame is barred as a scoring criterion, `PLA-R1`). **Its `DRP-S1P0` half is `DRP-SW`'s trigger input** (§2.10) |
+| **`DRP-C6`** — famous artists must not vanish (`REQ-33`) | *have famous artists been pushed out of the middle of journeys?* | per famous stratum, the share of band (pair, depth) journeys with ≥ 1 interior at `fame_lb_pctl` ≥ 0.99 | **FLOOR: fires if the cell's share is below one quarter of A0's in either famous stratum.** `REQ-33` bars elimination, not reduction; "a quarter of today's" as the line for near-elimination is **a choice with no prior calibration, stated as one.** At map level every famous artist remains a node with every shipped edge (`DRP-G3`), so elimination could only happen in routing |
+| **`DRP-C7`** — random-press companion | *the same comparison when presses remove a random artist instead of the most famous one* | `D` under the random rule, seed 1 | descriptive; feeds a mandatory qualifier (`DRP-R9`) |
+| **`DRP-C8`** — replication | *the same comparison on the pairs the 2026-09-27 measurement used* | `D` on graph-descriptives' FAMOUS draw, primary rule | descriptive; feeds a mandatory qualifier (`DRP-R9`) |
+| **`DRP-C9`** — term accounting (the `CRE-D2` shape) | *which parts of the router's cost are doing the work at each depth?* | per depth, each cost term's share of the chosen path's cost; the realised median `w_sim·(1−sim)` on chosen edges in the band | **no bar.** Drives the floor-attribution flag (§2.7) and the pricing cells' similarity-dominance report beside `CRE-`'s (§2.4) |
+| **`DRP-C10`** — supply structure (`DRP-S1` only) | *did the extra connections get built, and are they reachable from the journeys?* | added edges built; centres that gained ≥ 1; top-1 % artists with no neighbour below 0.9 **counting added edges** (against trim-supply's post-trim count, cited); candidates refused by the 60 bound; per pair, the count of added edges within one hop of the band journeys' nodes | descriptive; the frontier count feeds `DRP-R0`'s wording and §2.4's deferral condition |
+
+---
+
+## §6 — Gates, each with its own effect size
+
+**A gate's failure response is fixed here with it.** An instrument gate that fails stops the
+sweeps until the harness is fixed; it is never widened.
+
+| gate | plain sentence | fires when | consequence | effect size |
+|---|---|---|---|---|
+| **`DRP-G1`** router-harness identity | *our measuring harness reproduces a result a different script already committed on today's map* | on A0, over graph-descriptives' 80 pairs (its FAMOUS and MID sets, seed 20260927), the harness's per-pair interior medians at presses 0, 5, 10, 20 (at that output's printed precision), interior counts, stop rules and ladder stops **differ from `graph_descriptives.out.txt`** on any pair. Reproducing press 20 requires every earlier press's victim to be identical, so the check covers every rung with the ramp live | instrument failure; nothing is swept until fixed | **exact equality**; one divergence fires it. The response is cheap (fix the harness), so exact identity is the right bar |
+| **`DRP-G1r`** its red control | *the same check can see a change in the ramp* | the harness re-run with `w_known_ramp_fame_pctl` doubled **fails** to diverge from the committed output on at least one of the 80 pairs | `DRP-G1` is blind to the ramp; stop | ≥ 1 diverging pair required |
+| **`DRP-G2`** build identity | *our rebuild of today's map is today's map* | the harness rebuild (the shipped `build_from_archive`, `trim_supply.py`'s pinned config and capture) differs from `graph-lba-a6.bin` in node order, `offsets`, `neighbours`, `scores` bytes, `pop_raw`, or raw `fame_lb` | the candidate capture is untrusted; stop | exact equality. **Red control:** the same rebuild at `union_top_j` 49 must differ, or the check is blind |
+| **`DRP-G3`** arm construction invariants | *the extra-exits map is today's map plus the extra connections, and nothing else* | on the `DRP-S1` artifact, any of: the sub-graph of edges present in lba-a6 ≠ lba-a6's CSR (neighbours and score bytes, row for row); node set, `pop_raw` or `fame_lb_pctl` ≠ lba-a6's by MBID; any added edge failing §2.3's rule (centre ≥ 0.99, partner measured < 0.90, both lba-a6 nodes, not a shipped edge); any node's shipped degree > 50 or total degree > 60; largest component ≠ lba-a6's node set; any `edge_type` other than 0 | construction failure; the arm is not swept | exact; any violation fires it |
+| **`DRP-G4`** pricing press-0 identity (the `MSW-G2` shape) | *a stronger pull changes nothing before the first press* | any `DRP-P1` or `DRP-P2` cell's press-0 journey differs from its `DRP-P0` baseline's on the same supply level, on any pair | instrument failure | exact; one divergence |
+| **`DRP-G5`** toll arithmetic (`CRE-G2`(b)) | *the pull the harness applies is exactly what the formula says* | at presses 1 and 10 in each `DRP-P1` and `DRP-P2` cell, the ramp's contribution recomputed along the returned path ≠ ramp × `k` × Σ `fame_lb_pctl` over its interiors (target exempt) | instrument failure (a `k`-indexing bug passes `DRP-G1` and `DRP-G4` both) | equality within 1e-9 |
+| **`DRP-G6`** power | *today's app, pressed two arbitrary ways, differs so much that the design cannot see a five-point change* | `N_noise` > **0.025** in either famous stratum | **stop before any arm is swept**; report to the owner; any remedy (e.g. more pairs) is an amendment written before any arm result exists | 0.025 = half the material bar: above it, the bootstrap bound in `DRP-C1`(2) cannot separate a −0.05 median from noise at this draw |
+| **`DRP-G7`** floor dead in the band | *the obscurity floor contributes nothing from press 7 on* | the shipped `effective_floor_raw` returns non-zero for any drawn pair at `k` = 7, or `max(pop_raw)` > 1, or `floor_relax_known` ≠ 0.15 | §2.7's derivation and the band's lower edge are wrong; **stop**; amendment | any non-zero |
+| **`DRP-G8`** readability | *enough journeys survive in every cell to compare* | fewer than **30 of 40** pairs in a famous stratum have all four band depths feasible in all six cells, under the primary rule | that stratum is **unreadable**: no pass, no fail, reported as such | 30 of 40 (three quarters), a choice stated as one; the `CRS-G3` precedent |
+
+---
+
+## §7 — Reads of results, including the null
+
+**Run-state vocabulary.** *gated* = `DRP-G1`–`G7` recorded and passing. *swept* = a cell's ladders
+done under both press rules on all three strata plus the replication set. *complete* = all six cells
+swept, `N_noise` measured, `DRP-G8` recorded, dropped set committed.
+
+**Every read below presupposes *complete* unless it says otherwise. No read is reachable on a
+partial lattice.**
+
+**The pricing-alone cells `DRP-S0P1` and `DRP-S0P2` are part of the specified run even though the
+prior predicts their null on `DRP-T1`; no read is taken while either is unrun.**
+
+**The crossed cells `DRP-S1P1` and `DRP-S1P2` are part of the specified run even if `DRP-S1P0` and
+both pricing-alone cells are null; no read is taken while either is unrun.**
+
+**The middle pricing level is part of the specified run even if the strongest level moves nothing;
+no read is taken while `DRP-S0P1` or `DRP-S1P1` is unrun.**
+
+**Per-cell outcome, per famous stratum** (applied mechanically):
+
+- **MOVES** — `DRP-C1` passes **and** `DRP-C2` ≥ 0.70 **and** `DRP-C6` does not fire.
+- **DELETION** — `DRP-C1` passes, `DRP-C2` < 0.70.
+- **ELIMINATES** — `DRP-C6` fires (whatever else holds).
+- **BELOW BAR** — median `D` ≤ −`N_noise` but `DRP-C1` fails.
+- **NO MOVEMENT** — |median `D`| < `N_noise`.
+- **RISES** — median `D` ≥ +`N_noise` (the cell makes depth journeys *more* famous).
+- **UNREADABLE** — `DRP-G8`.
+
+"**Succeeds on famous pairs**" in this document = MOVES on **both** `DRP-T1` and `DRP-T2`. That is this
+document's operationalisation of `DRP-D2`'s condition, stated so the owner can amend it at stage 2;
+it is not his ruling.
+
+| # | result | read — what it licenses | what it bars |
+|---|---|---|---|
+| **`DRP-R0`** | **nothing moves** — no non-anchor cell MOVES on either famous stratum | *Plain: none of the changes we tried makes Dig deeper dig on famous pairs.* **Closes**: extra exits of this form (top 1 %, below 0.9, up to ten, added above the ceiling), crossed with a ramp up to 0.03, as a remedy on lba-a6. If `DRP-S0P1`/`P2` are null on `DRP-T1`, worded as **the prior confirmed**: *"a stronger pull is inert on walled famous pairs, as the supply measurement predicted."* **Leaves open, named**: other supply forms (other tiers, bars, quotas, a plain raised ceiling, damping > 0, a crawl change); the jump-relaxation device on its §2.4 condition; ramps above 0.03 only with new coherence evidence (the *"no viable pricing regime"* sub-outcome, `CRE-R0`'s); and #200's definition question, which is his. `DRP-C10`'s frontier count says *where* the added exits were and were not reachable | **"the family is exhausted"**, "the map cannot be fixed", "Dig deeper cannot work": each overclaims what one supply form and one pricing device tested |
+| **`DRP-R1`** | **supply alone moves** — `DRP-S1P0` MOVES; neither `DRP-S0P1` nor `DRP-S0P2` does | *Plain: giving famous artists back their less-listened connections is enough, at today's pull, and pushing harder alone is not.* Track B's router-declined-the-reserved-edges shape (`CRS-C5`, `ALG-E`) did **not** recur here — reported as a different map and currency, never as overturning it | one-knob attribution to supply if the floor-attribution flag (§2.7) fires for `DRP-S1P0` against A0 |
+| **`DRP-R2`** | **pricing alone moves** — `DRP-S0P1` or `DRP-S0P2` MOVES; `DRP-S1P0` does not | *Plain: a stronger per-press pull is enough on today's map.* **On `DRP-T1` this contradicts the prior** (§2.5) and goes to the owner **as a flag before stage 4**, with frontier counts on A0 to explain it. On `DRP-T2` it is consistent with the weak wall there. A config-only candidate exists (no rebuild) | any claim that the map's supply is not needed on `DRP-T1` beyond the stratum and draw measured |
+| **`DRP-R3`** | **only the crossed cells move** — `DRP-S1P1` and/or `DRP-S1P2` MOVE; `DRP-S1P0`, `DRP-S0P1` and `DRP-S0P2` do not | *Plain: both changes are needed — the extra connections exist but today's pull does not take them, and a stronger pull alone has nowhere to go.* The `CRE-` `B-S1-P1` shape | attribution to either knob alone |
+| **`DRP-R4`** | **both alone move** — `DRP-S1P0` and at least one of `DRP-S0P1`/`P2` MOVE | *Plain: either change works on its own.* The report gives every one-column difference; **choosing between them is the owner's** at stage 4 | a ranking of the two from `DRP-C1` alone: `DRP-C2`, `DRP-C3`, `DRP-C5` and `DRP-C9` are read beside it |
+| **`DRP-R5`** | **the famous strata disagree** — a cell MOVES on one of `DRP-T1`/`DRP-T2` and not the other | *Plain: the change works for one tier of famous artist and not the other.* `DRP-D2`'s condition is **not met** by this document's operationalisation; the mid-scale first-path climb remains neither accepted nor a target | generalising the moving tier's result to "famous pairs" |
+| **`DRP-R6`** | **DELETION** in any cell | *Plain: the journey got less famous mainly by getting shorter — fewer artists delivered, not more discoveries.* The Track 3b toll-family outcome reproduced; **never a success** | any sentence reporting that cell's `DRP-C1` as a pass without this read |
+| **`DRP-R7`** | **ELIMINATES** in any cell | *Plain: famous artists have been all but pushed out of the middle of journeys.* `REQ-33` is a Must and not tradeable: **the cell cannot be the candidate** | — |
+| **`DRP-R8`** | **the shape across presses** — for every MOVES cell, per depth 0–20 | *Plain: does the change build press by press, or arrive all at once?* Reported for every MOVES cell as the per-depth `D` profile. **A cell whose `D` reaches its band value by press 3 and stays flat after is reported as "a step, not a gradient"** (`REQ-42`, `REQ-16`; the `CRE-` strong-arm shape, CRE results §3). The `P1`→`P2` comparison at each supply level says whether the pull is graded | reporting a stepped cell as a gradient; reading the band value alone |
+| **`DRP-R9`** | **mandatory qualifiers** — attached to any read above where they hold | (i) `DRP-C7` shows NO MOVEMENT where `DRP-C1` passes: *"the change depends on pressing the most famous artist first, which no one does on purpose."* (ii) `DRP-C8`'s median `D` has the opposite sign to the primary's: *"on the pairs measured on 2026-09-27 it went the other way."* (iii) `DRP-C4`'s trigger: *"descent partly unmeasurable."* (iv) the floor-attribution flag: no one-knob attribution. (v) `DRP-C9` shows the band's realised similarity cost past `CRE-`'s dominating-regime figures: *"the pull may be outweighing similarity"* — a flag for the listen, not a verdict | dropping a qualifier from a summary |
+| **`DRP-R10`** | **what goes to the owner** — at *complete* | The report lists every MOVES cell with all companions and qualifiers, in `CLAUDE.md`'s four parts, **plus `DRP-SW`'s trigger reading** (§2.10). **It names no candidate.** Stage 4 is his: at most one cell, or none, and whether to spend `DRP-SW`. **`DRP-D2`'s condition is evaluated at adoption, not here**: an offline MOVES is necessary for it and not sufficient, because nothing offline measures coherence (§10) | recommending a cell; reading MOVES as "the remedy succeeds" |
+| **`DRP-R11`** | **`DRP-SW`'s trigger** — read at *swept* for `DRP-S1P0` | *Fires*: *"the extra connections changed more than one first path in ten, or moved the first path's middle by five points or more, on famous pairs"* — the switched-exits amendment becomes spendable, at the owner's call. *Does not fire*: *"the extra connections leave famous-pair first paths essentially as they are, so a switch would have nothing to protect"* | treating a fired trigger as a decision to build; treating a quiet one as evidence the added edges are unused at depth |
+
+**`DRP-MID` is descriptive in every read.** Its press-0 climb and its band movement are reported per
+cell with `DRP-C5`; **nothing about it passes or fails**, and a cell that worsens it is reported, not
+disqualified, because `DRP-D2` makes it conditional on the famous-pair result.
+
+**Every result reaches the owner in `CLAUDE.md`'s four parts**, each identifier with its plain
+sentence, never bare.
+
+---
+
+## §8 — Staging, seams, and what "go" commits to
+
+**Seven stages. The owner triggers the first.**
+
+1. **`ml-graph-analyst` critique of this committed document, before any arm runs** (the `LBA-AM1`
+   shape). **Given the code and the artifact and asked to check the claims against the repo, not to
+   review the prose.** Its questions, fixed now:
+   - **`DRP-Q1`** — does every §2.6 "held constant" row hold against source, and is there a dormant
+     term §2.7 missed?
+   - **`DRP-Q2`** — is the §2.7 floor derivation right, and is the band's lower edge where it says?
+   - **`DRP-Q3`** — can the added-above-the-ceiling rule change the node set, the largest component,
+     `pop_raw` or the frame in any way `DRP-G3` would not catch?
+   - **`DRP-Q4`** — is 40 pairs per stratum enough to see −0.05 given A0's famous-pair spread
+     (graph-descriptives §1 B, cited), and is `N_noise`'s derivation sound?
+   - **`DRP-Q5`** — are `DRP-SW`'s trigger statistics computable from what the lattice records, and
+     does its bar separate a real first-path change from a single odd pair?
+   - **`DRP-Q6`** — is every baseline in §2.2 genuinely one column away?
+
+   **Barred for the analyst:** building any arm, routing on any configuration other than A0, drawing
+   the pair set, and any judgement question (which cell to prefer, how the owner should rule). Its
+   findings land as amendment `DRP-AM1`, with the original wording of each changed clause quoted.
+2. **The owner's go on the amended design.**
+3. **The offline lattice**, in four sub-stages with **seams named now** (the >8-task rule):
+   - **3a — instruments.** Draw the pair set (§4) and commit it; `DRP-G1`/`G1r`, `DRP-G2`, `DRP-G7`;
+     build the `DRP-S1` artifact, `DRP-G3`, `DRP-C10`'s structural counts; A0's two random-press runs
+     and `N_noise`, `DRP-G6`. **Seam A**: every gate outcome, the artifact sha and `N_noise` committed.
+   - **3b — the `DRP-S0` row** (A0, `DRP-S0P1`, `DRP-S0P2`), `DRP-G4`, `DRP-G5`. **Seam B**: one
+     committed JSON per cell (artifact sha, cell id, per-depth journeys as node ids, per-term stats,
+     dropped set).
+   - **3c — the `DRP-S1` row**, `DRP-G4`, `DRP-G5`. **Seam C**: as B.
+   - **3d — the results note**, written by a session that did not run the sweeps (`CRE-`'s Stage 3
+     precedent), from the committed JSON, never from a session's prose. It reads `DRP-R11`.
+
+   Per-task appends to a retained execution log throughout. **A material amendment mid-flight is also
+   a seam.**
+
+   ⚠ **Sealing, binding on 3a–3d.** **No committed output and no owner-facing text names an interior
+   artist** — per-journey outputs hold node ids; interior names are resolved only in a file kept
+   outside the repository (`C:\unsung-fast\`) whose sha256 is committed. Endpoint names may appear
+   (graph-descriptives' precedent). Two reasons: §9 (no journey reaches the owner before his gate
+   criterion is committed) and the listen at stage 5, whose one listener is him (`LBA-AM5`'s
+   contamination argument).
+4. **The owner's go/no-go on at most one candidate cell**, with stage 3's report in hand, and his
+   call on whether to spend `DRP-SW` if its trigger fired. His decision entirely; `DRP-R10`.
+5. **The `REQ-38` blind listen, designed cold as a later amendment** by a session that has seen no
+   journey from any cell (the `LBA-D3` shape). **This document designs no part of it.** What it is
+   for: whether the candidate's journeys, **after several presses**, still hang together (`REQ-1`,
+   `REQ-9`) while digging (`REQ-13`), against today's app. It **must exercise presses** (`REQ-39`);
+   `GBL-` §5's run-once rule will bind its verdict; `REQ-41` bars reading a tie as equivalence.
+6. **The unblinded use gate, after the listen** (`LBA-AM5`'s order), **as a stop-gate only**, on the
+   owner's criterion (§9). `LBA-AM4`'s four bars are carried: (1) a stop-gate, not a quality bar — no
+   figure it yields enters the record as a path-quality measurement; (2) it is not the `REQ-38`
+   listen and does not replace it; (3) failing it stops the candidate, and today's app stands; (4)
+   passing it licenses nothing except proceeding to adoption. The owner logs the pairs he uses
+   (`LBA-AM5`'s requirement, carried).
+7. **Adoption — the owner's.**
+
+**What "go" at stage 4 commits to, stated now so it is a known thing.**
+
+- **A pricing-only candidate** (`DRP-S0P1` or `DRP-S0P2`): a change to
+  `ApiConfig.w_known_ramp_fame_pctl`'s default. No rebuild.
+- **A supply candidate** (`DRP-S1Px`): a shipping build rule for the added edges. It must define the
+  band on a frame available **before** the cap (`DRP-X4`), and **either** reproduce the analysis
+  artifact's edge set exactly **or** be treated as a new map and re-measured. Acceptance per
+  `acceptance.py`'s intent, never widened; recalibrating a bound so a new artifact can be adopted is
+  **the owner's** risk acceptance (`LBA-` §8 item 2). Manifest pinning and `ARTISTPATH_GRAPH_SHA256`
+  from the sidecar (`DEP-24`). The APG1 format is unchanged (every edge `edge_type` 0).
+- **A switched-exits candidate exists only if `DRP-SW` was spent**, and then carries §2.10's deploy
+  obligation.
+
+---
+
+## §9 — The use-gate criterion: OWED
+
+> ## ⛔ OWED — the owner's words, verbatim, with effect size and period
+>
+> *(This slot is empty on purpose. It is not drafted, suggested or exemplified here.)*
+>
+> **Criterion:** OWED.
+> **Effect size:** OWED.
+> **Period:** OWED.
+
+**Stage 5 may not begin, and no journey from any cell may be shown to the owner, until he has written
+this criterion and it is committed.** It lands as a dated amendment in §14 with his words quoted
+verbatim, written before he has seen any journey from any cell.
+
+---
+
+## §10 — Coherence, and the `CXR-` history: where this design can and cannot see
+
+**No offline number in this design measures coherence.** `REQ-1` and `REQ-9` are Musts; the
+Definitions say coherence is the owner's verdict notes, not a metric, and **bar proxying it with
+one** — the two offline metrics built to guard it were the worst predictors of his verdicts.
+`DRP-C9`'s realised similarity cost is reported **as a flag, never as a coherence measure.**
+
+**So descent bought with popularity-bleed or weak connections is invisible to every offline number
+here.** That is exactly `DRP-X1`: the added partners are candidates, not vetted connections
+(trim-supply §3), and the descriptive that would have measured their quality is unrun by the owner's
+ruling.
+
+**The `CXR-` class binds.** Obscurity retunes on this project have twice regressed in ways only use
+detected (`CXR-` diagnosis README; `LBA-AM4`'s record that the owner detected the regression within
+minutes of use). **Where this design catches that class: stage 5 (the blind listen) and stage 6 (the
+use gate). Where it does not: every offline number in stage 3, without exception.** An offline MOVES
+is therefore never evidence that a cell is better to use.
+
+### Weakest link
+
+**The load-bearing assumption is that the added connections are musically plausible next steps.** If
+many are popularity bleed, a cell can pass `DRP-C1` by routing journeys through artists who merely
+co-occur with famous ones in listening data, and nothing before stage 5 would see it.
+
+- **What would falsify it:** the stage-5 listen preferring today's app on journeys after several
+  presses, or the use gate firing on whatever criterion the owner writes.
+- **What would have tested it cheaply, and was not run:** trim-supply §4's quality descriptive —
+  deliberately, by the owner's ruling. If the analyst critique (stage 1) finds a reason the design is
+  blind in a way that descriptive would cure, that is a question for the owner at stage 2, not a run.
+- **What I would defend:** the structure — added exits exist in the data and the trim deletes them
+  (trim-supply's `SUP-R1`). **What I would abandon cheaply:** any reading of an offline pass as a
+  better app.
+
+---
+
+## §11 — Barred reads, carried forward
+
+- **No path-quality claim from the `LBA-G5` period** (`LBA-AM4` bar 1).
+- **`R2`'s `ALG-E` null must not be cited as "the quota rule cannot fix `DD-F1`"** (`NEXT.md`
+  "Closed"); nor may this design's `DRP-R0`, beyond the form tested.
+- **Famous-pair first-path fame is barred as a scoring criterion** (`PLA-R1`; `DRP-C5` is descriptive).
+- **No cross-map fame comparison** (§3; `DRP-X5`); the squeeze figures belong to their owner.
+- **No equivalence from a tie** at stage 5 (`REQ-41`).
+- **`LAL-R1` and `LBA-G5` are run-once and final** (`NEXT.md` "Closed"); nothing here re-reads them.
+- **Track B's cells, Track 3's and Track 3b's results, and Track 2/2F are closed**; this design
+  re-runs none of them and cites them for shape.
+- **`LBA-A6` has no pre-set revert trigger** (`NEXT.md` "Closed"), and nothing here proposes one.
+
+---
+
+## §12 — What this design does NOT do
+
+- It **runs no arm, builds no map, draws no pair, and changes no config default or shipped code.**
+- It **designs no listen** and **writes no gate criterion**.
+- It **builds nothing for `DRP-SW`**: no typed edges, no router copy, no harness code.
+- It **does not change the definition** of obscurity or novelty-likelihood (`DRP-D3`).
+- It **does not edit `PRODUCT-REQUIREMENTS.md`**; it cites it.
+- It **unpauses nothing but #200** (`DRP-D1`).
+- It **touches no `CXR-` candidate fix**; each still needs its own pre-registration and his trigger.
+
+---
+
+## §13 — Claims check
+
+**Every function, file, config value and pin this document names, resolved 2026-09-27 against
+`origin/main` at `397b022`.**
+
+| claim | resolves? |
+|---|---|
+| `ApiConfig`: `w_sim`–`w_avoid` `config.py:79-83`; `w_degree_hub` `:89` = 0.0; `w_known_ramp_fame_pctl` `:114` = 0.01; `floor_relax_known`/`floor_relax_dislike` `:117-118`; `graph_path` default `graph-lba-a6.bin` `:55-57` | ✓ |
+| `floor_raw` is not a config value: `effective_floor_raw` `pathfinding.py:25-49`, applied `:103-104` | ✓ |
+| Ramp `pathfinding.py:130-132` (count and liveness), added per interior `:169-170`, target exempt | ✓ — the brief's "`:130-131`" is the multiplier; the addition is `:169-170` |
+| Cost terms: `w_sim` `:156`, `w_jump` `:157`, `w_floor` `:158`, `w_avoid` `:159`, `w_degree_hub` `:160`, `w_hop` `:161` | ✓ — the brief's "`:157-160`" is off by one at each end; corrected here |
+| `pathfinding.py` last changed `a4ff9c6`, 2026-08-05; not since 2026-08-09 | ✓ (`git log`) |
+| `BuilderConfig`: `cap_strategy` `:106`, `union_top_j` `:110`, `union_degree_ceiling` `:111`, `similarity_damping` `:174`; the damping-with-clip refusal `:166-170` | ✓ |
+| `trimmed_union_cap` `graph.py:175`, weakest-first, **no reserved-slot mechanism** | ✓ |
+| Track B `banded_quota`: analysis code only, `cb_build_variants.py:163-256`, `floor(quota·d)` at every over-degree node, band = `pop_raw` rank in the build's own population | ✓ (`:195-202`, `:227-252`) |
+| Popularity summed over the untrimmed lists `pipeline.py:379-389`, before the cap `:404-414`; rescale before the cap `:369-377`; fame loaded after the cap `:448` | ✓ |
+| `_log_scaled` → [0, 1] `graph.py:285-300`; rows sorted by neighbour id `graph.py:349`; one `edge_type` per graph from `build_graph` `graph.py:363` | ✓ |
+| `EdgeType` `models.py:9-17`: 0 behavioural, 1 reserved | ✓ |
+| `edge_types` written per edge `artifact.py:171`; `FORMAT_VERSION` = 1 `artifact.py:85`; api discards the array `graph_store.py:282`; api refuses only on version `graph_store.py:247-248` | ✓ |
+| `GraphStore.fame_percentiles` `graph_store.py:148`; `neighbours_of` iterates the CSR row in order `graph_store.py:218-221` | ✓ |
+| `cre_ladder.victim_key` `cre_ladder.py:44-53` | ✓ |
+| graph-descriptives imports only `victim_key` and asserts `pathfinding`'s file and `find_journey` identity after the import (`graph_descriptives.py:95-107`); calls neither `cre_ladder.journey` nor `find_path_mirror`; **nothing asserts the CRE mirror is current, and nothing here uses it** | ✓ |
+| `graph-lba-a6.bin` and its sidecar in `C:/dev/music-app/builder/scratch/`; file sha256 = sidecar `sha256` = `28311d81…` | ✓ (hashed 2026-09-27) |
+| `C:\unsung-fast\lbd-archives\S4-A6\MANIFEST.json` sha256 = `cand_build.py:82`'s and `trim_supply.py:64`'s pin `950e3ee8…`; `S4-A6-fame` present; `trim_supply.py:65` pins the map sha | ✓ (hashed 2026-09-27) |
+| `NEXT.md`'s parked "router-side pricing track" says a successor must consume `TB-P5H-7`; `NEXT-ARCHIVE.md` records it **discharged 2026-08-03** by `CRE-` | **discrepancy found and corrected** in `NEXT.md` in this commit; the substance is carried here as `DRP-C2` |
+| The five figure owners, the `CRE-`, Track B, Track 3b and `JFX-` sections cited | ✓ (read 2026-09-27) |
+| **Not yet built** (stage 3a dependencies, analysis code only): the added-edge construction and artifact assembly; term accounting along chosen paths; the random-interior press rule; the sealed interior-name file | dependencies, stated |
+
+---
+
+## §14 — Amendments to this document
+
+**Every entry is dated, numbered and added beside the text it qualifies, never as a silent edit.** A
+bar's value is never edited; an amendment states whether any result existed when it was written and
+which criterion's commit-before-results property it spends.
+
+*(None yet. `DRP-AM1` is reserved for the stage-1 critique; the owner's use-gate criterion (§9) lands
+as its own dated entry; `DRP-SW`, if spent, lands as its own amendment under §2.10's terms.)*

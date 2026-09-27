@@ -72,6 +72,12 @@ got.**
    **Latest 2026-09-27:** `builder/analysis/2026-09-27-issue-200-trim-supply/` opened those edges —
    the wall is made by the build's fifty-connection trim, not by missing supply (`SUP-R1`); and
    `PRODUCT-REQUIREMENTS.md` §8 now carries a dated forward note, added on his authorisation.
+5. **#200's remedy (his rulings of 2026-09-27 unpaused #200 only):** the pre-registration
+   [`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md)
+   (`DRP-`) is **committed and UNEXECUTED** — nothing built, drawn or routed. Its stage 1, the
+   `ml-graph-analyst` critique, starts **on his word**; **his use-gate criterion (its §9) is owed**
+   before any journey from any cell is shown to him. Branch `charlessavage90/issue-200-depth-remedy-prereg`
+   (an address); tracking issue linked from #200.
 
 ---
 
@@ -148,7 +154,10 @@ read measured where it can and cannot be moved; the results note owns that readi
   inputs (Track B's `R0`/`R2`/`R3`, `RC-R1`'s stranding figures) stand as written.
 - **The router-side pricing track** (plan §0 ruling 2) — `R2`'s `ALG-E` null is its
   motivating evidence: the quota edges exist and production weights decline them. Needs
-  its own pre-registration, which must consume `TB-P5H-7`.
+  its own pre-registration, which must carry `TB-P5H-7`'s substance (the joint descent ×
+  delivered-payload read). *(Corrected 2026-09-27: this said "must consume `TB-P5H-7`", but
+  `NEXT-ARCHIVE.md` records the item itself DISCHARGED 2026-08-03 by `CRE-` (`CRE-C4`). The
+  substance still binds any pricing pre-registration; `DRP-C2` carries it for #200's remedy.)*
 - **The candidate-pool product decision** — whether a shortened-but-obscure bypass
   candidate (Track 3's DD-A2 or a TB arm) ships at all.
 - **The one-statistic cross-track recompute** that must precede any DD-vs-TB comparison.
