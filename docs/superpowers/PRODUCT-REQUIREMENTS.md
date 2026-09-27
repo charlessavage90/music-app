@@ -358,6 +358,15 @@ REQ-37 is ~~currently~~ **unachievable on famous-to-famous pairs at any router s
 > live use corroborates it. **The 2026-07-29 defect ruling below therefore stands until he
 > closes it**, and a session must not close it on this evidence.
 
+> **Forward note, 2026-09-27 (added on the owner's authorisation; changes no requirement).** The
+> boxed note's "in fame currency the barrier is gone" was measured on the pre-2026-09-25 map. **On
+> `graph-lba-a6.bin`, served since 2026-09-25, at the top 1 % by fame percentile the barrier is
+> present, and it is in the map's connections, not the fame ruler.** Figures owned by
+> `builder/analysis/2026-09-27-issue-200-graph-descriptives/README.md` §1 A and
+> `builder/analysis/2026-09-27-issue-200-ruler-vs-map/README.md` — cited, never restated. Across
+> the wider top decile it is only weakly present. This is structure, not routing, and the
+> 2026-07-29 defect ruling below still stands until the owner closes it.
+
 > **⚠ Read the decile in that sentence as an OPERATIONALISATION, not the requirement
 > (REQ-42, 2026-08-01).** The requirement is the trend; "below the top popularity decile"
 > is one way a session made it measurable, and it hardened into the goal itself in
