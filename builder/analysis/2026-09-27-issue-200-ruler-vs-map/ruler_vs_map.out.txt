@@ -1,0 +1,145 @@
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b  (matches sidecar and pin)
+sha256 OK  graph-lux4.bin  fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369  (matches sidecar and pin)
+graph_store: C:\Users\charl\worktrees\music-app\pinfish\api\src\artistpath_api\graph_store.py
+load + identity asserts: 0.6s
+
+## Populations
+lba-a6 N 87,394 (null fame 3); lux4 N 58,838 (null fame 92); shared by MBID 57,909; only lba-a6 29,485; only lux4 929
+shared, null in lba-a6 snapshot: 1; null in lux4 snapshot: 1; null in both: 1
+shared artists whose raw fame_lb is IDENTICAL in the two snapshots: 57,909 of 57,909; shared-only percentiles identical across snapshots: True
+shared-only frames: lba-a6 snapshot measured 57,908; lux4 snapshot measured 57,908
+measured RVM-1 in 0.1s
+measured RVM-2 in 0.1s
+measured RVM-1s in 0.1s
+measured RVM-2s in 0.1s
+measured RVM-3 in 0.1s
+measured RVM-6 in 0.1s
+measured RVM-4 in 0.1s
+measured RVM-5 in 0.1s
+
+## Measurement A metrics per variant (fame percentile; frame named per column)
+
+### top decile centres (fame pctl >= 0.90 in the variant's own frame)
+| metric | RVM-1 | RVM-2 | RVM-1s | RVM-2s | RVM-3 | RVM-6 | RVM-4 | RVM-5 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| edges | lux4 | lba-a6 | lux4 | lba-a6 | lba-a6 | lux4 | lba-a6 | lba-a6 |
+| frame | lux4 full, lux4 snapshot | lba-a6 full, lba-a6 snapshot | lux4 full, lux4 snapshot | lba-a6 full, lba-a6 snapshot | lux4 full, lux4 snapshot | lba-a6 full, lba-a6 snapshot | shared-only recomputed, lba-a6 snapshot | shared-only recomputed, lux4 snapshot |
+| artist set | all lux4 | all lba-a6 | shared | shared | shared | shared | shared | shared |
+| centres (valid, >= cut) | 5,875 | 8,740 | 5,871 | 8,542 | 5,871 | 8,542 | 5,791 | 5,791 |
+| centres with no counted neighbour (excluded) | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 |
+| centres measured (k) | 5,875 | 8,740 | 5,871 | 8,541 | 5,871 | 8,541 | 5,791 | 5,791 |
+| raw degree median (p10, p90) | 48 (13, 50) | 49 (15, 50) | 48 (13, 50) | 49 (17, 50) | 49 (19, 50) | 48 (12, 50) | 49 (19, 50) | 49 (19, 50) |
+| counted neighbours median (p10, p90) | 48 (13, 50) | 49 (15, 50) | 48 (13, 50) | 46 (13, 50) | 47 (15, 50) | 47 (12, 50) | 47 (15, 50) | 47 (15, 50) |
+| centres with >= 1 null-in-frame neighbour | 277 | 0 | 7 | 0 | 0 | 8 | 0 | 0 |
+| neighbour entries dropped: null in frame | 297 | 0 | 7 | 0 | 0 | 8 | 0 | 0 |
+| neighbour entries dropped: not shared | 0 | 0 | 2,526 | 28,798 | 17,410 | 3,288 | 17,033 | 17,033 |
+| share < 0.9: median | 0.4600 | 0.4861 | 0.4583 | 0.4250 | 0.4516 | 0.4167 | 0.4545 | 0.4545 |
+| share < 0.9: p10 | 0.1111 | 0.0400 | 0.1020 | 0.0208 | 0.0213 | 0.0816 | 0.0213 | 0.0213 |
+| share < 0.9: p90 | 0.7857 | 0.8049 | 0.7826 | 0.7551 | 0.7879 | 0.7400 | 0.7895 | 0.7895 |
+| share < 0.9: mean | 0.4541 | 0.4554 | 0.4485 | 0.4101 | 0.4306 | 0.4133 | 0.4312 | 0.4312 |
+| ZERO < 0.9: count | 63 | 629 | 68 | 698 | 466 | 182 | 460 | 460 |
+| ZERO < 0.9: fraction | 0.0107 | 0.0720 | 0.0116 | 0.0817 | 0.0794 | 0.0213 | 0.0794 | 0.0794 |
+| median count < 0.9 | 15 | 17 | 15 | 14 | 15 | 13 | 15 | 15 |
+| share < 0.5: median | 0.0606 | 0.0440 | 0.0600 | 0.0217 | 0.0345 | 0.0400 | 0.0370 | 0.0370 |
+| share < 0.5: p10 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| share < 0.5: p90 | 0.2222 | 0.3061 | 0.2105 | 0.2143 | 0.2500 | 0.1667 | 0.2553 | 0.2553 |
+| share < 0.5: mean | 0.0939 | 0.1071 | 0.0855 | 0.0711 | 0.0862 | 0.0660 | 0.0870 | 0.0870 |
+| ZERO < 0.5: count | 1,097 | 3,106 | 1,322 | 3,689 | 2,298 | 2,537 | 2,251 | 2,251 |
+| ZERO < 0.5: fraction | 0.1867 | 0.3554 | 0.2252 | 0.4319 | 0.3914 | 0.2970 | 0.3887 | 0.3887 |
+| median count < 0.5 | 2 | 2 | 2 | 1 | 1 | 1 | 1 | 1 |
+
+### top 1 % centres (fame pctl >= 0.99 in the variant's own frame)
+| metric | RVM-1 | RVM-2 | RVM-1s | RVM-2s | RVM-3 | RVM-6 | RVM-4 | RVM-5 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| edges | lux4 | lba-a6 | lux4 | lba-a6 | lba-a6 | lux4 | lba-a6 | lba-a6 |
+| frame | lux4 full, lux4 snapshot | lba-a6 full, lba-a6 snapshot | lux4 full, lux4 snapshot | lba-a6 full, lba-a6 snapshot | lux4 full, lux4 snapshot | lba-a6 full, lba-a6 snapshot | shared-only recomputed, lba-a6 snapshot | shared-only recomputed, lux4 snapshot |
+| artist set | all lux4 | all lba-a6 | shared | shared | shared | shared | shared | shared |
+| centres (valid, >= cut) | 588 | 874 | 588 | 872 | 588 | 872 | 580 | 580 |
+| centres with no counted neighbour (excluded) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| centres measured (k) | 588 | 874 | 588 | 872 | 588 | 872 | 580 | 580 |
+| raw degree median (p10, p90) | 49 (34, 50) | 49 (42, 50) | 49 (34, 50) | 49 (42, 50) | 49 (43, 50) | 49 (27, 50) | 49 (43, 50) | 49 (43, 50) |
+| counted neighbours median (p10, p90) | 49 (34, 50) | 49 (42, 50) | 48 (33, 50) | 48 (39, 50) | 48 (41, 50) | 48 (26, 50) | 48 (41, 50) | 48 (41, 50) |
+| centres with >= 1 null-in-frame neighbour | 28 | 0 | 1 | 0 | 0 | 1 | 0 | 0 |
+| neighbour entries dropped: null in frame | 33 | 0 | 1 | 0 | 0 | 1 | 0 | 0 |
+| neighbour entries dropped: not shared | 0 | 0 | 402 | 998 | 453 | 545 | 450 | 450 |
+| share < 0.9: median | 0.1429 | 0.0208 | 0.1348 | 0.0208 | 0.0204 | 0.1200 | 0.0204 | 0.0204 |
+| share < 0.9: p10 | 0.0408 | 0.0000 | 0.0406 | 0.0000 | 0.0000 | 0.0222 | 0.0000 | 0.0000 |
+| share < 0.9: p90 | 0.4000 | 0.3689 | 0.3971 | 0.3000 | 0.2670 | 0.4146 | 0.2659 | 0.2659 |
+| share < 0.9: mean | 0.1952 | 0.1075 | 0.1841 | 0.0935 | 0.0859 | 0.1705 | 0.0860 | 0.0860 |
+| ZERO < 0.9: count | 9 | 381 | 11 | 383 | 274 | 29 | 270 | 270 |
+| ZERO < 0.9: fraction | 0.0153 | 0.4359 | 0.0187 | 0.4392 | 0.4660 | 0.0333 | 0.4655 | 0.4655 |
+| median count < 0.9 | 6 | 1 | 6 | 1 | 1 | 5 | 1 | 1 |
+| share < 0.5: median | 0.0482 | 0.0000 | 0.0412 | 0.0000 | 0.0000 | 0.0400 | 0.0000 | 0.0000 |
+| share < 0.5: p10 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+| share < 0.5: p90 | 0.1667 | 0.0609 | 0.1392 | 0.0425 | 0.0400 | 0.1218 | 0.0408 | 0.0408 |
+| share < 0.5: mean | 0.0751 | 0.0230 | 0.0622 | 0.0148 | 0.0150 | 0.0522 | 0.0152 | 0.0152 |
+| ZERO < 0.5: count | 84 | 706 | 111 | 723 | 506 | 221 | 500 | 500 |
+| ZERO < 0.5: fraction | 0.1429 | 0.8078 | 0.1888 | 0.8291 | 0.8605 | 0.2534 | 0.8621 | 0.8621 |
+| median count < 0.5 | 2 | 0 | 2 | 0 | 0 | 1 | 0 | 0 |
+
+## Reproduction check vs ../2026-09-27-issue-200-graph-descriptives/graph_descriptives.out.txt
+RVM-2 top decile < 0.9: zero 629 (0.0720), median 0.4861, mean 0.4554 -> MATCH
+RVM-2 top decile < 0.5: zero 3106 (0.3554), median 0.0440, mean 0.1071 -> MATCH
+RVM-2 top 1 % < 0.9: zero 381 (0.4359), median 0.0208, mean 0.1075 -> MATCH
+RVM-2 top 1 % < 0.5: zero 706 (0.8078), median 0.0000, mean 0.0230 -> MATCH
+RVM-1 top decile < 0.9: zero 63 (0.0107), median 0.4600, mean 0.4541 -> MATCH
+RVM-1 top decile < 0.5: zero 1097 (0.1867), median 0.0606, mean 0.0939 -> MATCH
+RVM-1 top 1 % < 0.9: zero 9 (0.0153), median 0.1429, mean 0.1952 -> MATCH
+RVM-1 top 1 % < 0.5: zero 84 (0.1429), median 0.0482, mean 0.0751 -> MATCH
+all reproduced: True
+
+## Top-1 % centre sets (shared variants)
+RVM-1s: 588 top-1 % centres; 5,871 top-decile centres
+RVM-2s: 872 top-1 % centres; 8,541 top-decile centres
+RVM-3: 588 top-1 % centres; 5,871 top-decile centres
+RVM-6: 872 top-1 % centres; 8,541 top-decile centres
+RVM-4: 580 top-1 % centres; 5,791 top-decile centres
+RVM-5: 580 top-1 % centres; 5,791 top-decile centres
+overlap RVM-3 vs RVM-2s (both lba-a6 nodes): |RVM-3| 588, |RVM-2s| 872, both 588, only RVM-3 0, only RVM-2s 284, Jaccard 0.6743
+top-decile overlap RVM-3 vs RVM-2s: both 5871, only RVM-3 0, only RVM-2s 2670, Jaccard 0.6874
+
+## What the shared restriction drops
+lba-a6: CSR entries 2,490,728; kept 1,547,476; dropped 943,252. undirected (u<v) 1,245,364 [u>v 1,245,364]; kept 773,738; dropped 471,626
+  top decile centres in lba-a6 full frame: 8,740; not shared (dropped) 198; kept 8,542
+  top 1 % centres in lba-a6 full frame: 874; not shared (dropped) 2; kept 872
+lux4: CSR entries 1,315,684; kept 1,295,274; dropped 20,410. undirected (u<v) 657,842 [u>v 657,842]; kept 647,637; dropped 10,205
+  top decile centres in lux4 full frame: 5,875; not shared (dropped) 4; kept 5,871
+  top 1 % centres in lux4 full frame: 588; not shared (dropped) 0; kept 588
+
+## Attribution (shared variants; metric differences in fraction units)
+
+### HEADLINE top-1 % ZERO < 0.9 fraction
+values: RVM-1 0.0153 (9/588); RVM-2 0.4359 (381/874); RVM-1s 0.0187 (11/588); RVM-2s 0.4392 (383/872); RVM-3 0.4660 (274/588); RVM-6 0.0333 (29/872); RVM-4 0.4655 (270/580); RVM-5 0.4655 (270/580)
+total change RVM-1s -> RVM-2s: +0.4205
+| ordering | edges | edges share | frame | frame share |
+|---|---:|---:|---:|---:|
+| edges-first (1s->3->2s) | +0.4473 | 1.064 | -0.0268 | -0.064 |
+| frame-first (1s->6->2s) | +0.4060 | 0.965 | +0.0145 | 0.035 |
+| average (Shapley) | +0.4266 | 1.015 | -0.0061 | -0.015 |
+restriction effect: RVM-2 - RVM-2s -0.0033; RVM-1 - RVM-1s -0.0034
+ruler split of the edges-first frame part (-0.0268), lba-a6 edges: population (2s vs 4) -0.0263 (0.982); snapshot (4 vs 5) +0.0000 (-0.000); 929 residual (5 vs 3) -0.0005 (0.018)
+VERDICT (rule fixed before run, >= 2/3 in both orderings): EDGES
+
+### top-1 % ZERO < 0.5 fraction
+values: RVM-1 0.1429 (84/588); RVM-2 0.8078 (706/874); RVM-1s 0.1888 (111/588); RVM-2s 0.8291 (723/872); RVM-3 0.8605 (506/588); RVM-6 0.2534 (221/872); RVM-4 0.8621 (500/580); RVM-5 0.8621 (500/580)
+total change RVM-1s -> RVM-2s: +0.6404
+| ordering | edges | edges share | frame | frame share |
+|---|---:|---:|---:|---:|
+| edges-first (1s->3->2s) | +0.6718 | 1.049 | -0.0314 | -0.049 |
+| frame-first (1s->6->2s) | +0.5757 | 0.899 | +0.0647 | 0.101 |
+| average (Shapley) | +0.6237 | 0.974 | +0.0166 | 0.026 |
+restriction effect: RVM-2 - RVM-2s -0.0213; RVM-1 - RVM-1s -0.0459
+ruler split of the edges-first frame part (-0.0314), lba-a6 edges: population (2s vs 4) -0.0329 (1.049); snapshot (4 vs 5) +0.0000 (-0.000); 929 residual (5 vs 3) +0.0015 (-0.049)
+
+### top-decile ZERO < 0.9 fraction
+values: RVM-1 0.0107 (63/5875); RVM-2 0.0720 (629/8740); RVM-1s 0.0116 (68/5871); RVM-2s 0.0817 (698/8541); RVM-3 0.0794 (466/5871); RVM-6 0.0213 (182/8541); RVM-4 0.0794 (460/5791); RVM-5 0.0794 (460/5791)
+total change RVM-1s -> RVM-2s: +0.0701
+| ordering | edges | edges share | frame | frame share |
+|---|---:|---:|---:|---:|
+| edges-first (1s->3->2s) | +0.0678 | 0.966 | +0.0024 | 0.034 |
+| frame-first (1s->6->2s) | +0.0604 | 0.861 | +0.0097 | 0.139 |
+| average (Shapley) | +0.0641 | 0.914 | +0.0060 | 0.086 |
+restriction effect: RVM-2 - RVM-2s -0.0098; RVM-1 - RVM-1s -0.0009
+ruler split of the edges-first frame part (+0.0024), lba-a6 edges: population (2s vs 4) +0.0023 (0.974); snapshot (4 vs 5) +0.0000 (0.000); 929 residual (5 vs 3) +0.0001 (0.026)
+
+run time 1.3s

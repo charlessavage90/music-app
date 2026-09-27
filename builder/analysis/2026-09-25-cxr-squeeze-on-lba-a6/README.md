@@ -75,6 +75,10 @@ one artist, and no figure below changes at the precision shown.
   not move them. Only growth that differs from artist to artist could contribute. The size of that
   contribution is unmeasured. The added artists' low median percentile (§1) is the population
   change, and it is consistent with the rise being driven by that change.
+- **Forward note, 2026-09-27: the snapshot-age half above is measured, and it is zero.** Every one
+  of the 57,909 shared artists has the same raw `fame_lb` in both artifacts, despite the different
+  fetch dates, so the shift above is **entirely the population change**. Measured and owned in
+  `../2026-09-27-issue-200-ruler-vs-map/README.md` §1 ("Ruler split"). Nothing here was re-run.
 - **Materiality, carried from `CXR-M4`.** `../2026-09-01-cxr-regression-diagnosis/README.md`,
   section "`CXR-M4` — the shift is a SQUEEZE…", "Materiality": at twenty presses the ramp is worth
   about five hops of cost and the squeeze about one. **So the 20 % is a real force weakened, not a
