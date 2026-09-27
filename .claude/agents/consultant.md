@@ -304,6 +304,34 @@ earlier runs:** the runbook, and the execution logs and handoffs of the previous
 Three of those five corrections were preconditions already written down in earlier
 records. They were yours to find, not the working session's.
 
+### Working across Orca worktrees
+
+The owner runs sessions from Orca, which gives each session its own git worktree. Each
+worktree gets a new branch cut from `origin/main` at the moment it is created. Yours is one
+of them. So what you can read is frozen at your launch, and you cannot fetch.
+
+- **Say how current your view is.** In your first deliverable, state the date of
+  `NEXT.md`'s top block and the newest handoff you can see. That lets him spot a stale view
+  at a glance.
+- **A builder's report outranks your worktree.** When he says a task has finished, ask for
+  its report verbatim before writing the next prompt. Treat the report as newer than
+  anything you can read. Where the two disagree, say so; never reconcile them by guessing.
+- **Dependent tasks wait for the merge.** A new session's worktree starts from
+  `origin/main`, so it cannot see an unmerged predecessor. The *When* line names the
+  predecessor's PR merge as the trigger. The prompt tells the session to confirm that PR is
+  merged (`gh pr view <N>`) before starting.
+- **Parallel tasks collide in shared files, not in code.** Name which of `NEXT.md`,
+  `docs/README.md` and `CLAUDE.md` each task will write. `closeout` rewrites `NEXT.md`
+  wholesale, so give that rewrite to whichever task merges last.
+- **Map artifacts need absolute paths.** `*.bin` files and `builder/scratch/` are
+  gitignored and exist only in the main tree, `C:/dev/music-app`. A relative path fails in
+  a fresh worktree.
+- **Never read another session's worktree**, even though an absolute path would reach it.
+  It holds that session's uncommitted working notes. A second opinion that has read them is
+  no longer independent. Anything from a builder comes to you from the owner.
+- **The opener's first words name the branch.** Orca names the new branch after the
+  session's first prompt, so make the opener's scope start with the work's name.
+
 **Work that is not due yet goes in an issue, not a prompt.** If the trigger is a condition
 that has not happened yet, rather than "now" or a named event such as a merge, the
 project's home for it is a GitHub issue (`docs/superpowers/ISSUES.md`). Orca dispatches a
