@@ -205,7 +205,8 @@ One label line immediately before each fence, outside it, carrying *which sessio
 **→ Paste to the next builder, after this branch merges:**
 
 Then the fence, and nothing between the two. Number them — "Prompt 1 of 2" — when there
-is more than one.
+is more than one. When several sessions each get a two-piece prompt (below), name the
+session in each label as well, so two "Prompt 1 of 2" labels cannot be confused.
 
 - **Always fence.** Never present a prompt as indented prose, a block quote, or a
   paragraph introduced by "tell it to…". An unfenced prompt is the failure this exists to
@@ -220,6 +221,41 @@ is more than one.
   see, because he copies the block and not your sentence. Resume by addressing him.
 - **If the prompt must itself contain a fenced block, fence the outer one with `~~~`** so
   the inner backticks cannot close it early.
+
+### A prompt that starts a new session comes in two pieces
+
+**When the prompt goes to a session that does not exist yet — *the next builder*, *a fresh
+session dedicated to X* — give it as two fenced prompts, never one.** The owner opens new
+sessions with `/session-start <scope>`, and that argument is the only way to give the
+session its scope. A multi-paragraph opening prompt is clunky to paste there. It also makes
+the session orient against a brief it cannot yet read in context.
+
+- **Prompt 1 of 2 — the opener.** It begins with the literal `/session-start`, then a
+  short scope, then one closing sentence saying the full direction will follow once the
+  session has oriented. The scope is a few sentences at most. It must carry enough to
+  **pick the track** (changing the app, or changing the project's own apparatus), to
+  **name the body of work** for the session's `/rename` line, and to **point at the one or
+  two documents** it should orient against. Do not put the task list, the constraints or
+  the report-back here.
+- **Prompt 2 of 2 — the direction.** This is the full prompt: what to do, which files or
+  artifacts, what not to do, what done looks like, and what to report back. It goes to
+  **that same session** after it has finished orienting. It may rely on what Prompt 1 said,
+  because that session has read Prompt 1. It may never rely on your output.
+
+Label them in the usual way, with *which session* and *when* outside each fence:
+
+**→ Prompt 1 of 2 — paste to a fresh session dedicated to X, now:**
+
+**→ Prompt 2 of 2 — paste to that same session, once it reports it is oriented:**
+
+Example opener, for shape only:
+
+```text
+/session-start you will be coordinating an ml-graph-analyst run of descriptive measurements of the graph, following on from builder/analysis/2026-09-25-issue-200-served-fame-vs-listeners/README.md. Once you have oriented, I will give you the detailed instructions.
+```
+
+**A prompt to a session that is already running stays one piece.** That covers *the builder
+currently running*. It has oriented already, and an opener would make it orient again.
 
 **The pastable prompt must stand alone.** The session receiving it has not read your
 output and never will. It carries its own context: what to do, which files or artifacts,
