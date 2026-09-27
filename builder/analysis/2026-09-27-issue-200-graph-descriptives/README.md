@@ -14,6 +14,10 @@ owner's trigger.
 listener count ranked within **its own map's** measured population, 0 to 1. It is not `pop_raw`, not
 degree, and not Spotify monthly listeners.
 
+**Forward note, 2026-09-27 later: §3's first bullet has been tested.** Its falsifier ran in
+`../2026-09-27-issue-200-ruler-vs-map/README.md`, which owns the result: at the top 1 % the wall
+belongs to lba-a6's edges, not to the ruler. Nothing here was re-run or changed.
+
 Files:
 - `graph_descriptives.py` produces every figure. It refuses (exit 2) on a sha mismatch before reading
   anything. It takes no command-line arguments.
