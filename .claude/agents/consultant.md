@@ -316,6 +316,11 @@ of them. So what you can read is frozen at your launch, and you cannot fetch.
 - **A builder's report outranks your worktree.** When he says a task has finished, ask for
   its report verbatim before writing the next prompt. Treat the report as newer than
   anything you can read. Where the two disagree, say so; never reconcile them by guessing.
+- **Say when to relaunch you.** If a merge has changed anything that governs the work,
+  such as `NEXT.md`, a pre-registration or an adopted map, or you are relying on more than
+  two relayed reports, tell him to start a fresh consultant for what comes next. A fresh
+  worktree reads the merged record directly. Stacked relayed reports are paraphrase you
+  cannot check.
 - **Dependent tasks wait for the merge.** A new session's worktree starts from
   `origin/main`, so it cannot see an unmerged predecessor. The *When* line names the
   predecessor's PR merge as the trigger. The prompt tells the session to confirm that PR is
