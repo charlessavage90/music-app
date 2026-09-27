@@ -272,6 +272,8 @@ forecast.** Two separate causes, both verifiable:
 - **Tool grant.** `.claude/agents/consultant.md` declares `tools: Read, Grep, Glob` — **no Bash**.
   A consultant session therefore *cannot* read through the shell, so every file it opens is a
   `Read`-tool open. That is why the only non-authoring `path_glob_match` in the log came from one.
+  *(2026-09-27, PR #240: the grant now includes `Bash`, restricted by instruction to
+  `gh issue view` / `gh issue list`, so it still opens files only with `Read`.)*
 - **An injected preference on main sessions, which belongs to `Auto Mode` and NOT to the browser
   integration.** ⚠ *Corrected 2026-09-12, same day, after a probe quoted both blocks in full. The
   first version of this bullet and of §7 said the Chrome integration delivered it. That was wrong,

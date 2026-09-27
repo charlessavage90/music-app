@@ -564,7 +564,8 @@ that is how the drift began.
   so the check would have cleared the exact plan it exists to catch).
 - **`.claude/agents/consultant.md`** — **not a subagent, and a working session must never
   dispatch it as one.** It is launched as its own session (`claude --agent consultant --tools
-  Read,Grep,Glob`), reads the committed project record but never the code, and gives one
+  Read,Grep,Glob,Bash`, never in auto mode), reads the committed project record and GitHub
+  issues but never the code, and gives one
   reasoned recommendation on one named decision, then stays in conversation. Its whole value
   is that its inputs are the owner's rather than another session's paraphrase — dispatching it
   from a working session destroys exactly that. **Added to this list 2026-07-27**: the agent

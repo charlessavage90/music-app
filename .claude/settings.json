@@ -50,6 +50,8 @@
       "Bash(aws apprunner describe-service *)",
       "Bash(aws apprunner list-services *)",
       "Bash(docker info *)",
+      "Bash(gh issue view *)",
+      "Bash(gh issue list *)",
       "mcp__Snyk__snyk_code_scan"
     ],
     "deny": [
