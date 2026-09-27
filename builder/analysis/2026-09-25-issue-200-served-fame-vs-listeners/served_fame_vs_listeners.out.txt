@@ -1,0 +1,213 @@
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b
+requests 85  interior cards served 410  unique artists 168
+map sample: 400/400 with a Deezer fan count; median 2504
+
+## By depth band (per interior card served, repeats counted)
+| Dig-deeper presses | cards | unique | median fame_lb_pctl | median Deezer fans | median deezer_fan_pctl | cards >= 0.5 on both | < 0.5 fame, >= 0.5 Deezer | >= 0.5 fame, < 0.5 Deezer | < 0.5 on both | no Deezer count |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | 55 | 39 | 0.993 | 115,798 | 0.935 | 54 | 0 | 0 | 0 | 1 |
+| 1-4 | 145 | 77 | 0.993 | 69,893 | 0.920 | 143 | 0 | 2 | 0 | 0 |
+| 5-9 | 92 | 58 | 0.992 | 69,893 | 0.920 | 92 | 0 | 0 | 0 | 0 |
+| 10-21 | 118 | 66 | 0.994 | 102,938 | 0.932 | 112 | 0 | 6 | 0 | 0 |
+
+rank agreement fame_lb_pctl vs Deezer fans: served uniques rho=0.61 (n=167); map sample rho=0.45 (n=400)
+
+## Endpoints the owner picked
+| endpoint | fame_lb_pctl |
+|---|---|
+| Radiohead | 1.000 |
+| Pink Floyd | 1.000 |
+| Coheed and Cambria | 0.992 |
+| The Format | 0.984 |
+| Guster | 0.983 |
+| Wishbone Ash | 0.955 |
+| Commander Cody & His Lost Planet Airmen | 0.737 |
+| WITCH | 0.668 |
+| Young Gun Silver Fox | 0.393 |
+| Goose | 0.012 |
+
+## One hop from the served artists (per unique served interior, graph neighbours)
+| Dig-deeper presses | unique served | median neighbour count | median share of neighbours < 0.9 fame_lb_pctl | median share < 0.5 | cards served < 0.9 |
+|---|---|---|---|---|---|
+| 0 | 39 | 50 | 0.020 | 0.000 | 9 of 55 |
+| 1-4 | 77 | 49 | 0.021 | 0.000 | 13 of 145 |
+| 5-9 | 58 | 49 | 0.000 | 0.000 | 1 of 92 |
+| 10-21 | 66 | 49 | 0.000 | 0.000 | 1 of 118 |
+
+## Two hops from the served artists (every unique served interior, pooled)
+| hops | artists reachable | share < 0.9 fame_lb_pctl | share < 0.5 |
+|---|---|---|---|
+| exactly 1 | 2416 | 0.317 | 0.069 |
+| exactly 2 | 15936 | 0.741 | 0.265 |
+
+## Every unique served interior artist, deepest band first
+| artist | fame_lb_pctl | Deezer fans | deezer_fan_pctl | served at presses |
+|---|---|---|---|---|
+| The Moody Blues | 0.989 | 96,053 | 0.932 | 0,1,5,8,9,10,11,20,21 |
+| Phantogram | 0.990 | 89,892 | 0.932 | 21 |
+| Silversun Pickups | 0.994 | 69,893 | 0.920 | 0,1,2,3,5,6,7,8,9,10,11,15,16,19,20,21 |
+| Little Dragon | 0.996 | 79,335 | 0.927 | 21 |
+| Jefferson Airplane | 0.997 | 219,870 | 0.948 | 21 |
+| Lou Reed | 0.999 | 510,822 | 0.970 | 21 |
+| Donovan | 0.991 | 45,070 | 0.885 | 8,9,10,11,20 |
+| Nick Drake | 0.997 | 102,938 | 0.932 | 8,9,10,11,20 |
+| The Temper Trap | 0.997 | 123,351 | 0.938 | 1,20 |
+| Feist | 0.999 | 202,009 | 0.945 | 20 |
+| Emerson, Lake & Palmer | 0.983 | 135,543 | 0.938 | 0,1,2,3,7,12,13,14,15,17,19 |
+| Genesis | 0.995 | 1,192,979 | 0.985 | 7,12,15,19 |
+| Tears for Fears | 0.997 | 1,189,129 | 0.985 | 15,19 |
+| Joy Division | 0.999 | 808,086 | 0.980 | 13,19 |
+| Interpol | 0.999 | 479,570 | 0.970 | 2,7,12,15,19 |
+| Camel | 0.969 | 51,882 | 0.897 | 18 |
+| Ben Folds Five | 0.990 | 9,139 | 0.723 | 2,6,7,8,9,12,14,17,18 |
+| Silverchair | 0.992 | 356,322 | 0.963 | 18 |
+| Porcupine Tree | 0.993 | 143,907 | 0.938 | 18 |
+| A Perfect Circle | 0.997 | 311,755 | 0.963 | 18 |
+| blink‐182 | 0.965 | 2,334,297 | 0.995 | 5,15,17 |
+| Straylight Run | 0.972 | 2,082 | 0.468 | 17 |
+| The Starting Line | 0.979 | 10,528 | 0.743 | 17 |
+| Ween | 0.985 | 19,240 | 0.795 | 17 |
+| They Might Be Giants | 0.990 | 42,108 | 0.877 | 17 |
+| Frank Zappa | 0.992 | 235,094 | 0.953 | 17 |
+| Yellowcard | 0.995 | 224,838 | 0.953 | 17 |
+| King Gizzard & the Lizard Wizard | 0.878 | 92,711 | 0.932 | 6,16 |
+| Unknown Mortal Orchestra | 0.977 | 45,513 | 0.885 | 6,16 |
+| mae | 0.978 | 6,377 | 0.667 | 16 |
+| King Crimson | 0.989 | 171,433 | 0.945 | 16 |
+| The Red Jumpsuit Apparatus | 0.989 | 93,138 | 0.932 | 16 |
+| Anberlin | 0.990 | 50,074 | 0.897 | 16 |
+| Broken Bells | 0.995 | 64,351 | 0.912 | 0,1,2,6,16 |
+| Deftones | 0.998 | 1,046,098 | 0.983 | 16 |
+| Paramore | 0.999 | 3,148,894 | 0.995 | 2,16 |
+| Minus the Bear | 0.990 | 11,749 | 0.752 | 7,8,11,13,14,15 |
+| Coheed and Cambria | 0.992 | 51,939 | 0.897 | 14,15 |
+| AFI | 0.996 | 138,690 | 0.938 | 2,5,15 |
+| The Smiths | 0.999 | 1,504,348 | 0.988 | 15 |
+| The Used | 0.994 | 150,697 | 0.940 | 0,1,3,11,14 |
+| Peter Gabriel | 0.995 | 518,732 | 0.970 | 13,14 |
+| Good Charlotte | 0.996 | 734,821 | 0.975 | 1,3,4,10,11,14 |
+| Tori Amos | 0.996 | 34 | 0.048 | 13,14 |
+| The Offspring | 0.999 | 2,034,099 | 0.995 | 1,2,3,4,10,11,14 |
+| Fugazi | 0.989 | 65,884 | 0.917 | 13 |
+| At the Drive‐In | 0.991 | 47,903 | 0.890 | 13 |
+| Ben Folds | 0.993 | 1 | 0.005 | 13 |
+| Regina Spektor | 0.999 | 198,274 | 0.945 | 6,13 |
+| Mates of State | 0.986 | 2,985 | 0.542 | 12 |
+| Crowded House | 0.990 | 77,264 | 0.925 | 0,7,12 |
+| Barenaked Ladies | 0.991 | 29,209 | 0.840 | 2,7,8,12 |
+| Stars | 0.995 | 14,143 | 0.767 | 12 |
+| Counting Crows | 0.997 | 423,811 | 0.968 | 12 |
+| Metric | 0.998 | 623 | 0.258 | 1,11,12 |
+| Linda Ronstadt | 0.971 | 60,102 | 0.907 | 1,2,6,7,8,9,10,11 |
+| James Taylor | 0.989 | 136,820 | 0.938 | 7,8,9,10,11 |
+| America | 0.989 | 138,355 | 0.938 | 11 |
+| Brand New | 0.993 | 53,453 | 0.897 | 0,1,11 |
+| Dire Straits | 0.998 | 2,288,035 | 0.995 | 11 |
+| The Shins | 0.999 | 93,471 | 0.932 | 8,9,10,11 |
+| Boys Like Girls | 0.988 | 246,689 | 0.955 | 10 |
+| Steely Dan | 0.988 | 137,789 | 0.938 | 1,9,10 |
+| hellogoodbye | 0.989 | 22,649 | 0.820 | 10 |
+| Talking Heads | 0.997 | 446,426 | 0.968 | 10 |
+| Yeah Yeah Yeahs | 0.999 | 350,381 | 0.963 | 10 |
+| Circa Survive | 0.983 | 24,777 | 0.823 | 9 |
+| Manchester Orchestra | 0.988 | 42,620 | 0.880 | 2,9 |
+| The Decemberists | 0.997 | 46,954 | 0.890 | 0,9 |
+| Eagles | 0.997 | 1,391,397 | 0.988 | 1,8,9 |
+| Jeff Buckley | 0.998 | 327,566 | 0.963 | 9 |
+| Portishead | 0.999 | 582,807 | 0.973 | 9 |
+| The Doobie Brothers | 0.988 | 136,290 | 0.938 | 7,8 |
+| Third Eye Blind | 0.992 | 73,468 | 0.922 | 8 |
+| Spoon | 0.997 | 47,580 | 0.890 | 8 |
+| The Cranberries | 0.999 | 1,933,763 | 0.995 | 8 |
+| Something Corporate | 0.984 | 7,927 | 0.698 | 1,2,3,5,7 |
+| Motion City Soundtrack | 0.990 | 19,675 | 0.795 | 0,5,6,7 |
+| Sheryl Crow | 0.994 | 218,058 | 0.948 | 7 |
+| Supertramp | 0.994 | 1,285,030 | 0.985 | 7 |
+| Goat | 0.908 | 11,171 | 0.750 | 2,3,4,5,6 |
+| Uriah Heep | 0.985 | 125,866 | 0.938 | 4,6 |
+| Jack’s Mannequin | 0.987 | 8,811 | 0.718 | 0,4,5,6 |
+| Joni Mitchell | 0.993 | 115,537 | 0.938 | 2,6 |
+| OK Go | 0.997 | 85,908 | 0.930 | 4,6 |
+| Deep Purple | 0.998 | 2,017,854 | 0.995 | 4,5,6 |
+| Belle and Sebastian | 0.998 | 129,391 | 0.938 | 6 |
+| Wolfmother | 0.998 | 143,546 | 0.938 | 4,6 |
+| Queens of the Stone Age | 0.999 | 1,372,465 | 0.988 | 4,6 |
+| Björk | 0.999 | 866,774 | 0.980 | 6 |
+| Led Zeppelin | 1.000 | 5,542,218 | 0.995 | 6 |
+| Bob Dylan | 1.000 | 2,122,282 | 0.995 | 6 |
+| The Marshall Tucker Band | 0.945 | 13,277 | 0.760 | 3,4,5 |
+| The Brian Jonestown Massacre | 0.986 | 46,282 | 0.887 | 2,3,4,5 |
+| Spiritualized | 0.990 | 19,392 | 0.795 | 5 |
+| The Zombies | 0.992 | 48,923 | 0.890 | 5 |
+| The Allman Brothers Band | 0.993 | 133,085 | 0.938 | 3,4,5 |
+| Dashboard Confessional | 0.994 | 46,458 | 0.887 | 1,2,3,4,5 |
+| Nico | 0.995 | 87,951 | 0.930 | 5 |
+| Broken Social Scene | 0.997 | 32,986 | 0.855 | 5 |
+| Elliott Smith | 0.998 | 115,476 | 0.938 | 5 |
+| Band of Horses | 0.998 | 178,141 | 0.945 | 5 |
+| The Flaming Lips | 0.998 | 66,586 | 0.917 | 5 |
+| Say Anything | 0.986 | 10,059 | 0.738 | 0,1,4 |
+| The Dandy Warhols | 0.996 | 82,715 | 0.930 | 4 |
+| Lynyrd Skynyrd | 0.998 | 1,046,982 | 0.983 | 4 |
+| Black Sabbath | 0.999 | 3,035,452 | 0.995 | 4 |
+| Thee Sacred Souls | 0.739 | 21,798 | 0.810 | 0,1,2,3 |
+| Cleo Sol | 0.771 | 39,169 | 0.868 | 3 |
+| Obongjayar | 0.793 | 10,630 | 0.743 | 3 |
+| Thundercat | 0.968 | 64,882 | 0.917 | 3 |
+| Sampha | 0.984 | 85,765 | 0.930 | 3 |
+| Kenny Loggins | 0.987 | 112,136 | 0.935 | 3 |
+| Cheap Trick | 0.991 | 66,134 | 0.917 | 3 |
+| Rush | 0.995 | 528,504 | 0.970 | 0,1,2,3 |
+| The Bravery | 0.995 | 34,134 | 0.858 | 2,3 |
+| Black Rebel Motorcycle Club | 0.996 | 95,237 | 0.932 | 2,3 |
+| The Raconteurs | 0.997 | 166,201 | 0.940 | 0,3 |
+| Aerosmith | 0.999 | 5,333,700 | 0.995 | 0,1,3 |
+| Oasis | 1.000 | 4,700,356 | 0.995 | 1,3 |
+| Kings of Leon | 1.000 | 2,394,323 | 0.995 | 3 |
+| Sampa the Great | 0.712 | 17,155 | 0.787 | 0,1,2 |
+| Pink Siifu | 0.722 | 2,321 | 0.485 | 2 |
+| Orion Sun | 0.735 | 5,748 | 0.650 | 2 |
+| PinkPantheress | 0.888 | 240,182 | 0.953 | 2 |
+| Future Islands | 0.976 | 56,011 | 0.897 | 1,2 |
+| Eve 6 | 0.983 | 9,047 | 0.723 | 2 |
+| Charli xcx | 0.984 | 1,889,025 | 0.995 | 2 |
+| The Black Angels | 0.984 | 52,300 | 0.897 | 2 |
+| Carly Simon | 0.984 | 129,565 | 0.938 | 2 |
+| Kurt Vile | 0.986 | 54,712 | 0.897 | 2 |
+| Bush | 0.994 | 216,717 | 0.948 | 2 |
+| Alice in Chains | 0.998 | 1,298,660 | 0.985 | 0,2 |
+| Simon & Garfunkel | 0.999 | 1,166,797 | 0.985 | 2 |
+| Durand Jones & The Indications | 0.727 | 19,952 | 0.802 | 1 |
+| Leon Bridges | 0.873 | 94,253 | 0.932 | 1 |
+| The Meters | 0.974 | 22,925 | 0.820 | 1 |
+| Sharon Jones and the Dap‐Kings | 0.983 | 58,276 | 0.905 | 1 |
+| Carole King | 0.984 | 81,846 | 0.930 | 1 |
+| Karen O | 0.987 | 17,154 | 0.787 | 1 |
+| Ben E. King | 0.989 | 141,213 | 0.938 | 1 |
+| The Isley Brothers | 0.991 | 455,877 | 0.968 | 1 |
+| The Avalanches | 0.991 | 42,575 | 0.880 | 0,1 |
+| Taking Back Sunday | 0.993 | 75,234 | 0.925 | 1 |
+| Toro y Moi | 0.993 | 59,435 | 0.907 | 1 |
+| The Animals | 0.995 | 357,329 | 0.963 | 0,1 |
+| Santigold | 0.997 | 93,839 | 0.932 | 1 |
+| Snow Patrol | 0.999 | 1,295,518 | 0.985 | 1 |
+| I, Ced | 0.233 | — | — | 0 |
+| Mach‐Hommy | 0.682 | 6,990 | 0.688 | 0 |
+| Quelle Chris | 0.700 | 2,619 | 0.525 | 0 |
+| Westside Gunn | 0.788 | 55,339 | 0.897 | 0 |
+| Doechii | 0.874 | 153,071 | 0.940 | 0 |
+| Sabrina Carpenter | 0.917 | 1,817,422 | 0.990 | 0 |
+| Simply Red | 0.987 | 930,057 | 0.983 | 0 |
+| Chevelle | 0.989 | 213,536 | 0.948 | 0 |
+| Flyleaf | 0.991 | 138,763 | 0.938 | 0 |
+| Carly Rae Jepsen | 0.993 | 2,509,704 | 0.995 | 0 |
+| Rilo Kiley | 0.993 | 14,331 | 0.770 | 0 |
+| Sade | 0.994 | 1,455,208 | 0.988 | 0 |
+| The All‐American Rejects | 0.996 | 371,688 | 0.963 | 0 |
+| Bryan Adams | 0.997 | 1,752,355 | 0.990 | 0 |
+| Avril Lavigne | 0.998 | 5,713,360 | 0.998 | 0 |
+| LCD Soundsystem | 0.998 | 179,416 | 0.945 | 0 |
+| Creedence Clearwater Revival | 0.999 | 1,595,827 | 0.988 | 0 |
+| Modest Mouse | 0.999 | 181,606 | 0.945 | 0 |
+| The White Stripes | 1.000 | 1,320,195 | 0.986 | 0 |
+| The Strokes | 1.000 | 1,752,879 | 0.990 | 0 |

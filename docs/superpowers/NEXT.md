@@ -62,8 +62,8 @@ got.**
 2. **The owner:** press the unticked `TEST-QUEUE.md` boxes on unsung.fm.
 3. **After a few days:** #237 — prune the previous frontend's assets (a session's, with his AWS hands).
 4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or pick
-   new ones) and #200 (whether "better" should also prefer less-listened artists; its step 1 is
-   `agent-ready`).
+   new ones) and #200 (whether "better" should also prefer less-listened artists; step 1 is done,
+   PR #238, and its options are in that directory's README §4).
 
 ---
 
