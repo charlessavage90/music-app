@@ -1,0 +1,153 @@
+sha256 OK  S4-A6 MANIFEST.json 950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3
+sha256 OK  graph-lba-a6.bin    28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  population file     1bbff8fcfde78a07d276f727ccaf048c73da4bfd27709b64f6f6894d6d4d2d7b (== archive manifest)
+builder pipeline: C:\Users\charl\worktrees\music-app\sanddab\builder\src\artistpath_builder\pipeline.py
+api graph_store:  C:\Users\charl\worktrees\music-app\sanddab\api\src\artistpath_api\graph_store.py
+config: cap_strategy=trimmed_union union_top_j=50 union_degree_ceiling=50 damping=0.0 rescale=p99_log_clip filter_special_purpose=True drop_no_release_tail=True drop_featured_credit=True drop_unlistenable=True
+  builder: rescale p99 scale=2035 | saturated edges 148038 of 14793382 (1.001%)
+  builder: largest component: 87394 of 87764 artists
+build: 87,394 nodes, 2,490,728 CSR entries (16.2 min)
+REPRODUCTION: built node order, offsets, neighbours == graph-lba-a6.bin (shipped GraphStore): True
+lba-a6: N 87,394  CSR entries 2,490,728  null fame 3
+S4 rows == served rows for every node: True
+re-implemented trim == shipped trimmed_union_cap output on all 87,764 nodes: True
+reconstructed pre-Pass-1 drops reproduce the cap's input node set: True (87,764 artists; payloads 87,764; special 0, nameless 0, no-release 0, featured 0, un-listenable 0 among payload-holders; component prune 370)
+population P: 88,685 MBIDs
+
+====================================================================================================
+## top 1 % (fame percentile >= 0.99, lba-a6 frame): 874 centres
+
+(a) SUP-S0 raw archived list length (self-row excluded): median 1144  p10 180  p90 6491  mean 2496.86  min 100  max 32646
+    rows incl. any self-row: total 2,182,258 vs excl. 2,182,258; centres with duplicate MBIDs in S0: 0
+    SUP-S1 length (S0 on the map): median 1144  p10 180  p90 6482  mean 2493.11  min 100  max 32604
+
+    S0 entries by fate (pooled over 874 centres, 2,182,258 entries):
+    | fate | entries | share of S0 | centres with >= 1 |
+    |---|---:|---:|---:|
+    | lba-a6 node (-> S1) | 2,178,981 | 0.9985 | — |
+    | outside P | 0 | 0.0000 | 0 |
+    | special-purpose | 0 | 0.0000 | 0 |
+    | nameless / no identity row | 0 | 0.0000 | 0 |
+    | no archived payload of its own | 0 | 0.0000 | 0 |
+    | no-release-tail drop | 0 | 0.0000 | 0 |
+    | featured-credit drop | 0 | 0.0000 | 0 |
+    | un-listenable drop (20260809) | 0 | 0.0000 | 0 |
+    | lost to largest-component prune | 3,277 | 0.0015 | 582 |
+    | UNEXPLAINED | 0 | 0.0000 | 0 |
+    null-fame candidates excluded (entries, pooled): S1 17, S3 17, S5 0
+
+### top 1 %, candidates below 0.9 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 786  p10 64  p90 5171  mean 1898.08  min 0  max 27558
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 786 | 64 | 5171 | 1898.08 | 1 | 0.0011 |
+| SUP-S2 | 0 | 0 | 3 | 0.79 | 617 | 0.7059 |
+| SUP-S3 | 298 | 27 | 1879 | 736.06 | 2 | 0.0023 |
+| SUP-S4 | 1 | 0 | 15 | 4.73 | 381 | 0.4359 |
+| SUP-S5 | 1 | 0 | 15 | 4.73 | 381 | 0.4359 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 297 | 27 | 1879 | 735.88 | 3 | 0.0034 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 874 | 1.0000 |
+| rescue candidates surviving to S5 | 1 | 0 | 15 | 4.65 | 381 | 0.4359 |
+| union candidate set S1 ∪ rescue | 786 | 64 | 5171 | 1898.08 | 1 | 0.0011 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 4,132 of 1,658,922 (0.0025); per-centre share median 0.0007 over 873 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 694; outside own top-50 but rescued 642,624; neither 1,015,604
+    rescue direction: pooled 643,161 below-bar rescuers, 4,061 survive the ceiling (0.0063); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 639,186 (by the centre's own ceiling 639,100; by the neighbour's ceiling 86)
+    S5 zero count reproduces graph-descriptives §1 A 381 of 874: True
+
+### top 1 %, candidates below 0.5 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 296  p10 23  p90 2116  mean 752.72  min 0  max 12726
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 296 | 23 | 2116 | 752.72 | 7 | 0.0080 |
+| SUP-S2 | 0 | 0 | 0 | 0.01 | 868 | 0.9931 |
+| SUP-S3 | 116 | 10 | 828 | 312.04 | 14 | 0.0160 |
+| SUP-S4 | 0 | 0 | 3 | 0.91 | 706 | 0.8078 |
+| SUP-S5 | 0 | 0 | 3 | 0.91 | 706 | 0.8078 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 116 | 10 | 828 | 312.04 | 14 | 0.0160 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 874 | 1.0000 |
+| rescue candidates surviving to S5 | 0 | 0 | 3 | 0.91 | 706 | 0.8078 |
+| union candidate set S1 ∪ rescue | 296 | 23 | 2116 | 752.72 | 7 | 0.0080 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 795 of 657,881 (0.0012); per-centre share median 0.0000 over 867 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 10; outside own top-50 but rescued 272,710; neither 385,161
+    rescue direction: pooled 272,720 below-bar rescuers, 795 survive the ceiling (0.0029); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 271,925 (by the centre's own ceiling 271,925; by the neighbour's ceiling 0)
+    S5 zero count reproduces graph-descriptives §1 A 706 of 874: True
+
+====================================================================================================
+## top decile (fame percentile >= 0.9, lba-a6 frame): 8,740 centres
+
+(a) SUP-S0 raw archived list length (self-row excluded): median 225  p10 109  p90 1081  mean 581.45  min 3  max 32646
+    rows incl. any self-row: total 5,081,848 vs excl. 5,081,848; centres with duplicate MBIDs in S0: 0
+    SUP-S1 length (S0 on the map): median 225  p10 109  p90 1079  mean 580.87  min 3  max 32604
+
+    S0 entries by fate (pooled over 8,740 centres, 5,081,848 entries):
+    | fate | entries | share of S0 | centres with >= 1 |
+    |---|---:|---:|---:|
+    | lba-a6 node (-> S1) | 5,076,804 | 0.9990 | — |
+    | outside P | 0 | 0.0000 | 0 |
+    | special-purpose | 0 | 0.0000 | 0 |
+    | nameless / no identity row | 0 | 0.0000 | 0 |
+    | no archived payload of its own | 0 | 0.0000 | 0 |
+    | no-release-tail drop | 0 | 0.0000 | 0 |
+    | featured-credit drop | 0 | 0.0000 | 0 |
+    | un-listenable drop (20260809) | 0 | 0.0000 | 0 |
+    | lost to largest-component prune | 5,044 | 0.0010 | 1,666 |
+    | UNEXPLAINED | 0 | 0.0000 | 0 |
+    null-fame candidates excluded (entries, pooled): S1 33, S3 33, S5 0
+
+### top decile, candidates below 0.9 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 121  p10 15  p90 849  mean 411.84  min 0  max 27558
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 121 | 15 | 849 | 411.84 | 32 | 0.0037 |
+| SUP-S2 | 4 | 0 | 20 | 7.08 | 2,279 | 0.2608 |
+| SUP-S3 | 59 | 7 | 360 | 174.29 | 93 | 0.0106 |
+| SUP-S4 | 17 | 1 | 37 | 18.19 | 629 | 0.0720 |
+| SUP-S5 | 17 | 1 | 37 | 18.19 | 629 | 0.0720 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 56 | 6 | 359 | 172.41 | 116 | 0.0133 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 8,740 | 1.0000 |
+| rescue candidates surviving to S5 | 17 | 1 | 35 | 17.32 | 644 | 0.0737 |
+| union candidate set S1 ∪ rescue | 121 | 15 | 849 | 411.84 | 32 | 0.0037 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 158,955 of 3,599,445 (0.0442); per-centre share median 0.1944 over 8,708 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 61,877; outside own top-50 but rescued 1,461,386; neither 2,076,182
+    rescue direction: pooled 1,506,878 below-bar rescuers, 151,356 survive the ceiling (0.1004); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 1,364,308 (by the centre's own ceiling 1,355,522; by the neighbour's ceiling 8,786)
+    S5 zero count reproduces graph-descriptives §1 A 629 of 8740: True
+
+### top decile, candidates below 0.5 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 43  p10 3  p90 353  mean 165.71  min 0  max 12726
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 43 | 3 | 353 | 165.71 | 275 | 0.0315 |
+| SUP-S2 | 0 | 0 | 2 | 0.53 | 6,965 | 0.7969 |
+| SUP-S3 | 21 | 1 | 157 | 73.49 | 512 | 0.0586 |
+| SUP-S4 | 2 | 0 | 11 | 3.77 | 3,106 | 0.3554 |
+| SUP-S5 | 2 | 0 | 11 | 3.77 | 3,106 | 0.3554 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 20 | 1 | 157 | 73.41 | 524 | 0.0600 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 8,740 | 1.0000 |
+| rescue candidates surviving to S5 | 2 | 0 | 11 | 3.72 | 3,121 | 0.3571 |
+| union candidate set S1 ∪ rescue | 43 | 3 | 353 | 165.71 | 275 | 0.0315 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 32,963 of 1,448,340 (0.0228); per-centre share median 0.0488 over 8,465 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 4,667; outside own top-50 but rescued 637,622; neither 806,051
+    rescue direction: pooled 641,635 below-bar rescuers, 32,507 survive the ceiling (0.0507); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 609,326 (by the centre's own ceiling 609,128; by the neighbour's ceiling 198)
+    S5 zero count reproduces graph-descriptives §1 A 3106 of 8740: True
+
+====================================================================================================
+## Reading rule (fixed before the run)
+top 1 %, bar 0.9: Z_pre 1/874 = 0.0011; Z_post 381/874 = 0.4359; median S1 below-bar 786; Z_pre/Z_post 0.0026 (trim share 0.9974); R1 clause True; R2 clause False; verdict SUP-R1
+top 1 %, bar 0.5: Z_pre 7/874 = 0.0080; Z_post 706/874 = 0.8078; median S1 below-bar 296; Z_pre/Z_post 0.0099 (trim share 0.9901); R1 clause True; R2 clause False; verdict (no verdict)
+top decile, bar 0.9: Z_pre 32/8740 = 0.0037; Z_post 629/8740 = 0.0720; median S1 below-bar 121; Z_pre/Z_post 0.0509 (trim share 0.9491); R1 clause True; R2 clause False; verdict (no verdict)
+top decile, bar 0.5: Z_pre 275/8740 = 0.0315; Z_post 3106/8740 = 0.3554; median S1 below-bar 43; Z_pre/Z_post 0.0885 (trim share 0.9115); R1 clause True; R2 clause False; verdict (no verdict)
+
+S4-A6 MANIFEST.json sha256 after the run unchanged: True
+wall time 20.3 min
