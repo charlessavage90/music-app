@@ -72,8 +72,10 @@ Fox and Goose journeys.
 
 **Which Goose.** The journey's source is the rapper, per the logged MBID. The map holds exactly two
 artists named Goose: that rapper and a Belgian dance/electro-rock band (0.965). **The American jam
-band is not on the map at all.** If the owner meant the jam band, the search offered him neither. The
-rapper's journey is where the underground-rap artists in the list above come from.
+band is not on the map at all.** **The owner confirmed on 2026-09-27 that he meant the jam band.** So
+this journey started from an artist he did not intend, and the search offered him no way to pick the
+one he did. The rapper's journey is where the underground-rap artists in the list above come from.
+The missing jam band is filed as its own bug (#239).
 
 The deep presses (9 to 21 of them) all came on journeys between two endpoints at 0.74 or above: Guster
 → Wishbone Ash, Radiohead → The Format, Commander Cody → Pink Floyd, Guster → WITCH, and Coheed and
@@ -133,9 +135,10 @@ Pooled over all 168 served artists:
   alternative weights were run; that would be step 2, and it needs a pre-registration. This is the
   inference I would abandon most readily. A strong enough push could still route through the
   less-listened two-step neighbourhood; this table cannot say at what cost to coherence.
-- **One of the three less-famous-endpoint journeys may not be the one he meant.** Its "Goose" is a
-  rapper with almost no listeners, so its low-listener artists say what the router does from a
-  genuinely obscure start. They do not say what it would do from the jam band, which is not on the map.
+- **One of the three less-famous-endpoint journeys is not the one he meant** (confirmed 2026-09-27).
+  Its "Goose" is a rapper with almost no listeners, so its low-listener artists say what the router
+  does from a genuinely obscure start. They do not say what it would do from the jam band, which is
+  not on the map.
 - **The sample is small.** It covers 10 journeys, two days and one listener.
 
 ## 4. Options and their consequences
