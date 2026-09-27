@@ -1,0 +1,161 @@
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b
+sha256 OK  graph-lux4.bin  fd92a7352afb7321e80f3818262d08169fcfb3af1d6841d7ccfca0f5e5740369
+sha256 OK  graph-msw-tu50.bin  43dd82bb3771691ed778c1f2a3a079cdad0bd75636b2bedb1c754c8a2be79cc8
+pathfinding: C:\Users\charl\worktrees\music-app\dogfish\api\src\artistpath_api\pathfinding.py
+
+## Comparability: lux4 vs graph-msw-tu50.bin (the map the JFX critique measured)
+same MBIDs in same order: True; identical offsets+neighbours: True; identical fame_lb_pctl: True
+
+## Measurement A: neighbour shares below fame-percentile bars, each map in its own frame
+Centres: measured-fame artists only (a null is stored as 0.0 and can never reach 0.90). Headline shares: null neighbours excluded from numerator and denominator. Variant column: null neighbours kept, counted below both bars.
+
+### lba-a6: N 87,394  CSR entries 2,490,728  measured fame 87,391  null fame 3
+
+top decile (fame pctl >= 0.90): 8,740 artists; median neighbour count 49 (p10 15, p90 50); centres with >= 1 null neighbour: 0; centres with no measured neighbour: 0
+| bar | share median | p10 | p90 | mean | ZERO below: count | fraction | median count below | share median, nulls-as-below |
+|---|---|---|---|---|---|---|---|---|
+| < 0.9 | 0.4861 | 0.0400 | 0.8049 | 0.4554 | 629 | 0.0720 | 17 | 0.4861 |
+| < 0.5 | 0.0440 | 0.0000 | 0.3061 | 0.1071 | 3,106 | 0.3554 | 2 | 0.0440 |
+
+top 1 % (fame pctl >= 0.99): 874 artists; median neighbour count 49 (p10 42, p90 50); centres with >= 1 null neighbour: 0; centres with no measured neighbour: 0
+| bar | share median | p10 | p90 | mean | ZERO below: count | fraction | median count below | share median, nulls-as-below |
+|---|---|---|---|---|---|---|---|---|
+| < 0.9 | 0.0208 | 0.0000 | 0.3689 | 0.1075 | 381 | 0.4359 | 1 | 0.0208 |
+| < 0.5 | 0.0000 | 0.0000 | 0.0609 | 0.0230 | 706 | 0.8078 | 0 | 0.0000 |
+
+### lux4: N 58,838  CSR entries 1,315,684  measured fame 58,746  null fame 92
+
+top decile (fame pctl >= 0.90): 5,875 artists; median neighbour count 48 (p10 13, p90 50); centres with >= 1 null neighbour: 277; centres with no measured neighbour: 0
+| bar | share median | p10 | p90 | mean | ZERO below: count | fraction | median count below | share median, nulls-as-below |
+|---|---|---|---|---|---|---|---|---|
+| < 0.9 | 0.4600 | 0.1111 | 0.7857 | 0.4541 | 63 | 0.0107 | 15 | 0.4600 |
+| < 0.5 | 0.0606 | 0.0000 | 0.2222 | 0.0939 | 1,097 | 0.1867 | 2 | 0.0612 |
+
+top 1 % (fame pctl >= 0.99): 588 artists; median neighbour count 49 (p10 34, p90 50); centres with >= 1 null neighbour: 28; centres with no measured neighbour: 0
+| bar | share median | p10 | p90 | mean | ZERO below: count | fraction | median count below | share median, nulls-as-below |
+|---|---|---|---|---|---|---|---|---|
+| < 0.9 | 0.1429 | 0.0408 | 0.4000 | 0.1952 | 9 | 0.0153 | 6 | 0.1429 |
+| < 0.5 | 0.0482 | 0.0000 | 0.1667 | 0.0751 | 84 | 0.1429 | 2 | 0.0482 |
+
+## Measurement B: routing on lba-a6, shipped find_journey, default ApiConfig()
+
+ApiConfig() defaults, read at run time: w_known_ramp_fame_pctl 0.01, w_hop 0.02, w_floor 1.0
+seed 20260927; FAMOUS pool 4,370; MID pool 34,957
+  FAMOUS 10/40  73s
+  FAMOUS 20/40  153s
+  FAMOUS 30/40  294s
+  FAMOUS 40/40  412s
+  MID 10/40  569s
+  MID 20/40  1082s
+  MID 30/40  1617s
+  MID 40/40  2135s
+
+### FAMOUS: per pair (median interior fame percentile, nulls excluded; '-' = ladder stopped before that depth)
+| # | source (fame pctl) | target (fame pctl) | d0 | d5 | d10 | d20 | d20 - d0 | interior n d0/d20 | stop rule d0 | ladder stop |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Rihanna (1.000) | Mando Diao (0.992) | 0.996 | 0.994 | 0.998 | 0.999 | +0.004 | 5/4 | natural | - |
+| 2 | The Mountain Goats (0.992) | Delain (0.951) | 0.995 | 0.992 | 0.993 | 0.872 | -0.124 | 6/5 | natural | - |
+| 3 | Martha Wainwright (0.973) | Dungen (0.961) | 0.931 | 0.995 | 0.991 | 0.931 | +0.000 | 5/7 | natural | - |
+| 4 | Cameo (0.973) | Combichrist (0.965) | 0.991 | 0.993 | 0.995 | 0.983 | -0.008 | 9/5 | natural | - |
+| 5 | The Sounds (0.991) | America (0.989) | 0.998 | 0.997 | 0.994 | 0.993 | -0.004 | 6/6 | natural | - |
+| 6 | Anita O’Day (0.961) | Buffalo Springfield (0.992) | 0.992 | 0.996 | 0.988 | 0.995 | +0.003 | 4/4 | natural | - |
+| 7 | Freddie Hubbard (0.957) | Here We Go Magic (0.979) | 0.997 | 0.983 | 0.991 | 0.936 | -0.061 | 12/5 | natural | - |
+| 8 | Love Unlimited Orchestra (0.952) | Goldfrapp (0.998) | 0.996 | 0.996 | 0.995 | 0.993 | -0.003 | 7/5 | natural | - |
+| 9 | Jónsi & Alex (0.976) | The Sword (0.966) | 0.987 | 0.981 | 0.972 | 0.975 | -0.012 | 8/4 | natural | - |
+| 10 | De La Soul (0.999) | Westlife (0.981) | 0.995 | 0.990 | 0.991 | 0.949 | -0.046 | 4/4 | natural | - |
+| 11 | Shirley Bassey (0.985) | 10cc (0.987) | 0.990 | 0.994 | 0.996 | 0.993 | +0.003 | 4/4 | natural | - |
+| 12 | Kaki King (0.977) | The Mills Brothers (0.953) | 0.972 | 0.980 | 0.970 | 0.997 | +0.025 | 7/8 | natural | - |
+| 13 | Circle Jerks (0.960) | Maria Mena (0.977) | 0.992 | 0.993 | 0.991 | 0.992 | +0.000 | 6/6 | natural | - |
+| 14 | Hooverphonic (0.993) | The Living End (0.967) | 0.995 | 0.992 | 0.992 | 0.994 | -0.001 | 6/5 | natural | - |
+| 15 | Steel Pulse (0.955) | Live (0.991) | 0.998 | 0.985 | 0.991 | 0.994 | -0.003 | 2/4 | natural | - |
+| 16 | Plastic Bertrand (0.957) | Lali Puna (0.979) | 0.992 | 0.994 | 0.995 | 0.844 | -0.148 | 11/6 | natural | - |
+| 17 | The Concretes (0.974) | R. Kelly (0.993) | 0.994 | 0.993 | 0.997 | 0.991 | -0.003 | 7/4 | natural | - |
+| 18 | 3OH!3 (0.991) | Beach Fossils (0.984) | 0.977 | 0.936 | 0.943 | 0.899 | -0.079 | 4/6 | natural | - |
+| 19 | Peter Tosh (0.979) | XTC (0.986) | 0.992 | 0.998 | 0.989 | 0.991 | -0.001 | 3/4 | natural | - |
+| 20 | Extreme (0.985) | Angelo Badalamenti (0.981) | 0.996 | 0.992 | 0.991 | 0.993 | -0.003 | 7/6 | natural | - |
+| 21 | Alice Cooper (0.994) | Nelson Riddle (0.972) | 0.999 | 0.989 | 0.988 | 0.996 | -0.002 | 4/5 | natural | - |
+| 22 | The Magnetic Fields (0.992) | Vaya Con Dios (0.958) | 0.997 | 0.993 | 0.990 | 0.993 | -0.004 | 5/5 | natural | - |
+| 23 | The Sugarhill Gang (0.980) | oOoOO (0.956) | 0.988 | 0.975 | 0.962 | 0.966 | -0.022 | 7/5 | natural | - |
+| 24 | Bishop Allen (0.979) | The Click Five (0.953) | 0.991 | 0.988 | 0.996 | 0.997 | +0.006 | 8/6 | natural | - |
+| 25 | Lemon Jelly (0.980) | Billy Talent (0.995) | 0.996 | 0.999 | 0.997 | 0.996 | -0.000 | 4/5 | natural | - |
+| 26 | Circle Jerks (0.960) | Shitdisco (0.965) | 0.994 | 0.991 | 0.991 | 0.992 | -0.002 | 6/6 | natural | - |
+| 27 | Jem (0.990) | Enslaved (0.962) | 0.980 | 0.996 | 0.995 | 0.993 | +0.013 | 9/7 | natural | - |
+| 28 | Solomon Burke (0.978) | Sonic Syndicate (0.974) | 0.994 | 0.994 | 0.996 | 0.996 | +0.003 | 9/6 | natural | - |
+| 29 | Misfits (0.993) | Geri Halliwell (0.959) | 0.997 | 0.989 | 0.992 | 0.987 | -0.010 | 9/5 | natural | - |
+| 30 | Isis (0.986) | The Runaways (0.972) | 0.983 | 0.993 | 0.993 | 0.991 | +0.008 | 10/5 | natural | - |
+| 31 | Switchfoot (0.991) | Leftfield (0.989) | 0.994 | 0.994 | 0.999 | 0.988 | -0.006 | 6/6 | natural | - |
+| 32 | Pinch (0.951) | Marisa Monte (0.955) | 0.996 | 0.995 | 0.994 | 0.815 | -0.180 | 9/7 | natural | - |
+| 33 | Michael Bublé (0.996) | John Cale (0.980) | 0.999 | 0.994 | 0.992 | 0.995 | -0.004 | 3/4 | natural | - |
+| 34 | Julie London (0.984) | Kate Havnevik (0.965) | 0.997 | 0.997 | 0.994 | 0.990 | -0.007 | 5/3 | natural | - |
+| 35 | Camo & Krooked (0.959) | oOoOO (0.956) | 0.972 | 0.972 | 0.961 | 0.954 | -0.018 | 6/5 | natural | - |
+| 36 | Motörhead (0.997) | ZZ Top (0.996) | 0.998 | 0.989 | 0.997 | 0.993 | -0.005 | 1/2 | forced | - |
+| 37 | Overseer (0.957) | Mötley Crüe (0.992) | 0.995 | 0.995 | 0.990 | 0.993 | -0.002 | 6/6 | natural | - |
+| 38 | Emmylou Harris (0.980) | The Rocket Summer (0.968) | 0.991 | 0.993 | 0.973 | 0.997 | +0.006 | 9/6 | natural | - |
+| 39 | The Mission (0.954) | Saxon (0.975) | 0.988 | 0.990 | 0.983 | 0.987 | -0.001 | 7/5 | natural | - |
+| 40 | Steve Harley & Cockney Rebel (0.952) | Meg & Dia (0.958) | 0.951 | 0.951 | 0.951 | 0.992 | +0.041 | 6/6 | natural | - |
+
+### MID: per pair (median interior fame percentile, nulls excluded; '-' = ladder stopped before that depth)
+| # | source (fame pctl) | target (fame pctl) | d0 | d5 | d10 | d20 | d20 - d0 | interior n d0/d20 | stop rule d0 | ladder stop |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | Synestesia (0.581) | The Tormentos (0.463) | 0.987 | 0.983 | 0.972 | 0.967 | -0.020 | 14/7 | natural | - |
+| 2 | Narcotango (0.492) | J.M. Silk (0.355) | 0.975 | 0.975 | 0.981 | 0.984 | +0.009 | 8/9 | natural | - |
+| 3 | Lisa Knapp (0.388) | Caitlin Cary (0.596) | 0.980 | 0.907 | 0.723 | 0.828 | -0.152 | 11/8 | natural | - |
+| 4 | Midnight Red (0.360) | Patio (0.347) | 0.926 | 0.895 | 0.918 | 0.918 | -0.008 | 12/9 | natural | - |
+| 5 | Platypus (0.523) | Tekno Miles (0.388) | 0.974 | 0.974 | 0.974 | 0.967 | -0.007 | 9/8 | natural | - |
+| 6 | Samba Touré (0.403) | OG Maco (0.493) | 0.882 | 0.787 | 0.973 | 0.973 | +0.091 | 8/9 | natural | - |
+| 7 | The Coronas (0.671) | Knifeplay (0.316) | 0.798 | 0.721 | 0.721 | 0.588 | -0.210 | 9/6 | natural | - |
+| 8 | Silk Saw (0.408) | Arrial (0.305) | 0.704 | 0.651 | 0.649 | 0.722 | +0.018 | 3/5 | natural | - |
+| 9 | MY BABY (0.357) | David Pomeranz (0.423) | 0.991 | 0.929 | 0.991 | 0.981 | -0.011 | 9/7 | natural | - |
+| 10 | Neophyte Records All Stars (0.389) | Brockdorff Klang Labor (0.579) | 0.987 | 0.971 | 0.798 | 0.878 | -0.109 | 11/9 | natural | - |
+| 11 | Slumberville (0.385) | Rawhill Cru (0.448) | 0.843 | 0.900 | 0.822 | 0.938 | +0.095 | 11/8 | natural | - |
+| 12 | Hills West (0.390) | Taffetas (0.384) | 0.967 | 0.958 | 0.958 | 0.964 | -0.004 | 10/8 | natural | - |
+| 13 | Mono No Aware (0.529) | Luca Hänni (0.492) | 0.759 | 0.759 | 0.787 | 0.799 | +0.040 | 8/9 | natural | - |
+| 14 | The Away Team (0.572) | Sick Individuals (0.599) | 0.954 | 0.960 | 0.894 | 0.875 | -0.078 | 9/7 | natural | - |
+| 15 | 최리 (0.331) | Lady Leshurr (0.573) | 0.873 | 0.880 | 0.885 | 0.828 | -0.046 | 8/7 | natural | - |
+| 16 | Salmo (0.491) | Högni (0.372) | 0.989 | 0.876 | 0.880 | 0.561 | -0.428 | 8/4 | natural | - |
+| 17 | Mode Hookers (0.480) | Ugly Duck (0.335) | 0.920 | 0.762 | 0.753 | 0.744 | -0.176 | 7/8 | natural | - |
+| 18 | Mel Collins (0.600) | Volac (0.328) | 0.996 | 0.938 | 0.918 | 0.763 | -0.233 | 10/7 | natural | - |
+| 19 | Spidergawd (0.347) | Moon (0.460) | 0.974 | 0.984 | 0.979 | 0.979 | +0.005 | 8/7 | natural | - |
+| 20 | BRKLYN (0.393) | Wikluh Sky (0.407) | 0.989 | 0.880 | 0.898 | 0.788 | -0.201 | 13/8 | natural | - |
+| 21 | Bergthron (0.474) | Jul (0.542) | 0.886 | 0.872 | 0.908 | 0.889 | +0.003 | 12/12 | natural | - |
+| 22 | Billy Walker (0.503) | Lowland Hum (0.372) | 0.897 | 0.959 | 0.853 | 0.853 | -0.044 | 6/7 | natural | - |
+| 23 | Nik Bärtsch (0.450) | Larry Garner (0.552) | 0.971 | 0.973 | 0.969 | 0.836 | -0.135 | 10/8 | natural | - |
+| 24 | Suzi Wu (0.318) | Maozon (0.343) | 0.778 | 0.797 | 0.791 | 0.763 | -0.015 | 7/6 | natural | - |
+| 25 | Gitkin (0.400) | The Korea (0.664) | 0.869 | 0.842 | 0.779 | 0.744 | -0.125 | 12/10 | natural | - |
+| 26 | 김재중 (0.392) | Sleepaway (0.337) | 0.855 | 0.778 | 0.832 | 0.738 | -0.116 | 10/9 | natural | - |
+| 27 | Killer Be Killed (0.522) | Jubei (0.681) | 0.973 | 0.937 | 0.968 | 0.963 | -0.009 | 7/7 | natural | - |
+| 28 | The Lucy Show (0.573) | Stef, Pako & Frederik (0.318) | 0.965 | 0.964 | 0.982 | 0.986 | +0.021 | 13/9 | natural | - |
+| 29 | Landon Cube (0.544) | Strings (0.466) | 0.788 | 0.816 | 0.822 | 0.790 | +0.002 | 6/8 | natural | - |
+| 30 | webcage (0.344) | Awesome 3 (0.596) | 0.974 | 0.963 | 0.982 | 0.957 | -0.017 | 7/7 | natural | - |
+| 31 | Garageland (0.563) | Harakiri for the Sky (0.603) | 0.992 | 0.980 | 0.987 | 0.947 | -0.045 | 9/5 | natural | - |
+| 32 | El Jazzy Chavo (0.331) | KING QUARTZ (0.334) | 0.685 | 0.646 | 0.648 | 0.540 | -0.145 | 6/5 | natural | - |
+| 33 | The Knight Brothers (0.545) | Intermix (0.509) | 0.984 | 0.988 | 0.989 | 0.963 | -0.021 | 14/8 | natural | - |
+| 34 | Götz Alsmann (0.688) | I, the Breather (0.693) | 0.854 | 0.866 | 0.878 | 0.637 | -0.217 | 10/7 | natural | - |
+| 35 | Baxendale (0.672) | Ophis (0.570) | 0.995 | 0.991 | 0.994 | 0.971 | -0.024 | 11/10 | natural | - |
+| 36 | EH!DE (0.495) | Mélissa Laveaux (0.691) | 0.993 | 0.897 | 0.804 | 0.792 | -0.201 | 9/7 | natural | - |
+| 37 | Frida Boccara (0.485) | Laurie Berkner (0.625) | 0.965 | 0.971 | 0.996 | 0.982 | +0.017 | 6/8 | natural | - |
+| 38 | Cecilia Ann (0.435) | Falko Brocksieper (0.511) | 0.983 | 0.957 | 0.962 | 0.885 | -0.098 | 10/9 | natural | - |
+| 39 | K.I.M. (0.605) | Miss Destiny (0.535) | 0.992 | 0.973 | 0.995 | 0.960 | -0.032 | 8/3 | natural | - |
+| 40 | Silicon Scally (0.624) | Ash (0.388) | 0.892 | 0.993 | 0.904 | 0.776 | -0.115 | 8/5 | natural | - |
+
+### Summary by set x depth (median interior fame percentile per pair)
+| set | presses | pairs with a value | median of pair medians | p10 | p90 | median interior n | interior nulls excluded |
+|---|---|---|---|---|---|---|---|
+| FAMOUS | 0 | 40 of 40 | 0.994 | 0.977 | 0.998 | 6 | 0 |
+| FAMOUS | 5 | 40 of 40 | 0.993 | 0.980 | 0.996 | 6 | 0 |
+| FAMOUS | 10 | 40 of 40 | 0.991 | 0.969 | 0.997 | 6 | 0 |
+| FAMOUS | 20 | 40 of 40 | 0.992 | 0.928 | 0.996 | 5 | 0 |
+| MID | 0 | 40 of 40 | 0.966 | 0.787 | 0.992 | 9 | 0 |
+| MID | 5 | 40 of 40 | 0.933 | 0.762 | 0.983 | 8 | 0 |
+| MID | 10 | 40 of 40 | 0.906 | 0.750 | 0.990 | 8 | 0 |
+| MID | 20 | 40 of 40 | 0.877 | 0.713 | 0.979 | 8 | 0 |
+
+### Paired change, 0 -> 20 presses (d20 median minus d0 median, same pair)
+| set | pairs | median change | p10 | p90 | fell | rose | unchanged | d20 median < 0.9 | d20 median < 0.5 |
+|---|---|---|---|---|---|---|---|---|---|
+| FAMOUS | 40 | -0.003 | -0.063 | +0.006 | 28 | 11 | 1 | 4 of 40 (0.100) | 0 of 40 (0.000) |
+| MID | 40 | -0.028 | -0.202 | +0.018 | 30 | 10 | 0 | 23 of 40 (0.575) | 0 of 40 (0.000) |
+
+### Ladder cells (per set)
+FAMOUS: ladders complete to k=20: 40; stopped on empty interior: 0; stopped on no path: 0; stop rule at d0: forced 1, natural 39
+MID: ladders complete to k=20: 40; stopped on empty interior: 0; stopped on no path: 0; stop rule at d0: natural 40
