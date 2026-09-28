@@ -52,3 +52,17 @@ the shards.
   harness-identity check of this stage's own: the generalised ladder against stage 3a's
   `drp_common.ladder` (which `DRP-G1` validated) on A0, primary rule, `DRP-T1`/`T2`/`C8`, and against
   stage 3a's seed-1 random journeys.
+
+## Task 2 — the sweeps, `DRP-S0` row. 2026-09-28
+
+- **Timing probe:** A0 on `DRP-T1`, primary rule, 108 s for 40 pairs. The ceiling cell takes 10–60 s per
+  famous pair, because of the relaxation search at presses ≥ 4. Accepted as is: sharded 14 at a time,
+  under this machine's free memory at about 250 MB per process. The search was not changed for speed.
+- **Harness defect found and fixed before any shard was used:** at `F_max` = 1.0 (presses 0–3, and every
+  press of `DRP-G9`(a)'s identity run) where no journey with an interior exists at all, the search
+  indexed an empty list of percentiles above 1.0. Fixed: it returns "no ceiling admits one" (`c`, `r`
+  None) and keeps the user-exclusions-only journey, which §2.1's relaxation rule already specifies.
+  **Every shard was discarded and re-run on the fixed harness**, so each cell is a single harness version
+  (the gate script refuses mixed versions).
+- `harness_sha256` in every shard is the sha of `drp_sweep.py` as committed (LF). A Windows checkout
+  with CRLF conversion hashes differently; compare against `git show <commit>:<path> | sha256sum`.

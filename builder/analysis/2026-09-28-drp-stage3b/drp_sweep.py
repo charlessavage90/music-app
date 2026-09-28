@@ -100,6 +100,8 @@ def ceiling_step(m: Map, cfg, s: int, t: int, user_ex: list, fm: float):
     if interior_bearing(res):
         return res, passed, fm, 0.0, calls
     cands = m.distinct[m.distinct > fm]
+    if cands.size == 0:  # fm = 1.0 already excludes nothing: no ceiling can admit more
+        return res, passed, None, None, calls
     top = user_ex + ceiling_excludes(m, float(cands[-1]), s, t)
     res_top = find_journey(m.store, s, t, top, cfg)
     calls += 1
