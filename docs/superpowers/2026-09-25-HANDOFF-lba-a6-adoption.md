@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED ON NEXT ACTIONS 2026-09-25 by [`2026-09-25-HANDOFF-lba-a6-deploy.md`](2026-09-25-HANDOFF-lba-a6-deploy.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: c3eb276b95d9b61bdbfb4181077299ebc64ecb10 -->
 # Handoff — `LBA-G5` passed and `LBA-A6` adopted, 2026-09-25
 
 **⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-25 by [`2026-09-25-HANDOFF-lba-a6-deploy.md`](2026-09-25-HANDOFF-lba-a6-deploy.md).** ~~ACTIVE — this is the CURRENT handoff. Nothing supersedes it.~~ Supersedes

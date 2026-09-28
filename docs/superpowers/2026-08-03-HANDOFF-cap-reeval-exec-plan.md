@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-08-03 (Seam 1) on next actions by [`2026-08-03-HANDOFF-cre-run-seam1.md`](2026-08-03-HANDOFF-cre-run-seam1.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: a1c3f9225ac64852b3f472fc4f263544cb43589e -->
 # Handoff — the cap re-evaluation execution plan, 2026-08-03 (night)
 
 **⚠ SUPERSEDED 2026-08-03 (Seam 1) on next actions by

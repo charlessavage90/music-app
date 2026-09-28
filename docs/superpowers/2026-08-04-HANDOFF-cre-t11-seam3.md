@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-08-04 on next actions by [`2026-08-04-HANDOFF-cre-stage3-findings.md`](2026-08-04-HANDOFF-cre-stage3-findings.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: c8510cb6b1c56a2d74f71c1e387a561a43eb62d1 -->
 # Handoff — the `CRE-` run, Seam 3: criteria figures computed, 2026-08-04
 
 **⚠ SUPERSEDED 2026-08-04 on next actions by

@@ -1,6 +1,6 @@
 # Execution log — the label weighting and evidence probe (`WGT-`), 2026-08-01
 
-**RETAINED EXECUTION LOG. Owns no figures** — those live in
+**Role: RETAINED EXECUTION LOG. Owns no figures** — those live in
 [`findings/2026-08-01-label-weighting-probe.md`](findings/2026-08-01-label-weighting-probe.md),
 cited by section. One session: pre-registration written, committed, executed through every
 reading, extended twice at the owner's direction, and closed. Branch

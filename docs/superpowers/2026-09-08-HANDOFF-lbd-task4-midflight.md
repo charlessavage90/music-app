@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED on next actions 2026-09-10 by [`2026-09-10-HANDOFF-lbd-task4-owner-stop.md`](2026-09-10-HANDOFF-lbd-task4-owner-stop.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: cfe0d5dad21f39d8e0dcb0beba5fda80801e18cb -->
 # Handoff — `LBD-` Task 3 complete, Task 4 mid-flight, 2026-09-08
 
 **Role: SUPERSEDED on next actions, 2026-09-10**, by

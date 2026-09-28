@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-29 (latest) on next actions by [`2026-07-29-HANDOFF-graph-rebuild-track-a.md`](2026-07-29-HANDOFF-graph-rebuild-track-a.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: a22027baf1f45185656883b8b39680bcfcb9ad95 -->
 # Handoff — reciprocity sampling measured, 2026-07-29
 
 **Role: ⚠ SUPERSEDED 2026-07-29 (latest) on next actions** by

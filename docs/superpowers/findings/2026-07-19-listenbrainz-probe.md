@@ -1,3 +1,5 @@
+> **Role: HISTORICAL — Superseded for scoring and normalisation (it describes per-artist normalisation, deleted in `284366c`); everything else is still valid and load-bearing.** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 02f47d8499dce2a2258675e8131fbc9a5756a2ca -->
 # ListenBrainz API Probe — Findings
 
 > ## ⚠ SUPERSEDED for similarity scoring and normalisation

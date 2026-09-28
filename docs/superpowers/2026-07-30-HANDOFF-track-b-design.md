@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-30 on next actions by [`2026-07-30-HANDOFF-track-b-runs.md`](2026-07-30-HANDOFF-track-b-runs.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 4b6bfeb69c24423b9c3dba8ec6bc4eb74e7ee958 -->
 # Handoff — Track B designed through its seam (CB-4), 2026-07-30
 
 **Role: ⚠ SUPERSEDED 2026-07-30 on next actions** by

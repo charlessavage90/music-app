@@ -217,3 +217,39 @@ The plan's generator (Task `DLP-S2.3` step 3) was extracted verbatim and its cla
 - **The generator's own list on the real tree, after the widening** (this is `S2.4` step 2's input):
   **15** with no classifiable role line and **27** superseded without a named replacement (the dry
   run's 26 plus `2026-07-30-HANDOFF-track-b-runs.md`, which the widening newly classified).
+
+### 4. `DLP-S2.4` step 2 — role lines and banners for the 42 (the seam's last task)
+
+Applied by one throwaway script from an explicit table (one row per document, wording taken from its
+current `docs/README.md` row, every named replacement checked to exist; the script refuses a dirty
+file). Diff: **42 files, +83 −1**, exactly 39 two-line banners, two inserted role lines and one
+in-place edit.
+
+- **39 banners** in the `DLP-S2.2` format, each `frozen-below` the SHA of the file's last commit:
+  - the **27** superseded handoffs, each naming its replacement as a link in its own folder, from its
+    map row. Two needed more than the row: `2026-07-27-HANDOFF-onedrive-migration.md`'s row says "the
+    handoff above", resolved from its own role paragraph to `2026-07-27-HANDOFF-migration-phase-d.md`;
+    `2026-09-12-HANDOFF-lbl-listen2-prep.md`'s row names only a results note, and
+    `2026-09-13-HANDOFF-lbl-listen2-read.md` says it supersedes the prep note on next actions, so
+    that is named rather than `NEXT.md` (the plan's default applies only when no successor handoff
+    exists);
+  - **12** of the 15 unplaced documents, the frozen ones by their map row: five superseded handoffs,
+    two HISTORICAL findings (the map's "Partly historical" section; the row's "Superseded for …"
+    kept in sentence case, so it is not the all-caps `SUPERSEDED` that demands a replacement — they
+    are superseded in part, not replaced), and five COMPLETE/EXECUTED plans, specs and records.
+- **Two EXECUTED plans the map files under Active** (`plans/2026-07-26-track-a-…`, `plans/2026-07-26-
+  track-d-frontend.md`): their rows themselves say "EXECUTED 2026-07-26; do not execute again", so the
+  banner says EXECUTED and they will generate under Complete. A section change for the migration
+  PR's step-5 table, where the map was wrong.
+- **3 role lines into active documents**: the scoring adjudication (**AUTHORITATIVE**, from its row),
+  the configuration-model null (**AUTHORITATIVE for its own figures**), and the `WGT-` execution log,
+  whose existing bold `RETAINED EXECUTION LOG.` span gained the `Role:` prefix and nothing else.
+- **Verified:** `gen-docs-map.py --check` now classifies every document and names none as missing a
+  replacement (it stops at the absent markers, exit 2, which is this PR's intended state).
+  `docs-lint.sh --quiet`: hard checks passed, check 8 over all 39 banners. Check 8 was also shown
+  red on a real CRLF file (one byte appended below the reciprocity handoff's banner) and green once
+  restored — the fixtures are LF, so this was the one case the self-test could not cover.
+
+**Seam.** This PR ends here. The second PR starts from `S2.4` step 1 (archive the map) and runs step
+3 (the 211 warnings; re-measure first), steps 4–7 and `S2.5`, carrying the two rulings in §1 (the 36
+outside-`docs/` rows move verbatim to a hand section; `S2.5` updates the lint header's "Checks 4-6").

@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED ON NEXT ACTIONS 2026-09-13 by [`2026-09-13-HANDOFF-lbl-listen2-read.md`](2026-09-13-HANDOFF-lbl-listen2-read.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: a5f0592b5ef6f02508afcb7b51c2707784200c81 -->
 # Handoff — `LBL-` listen 2 prepared under `LBD-AM6`, 2026-09-12
 
 **Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-13 by**

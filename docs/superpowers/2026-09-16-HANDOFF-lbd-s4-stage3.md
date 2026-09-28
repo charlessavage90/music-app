@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED ON NEXT ACTIONS 2026-09-21 by [`2026-09-21-HANDOFF-lbd-s4-a6-candidate.md`](2026-09-21-HANDOFF-lbd-s4-a6-candidate.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 1e69d375449ff1c3c9b1488d01010a25e498e27a -->
 # Handoff — `LBD-S4` stage 3 complete, the owner stop is reached, 2026-09-16
 
 **Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-21** by
