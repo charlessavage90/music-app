@@ -229,6 +229,21 @@ if [ -f "$ADJ" ]; then
 fi
 
 # ----------------------------------------------------------------------------------
+note "== 7. docs/README.md's generated block matches the documents' own role paragraphs =="
+# DLS-Q2 (owner, 2026-09-11). Skipped until the markers exist, so the self-test's older fixtures
+# and any pre-migration tree are unaffected.
+if grep -qF '<!-- map:generated:begin -->' "$MAP" 2>/dev/null; then
+  if OUT7=$("${PYTHON:-python}" "$(dirname "$0")/gen-docs-map.py" --root "$ROOT" --check 2>&1); then
+    note "      ok"
+  else
+    printf '%s\n' "$OUT7"
+    FAILURES=$((FAILURES + 1))
+  fi
+else
+  note "      skipped (no generated block yet)"
+fi
+
+# ----------------------------------------------------------------------------------
 note "== 8. A frozen document is unchanged below its banner =="
 # DLS-Q1 (owner, 2026-09-11): a frozen document may gain a top banner pointing at what supersedes
 # it, and NOTHING below the banner may change. The banner names the commit it froze against.

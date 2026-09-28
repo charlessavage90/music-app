@@ -196,3 +196,24 @@ The plan's generator (Task `DLP-S2.3` step 3) was extracted verbatim and its cla
   existing "add it to the table above" sentence is left for the migration PR, where it goes stale.
 - **Deferred to `S2.5`, which edits the same header:** `docs-lint.sh`'s header says "Checks 4-6 emit
   CANDIDATES"; it becomes "4-6 and 9" when check 9 lands.
+
+### 3. `DLP-S2.3` — `scripts/gen-docs-map.py` and lint check 7
+
+- Controls 7 and 7b written from the plan's text and run **before** the generator existed: both red
+  (`check 7 did NOT fire (rc=1)`, `replacement check did NOT fire (rc=2)`).
+- **Added control 7c** (a `**⚠ Role:` line must be classified, and its row must keep the `⚠`). With the
+  plan's generator installed **verbatim**, 7 and 7b behaved and **7c went red**
+  (`no classifiable **Role:** line … warned.md`), which is the `DLP-S2.1` ruling's gap reproduced in a
+  fixture. The generator was then widened, the one change from the plan's text: a module-level
+  `ROLE = re.compile(r'\*\*(?:⚠\s*)?Role:')` used in `role_paragraph`, `bold_span` and `classify`,
+  with a docstring paragraph saying why. Check 7 added from the plan's text, unchanged.
+- **Result:** `self-test: 13 passed, 0 failed.` Real tree: `docs-lint: hard checks passed`; check 7
+  reports `skipped (no generated block yet)`, check 8 `ok`.
+- **Snyk (`snyk_code_scan` on `gen-docs-map.py`):** 1 issue, **Low**, `python/PT` (CWE-23): `--root`
+  flows into path concatenation. **Not fixed — the same ruling as `DLP-S1.1`'s for
+  `prose-survival.py`, for the same reason:** the root *is* the tool's input, given by the person
+  running it with their own permissions, and confining it to the repository would break controls 7,
+  7b and 7c, whose fixtures live in `mktemp -d` outside the tree.
+- **The generator's own list on the real tree, after the widening** (this is `S2.4` step 2's input):
+  **15** with no classifiable role line and **27** superseded without a named replacement (the dry
+  run's 26 plus `2026-07-30-HANDOFF-track-b-runs.md`, which the widening newly classified).
