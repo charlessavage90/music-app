@@ -34,6 +34,7 @@ from drp_common import (CEILING, DISLIKE, KNOWN, MAX_K, Exclusion, bottleneck,  
 NOISE_JOURNEYS = dc.OUT / "drp_noise_journeys.json"
 NOISE_SHA = "3d71ed00d76ccfd8b92b67ec50fe62941ccbb26775aac79c24834b6bedb802d1"
 ROW = sys.argv[1] if len(sys.argv) > 1 else "DRP-S0"
+MODE = sys.argv[2:]
 ANCHOR = f"{ROW}P0"
 RAMPS = [f"{ROW}P1", f"{ROW}P2"]
 CEIL = f"{ROW}P3"
@@ -63,6 +64,88 @@ out["harness_sha256"] = harness.pop()
 
 A = {(s, r): shard(ANCHOR, s, r) for s in SETS for r in RULES}
 AP = {key: paths(sh) for key, sh in A.items()}
+
+
+# ---- DRP-G9 (one function, run per (set, rule) in parallel: `g9 SET RULE`) ----------------------
+def g9_run(keys) -> dict:
+    cfgc = cell_cfg(CEIL)
+    b0 = {(sname, r["i"]): r["b0"] for sname, rows in
+          json.loads((STAGE3A / "drp_headroom.json").read_text(encoding="utf-8"))["maps"][ROW]["strata"].items()
+          for r in rows}
+    g9 = {k: [] for k in ("a", "b", "c", "d", "e", "f")}
+    red = {"e_press1_at_0.99_diverged": 0, "schedule_diverged_somewhere": 0, "f_dislike_fired": 0}
+    n_relaxed = 0
+    modes: dict = {}  # search mode per relaxed press; "bisected" means certification failed
+    for key in keys:
+        sname, rule = key
+        ident = paths(shard(CEIL, sname, rule, True))
+        for p in shard(CEIL, sname, rule)["pairs"]:
+            i, s, t, dep = p["i"], p["source"], p["target"], p["depths"]
+            base = AP[key][i]
+            # (a) F_max = 1.0 everywhere reproduces the P0 cell at every press
+            if ident[i] != base:
+                g9["a"].append([*key, i])
+            # (e) presses 0-3 identical to the P0 cell
+            for k in range(4):
+                if (dep[k]["path"] if k < len(dep) else "absent") != (base[k] if k < len(base) else "absent"):
+                    g9["e"].append([*key, i, k])
+            if [d["path"] for d in dep] != base:
+                red["schedule_diverged_somewhere"] += 1
+            # (e) red: press 1 with the ceiling at 0.99 must diverge from P0 on >= 1 pair
+            if len(base) > 1 and base[0] is not None and len(base[0]) > 2:
+                a0_lad = A[key]["pairs"][[q["i"] for q in A[key]["pairs"]].index(i)]["depths"]
+                res, *_ = ceiling_step(m, cfgc, s, t, user_list(a0_lad, 1), 0.99)
+                if (list(res[0]) if res else None) != base[1]:
+                    red["e_press1_at_0.99_diverged"] += 1
+            for k, d in enumerate(dep):
+                ux = user_list(dep, k)
+                # (f) the exact list passed, recorded at call time
+                if not d["g9f_ok"]:
+                    g9["f"].append([*key, i, k])
+                if d["c"] is None:
+                    if not math.isinf(bottleneck(m, s, t, {e.node for e in ux})):
+                        g9["d"].append([*key, i, k, "no ceiling admitted, yet a bottleneck exists"])
+                    continue
+                # (b) no interior above its recorded c
+                if d["path"] is not None and any(m.pl[v] > d["c"] for v in d["path"][1:-1]):
+                    g9["b"].append([*key, i, k])
+                # (d) c >= b0 at every press
+                if b0[(sname, i)] is not None and d["c"] < b0[(sname, i)]:
+                    g9["d"].append([*key, i, k, "c < b0"])
+                if d["r"] > 0:
+                    n_relaxed += 1
+                    # (d) c equals the independent minimax bottleneck under this press's user list
+                    if d["c"] != bottleneck(m, s, t, {e.node for e in ux}):
+                        g9["d"].append([*key, i, k, "c != bottleneck"])
+                    # (c) the next-lower distinct percentile below c, not below F_max(k), admits none
+                    j = int(np.searchsorted(m.distinct, d["c"], side="left"))
+                    lower = max(float(m.distinct[j - 1]), d["fmax"]) if j > 0 else d["fmax"]
+                    if interior_bearing(find_journey(store, s, t, ux + ceiling_excludes(m, lower, s, t), cfgc)):
+                        g9["c"].append([*key, i, k, "the next-lower ceiling admits a journey"])
+                    # and the upper side, re-routed here rather than read from the sweep's record
+                    if not interior_bearing(find_journey(store, s, t, ux + ceiling_excludes(m, d["c"], s, t), cfgc)):
+                        g9["c"].append([*key, i, k, "the recorded c admits no journey"])
+                    modes[d["search"]] = modes.get(d["search"], 0) + 1
+                # (f) red: the ceiling passed as DISLIKE at press 10 must fail the check
+                if k == 10:
+                    bad = ux + [Exclusion(node=e.node, reason=DISLIKE)
+                                for e in ceiling_excludes(m, d["c"], s, t)]
+                    if not passed_list_ok(m, cfgc, s, t, bad, ux, k):
+                        red["f_dislike_fired"] += 1
+        print(f"  G9 {key} done", flush=True)
+    return {"g9": g9, "red": red, "n_relaxed": n_relaxed, "modes": modes}
+
+
+G9_DIR = SHARDS.parent / "gates"  # partials stay outside the repo; the combined verdict is committed
+if MODE:
+    if len(MODE) != 3 or MODE[0] != "g9" or (MODE[1], MODE[2]) not in A:
+        dc.refuse("usage: drp_gates_3b.py ROW [g9 SET RULE]")
+    res = g9_run([(MODE[1], MODE[2])])
+    res["harness_sha256"] = out["harness_sha256"]
+    dc.write_json(G9_DIR / f"g9__{MODE[1]}__{MODE[2]}.json", res)
+    print(f"DRP-G9 partial {MODE[1:]}: { {k: len(v) for k, v in res['g9'].items()} } reds {res['red']}")
+    sys.exit(0)
+
 
 # ---- H0 ----------------------------------------------------------------------------------------
 if ROW == "DRP-S0":
@@ -133,72 +216,21 @@ out["DRP-G5"] = g5
 print(f"DRP-G5: {g5['verdict']}; red (ceiling as KNOWN) fired on {g5['red_ceiling_as_known_fired']}",
       flush=True)
 
-# ---- DRP-G9 ------------------------------------------------------------------------------------
-cfgc = cell_cfg(CEIL)
-b0 = {(sname, r["i"]): r["b0"] for sname, rows in
-      json.loads((STAGE3A / "drp_headroom.json").read_text(encoding="utf-8"))["maps"][ROW]["strata"].items()
-      for r in rows}
-g9 = {k: [] for k in ("a", "b", "c", "d", "e", "f")}
-red = {"e_press1_at_0.99_diverged": 0, "schedule_diverged_somewhere": 0, "f_dislike_fired": 0}
-n_relaxed = 0
-modes: dict = {}  # search mode per relaxed press; "bisected" means certification failed
+parts = []
 for key in A:
-    sname, rule = key
-    ident = paths(shard(CEIL, sname, rule, True))
-    for p in shard(CEIL, sname, rule)["pairs"]:
-        i, s, t, dep = p["i"], p["source"], p["target"], p["depths"]
-        base = AP[key][i]
-        # (a) F_max = 1.0 everywhere reproduces the P0 cell at every press
-        if ident[i] != base:
-            g9["a"].append([*key, i])
-        # (e) presses 0-3 identical to the P0 cell
-        for k in range(4):
-            if (dep[k]["path"] if k < len(dep) else "absent") != (base[k] if k < len(base) else "absent"):
-                g9["e"].append([*key, i, k])
-        if [d["path"] for d in dep] != base:
-            red["schedule_diverged_somewhere"] += 1
-        # (e) red: press 1 with the ceiling at 0.99 must diverge from P0 on >= 1 pair
-        if len(base) > 1 and base[0] is not None and len(base[0]) > 2:
-            a0_lad = A[key]["pairs"][[q["i"] for q in A[key]["pairs"]].index(i)]["depths"]
-            res, *_ = ceiling_step(m, cfgc, s, t, user_list(a0_lad, 1), 0.99)
-            if (list(res[0]) if res else None) != base[1]:
-                red["e_press1_at_0.99_diverged"] += 1
-        for k, d in enumerate(dep):
-            ux = user_list(dep, k)
-            # (f) the exact list passed, recorded at call time
-            if not d["g9f_ok"]:
-                g9["f"].append([*key, i, k])
-            if d["c"] is None:
-                if not math.isinf(bottleneck(m, s, t, {e.node for e in ux})):
-                    g9["d"].append([*key, i, k, "no ceiling admitted, yet a bottleneck exists"])
-                continue
-            # (b) no interior above its recorded c
-            if d["path"] is not None and any(m.pl[v] > d["c"] for v in d["path"][1:-1]):
-                g9["b"].append([*key, i, k])
-            # (d) c >= b0 at every press
-            if b0[(sname, i)] is not None and d["c"] < b0[(sname, i)]:
-                g9["d"].append([*key, i, k, "c < b0"])
-            if d["r"] > 0:
-                n_relaxed += 1
-                # (d) c equals the independent minimax bottleneck under this press's user list
-                if d["c"] != bottleneck(m, s, t, {e.node for e in ux}):
-                    g9["d"].append([*key, i, k, "c != bottleneck"])
-                # (c) the next-lower distinct percentile below c, not below F_max(k), admits none
-                j = int(np.searchsorted(m.distinct, d["c"], side="left"))
-                lower = max(float(m.distinct[j - 1]), d["fmax"]) if j > 0 else d["fmax"]
-                if interior_bearing(find_journey(store, s, t, ux + ceiling_excludes(m, lower, s, t), cfgc)):
-                    g9["c"].append([*key, i, k, "the next-lower ceiling admits a journey"])
-                # and the upper side, re-routed here rather than read from the sweep's record
-                if not interior_bearing(find_journey(store, s, t, ux + ceiling_excludes(m, d["c"], s, t), cfgc)):
-                    g9["c"].append([*key, i, k, "the recorded c admits no journey"])
-                modes[d["search"]] = modes.get(d["search"], 0) + 1
-            # (f) red: the ceiling passed as DISLIKE at press 10 must fail the check
-            if k == 10:
-                bad = ux + [Exclusion(node=e.node, reason=DISLIKE)
-                            for e in ceiling_excludes(m, d["c"], s, t)]
-                if not passed_list_ok(m, cfgc, s, t, bad, ux, k):
-                    red["f_dislike_fired"] += 1
-    print(f"  G9 {key} done", flush=True)
+    f = G9_DIR / f"g9__{key[0]}__{key[1]}.json"
+    if not f.exists():
+        dc.refuse(f"DRP-G9 partial missing: {f.name}; run `g9 {key[0]} {key[1]}` first")
+    parts.append(json.loads(f.read_text(encoding="utf-8")))
+    if parts[-1]["harness_sha256"] != out["harness_sha256"]:
+        dc.refuse(f"{f.name} was computed on another harness version")
+g9 = {k: sum((pt["g9"][k] for pt in parts), []) for k in ("a", "b", "c", "d", "e", "f")}
+red = {k: sum(pt["red"][k] for pt in parts) for k in parts[0]["red"]}
+n_relaxed = sum(pt["n_relaxed"] for pt in parts)
+modes: dict = {}
+for pt in parts:
+    for k, v in pt["modes"].items():
+        modes[k] = modes.get(k, 0) + v
 g9_viol = sum(len(v) for v in g9.values())
 reds_ok = all(v >= 1 for v in red.values())
 out["DRP-G9"] = {"violations": g9, "n_relaxed_presses_checked": n_relaxed, "search_modes": modes, "red_controls": red,
