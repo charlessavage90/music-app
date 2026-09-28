@@ -95,13 +95,16 @@ still waste, and it is expensive to detect.
   gh issue list --state open --label deferred --limit 100
   gh issue list --state open --label agent-ready
   ```
-  A condition that has come due gets `agent-ready` if it is a session's work
-  (`gh issue edit N --add-label agent-ready`), or is named to the owner if it is his
-  (`owner-decision` / `owner-hands`). **Re-test each condition against reality; a list of
-  titles is not the check.**
+  A condition that has come due **changes kind** (`deferred` → `task` or `bug`) and gets
+  `agent-ready` only once the `ISSUES.md` §4 checklist passes, if it is a session's work — or
+  is named to the owner if it is his (`owner-decision` / `owner-hands`). **Re-test each
+  condition against reality; a list of titles is not the check.** Then the mechanical checks
+  (`ISSUES.md` §9) — `python scripts/issues.py lint`, `conflicts`, `stale`, `unblocked` — and
+  report what they find; a failing `agent-ready` loses the label, which needs no permission.
 - **If Orca dispatched this session from an issue, that issue is the scope** — read it in
-  full, including its *Whose* and *Done when*. An `owner-decision` issue is prepared for
-  him, never decided.
+  full, including its *Whose* and *Done when*, and **claim it before orienting further**
+  (`ISSUES.md` §7: `conflicts N`, then `claimed` on and `agent-ready` off). An
+  `owner-decision` issue is prepared for him, never decided.
 
 ## C. What state is the repo in, and is anyone else in it?
 

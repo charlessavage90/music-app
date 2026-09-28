@@ -181,7 +181,9 @@ that clears the item with no work.
 labels and the body shape are owned by `docs/superpowers/ISSUES.md`; the templates in
 `.github/ISSUE_TEMPLATE/` enforce them. The owner dispatches agent sessions from issues
 in Orca, so **write each one as the whole brief for a session that has nothing else**:
-*Condition*, *Whose*, *Done when*, and a *Source* path. File it at deferral time:
+*Condition*, *Whose*, *Done when*, a *Source* path, and *Reads / Changes contracts*
+(`ISSUES.md` §5). **An issue this session claimed and is not finishing is released** (§7):
+`claimed` off, a comment saying where it stopped. File each deferral at deferral time:
 
 ```bash
 gh issue create --title "[ID] plain-language title" --label deferred --label area:<pkg> --body-file <brief.md>  # + owner-decision / owner-hands if it is his
@@ -726,6 +728,12 @@ The PR body is where a reviewer picks up the context, so it carries:
   single most important thing a reviewer needs to know
 - Deferred findings with their success conditions (A3) — **by issue number**, each new one
   filed and each discharged one closed; `Closes #N` for every issue this work fixes
+- **The contracts this PR changes** (`Changes contracts: …`, the `ISSUES.md` §5 vocabulary, or
+  `none`) — and for each, run `python scripts/issues.py readers <contract>` and comment on
+  every open issue it lists that the contract changed here, pulling `agent-ready` off any whose
+  brief it invalidates. **This is the only step that catches a queued issue built on a meaning
+  this PR just changed**; git merges both cleanly. Then `python scripts/issues.py unblocked`:
+  anything this work unblocked gets the §4 checklist, not an automatic `agent-ready`
 - Checksums for any adopted artifact (D3)
 - **What is closed and should not be re-litigated** — decisions already taken with
   reasoning recorded. Without this, review reopens settled questions, which is expensive
