@@ -782,6 +782,8 @@ sentence, never bare.
 > **Criterion:** OWED.
 > **Effect size:** OWED.
 > **Period:** OWED.
+>
+> ⚑ ***Discharged 2026-09-27 by `DRP-AM6` (§14): his words, verbatim, with his two clarifications.*** *The OWED lines above are kept as the record of the empty slot.*
 
 **Stage 5 may not begin, and no journey from any cell may be shown to the owner, until he has written
 this criterion and it is committed.** It lands as a dated amendment in §14 with his words quoted
@@ -1508,3 +1510,46 @@ beside `DRP-SW`'s typed-edge deploy obligation and in the same form:
 > whether the wire contract carries `c` to the frontend, are adoption decisions, not this
 > document's.**
 
+
+### `DRP-AM6` — the owner's use-gate criterion (§9), verbatim. HIS, given 2026-09-27
+
+**Written before he has seen any journey from any cell.** No cell has been built or routed, and no
+`DRP-` pair has been drawn. So §9's precondition holds, and this entry discharges §9's **OWED**.
+**Numbered `DRP-AM6`** because `DRP-AM5` was already reserved for the second stage-1 critique, which
+was in flight when he gave this.
+
+**His criterion, verbatim:**
+
+> The candidate fails if, over 20 journeys — each the same pair run on today's app and on the candidate, pressed at least 5 times, half of them to 10 — the candidate's journey is noticeably worse than today's on more than half. Noticeably worse means any of:
+> (a) the artists that appear after pressing don't fit the journey — novelty bought with coherence;
+> (b) after pressing, I recognise more of the artists than today's app gives me;
+> (c) for an arm that changes the first path, the first path is worse than today's.
+> (d) or, on a quarter or more of journeys, the journey after pressing no longer holds together at all.
+
+**His two clarifications, given the same day, verbatim as he selected them:**
+
+> On whether (d) is a separate fail condition: **"Separate fail condition"** — fail if ≥ 11 of 20 are noticeably worse by (a)–(c), OR if ≥ 5 of 20 fall apart after pressing.
+>
+> On "pressed at least 5 times, half of them to 10": **"All at ≥5, 10 of them to 10"** — every journey pressed at least 5 times; 10 of the 20 continue to 10 presses, judged at 10.
+
+**The §9 slots, filled from his words and nothing else:**
+- **Criterion:** (a)–(d) above.
+- **Effect size:**
+  - "more than half" of 20 journeys is **≥ 11 of 20** (arithmetic) noticeably worse by (a), (b) or
+    (c);
+  - **or**, separately, "a quarter or more" is **≥ 5 of 20** that no longer hold together after
+    pressing (d).
+- **Period:** "over 20 journeys", every one pressed at least 5 times and 10 of them to 10. **He gave
+  no time window, and none is recorded.**
+
+**How it binds, carried from §8 stage 6, and nothing added:**
+- it is a **stop-gate only** (`LBA-AM4`'s four bars);
+- it runs **after** the stage-5 blind listen;
+- **each journey is the same pair on today's app and on the candidate**, as his words require;
+- he logs the pairs he uses (`LBA-AM5`'s requirement);
+- (c) applies only to a candidate whose first path differs from today's. That is `DRP-S1P0`,
+  `DRP-S1P1`, `DRP-S1P2` or `DRP-S1P3`. By `DRP-G4` and `DRP-G9`(e), the pricing-only and `DRP-S0P3`
+  cells cannot change the first path, so for them (c) cannot fire.
+
+**What this changes elsewhere:** §9's three OWED slots now point here. No bar or read in §5–§7 reads
+this criterion, and **no offline figure may be read as a prediction of it** (§10).
