@@ -100,9 +100,9 @@ offline pass here is necessary for it and not sufficient (§7 `DRP-R10`).
 remedy, not a definition change; #200's definition question ("should better also prefer
 less-listened artists", in audience size) is not decided or pre-empted here.
 
-**`DRP-D4` — where `REQ-33` bites, HIS, 2026-09-27:** recorded verbatim in §14 `DRP-AM3` item 1, with the question it answers. *(added `DRP-AM3`)*
+**`DRP-D4` — where `REQ-33` bites, HIS, 2026-09-27:** recorded verbatim in §14 `DRP-AM3` item 1, with the question it answers. *(added `DRP-AM3`)* **On the record:** [#244, 2026-09-28T01:11Z](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5861582342), posted by the owner.
 
-**`DRP-D5` — famous artists on the first path, HIS, 2026-09-27:** *"A, yes, if \*far fewer\* famous artists appear in first paths between a pair of famous artists, that should fail"*. Recorded in §14 `DRP-AM5`, finding `DRP-AM5-I3`. *(added `DRP-AM5`)*
+**`DRP-D5` — famous artists on the first path, HIS, 2026-09-27:** *"A, yes, if \*far fewer\* famous artists appear in first paths between a pair of famous artists, that should fail"*. Recorded in §14 `DRP-AM5`, finding `DRP-AM5-I3`. *(added `DRP-AM5`)* **On the record:** [the same #244 comment](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5861582342).
 
 **Also from the issue, standing:** step 1 established that the definition agrees with the owner's
 ear and the question is which artists the router picks (served-fame README §2); **`LBA-AM4` bar 1
@@ -1549,7 +1549,10 @@ beside `DRP-SW`'s typed-edge deploy obligation and in the same form:
 > approve."* Asked why he needed to, he left the methodology findings to the session under
 > `CLAUDE.md`'s "Whose decision is it" split. **Two were his:**
 > - **`DRP-AM5-I3` is settled by his ruling `DRP-D5`** (row below, and §1).
-> - **`DRP-AM5-I2` is still his hands:** the comment on #244 that records his rulings and requests.
+> - **`DRP-AM5-I2` is discharged:** he posted [the #244 comment](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5861582342) on 2026-09-28 at 01:11 UTC. It
+>   records `DRP-D4`, `DRP-D5`, his requests for `DRP-AM2`–`AM4` and his `DRP-AM6` criterion with its
+>   clarifications, in his words. It matches the text the session drafted from his messages, with no
+>   difference but a trailing blank line.
 >
 > **`DRP-AM5-F8`** was the session's call: the slope stays at 0.015. Every *adopt* below is now the
 > governing text in the body (see the §14 legend), and every *reject* or *no change* stands as
