@@ -27,8 +27,8 @@ maintained as project documentation.
 
 **artistpath** — an app that builds a listenable "journey" of artist cards between
 two chosen artists. Given artist A and artist B it finds a least-cost path through
-a similarity graph and renders each hop as a card with a 30-second clip. Two bypass
-signals ("not for me" / "know them already") reroll the whole path.
+a similarity graph and renders each hop as a card with a 30-second clip. One bypass
+press, "Dig deeper" (`known`), rerolls the whole path; the "not for me" button left in `LUX-1`.
 
 Three independent packages:
 
@@ -195,8 +195,9 @@ currency. **Two depth-graduated devices**, `floor_raw` and the ramp (`k` = `know
 fixed per request) — everything else is static per request.
 Every path request is a **full regeneration** — no previous path is reused.
 
-The **two-signal bypass** shapes the reroll differently per signal:
-- **`dislike` ("not for me")** applies a soft penalty to the *neighbourhood* of the
+**The UI sends only `known` since `LUX-1`** (`PathPage.tsx`'s `handleBypass`); the router and the
+URL decoder still accept `dislike`, so older links resolve. Each signal shapes the reroll differently:
+- **`dislike` ("not for me", no longer reachable from the UI)** applies a soft penalty to the *neighbourhood* of the
   disliked artist (decays over `avoid_radius` hops) — steers around a stylistic region
   rather than offering a near-identical substitute.
 - **`known` ("know them already")** relaxes the obscurity *floor* more aggressively than
