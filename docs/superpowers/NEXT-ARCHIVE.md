@@ -19,6 +19,31 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-28 (Seam B) — the top block as it stood at the `DRP-` stage-3a closeout (Seam A)
+
+**Last updated: 2026-09-27, at Seam A of the #200 remedy's stage 3a (the instruments).** The live
+site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and
+frontend built from `b3e197b`. The work is on branch `charlessavage90/issue-200-drp-stage3a`, PR #250,
+tracking issue #244 (addresses; `git`/`gh` own the merge state). Handoff:
+[`2026-09-27-HANDOFF-drp-stage3a.md`](2026-09-27-HANDOFF-drp-stage3a.md).
+
+# #200'S INSTRUMENTS ARE BUILT AND EVERY SEAM-A GATE PASSED. NEXT: STAGE 3B, A SESSION'S.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **A session:** stage 3b, the `DRP-S0` row (A0, `DRP-S0P1`, `DRP-S0P2`, `DRP-S0P3` with `DRP-G9`),
+   `DRP-G4`, `DRP-G5`, per the pre-registration's §8, to Seam B. It starts from the stage-3a
+   execution log's "Seam A" entry, which names what it inherits and must build.
+2. **A session:** stage 3c, the `DRP-S1` row, to Seam C. Then **3d**, the results note, written by a
+   session that ran no sweep.
+3. **The owner:** his stage-4 go/no-go on at most one cell; then the blind listen (stage 5, designed
+   cold) and his use gate (stage 6, `DRP-AM6`).
+4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+   previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
+
+---
+
 ## Demoted 2026-09-27 (Seam A) — the top block as it stood at the `DRP-` amendments closeout
 
 **Last updated: 2026-09-27, at the closeout of the #200 pre-registration's amendments `DRP-AM1`–`AM6`
