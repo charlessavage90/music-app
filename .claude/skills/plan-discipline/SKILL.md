@@ -128,4 +128,5 @@ was under-recorded.
 **How to ask for a plan review.** "Review this plan" finds prose problems. **"Check this
 plan's claims against the repo"** finds the confounds. Every high-value finding in Phase 2
 came from a reader with the *code* open, because a plan can be perfectly self-consistent
-and still wrong relative to `config.py`. Same cost, very different yield.
+and still wrong relative to `config.py`. Same cost, very different yield. **The `experiment-reviewer`
+agent is that reader** — give it that brief, not "review this plan".

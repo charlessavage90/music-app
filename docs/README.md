@@ -590,6 +590,15 @@ that is how the drift began.
   letter-number token without its plain-language sentence; and **J**, reads-of-results
   completeness for pre-registrations. It reports and never edits, and it may never propose
   renaming an identifier in a committed document. Dispatched by `closeout` B1.
+- **Four domain reviewers, added 2026-09-28** — subagents that report and never edit (no
+  `Edit` tool), each scoped to where this project's recorded defects actually fell:
+  **`experiment-reviewer.md`** (pre-registrations, probe plans and blind-listen packets,
+  checked against the repo and `plan-discipline`; derivations go to `ml-graph-analyst`,
+  judgement to the owner), **`test-reviewer.md`** (mutation-first: can each guard's tests go
+  red; mutates only in a throwaway worktree), **`frontend-reviewer.md`** (what a phone user
+  hits, plus the by-hand presses for `TEST-QUEUE.md`), and **`backend-reviewer.md`** (the whole
+  backend — `api/`, `builder/src/`, `infra/` and the APG1 contract between
+  the two parsers). Grounded in the two gate team reviews and the `LBD-` plan review.
 - **`.claude/hooks/` and `.claude/rules/`** — project hooks, wired in `.claude/settings.json`:
   a repo-state report at session start (branch, uncommitted paths, other worktrees, and an
   Orca setup still running or failed — from the `.orca-setup-state` marker `orca.yaml` writes), a

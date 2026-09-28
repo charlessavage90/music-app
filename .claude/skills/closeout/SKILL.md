@@ -483,6 +483,10 @@ All of them were green. None of them tested what its name claimed.
 You do not need to do this for every test — only the ones whose failure would matter.
 Five minutes on the invariants beats an hour on the whole suite.
 
+**When the invariants span more than a handful of tests, dispatch the `test-reviewer` agent
+with the diff** — it runs exactly this check, one mutation at a time, in a throwaway
+worktree, and reports each guard red or green.
+
 ### B4. Prose-versus-code check
 
 Read the docstrings, module headers, and any task reports this work produced, and
