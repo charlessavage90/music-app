@@ -120,3 +120,22 @@ eight `DRP-S1P3` identity shards; the merges; the gates; **`DRP-C10`'s per-pair 
 from the committed files once `DRP-S1P0` exists. **Cost to budget:** the `DRP-S0` row took about 2.5 h
 wall at 14 processes; the ceiling cell dominated (48–75 min per shard). On `DRP-S1` the famous pairs have
 more room (stage 3a's headroom), which may change the ceiling cell's cost in either direction.
+
+## Closeout at Seam B. 2026-09-28
+
+- `NEXT.md` top block rewritten; the outgoing block is demoted to `NEXT-ARCHIVE.md` (nothing in it still
+  bound except the ordered actions and carried items, both kept). Handoff
+  [`2026-09-28-HANDOFF-drp-stage3b.md`](2026-09-28-HANDOFF-drp-stage3b.md); the stage-3a handoff's role
+  line points forward to it. Map rows added for the three new documents.
+- B1: `docs-lint` hard checks passed (candidates: generic decimals in older specs, none from this work).
+  The `doc-auditor`, scoped to this diff, verified every sha in the README, the sealing rule and the
+  handoff chain, and found one MEDIUM: the pre-registration's `DRP-AM3` item 4 carried no pointer to
+  this stage's search departure. **Fixed**: a one-line implementation note there, pointing at task 2; no
+  bar or definition changed.
+- A4: no config knob added. A5: no listener on 8000 or 5173; no process of this session survives.
+  B2: both scripts are entry points, the gate script imports the sweep's functions. B3: every gate red
+  control fired; H0 compares non-empty 21-press journeys. B6: `NEXT.md` and `docs/README.md` over
+  budget and **not caused by this work** (#145). C1: nothing the owner can press, so no `TEST-QUEUE.md`
+  entry. D3: artifacts unchanged from stage 3a; the cell and harness shas are in the README. D4:
+  builder 292 passed, api 347 passed; frontend untouched. D6: the standing context layer is untouched,
+  delta 0.
