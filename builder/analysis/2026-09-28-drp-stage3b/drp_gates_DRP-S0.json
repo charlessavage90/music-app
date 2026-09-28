@@ -1,0 +1,46 @@
+{
+ "row": "DRP-S0",
+ "graph_sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b",
+ "harness_sha256": "6213bb1e71075511b09e7c48906ebbba917759961f4a7f2c0d67f69aa02e46fe",
+ "H0": {
+  "primary_vs_drp_common_ladder": [],
+  "random_vs_stage3a_noise": [],
+  "verdict": "PASS"
+ },
+ "DRP-G4": {
+  "violations": [],
+  "red_press1_diverged": {
+   "DRP-S0P1": 54,
+   "DRP-S0P2": 93
+  },
+  "verdict": "PASS",
+  "red_control": "fired"
+ },
+ "DRP-G5": {
+  "violations": [],
+  "red_ceiling_as_known_fired": 320,
+  "verdict": "PASS",
+  "red_control": "fired"
+ },
+ "DRP-G9": {
+  "violations": {
+   "a": [],
+   "b": [],
+   "c": [],
+   "d": [],
+   "e": [],
+   "f": []
+  },
+  "n_relaxed_presses_checked": 1770,
+  "search_modes": {
+   "certified": 1770
+  },
+  "red_controls": {
+   "e_press1_at_0.99_diverged": 291,
+   "schedule_diverged_somewhere": 320,
+   "f_dislike_fired": 320
+  },
+  "verdict": "PASS",
+  "red_control": "all fired"
+ }
+}

@@ -89,3 +89,34 @@ the shards.
     quantity, and the gate keeps an independent side. A change to what is measured would be a material
     amendment and a seam. A change to how the same quantity is found, checked from both sides, is not.
 - All shards discarded again and re-run on this harness.
+- 40 shards, all exit 0, one harness version (`6213bb1e…`, as committed). Merged into the four cell
+  files; shas in the directory README.
+
+## Task 3 — gates. 2026-09-28
+
+- `DRP-G9` run as eight parallel partials (one per set × rule), then H0, `DRP-G4`, `DRP-G5` and the
+  combination in one process. **All PASS; every red control fired.** Outcomes:
+  [`builder/analysis/2026-09-28-drp-stage3b/README.md`](../../builder/analysis/2026-09-28-drp-stage3b/README.md),
+  counts in `drp_gates_DRP-S0.json`.
+- **Every relaxed ceiling press was certified; none fell back to bisection.** So the task-2 decision
+  never had to lean on its fallback, and `DRP-G9`(d) found nothing to report.
+- **Decision (mine): the Seam-B README reads no result.** No criterion is computed and no outcome
+  assigned: §7 bars any read before *complete*, §4's drop rule needs all eight cells, and §8 gives the
+  reading to 3d, a session that ran no sweep. A sweep session's framing of its own row is exactly what
+  that rule keeps out.
+
+## Seam B — reached 2026-09-28
+
+**The `DRP-S0` row is *swept*** (§7): four cells, both press rules, all four pair sets, `DRP-G4`, `G5`,
+`G9` passing. One committed JSON per cell. **Nothing from 3c runs from this session** (the owner's
+choice, 2026-09-28: 3c in a separate session).
+
+**What 3c inherits and must not redo:** everything stage 3a's Seam A lists, plus `drp_sweep.py` (the
+`DRP-S1` cells are already in its table, and its map loader refuses unless `DRP-G3` passed on the pinned
+artifact) and `drp_gates_3b.py` (run with `DRP-S1`; H0 is `DRP-S0`-only by design, since the `DRP-S1`
+ladder is the same code). **What 3c must build or run:** the eight `DRP-S1` shards per cell plus the
+eight `DRP-S1P3` identity shards; the merges; the gates; **`DRP-C10`'s per-pair frontier count** (still
+3c's, per the Seam-A handoff: it needs the band journeys); and `DRP-C5`'s `DRP-S1P0` half is computable
+from the committed files once `DRP-S1P0` exists. **Cost to budget:** the `DRP-S0` row took about 2.5 h
+wall at 14 processes; the ceiling cell dominated (48–75 min per shard). On `DRP-S1` the famous pairs have
+more room (stage 3a's headroom), which may change the ceiling cell's cost in either direction.
