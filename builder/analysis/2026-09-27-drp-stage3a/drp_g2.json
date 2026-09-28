@@ -1,0 +1,15 @@
+{
+ "mode": "build",
+ "union_top_j": 50,
+ "fields_equal": {
+  "node_order": true,
+  "offsets": true,
+  "neighbours": true,
+  "scores_bytes": true,
+  "pop_raw": true,
+  "fame_lb_raw": true
+ },
+ "verdict": "PASS",
+ "serialised_bytes_equal_file": true,
+ "rebuilt_sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b"
+}

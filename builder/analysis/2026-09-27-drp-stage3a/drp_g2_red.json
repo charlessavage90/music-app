@@ -1,0 +1,15 @@
+{
+ "mode": "red",
+ "union_top_j": 49,
+ "fields_equal": {
+  "node_order": false,
+  "offsets": false,
+  "neighbours": false,
+  "scores_bytes": false,
+  "pop_raw": false,
+  "fame_lb_raw": false
+ },
+ "verdict": "PASS (red control fired: union_top_j 49 differs)",
+ "serialised_bytes_equal_file": false,
+ "rebuilt_sha256": "8b9655441135b2172b9412518c2d473af28ed5c5782bab58fae5d22614cb5611"
+}

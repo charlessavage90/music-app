@@ -281,6 +281,14 @@ prior confirmed, never as a finding.**
 | `DRP-S1P1`, `DRP-S1P2` | **Movement possible; size not predicted.** The untested cells — new supply × stronger pull — are the shape `CRE-` found passing on `ALG-B` (`B-S1-P1a/b`, results §0), with a measurement hole that does not apply here (§3). **At press 0 each equals `DRP-S1P0`** (the ramp is zero at `k` = 0; `DRP-G4`) | CRE results §0, §3 |
 | `DRP-S0P3`, `DRP-S1P3` *(added `DRP-AM2`, §14)* | **Descent at depth largely forced wherever the map can route under the ceiling**; ~~**`DRP-C6` ELIMINATES predicted on any stratum where band relaxation rarely reaches 0.99**~~ ⚑ *Struck by `DRP-AM3` (§14).* (§14 `DRP-AM2`, exposures (i) and (ii)). **Presses 0–3 equal the `DRP-P0` cell's** (`DRP-G9`(e)). **On `DRP-T1` under `DRP-S0`, large relaxation predicted**: a walled top-1 % endpoint has no neighbour below 0.9 (trim-supply §1), so the ceiling forces relaxation on its journeys from press 10, and at presses 4–9 only where its least-famous neighbour exceeds `F_max(k)`. ⚑ *Governing wording since `DRP-AM5-F7` (§14); the original is quoted there.* **`DRP-S1P3` should relax less than `DRP-S0P3` if the added exits are routable.** At press 0 each equals its `DRP-P0` cell (`DRP-G4`). `DRP-C11`'s measured `b₀` is appended here at Seam A, and changes no read | §14 `DRP-AM2`; trim-supply §1 |
 
+**`DRP-C11`'s measured `b₀`, appended at Seam A (2026-09-27), as the `DRP-S0P3`/`DRP-S1P3` row
+above says; it annotates the priors and changes no read.** The distribution per stratum and supply
+level is owned by
+[`builder/analysis/2026-09-27-drp-stage3a/README.md`](../../../builder/analysis/2026-09-27-drp-stage3a/README.md)
+("`DRP-C11` headroom"), cited and not restated here. In plain terms: the extra connections lower
+the bound on the most-famous pairs and leave the next tier and the middle of the map unchanged pair
+for pair, which is §2.3's design (centres are the top 1 % only), not a finding.
+
 ### §2.6 Held constant, and why each is genuinely constant under the intervention
 
 | held constant | why the intervention cannot change it |

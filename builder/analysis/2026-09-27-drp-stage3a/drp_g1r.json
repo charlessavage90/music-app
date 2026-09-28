@@ -1,0 +1,11 @@
+{
+ "mode": "g1r",
+ "graph_sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b",
+ "ramp": 0.015,
+ "sets": {
+  "FAMOUS": {},
+  "MID": {}
+ },
+ "diverging_pairs": 78,
+ "verdict": "PASS (red control fired)"
+}
