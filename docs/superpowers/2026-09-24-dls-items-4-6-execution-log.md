@@ -139,3 +139,49 @@ two. The three removed units are in the allow-file under their own header. Survi
 own `HEAD`: agent **113/113**, `closeout` **516/516**. No `UV_LINK_MODE` remains under `.claude/`
 except `settings.json`'s `env` and the kept prefixed allow rules. Agent and skill bodies only, and no
 description changed, so the unconditional layer is unchanged (conditional −3 lines).
+
+---
+
+## Stage `DLP-S2` — issue #260, branch `charlessavage90/docs-layer`
+
+Stage base: `28c9da7` (#251's merge, `origin/main` at session start). **The issue was opened by this
+session on 2026-09-28**: plan §1 says each stage's issue opens when its predecessor merges, and
+`DLP-S2`'s never was after PR #231. A second session was live in its own worktree throughout
+(`DRP-stage-3c`, PR #259); it touches `docs/README.md` and `NEXT.md` only at its closeout.
+
+### 1. `DLP-S2.1` — the retrofit measured before building anything (2026-09-28)
+
+The plan's generator (Task `DLP-S2.3` step 3) was extracted verbatim and its classifier run dry over
+`docs/**/*.md`, skipping `README.md` and `reference/`. Scripts are throwaway, in the session scratchpad.
+
+| step | what | at plan time | measured |
+|---|---|---|---|
+| 1 | documents with no classifiable role line | 22 | **23** |
+| 2b | superseded documents whose bold role line names no replacement | 25 of 62 | **26** |
+| 2 | `⚠` segments of map rows that do not survive into their own document | — | **219 of 219** (plan's segment: `⚠` to the next `⚠` or cell end), **211 of 219 across 144 documents** (the warning sentence alone) |
+
+- **Why two figures for step 2.** The plan's segment runs to the end of the cell, so it carries the
+  row's summary along with the warning and fails whenever the summary is not verbatim in the
+  document — which is almost always, since that is #152's complaint. All 219 failing looked like an
+  instrument fault, so it was re-run on the warning sentence only (to the closing `**` when the
+  warning opens bold, else its first sentence) and one case checked by hand: `findings/2026-09-13-
+  lbl-listen2-results.md`'s "Endpoint familiarity was NEVER confirmed" warning is in the map row and
+  nowhere in the document. The tighter figure is the real work; the gate fires on either.
+- **Gate `DLP-G2` FIRES** (*does the retrofit fit in one session?* fires above 120 judged edits):
+  23 + 26 + 211 = **260**. **Ruling, per the step's own text:** `DLP-S2.4` splits at a seam. **This
+  PR:** `S2.1`–`S2.3` and `S2.4` step 2 (role lines and banners). **The next PR:** `S2.4` step 1 (archive
+  the old map), step 3 (the warnings), steps 4–7 (migrate) and `S2.5`. **Step 1 moves to the second PR**
+  so the archive copy is taken at the moment the map is replaced, and **the map is not regenerated
+  in this PR**, because regenerating before the warnings move would drop 211 of them from view.
+- **Ruling — the generator accepts `**⚠ Role:`.** 8 of the 23 open with `**⚠ Role: …`, the house
+  pattern for a warned role line, and the plan's code matches only `**Role:`. That is a gap in the
+  tool, not in the documents, so the generator's pattern is widened to an optional `⚠` and the 8 need
+  no edit. **15 remain**: 5 open with `**Status:**` (not a role line, and not accepted as one: its
+  text often carries no role word) and 10 have neither.
+- **Ruling — 36 map rows point outside `docs/`** (`../CLAUDE.md`, `../frontend/design/…`, and
+  `../builder/analysis/…` folders and READMEs); plus the `reference/` entry. The generator scans
+  `docs/` only, so migrating as written would drop them. They move **verbatim** to a hand-written
+  section above the markers in the second PR. Step 4's list of hand-written sections is extended by
+  that one; nothing else about the migration changes.
+- **Step 1's list and step 2b's list** are those printed by the dry run; the second PR re-measures
+  rather than copying them, since documents land daily.
