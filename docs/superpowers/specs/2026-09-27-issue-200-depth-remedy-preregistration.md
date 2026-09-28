@@ -1511,6 +1511,92 @@ beside `DRP-SW`'s typed-edge deploy obligation and in the same form:
 > document's.**
 
 
+### `DRP-AM5` — the second stage-1 pass: two critiques, every finding dispositioned. PROPOSED, 2026-09-27
+
+> **⛔ STATUS: PROPOSED, NOT ADOPTED.** Which findings are adopted is **the owner's to approve**.
+> **Nothing in §0–§13 has been changed by this entry.** Where a disposition below reads
+> *adopt*, that is the dispatching session's recommendation, and the text it names is applied
+> only after his approval, by a follow-up that records it.
+
+**Dated 2026-09-27. Nothing had run when this was written.** No arm was built, no `DRP-` pair was
+drawn, and no ceiling was routed. The only routing anywhere was the analyst's, on A0 at
+`ApiConfig()` defaults over graph-descriptives' own draws. **So this amendment spends no
+commit-before-results property. No bar's value changes under any disposition below.** Three
+dispositions add a threshold where none existed, and each is named as such: `DRP-AM5-I4`,
+`DRP-AM5-I12` and `DRP-AM5-F2`'s exact-equality conditions.
+
+**Why it was run.** The owner asked for the pre-registration's stage-1 critique to be repeated on
+the document as amended by `DRP-AM2`–`AM4`, and for an independent review beside it.
+- **`ml-graph-analyst`**, derivation only, on questions `DRP-Q7`–`DRP-Q12`: factor table, held
+  constants, effect sizes, instrument assertions, the schedule's arithmetic, and the headroom
+  instrument.
+  [`builder/analysis/2026-09-27-drp-prereg-critique-2/README.md`](../../../builder/analysis/2026-09-27-drp-prereg-critique-2/README.md):
+  findings `DRP-AM5-F1`–`F8` and observations `DRP-AM5-O1`–`O8`.
+- **An independent review on a different model**, given the owner's brief verbatim with only the
+  path and SHA filled in. Its scope was fidelity, design logic, executability, owner material and
+  direction.
+  [`builder/analysis/2026-09-27-drp-prereg-independent-review/README.md`](../../../builder/analysis/2026-09-27-drp-prereg-independent-review/README.md).
+  Its thirteen findings are numbered here `DRP-AM5-I1`–`I13` in its own ranked order, and its
+  unnumbered executability and direction items `DRP-AM5-I14`–`I17`. That is a namespace added by
+  this entry, **because bare `1`–`13` would collide.**
+- **Both read the document at `1070acc`. Neither saw the other's output.** Their figures are their
+  own and are cited, never restated here.
+
+**Verified before dispositioning, not taken on trust.**
+- **`DRP-AM5-F1`** was checked against the probe's own float64 table
+  (`drp_ceiling_probe.out.txt` §1). At every `k` ≥ 4, no node sits exactly at `F_max(k)`, so
+  "the lowest distinct percentile at or above `F_max(k)`" is always strictly above it. **The defect
+  is in `DRP-AM3` item 4's wording, written by the dispatching session.**
+- **`DRP-AM5-I1`**'s central instance was checked in the body: `DRP-G1r` still reads
+  "`w_known_ramp_fame_pctl` doubled", and the 0.015 lives only in §14.
+- **`DRP-AM5-I2`** was checked in the record: `DRP-D4`'s words appear in no other file on any ref,
+  and in no comment on #200 or #244.
+- **The analyst's probe script passed a Snyk code scan with 0 issues.**
+
+#### Dispositions
+
+**Column key.** *Disposition* is the recommendation. *What it changes* names the clause.
+*Bar value?* says whether any committed bar's number moves: none does.
+
+| finding | what it found | disposition | what it changes | bar value? |
+|---|---|---|---|---|
+| **`DRP-AM5-I1`** (BLOCKS-ARMS) | The body keeps superseded wording with no legend. A cold session executing §6 would run `DRP-G1r` at the ramp doubled, which is `DRP-P1`, an arm, at stage 3a. | **Adopt, and go further than the proposed legend.** Apply every governing wording **in place** in §0–§13, the `LBA-AM1` shape: the originals are already quoted in §14, so nothing is lost. Add a legend at the head of §14. **Rejected part: a separate governing-values index**, because it would be a second copy of every value, and a second copy is how figures drift here. | Body text throughout: §2.1–§2.3, §2.10, §4, §5, §6, §7. The ⚑ markers stay as provenance. | no |
+| **`DRP-AM5-F1`** | The relaxation search as worded records a relaxation at every press from 4, so `DRP-G9`(c)/(d) fire on correct routing and `DRP-C13` reads 1.0. | **Adopt.** Test `F_max(k)` first: if `find_journey` returns an interior-bearing journey with every node above `F_max(k)` excluded, then `c` = `F_max(k)` and `r` = 0. Otherwise `c` is the lowest distinct percentile **above** `F_max(k)` at which it does. "`c` is some node's percentile" is qualified to "when `r` > 0". | `DRP-AM3` item 4; `DRP-AM2` item 1; `DRP-G9`(c)/(d); `DRP-C13` | no |
+| **`DRP-AM5-F2`**, with **`DRP-AM5-I5`** | Nothing asserts that ceiling exclusions stay out of the floor and the avoidance map: `DRP-G5` sees only the ramp's `k`, at presses 1 and 10. Double-listing is routine: most artists pressed at 0–3 sit above the press-4 ceiling. `DRP-G5`'s plain sentence claims more than it can see, since no cost is returned. | **Adopt both.** `DRP-G9` gains, at every (pair, press) of both ceiling cells: exactly `k` `KNOWN` entries and 0 `DISLIKE`, and every other entry `"ceiling"`; the shipped `effective_floor_raw` on the passed list equals it on the user list; the shipped `avoidance_map` on the passed list is empty. **Pinned: a pressed artist is passed as `KNOWN` even when it is also above `c`, with no de-duplication across reasons.** Red control: the ceiling passed as `DISLIKE` at press 10 must fire it. `DRP-G5`'s plain sentence becomes *"the number of presses the harness told the router about is the number the ladder is at, and the ceiling never counts as a press"*; the router's own arithmetic stays with `DRP-G1`/`G1r`. | `DRP-G9`; `DRP-G5`'s plain sentence; the §2.6 ceiling row's "asserted" claim | no (new exact-equality conditions) |
+| **`DRP-AM5-I2`** (SHOULD-FIX) | `DRP-D4`, and the requests behind `DRP-AM2` and `DRP-AM4`, exist only in this document, while §1's own standard is "from the record rather than from a conversation". | **Deferred to the owner's hands. Success condition:** a comment on #244, **posted by him**, quotes `DRP-D4` verbatim and confirms in one line each that he asked for `DRP-AM2`'s additions, `DRP-AM4`'s red control and obligation, and `DRP-AM6`'s criterion and clarifications. §1 and §14 then cite its URL. That lands before stage 2, and his stage-2 go lands the same way. A session does not post it: a session posting "the owner said" is the invented-provenance failure `session-start` §C records. | §1, §14 (the citation), once it exists | no |
+| **`DRP-AM5-I3`** (SHOULD-FIX) | `DRP-D2` (*"Depth zero … not scored"*) and the re-scoped `DRP-C6`, which is gated at depth 0 and can disqualify a `DRP-S1` cell on its first path, are not reconciled. | **The owner's to confirm.** Proposed reading: `DRP-D4` is later and explicit (*"bites on the first path"*). `DRP-D2` bars scoring **descent** at depth 0, and `PLA-R1` bars first-path **fame** as a criterion, while `DRP-C6` is a `REQ-33` **floor**, so they do not conflict. At depth 0 only the `DRP-S1` cells can fire it. If he did not mean `DRP-D4` to be able to disqualify the supply arm on its first path, the fix is to gate `DRP-C6` at depths 1–3 for `DRP-S1` cells. **That is his to say.** | §1's `DRP-D2` consequence, the `DRP-C6` row | no |
+| **`DRP-AM5-F6`**, with **`DRP-AM5-I12`** | The re-scoped `DRP-C6` names no denominator and no press rule at depths 0–3. And with a small A0 share, "a quarter of A0's" can be a fraction of one pair. | **Adopt both.** Denominator at depth d = the drawn pairs of the stratum with an interior-bearing journey at d in both the cell and A0, under the primary rule, independent of the band drop rule (the `DRP-AM1-F5` form). **Guard, new and derived:** it fires at a (stratum, depth) only where A0's count there is ≥ 4, the smallest count at which a quarter is at least one pair. Below that, the (stratum, depth) is reported unreadable for `DRP-C6`. On the analyst's proxy the guard would be inert (critique F6's A0 counts). | `DRP-C6`'s denominator; hence MOVES, ELIMINATES, `DRP-R7` | no (one-quarter bar unchanged; guard added) |
+| **`DRP-AM5-F3`** | `DRP-R12` credits the ceiling alone, but for `DRP-S1P3` the scored comparison (against A0) is two columns away and unbarred. | **Adopt.** `DRP-R12` bars *"one-knob attribution to the ceiling when `DRP-S1P3` MOVES and `DRP-S0P3` does not"*; its plain sentence then names both changes. | `DRP-R12` | no |
+| **`DRP-AM5-F4`** | `DRP-R1` and `DRP-R3` speak for "pushing harder" but read only the ramp cells, so they could contradict `DRP-R12` if `DRP-S0P3` moves. | **Adopt.** "A stronger per-press **ramp**" in both plain sentences. Each bars *"using this sentence without `DRP-R12` beside it when `DRP-S0P3` MOVES"*. | `DRP-R1`, `DRP-R3` | no |
+| **`DRP-AM5-F5`**, with **`DRP-AM5-I8`**(b) | `DRP-R13` leaves open how "median band `r`" aggregates and whether "the ramp cells" means both or either. Its thresholds are borrowed from a different statistic. | **Adopt.** Median over band-readable pairs of each pair's median `r` over presses 7–10, and **both** `DRP-P1` and `DRP-P2` at NO MOVEMENT or BELOW BAR. 0.05 and `N_noise` are kept, and stated as yardsticks reused from another statistic, a choice stated as one. | `DRP-R13` | no |
+| **`DRP-AM5-I8`**(a) | `DRP-C2` "at each band depth separately" in the ceiling cells is not defined. | **Adopt.** Per pair: interior count at depth d ÷ interior count at press 0. Median over pairs, ÷ A0's same statistic at d, ≥ 0.70. | `DRP-C2` row, MOVES in `DRP-P3` cells | no |
+| **`DRP-AM5-I4`** (SHOULD-FIX) | `DRP-R8`'s "a step, not a gradient" has no effect size. | **Adopt.** *Step* = \|`D(k)` − `D(band)`\| < `N_noise` for every `k` in 3…20; otherwise *gradient*. A choice with no prior calibration, stated as one. | `DRP-R8` | **new threshold** where there was none |
+| **`DRP-AM5-F7`** | The §2.5 ceiling prior (walled endpoints force relaxation) holds from press 10, not press 4. | **Adopt.** *"Forces relaxation from press 10 for walled endpoints, and at presses 4–9 only where the endpoint's least-famous neighbour exceeds `F_max(k)`."* | §2.5 prior (descriptive) | no |
+| **`DRP-AM5-F8`** | "About three times as steep" is wrong: reaching the mid band's **top** takes about 1.2× the slope, and about 2.75× reaches its bottom. | **Adopt the correction.** It removes the stated reason for not reaching the mid band by press 20, since 1.2× is not a step. **The slope stays 0.015**, on its own derivation (the carried instrument floor, the gentlest step the design can see), which never depended on that sentence. Whether the ceiling should instead reach the mid band's top by press 20 is **offered to the owner** (report, part 4); it is not decided here. | `DRP-AM3` item 2's side remark | no |
+| **`DRP-AM5-I6`** | §7's *gated* lists `DRP-G1`–`G7`, but `G4`/`G5` are measured in the sweeps, and `G9`/`G10` are absent. | **Adopt.** *gated* = `G1`, `G1r`, `G2`, `G3`, `G6`, `G7`, `G10` (the Seam-A set). `G4`, `G5` and `G9` belong to *swept*. | §7 run-state vocabulary | no |
+| **`DRP-AM5-I7`** | `DRP-G10` routes on the `DRP-S1` map at stage 3a and does not say what it records. | **Adopt.** It records per-pair pass/fail only, and no journey is kept, as `DRP-G1r` does. | `DRP-G10` | no |
+| **`DRP-AM5-I9`** | Three citations slightly off. | **Adopt.** `EdgeType` is `builder/src/artistpath_builder/models.py`, and `:18` adds `DESCRIPTIVE = 2`, so a `DRP-SW` type must avoid 1 **and** 2. The reader also refuses on bad magic and length (`graph_store.py:245-246`, `:254-262`). The api `models.py` comment runs `:24-28`. | §2.9, §2.10 deploy note, `DRP-AM2` check (c) | no |
+| **`DRP-AM5-I10`** | §2.10 restates a figure from `JFX-AM1` §`AM1.9` (the 96–100 %). | **Adopt.** Drop the number; cite the section. | §2.10 `N` input (i) | no |
+| **`DRP-AM5-I11`** | `docs/README.md`'s row stopped at `DRP-AM3`. | **Adopted in this commit**: it is the map's row, not the governed document. | `docs/README.md` | no |
+| **`DRP-AM5-I13`** | The analyst's directory was untracked in the tree. | **No change**: it was the concurrent analyst's, and it is now committed verbatim. | — | no |
+| **`DRP-AM5-I14`** (executability) | How `DRP-C9`'s per-term shares are computed is implied, since no cost is returned. | **Adopt.** Recomputed along the returned path from `cfg`, `k` and the shipped `effective_floor_raw`, term by term as `pathfinding.py:156-170` writes them. | `DRP-C9` | no |
+| **`DRP-AM5-I15`**, with **`DRP-AM5-O3`** | Is the ceiling exclusion set `pctl > c`? And "exceeds" must be strict, since exactly one node sits at 1.0. | **Adopt.** The exclusion set is `fame_lb_pctl` **>** `c`, strictly, endpoints exempt. | `DRP-AM2` item 1, `DRP-P3` row | no |
+| **`DRP-AM5-I16`**, with **`DRP-AM5-O1`** | `DRP-G9`(a) with `F_max` ≡ 1.0 passes an empty exclusion list, so it tests plumbing only. And (c) re-applies the search's own test, so it is a self-consistency check. | **Adopt, as statements.** (a) tests plumbing and (c) self-consistency; (d) and `DRP-G10` are the independent checks. No condition removed. | `DRP-G9` row | no |
+| **`DRP-AM5-I17`** (direction) | `DRP-T2` gets no exits of its own (centres are top-1 % only), so a `DRP-S1` null there does not test "give the 0.95–0.99 tier exits". | **Adopt.** `DRP-R0`'s "leaves open" names it explicitly. | `DRP-R0` | no |
+| **`DRP-AM5-O2`** | `DRP-C11` must read the shipped `fame_lb_pctl` (nulls at 0.0), not the NaN array `victim_key` uses. | **Adopt.** | `DRP-C11` row | no |
+| **`DRP-AM5-O4`** | `DRP-AM1-O5`'s press-1 red control for `DRP-G4` would fail for certain if extended to the ceiling cells, which are inert at press 1. | **Adopt.** That red control is `DRP-P1`/`P2`-only. The ceiling cells' red control is `DRP-G9`(e)'s. | `DRP-G4` row | no |
+| **`DRP-AM5-O6`** | Two unmarked residues of superseded wording: the "0.9857 … first press" sentence in `DRP-AM2`'s exposure (i), and §2.2's "six cells" heading. | **Adopt.** Marked, and resolved by the in-place application under `DRP-AM5-I1`. | as named | no |
+| **`DRP-AM5-O5`**, **`O7`**, **`O8`** | The forced-stop detour adds no mechanism under a ceiling; the `DRP-G1` comparison is feasible on the MID half too; headroom is large on the proxy. | **No change**: each confirms the design, and O8 is a proxy figure, which §2.5 takes at Seam A on the real draw. | — | no |
+
+**Where the reviewers agreed without seeing each other:** `DRP-AM5-F5` = `DRP-AM5-I8`(b)
+(`DRP-R13`'s aggregation); `DRP-AM5-F2` overlaps `DRP-AM5-I5` (what `DRP-G5` can see); and
+`DRP-AM5-F6` sits next to `DRP-AM5-I12` (`DRP-C6`'s denominator and its small-count guard).
+
+**What this hands on:** the owner's approval of these dispositions, and his answers on
+`DRP-AM5-I2` (his hands), `DRP-AM5-I3` (his reading of his own rulings) and `DRP-AM5-F8` (whether
+the ceiling should reach the mid band). The adopted text is applied in place after that, in one
+recorded follow-up. Stage 2 comes after that.
+
 ### `DRP-AM6` — the owner's use-gate criterion (§9), verbatim. HIS, given 2026-09-27
 
 **Written before he has seen any journey from any cell.** No cell has been built or routed, and no
