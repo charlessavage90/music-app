@@ -53,6 +53,10 @@ modifier on top of the kind, not a kind.
 | state | `agent-ready` · `claimed` | `agent-ready`: **passes the §4 checklist — dispatch it.** This is Orca's signal. `claimed`: a session is working it (§7). **At most one of the two, ever**, and **never either on an issue carrying a whose-label** |
 | area | `area:api` · `area:frontend` · `area:builder` · `area:infra` · `area:apparatus` | Which package, or the project's own docs/skills/agents. **Not a collision signal** — §5 is |
 
+**No other labels exist.** GitHub's defaults (`enhancement`, `wontfix`, `question`, …) were deleted
+2026-09-28, unused, so a session choosing a kind cannot pick one outside this table — `wontfix` in
+particular contradicts closing as *not planned* (§8). `documentation` is the one default kept, as a kind.
+
 **Milestone `Gate 3 — public`** holds everything that must close before sharing beyond friends and
 family — the Gate 2→3 review's blocking set and anything that joins it.
 

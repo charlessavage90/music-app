@@ -706,6 +706,9 @@ Run them; do not assert green from memory. Evidence before assertions.
 discharge of D4 — it is D4 unanswered. **Name what you verified instead, and paste it.**
 
 - **`scripts/docs-lint.sh`** — hard checks must pass before the PR; candidates need a reader.
+- **`python scripts/issues-selftest.py`** — must pass before a PR that touches `scripts/issues.py`,
+  `.github/ISSUE_TEMPLATE/` or `ISSUES.md`: it is what catches the contract vocabulary drifting
+  between the three (`ISSUES.md` §5).
   Green is not clean; the script says so itself.
 - **Every command, path and section number the diff introduces, resolved.** A document naming
   a file or config value that does not exist is one of the two failure classes this whole
