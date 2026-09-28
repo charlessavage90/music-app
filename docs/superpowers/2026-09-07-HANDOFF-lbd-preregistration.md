@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED on next actions 2026-09-08 by [`2026-09-08-HANDOFF-lbd-task4-midflight.md`](2026-09-08-HANDOFF-lbd-task4-midflight.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 63906242dbe53f67c3beb9605c8d3e07657aa8c1 -->
 # Handoff — `LBD-` Tasks 1 and 2 done, 2026-09-07
 
 **Role: SUPERSEDED on next actions, 2026-09-08.** [`2026-09-08-HANDOFF-lbd-task4-midflight.md`](2026-09-08-HANDOFF-lbd-task4-midflight.md) is the current handoff for the `LBD-` track and supersedes this one **on next actions**; this document's account of Tasks 1–2 and of what must not be reverted still stands. *(Was: the current handoff for the `LBD-` track.)* It does **not** supersede

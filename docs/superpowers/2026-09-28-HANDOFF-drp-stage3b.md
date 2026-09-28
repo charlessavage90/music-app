@@ -1,6 +1,8 @@
 # Handoff — #200 `DRP-` stage 3b (the `DRP-S0` row) complete at Seam B, 2026-09-28
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: ⚠ SUPERSEDED ON NEXT ACTIONS 2026-09-28 (Seam C) by
+[`2026-09-28-HANDOFF-drp-stage3c.md`](2026-09-28-HANDOFF-drp-stage3c.md)**; its decisions list and
+environment facts still stand. ~~**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it.~~ Supersedes
 [`2026-09-27-HANDOFF-drp-stage3a.md`](2026-09-27-HANDOFF-drp-stage3a.md) on next actions. It does **not** state project
 status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

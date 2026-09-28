@@ -1,5 +1,7 @@
 # Scoring & Path-Quality Metrics — Adjudicated Record
 
+**Role: AUTHORITATIVE — all scoring, hub-seeking, and path-quality figures. The single quantitative record.**
+
 **Date:** 2026-07-21
 **Amended:** 2026-07-21 (§4.3 restated, §4.4 added, §6 rows 28–30 added, §8 note added) —
 see §4.4 for what changed and why. **Amended:** 2026-07-22 (§5.3 note, §6 rows 19/22

@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-27 on next actions by [`2026-07-27-HANDOFF-onedrive-migration.md`](2026-07-27-HANDOFF-onedrive-migration.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 4b90ca36fed4fa63132ca3e6846e1ec2e812909d -->
 # Handoff — Gate 2 Track C complete, 2026-07-27
 
 > **⚠ SUPERSEDED 2026-07-27 on next actions** by

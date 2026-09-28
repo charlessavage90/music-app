@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED on everything by [`2026-09-01-HANDOFF-cxr-revert.md`](2026-09-01-HANDOFF-cxr-revert.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 764dd8d3c040111f1caa7a995115e556b8b4121b -->
 # Handoff — the extended graph is adopted and LIVE, 2026-08-10
 
 **Role: SUPERSEDED — this is NOT the current handoff.** Superseded on **everything**, next

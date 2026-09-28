@@ -1,3 +1,5 @@
+> **Role: EXECUTED 2026-07-26; do not execute again — the Track D implementation plan; outcomes in [`2026-07-26-gate2-track-d-execution-log.md`](../2026-07-26-gate2-track-d-execution-log.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: aa9206143c81f98d5a6d663b788ce13fa6b897c8 -->
 # Track D — Frontend Implementation Plan
 
 > **⚠ EXECUTED 2026-07-26 — do not execute again.** Outcomes, including three defects found

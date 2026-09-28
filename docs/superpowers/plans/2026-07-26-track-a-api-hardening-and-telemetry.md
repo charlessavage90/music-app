@@ -1,3 +1,5 @@
+> **Role: EXECUTED 2026-07-26; do not execute again — the Track A implementation plan; outcomes in [`2026-07-26-gate2-track-a-execution-log.md`](../2026-07-26-gate2-track-a-execution-log.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 0cb64e2a8abd398762f13affaf257d9f2625e3ef -->
 # Track A — API hardening and telemetry Implementation Plan
 
 > **⚠ EXECUTED 2026-07-26 — do not execute again.** Outcomes are in

@@ -1,3 +1,5 @@
+> **Role: COMPLETE — F1 implementation plan, six tasks. Executed 2026-07-25; do not execute again.** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 0cb64e2a8abd398762f13affaf257d9f2625e3ef -->
 # F1 Minimum-Stop Implementation Plan
 
 > **⚠ EXECUTED 2026-07-25 — do not execute again.** Outcomes are in

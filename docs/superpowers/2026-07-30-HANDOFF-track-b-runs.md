@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-30 on next actions by [`2026-07-30-HANDOFF-fame-proxy-coverage.md`](2026-07-30-HANDOFF-fame-proxy-coverage.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 0533ed11cb01f77f45b4ef9907b6ef1bcaf105a6 -->
 # Handoff — Track B runs and reads complete, 2026-07-30
 
 **⚠ Role: SUPERSEDED 2026-07-30 (later) on NEXT ACTIONS ONLY** by

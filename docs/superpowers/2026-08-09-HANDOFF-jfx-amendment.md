@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED ON EVERYTHING 2026-08-10 by [`2026-08-10-HANDOFF-jfx-run.md`](2026-08-10-HANDOFF-jfx-run.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 692dc5170e6cedaec424c1394017bb3560360966 -->
 # Handoff — `JFX-AM1` committed, arms not run, 2026-08-09
 
 **Role: SUPERSEDED — this is NOT the current handoff.** Superseded **on everything** by

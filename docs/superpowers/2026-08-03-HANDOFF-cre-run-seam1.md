@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-08-03 on next actions by [`2026-08-03-HANDOFF-cre-run-stage2-midflight.md`](2026-08-03-HANDOFF-cre-run-stage2-midflight.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 6d5bc72206805514f2aa43774559b6b8232bd28c -->
 # Handoff — the `CRE-` run, Stage 0 and Stage 1 complete (Seam 1), 2026-08-03
 
 **Role: SUPERSEDED on next actions** by

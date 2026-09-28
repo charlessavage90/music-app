@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-27 on next actions AND on status by [`2026-07-27-HANDOFF-migration-phase-d.md`](2026-07-27-HANDOFF-migration-phase-d.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 1b7b8621f77e43f287c5122c49d50391ad2251fa -->
 # Handoff — the OneDrive migration is planned, not started, 2026-07-27
 
 **Role: SUPERSEDED — on next actions AND on status**, 2026-07-27, by

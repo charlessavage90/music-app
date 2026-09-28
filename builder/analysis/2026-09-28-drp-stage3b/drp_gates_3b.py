@@ -1,6 +1,7 @@
-"""DRP- stage 3b gates on the DRP-S0 row: DRP-G4, DRP-G5, DRP-G9 (a)-(f) with every red control,
-and one harness-identity check of this stage's own. Reads the shards drp_sweep.py wrote; routes
-only where a gate or red control says to, and keeps counts, never journeys, from those calls.
+"""DRP- gates on one supply row, DRP-S0 (stage 3b, the default) or DRP-S1 (stage 3c): DRP-G4,
+DRP-G5, DRP-G9 (a)-(f) with every red control, and, on DRP-S0 only, one harness-identity check of
+stage 3b's own. Reads the shards drp_sweep.py wrote; routes only where a gate or red control says
+to, and keeps counts, never journeys, from those calls.
 
 Governing: the pre-registration's §6 rows for DRP-G4, DRP-G5 and DRP-G9 (executed from the body),
 §7 *swept* (a cell is swept when its ladders are done and G4, G5 and, for a ceiling cell, G9 pass).
@@ -12,7 +13,13 @@ and DRP-C8, compared path for path; and the A0 random-rule shards for DRP-T1/DRP
 stage 3a's seed-1 random journeys (drp_noise_journeys.json, sha committed in its README).
 
     cd api && PYTHONIOENCODING=utf-8 uv run python -u \
-      ../builder/analysis/2026-09-28-drp-stage3b/drp_gates_3b.py
+      ../builder/analysis/2026-09-28-drp-stage3b/drp_gates_3b.py ROW g9 SET RULE   # x8, in parallel
+    cd api && PYTHONIOENCODING=utf-8 uv run python -u \
+      ../builder/analysis/2026-09-28-drp-stage3b/drp_gates_3b.py ROW               # combine
+
+The DRP-G9 partials are written outside the repository as gates/g9__ROW__SET__RULE.json, and the
+combining run refuses a partial recorded for another row (keyed by row at stage 3c: both rows share
+one harness sha, so the sha alone could not tell them apart). Output: drp_gates_ROW.json.
 """
 from __future__ import annotations
 
@@ -142,7 +149,8 @@ if MODE:
         dc.refuse("usage: drp_gates_3b.py ROW [g9 SET RULE]")
     res = g9_run([(MODE[1], MODE[2])])
     res["harness_sha256"] = out["harness_sha256"]
-    dc.write_json(G9_DIR / f"g9__{MODE[1]}__{MODE[2]}.json", res)
+    res["row"] = ROW
+    dc.write_json(G9_DIR / f"g9__{ROW}__{MODE[1]}__{MODE[2]}.json", res)
     print(f"DRP-G9 partial {MODE[1:]}: { {k: len(v) for k, v in res['g9'].items()} } reds {res['red']}")
     sys.exit(0)
 
@@ -218,10 +226,14 @@ print(f"DRP-G5: {g5['verdict']}; red (ceiling as KNOWN) fired on {g5['red_ceilin
 
 parts = []
 for key in A:
-    f = G9_DIR / f"g9__{key[0]}__{key[1]}.json"
+    f = G9_DIR / f"g9__{ROW}__{key[0]}__{key[1]}.json"
     if not f.exists():
-        dc.refuse(f"DRP-G9 partial missing: {f.name}; run `g9 {key[0]} {key[1]}` first")
+        dc.refuse(f"DRP-G9 partial missing: {f.name}; run `{ROW} g9 {key[0]} {key[1]}` first")
     parts.append(json.loads(f.read_text(encoding="utf-8")))
+    # Both rows run one harness version, so the sha below cannot tell a DRP-S0 partial from a DRP-S1
+    # one; the row must. (Stage 3c: the partials were unkeyed until then, and 3b's are renamed.)
+    if parts[-1].get("row", "DRP-S0") != ROW:
+        dc.refuse(f"{f.name} was computed for row {parts[-1].get('row')}, not {ROW}")
     if parts[-1]["harness_sha256"] != out["harness_sha256"]:
         dc.refuse(f"{f.name} was computed on another harness version")
 g9 = {k: sum((pt["g9"][k] for pt in parts), []) for k in ("a", "b", "c", "d", "e", "f")}

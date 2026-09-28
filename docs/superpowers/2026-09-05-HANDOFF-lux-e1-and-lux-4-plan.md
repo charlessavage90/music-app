@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED on next actions by [`2026-09-06-HANDOFF-lux-4-artifact.md`](2026-09-06-HANDOFF-lux-4-artifact.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: fc74bff8019d942fd12303e9af8e395b74bc9a23 -->
 # Handoff — `LUX-E4` closed, `LUX-E1` run, and `LUX-4` planned, 2026-09-05
 
 **Role: SUPERSEDED on next actions — no longer the current handoff.** Succeeded by

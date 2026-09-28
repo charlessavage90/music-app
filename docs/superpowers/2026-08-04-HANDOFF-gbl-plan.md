@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-08-04 (later) on next actions by [`2026-08-04-HANDOFF-gbl-harness.md`](2026-08-04-HANDOFF-gbl-harness.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 83f48a21a32a8150401510e5a15e0869921e46b9 -->
 # Handoff — the `GBL-` blind listen specified and planned, 2026-08-04 (evening)
 
 **Role: SUPERSEDED on next actions** by

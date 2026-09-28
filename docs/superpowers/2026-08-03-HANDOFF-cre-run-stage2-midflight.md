@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-08-04 on next actions by [`2026-08-04-HANDOFF-cre-t11-seam3.md`](2026-08-04-HANDOFF-cre-t11-seam3.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 3b12e06bb7f46697181c19acb38e0deb217ccbd3 -->
 # Handoff — the `CRE-` run, Stage 2 gates and all sixteen sweeps, 2026-08-03
 
 **Role: SUPERSEDED on next actions** by

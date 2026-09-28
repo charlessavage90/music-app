@@ -131,6 +131,62 @@ if printf '%s' "$OUT" | grep -q 'from the adjudication also appears in'; then
   else bad "check 6 fired but failed the run"; fi
 else bad "check 6 did NOT fire (rc=$RC)"; fi
 
+# --- control 8: an edit below a frozen banner --------------------------------------
+echo "== control 8: an edit below a frozen banner must FAIL =="
+build_clean "$TMP/c8"
+( cd "$TMP/c8" && git init -q && git add -A && git -c user.email=t@t -c user.name=t commit -qm base )
+SHA=$(git -C "$TMP/c8" rev-parse HEAD)
+F="$TMP/c8/docs/superpowers/plans/live-plan.md"
+{ printf '> **Role: SUPERSEDED — test banner.** Banner added under `DLS-Q1`.\n<!-- frozen-below: %s -->\n' "$SHA"
+  git -C "$TMP/c8" show "$SHA:docs/superpowers/plans/live-plan.md"; } > "$F.new" && mv "$F.new" "$F"
+OUT=$(run_lint "$TMP/c8"); RC=$?
+if [ "$RC" -eq 0 ]; then ok "a banner over an untouched body passes"
+else bad "banner alone failed (rc=$RC)"; printf '%s\n' "$OUT" | sed 's/^/        /'; fi
+printf 'An edit below the banner.\n' >> "$F"
+OUT=$(run_lint "$TMP/c8"); RC=$?
+if [ "$RC" -ne 0 ] && printf '%s' "$OUT" | grep -q 'text below the banner differs'; then ok "check 8 goes red"
+else bad "check 8 did NOT fire (rc=$RC)"; fi
+
+# --- control 7: a stale generated block --------------------------------------------
+echo "== control 7: a stale generated block must FAIL =="
+build_clean "$TMP/c7"
+printf '\n<!-- map:generated:begin -->\n<!-- map:generated:end -->\n' >> "$TMP/c7/docs/README.md"
+# old.md names its replacement relative to its OWN folder; the fresh block passes only if the
+# generator rebased that link to superpowers/plans/live-plan.md (check 3 would call it dead).
+printf '# Old\n\n**Role: SUPERSEDED by [`plans/live-plan.md`](plans/live-plan.md).** Kept for history.\n' \
+  > "$TMP/c7/docs/superpowers/old.md"
+"${PYTHON:-python}" "$HERE/gen-docs-map.py" --root "$TMP/c7" >/dev/null
+OUT=$(run_lint "$TMP/c7"); RC=$?
+if [ "$RC" -eq 0 ]; then ok "a freshly generated block passes, links rebased"
+else bad "fresh block failed (rc=$RC)"; printf '%s\n' "$OUT" | sed 's/^/        /'; fi
+printf '# Later\n\n**Role: COMPLETE.** Added after generation.\n' > "$TMP/c7/docs/superpowers/later.md"
+OUT=$(run_lint "$TMP/c7"); RC=$?
+if [ "$RC" -ne 0 ] && printf '%s' "$OUT" | grep -q 'generated block is stale'; then ok "check 7 goes red"
+else bad "check 7 did NOT fire (rc=$RC)"; fi
+
+# --- control 7b: a superseded document that names no replacement ---------------------
+echo "== control 7b: a superseded document naming no replacement must FAIL =="
+build_clean "$TMP/c7b"
+printf '\n<!-- map:generated:begin -->\n<!-- map:generated:end -->\n' >> "$TMP/c7b/docs/README.md"
+printf '# Orphaned\n\n**Role: SUPERSEDED — this is not the current handoff.**\n' \
+  > "$TMP/c7b/docs/superpowers/orphaned.md"
+OUT=$("${PYTHON:-python}" "$HERE/gen-docs-map.py" --root "$TMP/c7b" 2>&1); RC=$?
+if [ "$RC" -eq 1 ] && printf '%s' "$OUT" | grep -q 'names no replacement'; then ok "replacement check goes red"
+else bad "replacement check did NOT fire (rc=$RC)"; fi
+
+# --- control 7c: a warned role line is still a role line ------------------------------
+# The house pattern for a role line carrying a warning is "**⚠ Role: …**". The generator must
+# classify it, or every such document fails as unclassified (8 did on 2026-09-28, DLP-S2.1).
+echo "== control 7c: a '**⚠ Role:' line must be classified =="
+build_clean "$TMP/c7c"
+printf '\n<!-- map:generated:begin -->\n<!-- map:generated:end -->\n' >> "$TMP/c7c/docs/README.md"
+printf '# Warned\n\n**⚠ Role: COMPLETE — do not execute again.** Kept for history.\n' \
+  > "$TMP/c7c/docs/superpowers/warned.md"
+OUT=$("${PYTHON:-python}" "$HERE/gen-docs-map.py" --root "$TMP/c7c" 2>&1); RC=$?
+if [ "$RC" -eq 0 ] && grep -qF '[`superpowers/warned.md`](superpowers/warned.md) | **⚠ Role: COMPLETE' "$TMP/c7c/docs/README.md"
+then ok "a warned role line is classified, and its row keeps the warning"
+else bad "a warned role line was not classified (rc=$RC)"; printf '%s\n' "$OUT" | sed 's/^/        /'; fi
+
 echo
 echo "self-test: $PASS passed, $FAILED failed."
 [ "$FAILED" -eq 0 ] || { echo "A control did not behave. docs-lint's green result is NOT evidence until this passes."; exit 1; }

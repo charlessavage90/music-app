@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-29 on next actions by [`2026-07-29-HANDOFF-requirements-track3b.md`](2026-07-29-HANDOFF-requirements-track3b.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 16647826af9ea578f2392a6e6018a94b3d0d2094 -->
 # Handoff — Track 3 executed and read, 2026-07-28
 
 **Role: ⚠ SUPERSEDED 2026-07-29 on next actions** by
