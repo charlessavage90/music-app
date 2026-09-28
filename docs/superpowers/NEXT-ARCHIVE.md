@@ -19,6 +19,54 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-28 — struck and discharged registry entries (issue #145)
+
+**Not a status block.** Moved verbatim out of `NEXT.md`'s *PARKED* registry by the #145 budget work, because each was already struck, ruled or discharged and kept only "for the record". Nothing here binds; what still binds stayed in `NEXT.md`.
+
+**From *PARKED*: two struck items.**
+
+- ~~**Whether the fame instrument is fixed BEFORE or AFTER the graph work**~~ — **RULED
+  AND DONE 2026-08-02: before, and it was.** The `FPC-2`/`FPC-9` pairing rule stays for
+  reading that record. Struck, kept for the record.
+- ~~**Whether a currency change re-reads prior fame-scored results**~~ — **RULED
+  2026-08-02: NO re-read.** Prior results stand in their measured currency;
+  cross-currency comparisons barred. Struck, kept for the record.
+
+**From *PARKED*, the coherence thread: its original text.** The sentence that introduced it in `NEXT.md` read: "Retained below as written."
+
+  *(Original text, superseded on status only:)*
+  **A third strand, owner-raised 2026-07-30 after the probe and explicitly flagged
+  worth a future session: tag-aware neighbour SELECTION at build time, at the top of
+  the graph.** The probe's kill was about *scoring paths*; selection lives where
+  candidates are many and labels near-total (top bands 94–100%, `COH-2`), and barely
+  operates where labels are dark — the coverage failure and this use are close to
+  complementary. Three caveats travel with it: it *reorders* candidate lists and
+  cannot add famous→obscure supply (that stays with candidate supply and router
+  pricing); tags spent on construction are spent as an evaluator — §7's self-audit
+  circularity in new clothes, leaving the 11 blind verdicts as the only independent
+  check; and picking it up is Track-B-shaped work — a selection-rule change, so a
+  rebuild, a pre-registration with a factor table, and a blind listen (`REQ-38`).
+  `COH-5` makes the data side cheap (~47 min for a full tag frame).
+
+**From *PARKED*: the discharged owner actions.**
+
+**Owner actions, all three discharged 2026-08-02 — kept struck for the record.** *(Heading
+corrected 2026-09-05: it read "Still owed by the owner" over three items marked done.)*
+
+1. ✅ **The use-the-app test — DONE 2026-08-02.** The redesign entry was run in full against
+   `https://musicapp.cmiller.io`, desktop and phone. Everything passed; journeys he knows well
+   were **unchanged**, which was the check that mattered. One incidental finding worth
+   carrying: **the loading screen is often too fast to see**, so nothing should be measured or
+   redesigned on the assumption a user experiences it.
+2. ✅ **The iPhone script — DONE 2026-08-02, and it settled a Gate 3 blocker.** All three
+   questions clean: clips play, the bottom bar clears the home indicator, artist-name typing is
+   unaffected. **`G3-F2` is FALSIFIED** — see the gate table below.
+3. ✅ **The `--prune` publish pass — DONE 2026-08-02.** Two orphaned assets from the
+   pre-redesign build deleted; live site verified afterwards. See `NEXT-ARCHIVE.md`'s *The `--prune` publish pass* row for the
+   pre-flight a successor should repeat.
+
+---
+
 ## Demoted 2026-09-28 (Seam B) — the top block as it stood at the `DRP-` stage-3a closeout (Seam A)
 
 **Last updated: 2026-09-27, at Seam A of the #200 remedy's stage 3a (the instruments).** The live
