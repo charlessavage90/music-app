@@ -18,7 +18,7 @@ here. It owns **no figures and no status**; both are pointed at below, never res
 | **Anything waiting to be tested by hand?** | `docs/superpowers/TEST-QUEUE.md` — the async use-the-app queue. `closeout` appends **only when there is something he can press** — an empty file is a valid state, never a lapse; `session-start` reads it and flags stale entries. It catches the defect class tests structurally cannot. |
 | **What does the owner mean by "better"?** | Two documents since 2026-07-29: `docs/superpowers/PRODUCT-REQUIREMENTS.md` (`REQ-`) is his Must/Should/Expect requirements layer and **governs where the two disagree** (its §10 lists the disagreements); `docs/superpowers/WHAT-GOOD-LOOKS-LIKE.md` remains the calibration record for the blind listening test, this project's strongest evidence class. Read both before running one, interpreting a verdict, **or designing anything that scores a path**. WGLL records **preference, not evidence**: never read a threshold off it, but a criterion that contradicts either document is wrong. Worked example — the Track 2 pre-registration's C4 existed because value 2 ruled out fewer-but-obscurer; that clause is among the superseded (§10 there), which is exactly why the governing document matters. |
 | **Is there project memory?** | Yes, outside the repo: `~/.claude/projects/C--dev-music-app/memory/`. `MEMORY.md` indexes it. Memory holds pointers and preferences, **not figures**. |
-| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. And `consultant.md` — **not a subagent**: it is launched as its own session (`claude --agent consultant`), reads only the committed record, and gives one reasoned recommendation on one named decision. Its whole value is that its inputs are the owner's, not another session's paraphrase, so a working session must never dispatch it. |
+| **Specialist help?** | `.claude/agents/ml-graph-analyst.md` — analysis-only subagent for graph, scoring and metric questions. No `Edit` tool by design. Also `doc-auditor.md`, project-local and shadowing the global one; `closeout` B1 dispatches it, and `docs/README.md` says what it checks. And `consultant.md` — **not a subagent**: it is launched as its own session (`claude --agent consultant`), reads only the committed record, and gives one reasoned recommendation on one named decision. Its whole value is that its inputs are the owner's, not another session's paraphrase, so a working session must never dispatch it. Four domain reviewers — `experiment-`, `test-`, `frontend-` and `backend-reviewer` — report and never edit; `docs/README.md` scopes each. |
 
 **Never use as context:** `docs/how-we-map-similar-artists.md` (a narrative journal). It is not
 maintained as project documentation.
@@ -424,7 +424,8 @@ need.
   structure; when a metric moves and you cannot tell property from bug; when a claim about
   the graph is about to enter the record; or to critique an analysis before acting on it.
   Never for interpreting evidence that feeds a human decision.
-- **Team review** (architect, security, quality, frontend, plus the graph analyst only if
+- **Team review** (`backend-reviewer` twice — briefed once on architecture, once on
+  security — plus `test-reviewer` and `frontend-reviewer`, and the graph analyst only if
   a scoring question is open) — **at gate boundaries, after a period of real use.** Gate 1
   → 2 and Gate 2 → 3. Staff the frontend explicitly: three backend-focused reviewers once
   missed an entire defect class that twenty minutes of use found.
