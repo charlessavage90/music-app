@@ -253,3 +253,21 @@ in-place edit.
 **Seam.** This PR ends here. The second PR starts from `S2.4` step 1 (archive the map) and runs step
 3 (the 211 warnings; re-measure first), steps 4–7 and `S2.5`, carrying the two rulings in §1 (the 36
 outside-`docs/` rows move verbatim to a hand section; `S2.5` updates the lint header's "Checks 4-6").
+
+### 5. Closeout (maintenance tier) for part 1
+
+- **D6**, memory directory `~/.claude/projects/C--dev-music-app/memory`: unconditional **46,650**
+  characters, conditional **3,538** lines. **Delta 0 in both**: neither this PR nor the same session's
+  #262 touches `CLAUDE.md`, `.claude/` or memory (`git diff --name-only origin/main...` over those
+  paths is empty for both branches). These totals are not comparable to §1's `DLP-S1` baseline:
+  other PRs have landed in between.
+- **B1:** `docs-lint.sh` hard checks pass on both branches. `doc-auditor`, scoped to both diffs:
+  **no defects**. It sampled 6 of the 39 banners in full (replacement confirmed from the successor's
+  side in 3 cases) and relied on check 8 for the rest's bodies.
+- **B1-mt:** nothing under `.claude/` changed. The frozen documents touched are the 39 banners, the
+  one edit `DLS-Q1` permits and check 8 guards; and `NEXT-ARCHIVE.md` in #262, where a block was
+  inserted by the `A2-next` procedure and `prose-survival` shows its 1,887 existing sentences
+  unchanged. No identifier series was minted.
+- **A3:** #260 released (`claimed` off) at this seam; part 2 is dispatchable only after this PR
+  merges. #145 and #152 stay open, with progress comments on #145 and #260. **A5:** no process
+  started, none listening. **C1:** nothing the owner can press, so no `TEST-QUEUE.md` entry.
