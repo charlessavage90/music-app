@@ -93,3 +93,26 @@ and two choices left to it by design: which frontier count (`incident_all` or `i
 §2.4's condition reads, and forming §4's cross-cell drop set from the eight `dropped_in_this_cell`
 lists. It also reads `DRP-R11` (`DRP-SW`'s trigger, #246) from `DRP-S1P0`, and weighs stage 3b's
 search departure from `DRP-AM3` item 4, which this row inherited unchanged.
+
+## Closeout at Seam C. 2026-09-28
+
+- `NEXT.md` top block rewritten; the outgoing block is demoted to `NEXT-ARCHIVE.md` (nothing in it still
+  bound except the ordered actions and carried items, both kept). Handoff
+  [`2026-09-28-HANDOFF-drp-stage3c.md`](2026-09-28-HANDOFF-drp-stage3c.md); the stage-3b handoff's role
+  line points forward to it. Map rows added for the three new documents and folders; the stage-3b
+  folder's row says the `DRP-S1` files sit there, owned by stage 3c's row.
+- **A forward note appended to the stage-3b README was reverted**: that README is COMPLETE and frozen, so
+  the pointer lives in `docs/README.md`'s row instead.
+- B1: `docs-lint` hard checks passed (candidates: generic decimals in older specs, none from this work).
+  The `doc-auditor`, scoped to the diff, verified every sha, gate claim, the handoff chain and sealing,
+  and found one MEDIUM: `drp_gates_3b.py`'s docstring did not say the row is an argument or how the
+  partials are named. **Fixed.**
+- A3: no new deferral; #246, #247, #249 unchanged (each waits on 3d or stage 4). A4: no config knob.
+  A5: no listener on 8000 or 5173; no process of this session survives. B2: `drp_c10_frontier.py` is an
+  entry point. B3: every gate red control fired; the frontier count's control fired. **One guard not
+  shown to go red: the combining step's refusal of another row's `DRP-G9` partial.** Exercising it costs
+  a full combining run (the G4/G5 re-routing precedes it); it is a two-line comparison, read in review.
+  B6: `NEXT.md` and `docs/README.md` over budget and **not caused by this work** (#145); this work added
+  three map rows. C1: nothing the owner can press, so no `TEST-QUEUE.md` entry. D3: artifacts unchanged
+  from stage 3a; cell and harness shas in the stage-3c README. D4: builder 292 passed, api 347 passed;
+  frontend untouched. D6: the standing context layer is untouched, delta 0.
