@@ -9,9 +9,8 @@ committed outputs own: each entry points at its output file.
 stage-2 go, 2026-09-27, in session ("Just go as designed", after being shown §10's weakest link and
 the option of stopping at Seam A); relayed to
 [#244](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5861972775) by this
-session. ⚠ `DRP-AM5-I2` says his go lands on #244 **posted by him**; the session's relay does not
-meet that, and the owner has been asked to post his own line. Until he does, cite the relay as a
-relay.
+session. **That relay is the record.** The owner ruled on 2026-09-28 that `DRP-AM5-I2`'s "posted by
+him" was a session's requirement, not his, and that no owner-posted comment is owed.
 
 **Seam A (the end of this log's scope):** every gate outcome (`DRP-G1`, `G1r`, `G2`, `G3`, `G6`,
 `G7`, `G10`), the `DRP-S1` artifact sha and `N_noise` committed. Nothing in 3b–3d runs from this

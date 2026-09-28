@@ -24,9 +24,11 @@ what 3b inherits and must build, then the figures in
 - **`N_noise` ran on the two famous strata only.** The A0 seed-1 random ladders on every stratum
   are the A0 cell's `DRP-C7` companion, and 3b produces them.
 
+- **The stage-2 go is on the record as the session's relay on #244, and that is sufficient** (owner,
+  2026-09-28). `DRP-AM5-I2`'s "posted by him" was a session's requirement and he has dropped it.
+  **Never ask him to re-post it.**
+
 **Owed, and by whom:**
-- **The owner:** his own one-line stage-2 go on #244. The session relayed it there, but
-  `DRP-AM5-I2` asks for it posted by him.
 - **A session:** stage 3b, to Seam B.
 
 **Environment facts a 3b session needs:**

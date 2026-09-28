@@ -58,17 +58,14 @@ tracking issue #244 (addresses; `git`/`gh` own the merge state). Handoff:
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner:** post his own one-line stage-2 go on #244. The go was given in session on
-   2026-09-27 and relayed there by the session, which does not meet `DRP-AM5-I2`'s "posted by him".
-   It blocks nothing already run; it is owed for the record.
-2. **A session:** stage 3b, the `DRP-S0` row (A0, `DRP-S0P1`, `DRP-S0P2`, `DRP-S0P3` with `DRP-G9`),
+1. **A session:** stage 3b, the `DRP-S0` row (A0, `DRP-S0P1`, `DRP-S0P2`, `DRP-S0P3` with `DRP-G9`),
    `DRP-G4`, `DRP-G5`, per the pre-registration's §8, to Seam B. It starts from the stage-3a
    execution log's "Seam A" entry, which names what it inherits and must build.
-3. **A session:** stage 3c, the `DRP-S1` row, to Seam C. Then **3d**, the results note, written by a
+2. **A session:** stage 3c, the `DRP-S1` row, to Seam C. Then **3d**, the results note, written by a
    session that ran no sweep.
-4. **The owner:** his stage-4 go/no-go on at most one cell; then the blind listen (stage 5, designed
+3. **The owner:** his stage-4 go/no-go on at most one cell; then the blind listen (stage 5, designed
    cold) and his use gate (stage 6, `DRP-AM6`).
-5. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
    previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
 
 ---
