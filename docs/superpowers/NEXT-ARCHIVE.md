@@ -19,6 +19,35 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-27 (Seam A) — the top block as it stood at the `DRP-` amendments closeout
+
+**Last updated: 2026-09-27, at the closeout of the #200 pre-registration's amendments `DRP-AM1`–`AM6`
+and its second stage-1 pass.** The live site is unchanged since 2026-09-25: it serves
+`graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The work is on branch
+`charlessavage90/issue-200-depth-remedy-prereg`, PR #245, tracking issue #244 (addresses; `git`/`gh`
+own the merge state). Handoff: [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md).
+
+# #200'S REMEDY IS PRE-REGISTERED, CRITIQUED TWICE AND AMENDED. NEXT: HIS STAGE-2 GO.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner:** his go on the amended design
+   ([`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md),
+   `DRP-`, §8 stage 2). **Posted on #244**, as his rulings and requests already are: the document's
+   own standard is "from the record rather than from a conversation" (`DRP-AM5-I2`). It is his
+   because spending the lattice is his.
+2. **A session, only after that go:** stage 3a, the instruments, per §8 and its named seams. It
+   executes **from the document body**, which carries the governing wording since `DRP-AM5` (the
+   legend at the head of §14). **No arm runs before the go.**
+3. **The owner:** his stage-4 go/no-go on at most one cell. Then the blind listen (stage 5, designed
+   cold by a session that has seen no journey) and his use gate (stage 6, on his criterion, recorded
+   verbatim as `DRP-AM6`).
+4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+   previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
+
+---
+
 ## Demoted 2026-09-27 (later) — the top block as it stood at the `DRP-` pre-registration closeout
 
 **Last updated: 2026-09-27, at the closeout of the #200 depth-remedy pre-registration.** The live

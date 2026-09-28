@@ -1,0 +1,76 @@
+{
+ "artifact_sha256": "418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f",
+ "lba_a6_sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b",
+ "capture_sha256": "bf697aee945bdb9527d4d2de1221834c4a05d2e3e2fc223430824124a0c1b254",
+ "violations": [],
+ "red_drop_violations": 1,
+ "red_ulp_violations": 1,
+ "verdict": "PASS",
+ "DRP-C10": {
+  "added_edges": 7998,
+  "centres": 874,
+  "centres_gaining_ge1": 817,
+  "top1pct_no_neighbour_below_0.9": {
+   "lba_a6": 381,
+   "drp_s1": 2,
+   "cited": "trim-supply README / graph-descriptives \u00a71 A (381 of 874 post-trim)"
+  },
+  "skips_at_60": 205,
+  "added_per_centre": {
+   "min": 0.0,
+   "p10": 10.0,
+   "median": 10.0,
+   "p90": 10.0,
+   "max": 10.0,
+   "mean": 9.151029748283753
+  },
+  "distinct_partners": 3855,
+  "added_per_partner": {
+   "min": 1.0,
+   "p10": 1.0,
+   "median": 1.0,
+   "p90": 4.0,
+   "max": 37.0,
+   "mean": 2.074708171206226,
+   "distribution": {
+    "1": 2484,
+    "2": 627,
+    "3": 244,
+    "4": 145,
+    "5": 79,
+    "6": 68,
+    "7": 40,
+    "8": 35,
+    "9": 29,
+    "10": 45,
+    "11": 16,
+    "12": 10,
+    "13": 5,
+    "14": 9,
+    "15": 3,
+    "16": 2,
+    "17": 2,
+    "18": 3,
+    "19": 3,
+    "20": 1,
+    "21": 1,
+    "22": 1,
+    "31": 1,
+    "34": 1,
+    "37": 1
+   }
+  },
+  "partner_fame_lb_pctl": {
+   "min": 0.001739329442728001,
+   "p10": 0.39645954914749976,
+   "median": 0.7807758324751116,
+   "p90": 0.8861036731891521,
+   "max": 0.8998970133882596,
+   "mean": 0.7057675025665023,
+   "below_0.5": 593,
+   "below_0.7": 1348,
+   "in_[0.8,0.9)": 1748
+  },
+  "frontier_count_per_pair": "computed at stage 3c from the band journeys (it needs them)"
+ }
+}
