@@ -309,6 +309,8 @@ what the app does (§8; `DRP-R10`). This note names no candidate.
   pricing. Neither closes the family.
 - **Carried, whatever he chooses:**
   - **`DRP-SW` is not spendable** (its trigger did not fire). #246 closes with this reading.
+  - **The jump-relaxation device (#247) is not reached.** Its condition needed `DRP-R0` to fire, and
+    it did not, so the issue is closed as not planned. It is revived only by decision.
   - **#249** (a ceiling that varies along the journey) had two conditions. Its first, a ceiling cell
     reaching MOVES, **has now come due.** Its second is his: naming at stage 4 *where within a journey*
     the famous artists sit as the remaining problem.

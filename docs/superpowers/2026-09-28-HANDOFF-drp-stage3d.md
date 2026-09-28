@@ -27,7 +27,8 @@ the design left to 3d, committed before any figure existed.
   the stage-5 blind listen designed cold by a session that has seen no journey, and his use gate.
   **#249's second condition** (where within a journey famous artists sit) is his to name at stage 4
   or not.
-- **Nothing is owed by a session before his stage-4 call.**
+- **Nothing is owed by a session before his stage-4 call.** #246 closes with PR's merge (trigger did
+  not fire); #247 was closed as not planned (its condition needed `DRP-R0` to fire, and it did not).
 
 **Handoff defect found in the previous one, recorded so the next handoff avoids it:** the stage-3c
 handoff said 3d needs "neither graph artifact". It does. The cell files carry node ids and no fame

@@ -125,3 +125,25 @@ below is a place where it is silent or leaves the choice to 3d by name.
 Stage 3 is finished. **Next is stage 4, the owner's go/no-go on at most one cell** (§8), with the
 results note in hand. Nothing is in flight: no process of this session survives, and no server was
 started.
+
+## Closeout at Seam D. 2026-09-28
+
+- A1/A2/A2-next: this log, the handoff, and `NEXT.md`'s top block; the outgoing block was demoted to
+  `NEXT-ARCHIVE.md` (nothing in it still bound except the ordered actions and carried items, both
+  kept). The stage-3c handoff's role line points forward.
+- **A3:** #246's Done-when is met (trigger did not fire); the PR closes it. **#247 closed as not
+  planned**: its condition required `DRP-R0` to fire on the complete lattice, and it did not, so it is
+  known-unreachable, not deferred. #249: its first condition came due; its second is the owner's
+  (comment posted). A4: no config knob. A5: no listener on 8000 or 5173; no process survives.
+- **B1:** `docs-lint` hard checks passed (its only candidates in this diff are ramp settings, not
+  figures). The `doc-auditor`, scoped to the diff, checked figures against `drp_results.json`,
+  identifiers and barred reads, the handoff chain, `NEXT.md`, sealing and completeness: **no defects.**
+  The #247 closure landed after it ran and was folded into the note and handoff here.
+- B2: `drp_read.py` is an entry point. **B3:** both of the reader's refusal guards shown to go red (a
+  wrong pinned cell sha; a dropped list disagreeing with the journeys). B4: docstrings checked against
+  the code. B5: no `.claude/` file mentions `DRP-`; the only stale "3d is next" lines are in the two
+  superseded handoffs. **B6:** `NEXT.md` 349 lines (budget 250) and `docs/README.md` 641 (budget 400),
+  both over before this work (#145). This work added four map rows and one net line to `NEXT.md`.
+- C1: nothing the owner can press, so no `TEST-QUEUE.md` entry. D2: no fixture changed. D3: no
+  artifact adopted or built; both maps' shas are verified in the reader's run log. D4: builder 292
+  passed, api 347 passed; frontend untouched. D6: no standing-layer file in the diff, delta 0.
