@@ -131,6 +131,22 @@ if printf '%s' "$OUT" | grep -q 'from the adjudication also appears in'; then
   else bad "check 6 fired but failed the run"; fi
 else bad "check 6 did NOT fire (rc=$RC)"; fi
 
+# --- control 8: an edit below a frozen banner --------------------------------------
+echo "== control 8: an edit below a frozen banner must FAIL =="
+build_clean "$TMP/c8"
+( cd "$TMP/c8" && git init -q && git add -A && git -c user.email=t@t -c user.name=t commit -qm base )
+SHA=$(git -C "$TMP/c8" rev-parse HEAD)
+F="$TMP/c8/docs/superpowers/plans/live-plan.md"
+{ printf '> **Role: SUPERSEDED — test banner.** Banner added under `DLS-Q1`.\n<!-- frozen-below: %s -->\n' "$SHA"
+  git -C "$TMP/c8" show "$SHA:docs/superpowers/plans/live-plan.md"; } > "$F.new" && mv "$F.new" "$F"
+OUT=$(run_lint "$TMP/c8"); RC=$?
+if [ "$RC" -eq 0 ]; then ok "a banner over an untouched body passes"
+else bad "banner alone failed (rc=$RC)"; printf '%s\n' "$OUT" | sed 's/^/        /'; fi
+printf 'An edit below the banner.\n' >> "$F"
+OUT=$(run_lint "$TMP/c8"); RC=$?
+if [ "$RC" -ne 0 ] && printf '%s' "$OUT" | grep -q 'text below the banner differs'; then ok "check 8 goes red"
+else bad "check 8 did NOT fire (rc=$RC)"; fi
+
 echo
 echo "self-test: $PASS passed, $FAILED failed."
 [ "$FAILED" -eq 0 ] || { echo "A control did not behave. docs-lint's green result is NOT evidence until this passes."; exit 1; }

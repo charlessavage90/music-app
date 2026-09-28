@@ -185,3 +185,14 @@ The plan's generator (Task `DLP-S2.3` step 3) was extracted verbatim and its cla
   that one; nothing else about the migration changes.
 - **Step 1's list and step 2b's list** are those printed by the dry run; the second PR re-measures
   rather than copying them, since documents land daily.
+
+### 2. `DLP-S2.2` — frozen-document banners and lint check 8
+
+- Control 8 written from the plan's text without change and run **before** the check existed:
+  `8 passed, 1 failed` — "a banner over an untouched body passes" green, "check 8 did NOT fire (rc=0)"
+  red. After check 8 (plan text, unchanged): `self-test: 9 passed, 0 failed.` Real tree:
+  `docs-lint: hard checks passed` (no banner exists yet, so check 8 has nothing to compare).
+- Banner format documented in `docs/README.md` §"Adding a document", appended; the section's
+  existing "add it to the table above" sentence is left for the migration PR, where it goes stale.
+- **Deferred to `S2.5`, which edits the same header:** `docs-lint.sh`'s header says "Checks 4-6 emit
+  CANDIDATES"; it becomes "4-6 and 9" when check 9 lands.

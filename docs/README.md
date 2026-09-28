@@ -619,3 +619,16 @@ that is how the drift began.
 State its role in the first ten lines. Add it to the table above. If it supersedes
 something, put a banner on what it supersedes **and mark the superseded claims inline**,
 not only at the top of the file — a reader who lands mid-document never sees the banner.
+
+**A frozen document (COMPLETE, HISTORICAL or SUPERSEDED) takes exactly one kind of edit: a top
+banner** (`DLS-Q1`, owner 2026-09-11). Nothing below it may change, and `scripts/docs-lint.sh`
+check 8 fails if anything does. The marker line always comes second and names the full SHA of the
+last commit that touched the file:
+
+```markdown
+> **Role: SUPERSEDED — <one sentence: what superseded it and where>.** Banner added <date> under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: <full SHA of the last commit that touched this file> -->
+```
+
+A superseded document's bold role line must **name its replacement** as a link or a backticked
+`.md` path. To change a banner later, edit only the lines above the marker.

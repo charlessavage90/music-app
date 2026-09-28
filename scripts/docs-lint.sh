@@ -229,6 +229,31 @@ if [ -f "$ADJ" ]; then
 fi
 
 # ----------------------------------------------------------------------------------
+note "== 8. A frozen document is unchanged below its banner =="
+# DLS-Q1 (owner, 2026-09-11): a frozen document may gain a top banner pointing at what supersedes
+# it, and NOTHING below the banner may change. The banner names the commit it froze against.
+C8=0
+while IFS= read -r f; do
+  [ -n "$f" ] || continue
+  sha=$(grep -m1 -oE '<!-- frozen-below: [0-9a-f]{7,40} -->' "$f" | grep -oE '[0-9a-f]{7,40}')
+  [ -n "$sha" ] || continue
+  rel=${f#"$ROOT"/}
+  if ! git -C "$ROOT" cat-file -e "$sha:$rel" 2>/dev/null; then
+    fail "frozen-below $sha has no $rel (renamed since it froze? add a new banner, never edit below it)"
+    C8=$((C8 + 1)); continue
+  fi
+  want=$(git -C "$ROOT" show "$sha:$rel" | tr -d '\r')
+  have=$(awk 'f{print} /<!-- frozen-below: /{f=1}' "$f" | tr -d '\r')
+  if [ "$want" != "$have" ]; then
+    fail "text below the banner differs from $sha: $rel"
+    C8=$((C8 + 1))
+  fi
+done <<EOF
+$(docs_files)
+EOF
+[ "$C8" -eq 0 ] && note "      ok"
+
+# ----------------------------------------------------------------------------------
 echo
 if [ "$FAILURES" -gt 0 ]; then
   echo "docs-lint: $FAILURES hard failure(s)."
