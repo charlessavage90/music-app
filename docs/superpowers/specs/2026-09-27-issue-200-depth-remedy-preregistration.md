@@ -53,7 +53,7 @@ across every ref on 2026-09-27** —
 `git grep -lE '\bDRP-' $(git for-each-ref --format='%(refname)' refs/remotes refs/heads)`, all
 files and `*.md` alone: **zero hits.** ⚠ **Every token is written with its prefix.** Bare `S0`,
 `P1`, `C1`, `G1`, `R1`, `T1` all belong to other series (Track 2, Track B, `CRE-`, `JFX-`, the
-fame strata); this document never uses one bare.
+fame strata); this document never uses one bare. **One exception, disclosed 2026-09-27 at closeout (doc-auditor):** `A0` is used bare throughout as shorthand for `DRP-S0P0`, and it collides with Track 2's `A0` (`2026-07-23-track2-preregistration.md`). Committed identifiers are never renamed, so **any document citing both writes `DRP-S0P0`**, never `A0`.
 
 ---
 
