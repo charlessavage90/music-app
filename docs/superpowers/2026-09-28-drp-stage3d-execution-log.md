@@ -92,3 +92,36 @@ below is a place where it is silent or leaves the choice to 3d by name.
     rule's press-0 journeys are identical (no press has happened yet).
 13. **Leave-one-out range** (`DRP-C1` item 4): the minimum and maximum of the median `D` over the `n`
     subsets that drop one band-readable pair.
+
+## Task 2 — the reader. 2026-09-28
+
+- `builder/analysis/2026-09-28-drp-stage3d/drp_read.py`, committed with its output `drp_results.json`
+  at `0b80dab`, **before the results note was opened**. It routes nothing. Every input is
+  identity-checked (folder README), and it refuses on any mismatch; none fired.
+- **The drop set** (task 1, choice 1) matched a recomputation from the journeys in all eight cells.
+- **Second-path check:** one MOVES row's median `D` and its count past −0.05 were recomputed by
+  separate code from the raw JSON and the `GraphStore`, and agree exactly. **The floor-attribution
+  flag reads zero everywhere**, which looked like a possible bug and is not: across five cells and
+  33,542 journeys the floor term fires on 200, all of them first paths (press 0), none at presses 1–6.
+- Snyk code scan on the folder: 0 issues.
+- **No choice from task 1 turned out to decide a read.** Choice 2 (which frontier count): §2.4's
+  condition needs `DRP-R0`, which did not fire, and both counts are 100 % anyway. Choice 7 (the
+  `DRP-R9`(v) yardstick): every cell sits below both F7 figures. Choice 5 (`DRP-C8`'s sign): the
+  signs agree everywhere.
+
+## Task 3 — the results note. 2026-09-28
+
+- [`findings/2026-09-28-drp-lattice-results.md`](findings/2026-09-28-drp-lattice-results.md), in
+  `CLAUDE.md`'s four parts. It owns the reading and names no candidate (`DRP-R10`). Every figure in
+  it was checked against `drp_results.json` after drafting; six phrasings were corrected where the
+  plain sentence had drifted from the number (for example "a third less famous" for a
+  thirty-three-point drop).
+- **`DRP-R11` does not fire**, so #246's Done-when ("or the trigger does not fire") is met. The PR
+  closes it with the reading. **#249's first condition has come due** (a ceiling cell MOVES); its
+  second is the owner's at stage 4. A comment on #249 says so.
+
+## Seam D — reached 2026-09-28
+
+Stage 3 is finished. **Next is stage 4, the owner's go/no-go on at most one cell** (§8), with the
+results note in hand. Nothing is in flight: no process of this session survives, and no server was
+started.
