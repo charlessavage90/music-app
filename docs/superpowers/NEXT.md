@@ -47,22 +47,21 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-27, at Seam A of the #200 remedy's stage 3a (the instruments).** The live
-site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and
-frontend built from `b3e197b`. The work is on branch `charlessavage90/issue-200-drp-stage3a`, PR #250,
-tracking issue #244 (addresses; `git`/`gh` own the merge state). Handoff:
-[`2026-09-27-HANDOFF-drp-stage3a.md`](2026-09-27-HANDOFF-drp-stage3a.md).
+**Last updated: 2026-09-28, at Seam B of the #200 remedy's stage 3b (the `DRP-S0` row).** The live
+site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend
+built from `b3e197b`. The work is on branch `charlessavage90/issue-200-drp-stage3b`, PR #251, tracking
+issue #244 (addresses; `git`/`gh` own the merge state). Handoff:
+[`2026-09-28-HANDOFF-drp-stage3b.md`](2026-09-28-HANDOFF-drp-stage3b.md).
 
-# #200'S INSTRUMENTS ARE BUILT AND EVERY SEAM-A GATE PASSED. NEXT: STAGE 3B, A SESSION'S.
+# #200'S TODAY'S-MAP ROW IS SWEPT AND EVERY GATE PASSED. NEXT: STAGE 3C, A SESSION'S.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **A session:** stage 3b, the `DRP-S0` row (A0, `DRP-S0P1`, `DRP-S0P2`, `DRP-S0P3` with `DRP-G9`),
-   `DRP-G4`, `DRP-G5`, per the pre-registration's §8, to Seam B. It starts from the stage-3a
-   execution log's "Seam A" entry, which names what it inherits and must build.
-2. **A session:** stage 3c, the `DRP-S1` row, to Seam C. Then **3d**, the results note, written by a
-   session that ran no sweep.
+1. **A session (a fresh one, by the owner's choice):** stage 3c, the `DRP-S1` row (`DRP-S1P0`–`P3`,
+   with `DRP-G4`, `DRP-G5`, `DRP-G9`), and `DRP-C10`'s per-pair frontier count, to Seam C. It starts
+   from the stage-3b execution log's "Seam B" entry, which names what it inherits.
+2. **A session that ran no sweep:** stage 3d, the results note, from the committed per-cell JSON.
 3. **The owner:** his stage-4 go/no-go on at most one cell; then the blind listen (stage 5, designed
    cold) and his use gate (stage 6, `DRP-AM6`).
 4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the

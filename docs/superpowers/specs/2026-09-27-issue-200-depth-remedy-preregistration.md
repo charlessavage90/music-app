@@ -1487,7 +1487,7 @@ the bottleneck. So `c` > `b₀` is expected and legitimate, not a fault. **The a
   cells are not read until it is fixed, and it is never reported as a result.
 - **So that (d) is a cross-check and not a tautology, the two sides are computed independently.**
   - The harness finds `c` by searching the frame's distinct percentiles at or above `F_max(k)` with
-    the **shipped `find_journey`**: the lowest one at which it returns an interior-bearing journey. ⚑ *Corrected by `DRP-AM5-F1`: `F_max(k)` itself is tested first, so `r` = 0 whenever it admits a journey (§2.1 `DRP-P3` row).*
+    the **shipped `find_journey`**: the lowest one at which it returns an interior-bearing journey. ⚑ *Corrected by `DRP-AM5-F1`: `F_max(k)` itself is tested first, so `r` = 0 whenever it admits a journey (§2.1 `DRP-P3` row).* ⚑ *Implementation note, stage 3b (2026-09-28), no bar or definition changed: the harness takes a candidate from `DRP-C11`'s minimax search and certifies it with the shipped `find_journey` from both sides, falling back to this search on failure; what that does to (d)'s independence is in [`../2026-09-28-drp-stage3b-execution-log.md`](../2026-09-28-drp-stage3b-execution-log.md), task 2.*
   - `DRP-C11` computes the bottleneck by its own minimax path search, which does not call
     `find_journey`.
 
