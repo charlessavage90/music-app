@@ -47,29 +47,30 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-27, at the closeout of the #200 depth-remedy pre-registration.** The live
-site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and
-frontend built from `b3e197b`. This session's work is on branch
+**Last updated: 2026-09-27, at the closeout of the #200 pre-registration's amendments `DRP-AM1`–`AM6`
+and its second stage-1 pass.** The live site is unchanged since 2026-09-25: it serves
+`graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The work is on branch
 `charlessavage90/issue-200-depth-remedy-prereg`, PR #245, tracking issue #244 (addresses; `git`/`gh`
-own the merge state). Handoff: [`2026-09-27-HANDOFF-drp-prereg.md`](2026-09-27-HANDOFF-drp-prereg.md).
+own the merge state). Handoff: [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md).
 
-# #200'S REMEDY IS PRE-REGISTERED AND CRITIQUED. NEXT: AMENDMENT `DRP-AM1` (A SESSION'S), THEN HIS GO.
+# #200'S REMEDY IS PRE-REGISTERED, CRITIQUED TWICE AND AMENDED. NEXT: HIS STAGE-2 GO.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **A session:** write amendment `DRP-AM1`. It folds the stage-1 `ml-graph-analyst` critique
-   (`builder/analysis/2026-09-27-drp-prereg-critique/`) into
-   [`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md)
-   (`DRP-`) §14. It is methodology, so it is not his. **No arm runs.**
-2. **The owner:** write his use-gate criterion (that document's §9, **OWED**). It may be written
-   at any time before its stage 5. **No journey from any cell may be shown to him until it is
-   committed.**
-3. **The owner:** his go on the amended design (stage 2). Then the offline lattice runs (stage 3,
-   a session's), then his go/no-go on at most one cell (stage 4).
-4. **Carried from 2026-09-25, his and not blocking:** merge PR #236; press the unticked
-   `TEST-QUEUE.md` boxes; #237 (prune the previous frontend's assets, after a few days, with his
-   AWS hands); #233 (the landing's sample journeys).
+1. **The owner:** his go on the amended design
+   ([`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md),
+   `DRP-`, §8 stage 2). **Posted on #244**, as his rulings and requests already are: the document's
+   own standard is "from the record rather than from a conversation" (`DRP-AM5-I2`). It is his
+   because spending the lattice is his.
+2. **A session, only after that go:** stage 3a, the instruments, per §8 and its named seams. It
+   executes **from the document body**, which carries the governing wording since `DRP-AM5` (the
+   legend at the head of §14). **No arm runs before the go.**
+3. **The owner:** his stage-4 go/no-go on at most one cell. Then the blind listen (stage 5, designed
+   cold by a session that has seen no journey) and his use gate (stage 6, on his criterion, recorded
+   verbatim as `DRP-AM6`).
+4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+   previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
 
 ---
 

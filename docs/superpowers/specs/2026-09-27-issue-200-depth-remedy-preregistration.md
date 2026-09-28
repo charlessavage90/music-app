@@ -1242,7 +1242,7 @@ artist's position along the journey is **not added**. The endpoints are fixed an
 a journey an envelope would shape is already bounded at both ends by the owner's choice, and the
 per-press ceiling already carries the gradient across presses. **Condition for reopening:** a `DRP-P3`
 cell reaches MOVES, and the owner names at stage 4 *where within a journey* the famous artists sit as
-the remaining problem. It would then need its own pre-registration.
+the remaining problem. It would then need its own pre-registration. **Tracked as issue #249.**
 
 #### Derived exposures the addition creates, stated before any result
 

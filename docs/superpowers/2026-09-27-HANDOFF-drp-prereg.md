@@ -1,6 +1,6 @@
 # Handoff — #200 depth-remedy pre-registration committed and critiqued, 2026-09-27
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED 2026-09-27 (later) on NEXT ACTIONS ONLY** by [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md): `DRP-AM1` is written and the design has been amended through `DRP-AM6`. Its decisions list still stands. Supersedes
 [`2026-09-25-HANDOFF-lba-a6-deploy.md`](2026-09-25-HANDOFF-lba-a6-deploy.md) on next actions.
 It does **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
