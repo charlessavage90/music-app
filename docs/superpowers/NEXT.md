@@ -85,12 +85,6 @@ read measured where it can and cannot be moved; the results note owns that readi
   the `CXR-` README** (each needs its own pre-registration) — all open, none blocking, all his
   trigger. *(Carried from the 2026-09-08 status block, distilled 2026-09-10.)*
 
-- ~~**Whether the fame instrument is fixed BEFORE or AFTER the graph work**~~ — **RULED
-  AND DONE 2026-08-02: before, and it was.** The `FPC-2`/`FPC-9` pairing rule stays for
-  reading that record. Struck, kept for the record.
-- ~~**Whether a currency change re-reads prior fame-scored results**~~ — **RULED
-  2026-08-02: NO re-read.** Prior results stand in their measured currency;
-  cross-currency comparisons barred. Struck, kept for the record.
 - **The coherence thread** — execution log
   [`2026-07-30-fame-proxy-coverage-execution-log.md`](2026-07-30-fame-proxy-coverage-execution-log.md)
   §7. **Its instrument half was probed 2026-07-30 and the kill gate fired** (`COH-`,
@@ -113,20 +107,8 @@ read measured where it can and cannot be moved; the results note owns that readi
   **One caveat was measured and turned out to understate the case:** the strand assumed
   selection "reorders candidate lists", which is true — but `TD-2` measured that reordering
   converts to roughly twice as much map change as per-artist counting suggests, because
-  every swap also *creates* a connection. Retained below as written.
-  *(Original text, superseded on status only:)*
-  **A third strand, owner-raised 2026-07-30 after the probe and explicitly flagged
-  worth a future session: tag-aware neighbour SELECTION at build time, at the top of
-  the graph.** The probe's kill was about *scoring paths*; selection lives where
-  candidates are many and labels near-total (top bands 94–100%, `COH-2`), and barely
-  operates where labels are dark — the coverage failure and this use are close to
-  complementary. Three caveats travel with it: it *reorders* candidate lists and
-  cannot add famous→obscure supply (that stays with candidate supply and router
-  pricing); tags spent on construction are spent as an evaluator — §7's self-audit
-  circularity in new clothes, leaving the 11 blind verdicts as the only independent
-  check; and picking it up is Track-B-shaped work — a selection-rule change, so a
-  rebuild, a pre-registration with a factor table, and a blind listen (`REQ-38`).
-  `COH-5` makes the data side cheap (~47 min for a full tag frame).
+  every swap also *creates* a connection.
+  The original text is in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), block "Demoted 2026-09-28 — struck and discharged registry entries".
 - **The cap-rule decision for any rebuild** — Track B's `R1` is its input; adoption of
   any rule owes the blind listen.
 - ⚠ ~~**`ALG-B` adoption**~~ — **THIS ALREADY HAPPENED. Corrected 2026-09-05.** `ALG-B` is
@@ -153,21 +135,6 @@ read measured where it can and cannot be moved; the results note owns that readi
 - **Re-evaluating bounded-degree itself** (router-priced unbounded graphs) — Track B's
   `UC` reference rows now give it measured baselines; his trigger; owes its own blind
   listen.
-
-**Owner actions, all three discharged 2026-08-02 — kept struck for the record.** *(Heading
-corrected 2026-09-05: it read "Still owed by the owner" over three items marked done.)*
-
-1. ✅ **The use-the-app test — DONE 2026-08-02.** The redesign entry was run in full against
-   `https://musicapp.cmiller.io`, desktop and phone. Everything passed; journeys he knows well
-   were **unchanged**, which was the check that mattered. One incidental finding worth
-   carrying: **the loading screen is often too fast to see**, so nothing should be measured or
-   redesigned on the assumption a user experiences it.
-2. ✅ **The iPhone script — DONE 2026-08-02, and it settled a Gate 3 blocker.** All three
-   questions clean: clips play, the bottom bar clears the home indicator, artist-name typing is
-   unaffected. **`G3-F2` is FALSIFIED** — see the gate table below.
-3. ✅ **The `--prune` publish pass — DONE 2026-08-02.** Two orphaned assets from the
-   pre-redesign build deleted; live site verified afterwards. See `NEXT-ARCHIVE.md`'s *The `--prune` publish pass* row for the
-   pre-flight a successor should repeat.
 
 ~~**One action is owed by the owner: merging draft PR #69.**~~ *(Discharged — #69 merged
 2026-08-03 at `2e3b017`. Struck 2026-09-05, having read as a live owner action for a month.
@@ -321,6 +288,10 @@ old heading.)*
   overturned no measurement: `CXR-P3`'s null and the diagnosis README's "unexplained by anything
   here" remain exactly true. And do not re-queue "tell me how it feels" (owner ruling,
   2026-08-07): his long-run evaluation is continuous and `TEST-QUEUE.md` does not hold it.
+- **From the discharged 2026-08-02 use-the-app test** (the rest of that record is in
+  `NEXT-ARCHIVE.md`, block dated 2026-09-28): One incidental finding worth
+  carrying: **the loading screen is often too fast to see**, so nothing should be measured or
+  redesigned on the assumption a user experiences it.
 
 - **`max_size=2` (`stack.py`)** — the **cost ceiling**, the only automatic spend control.
 - **App Runner is excluded from CDK tagging** — tagging forces a replacement that cannot
