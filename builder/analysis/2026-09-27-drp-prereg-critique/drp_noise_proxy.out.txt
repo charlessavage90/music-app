@@ -1,0 +1,21 @@
+sha256 OK graph-lba-a6.bin 28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b
+pathfinding: C:\Users\charl\worktrees\music-app\penguin\api\src\artistpath_api\pathfinding.py
+ApiConfig() ramp 0.01 floor_relax_known 0.15
+  10/40  88s
+  20/40  184s
+  30/40  389s
+  40/40  539s
+
+## Partial DRP-G1: victim_key ladder vs graph_descriptives.out.txt (FAMOUS half, d0/d5/d10)
+pairs matching on every compared field: 40 of 40
+
+## N_noise proxy (random-press seed 1 vs seed 2, band 7-10 pooled)
+pairs with all band depths feasible on both seeds: 40 of 40
+victim_key M_A0(band): median 0.9921; pairs with M_A0(band) > 0.985: 35; <= 0.985: 5
+victim_key M_A0(band) - M_A0(0): median -0.0013 sd 0.0118
+random s1 M(band) median 0.9942; s2 0.9943
+Delta per pair: median -0.0004 sd 0.0046 MAD 0.0014; exactly 0: 3; |Delta| >= 0.05: 0
+U = 97.5th pct of |bootstrap median of Delta| = 0.0012;  N_noise proxy = max(0.015, U) = 0.0150;  DRP-G6 (> 0.025) would fire on this proxy: False
+  pairs both >= 0.99 (T1-like): 2
+  pairs both in [0.95, 0.99) (T2-like): 21
+wall 540s

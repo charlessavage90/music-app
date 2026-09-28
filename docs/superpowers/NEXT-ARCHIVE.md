@@ -19,6 +19,70 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-27 (later) — the top block as it stood at the `DRP-` pre-registration closeout
+
+**Last updated: 2026-09-27, at the closeout of the #200 depth-remedy pre-registration.** The live
+site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and
+frontend built from `b3e197b`. This session's work is on branch
+`charlessavage90/issue-200-depth-remedy-prereg`, PR #245, tracking issue #244 (addresses; `git`/`gh`
+own the merge state). Handoff: [`2026-09-27-HANDOFF-drp-prereg.md`](2026-09-27-HANDOFF-drp-prereg.md).
+
+# #200'S REMEDY IS PRE-REGISTERED AND CRITIQUED. NEXT: AMENDMENT `DRP-AM1` (A SESSION'S), THEN HIS GO.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **A session:** write amendment `DRP-AM1`. It folds the stage-1 `ml-graph-analyst` critique
+   (`builder/analysis/2026-09-27-drp-prereg-critique/`) into
+   [`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md)
+   (`DRP-`) §14. It is methodology, so it is not his. **No arm runs.**
+2. **The owner:** write his use-gate criterion (that document's §9, **OWED**). It may be written
+   at any time before its stage 5. **No journey from any cell may be shown to him until it is
+   committed.**
+3. **The owner:** his go on the amended design (stage 2). Then the offline lattice runs (stage 3,
+   a session's), then his go/no-go on at most one cell (stage 4).
+4. **Carried from 2026-09-25, his and not blocking:** merge PR #236; press the unticked
+   `TEST-QUEUE.md` boxes; #237 (prune the previous frontend's assets, after a few days, with his
+   AWS hands); #233 (the landing's sample journeys).
+
+---
+
+## Demoted 2026-09-27 — the top block as it stood at the `LBA-A6` deploy closeout
+
+**Last updated: 2026-09-25, at the closeout of the deploy that put `LBA-A6` in production.** The
+live site serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The
+deploy's record is [`2026-09-25-lba-a6-deploy-execution-log.md`](2026-09-25-lba-a6-deploy-execution-log.md);
+its branch is `charlessavage90/deploy-lba-a6-production`, PR #236. Those are addresses; `git`/`gh`
+own the merge state.
+
+# THE NEW MAP IS LIVE. NO SESSION WORK IS OWED; THE NEXT ACTIONS ARE THE OWNER'S.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner:** merge PR #236 (runbook §4/§5/§9 corrections, the deploy log, #142's data).
+2. **The owner:** press the unticked `TEST-QUEUE.md` boxes on unsung.fm.
+3. **After a few days:** #237 — prune the previous frontend's assets (a session's, with his AWS hands).
+4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or pick
+   new ones) and #200 (whether "better" should also prefer less-listened artists; step 1 is done,
+   PR #238, and its options are in that directory's README §4). **Added 2026-09-27:** two descriptive
+   measurements closing step 1's weakest links 1 and 3 —
+   `builder/analysis/2026-09-27-issue-200-graph-descriptives/` (its §4 extends step 1's options; it
+   also marks `PRODUCT-REQUIREMENTS.md` §8's "the barrier is gone" as not holding at the top 1 % on
+   the adopted map, which is his document and unedited). **Later 2026-09-27:** `builder/analysis/2026-09-27-issue-200-ruler-vs-map/` ran that
+   directory's §3 falsifier — the top-1 % wall is in the map's edges, not the fame ruler.
+   **Latest 2026-09-27:** `builder/analysis/2026-09-27-issue-200-trim-supply/` opened those edges —
+   the wall is made by the build's fifty-connection trim, not by missing supply (`SUP-R1`); and
+   `PRODUCT-REQUIREMENTS.md` §8 now carries a dated forward note, added on his authorisation.
+5. **#200's remedy (his rulings of 2026-09-27 unpaused #200 only):** the pre-registration
+   [`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md)
+   (`DRP-`) is **committed and UNEXECUTED** — nothing built, drawn or routed. Its stage 1, the
+   `ml-graph-analyst` critique, starts **on his word**; **his use-gate criterion (its §9) is owed**
+   before any journey from any cell is shown to him. Branch `charlessavage90/issue-200-depth-remedy-prereg`
+   (an address); tracking issue linked from #200.
+
+---
+
 ## Demoted 2026-09-25 (later) — the top block as it stood at the `LBA-A6` adoption closeout
 
 **Last updated: 2026-09-25, at the closeout that ADOPTED `LBA-A6`.** The live site is unchanged

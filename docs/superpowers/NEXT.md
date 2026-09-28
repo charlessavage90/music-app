@@ -47,31 +47,30 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-25, at the closeout of the deploy that put `LBA-A6` in production.** The
-live site serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The
-deploy's record is [`2026-09-25-lba-a6-deploy-execution-log.md`](2026-09-25-lba-a6-deploy-execution-log.md);
-its branch is `charlessavage90/deploy-lba-a6-production`, PR #236. Those are addresses; `git`/`gh`
-own the merge state.
+**Last updated: 2026-09-27, at the closeout of the #200 pre-registration's amendments `DRP-AM1`–`AM6`
+and its second stage-1 pass.** The live site is unchanged since 2026-09-25: it serves
+`graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The work is on branch
+`charlessavage90/issue-200-depth-remedy-prereg`, PR #245, tracking issue #244 (addresses; `git`/`gh`
+own the merge state). Handoff: [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md).
 
-# THE NEW MAP IS LIVE. NO SESSION WORK IS OWED; THE NEXT ACTIONS ARE THE OWNER'S.
+# #200'S REMEDY IS PRE-REGISTERED, CRITIQUED TWICE AND AMENDED. NEXT: HIS STAGE-2 GO.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner:** merge PR #236 (runbook §4/§5/§9 corrections, the deploy log, #142's data).
-2. **The owner:** press the unticked `TEST-QUEUE.md` boxes on unsung.fm.
-3. **After a few days:** #237 — prune the previous frontend's assets (a session's, with his AWS hands).
-4. **Then his choices, none blocking:** #233 (keep the landing's re-measured sample journeys or pick
-   new ones) and #200 (whether "better" should also prefer less-listened artists; step 1 is done,
-   PR #238, and its options are in that directory's README §4). **Added 2026-09-27:** two descriptive
-   measurements closing step 1's weakest links 1 and 3 —
-   `builder/analysis/2026-09-27-issue-200-graph-descriptives/` (its §4 extends step 1's options; it
-   also marks `PRODUCT-REQUIREMENTS.md` §8's "the barrier is gone" as not holding at the top 1 % on
-   the adopted map, which is his document and unedited). **Later 2026-09-27:** `builder/analysis/2026-09-27-issue-200-ruler-vs-map/` ran that
-   directory's §3 falsifier — the top-1 % wall is in the map's edges, not the fame ruler.
-   **Latest 2026-09-27:** `builder/analysis/2026-09-27-issue-200-trim-supply/` opened those edges —
-   the wall is made by the build's fifty-connection trim, not by missing supply (`SUP-R1`); and
-   `PRODUCT-REQUIREMENTS.md` §8 now carries a dated forward note, added on his authorisation.
+1. **The owner:** his go on the amended design
+   ([`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md),
+   `DRP-`, §8 stage 2). **Posted on #244**, as his rulings and requests already are: the document's
+   own standard is "from the record rather than from a conversation" (`DRP-AM5-I2`). It is his
+   because spending the lattice is his.
+2. **A session, only after that go:** stage 3a, the instruments, per §8 and its named seams. It
+   executes **from the document body**, which carries the governing wording since `DRP-AM5` (the
+   legend at the head of §14). **No arm runs before the go.**
+3. **The owner:** his stage-4 go/no-go on at most one cell. Then the blind listen (stage 5, designed
+   cold by a session that has seen no journey) and his use gate (stage 6, on his criterion, recorded
+   verbatim as `DRP-AM6`).
+4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+   previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
 
 ---
 
@@ -148,7 +147,10 @@ read measured where it can and cannot be moved; the results note owns that readi
   inputs (Track B's `R0`/`R2`/`R3`, `RC-R1`'s stranding figures) stand as written.
 - **The router-side pricing track** (plan §0 ruling 2) — `R2`'s `ALG-E` null is its
   motivating evidence: the quota edges exist and production weights decline them. Needs
-  its own pre-registration, which must consume `TB-P5H-7`.
+  its own pre-registration, which must carry `TB-P5H-7`'s substance (the joint descent ×
+  delivered-payload read). *(Corrected 2026-09-27: this said "must consume `TB-P5H-7`", but
+  `NEXT-ARCHIVE.md` records the item itself DISCHARGED 2026-08-03 by `CRE-` (`CRE-C4`). The
+  substance still binds any pricing pre-registration; `DRP-C2` carries it for #200's remedy.)*
 - **The candidate-pool product decision** — whether a shortened-but-obscure bypass
   candidate (Track 3's DD-A2 or a TB arm) ships at all.
 - **The one-statistic cross-track recompute** that must precede any DD-vs-TB comparison.

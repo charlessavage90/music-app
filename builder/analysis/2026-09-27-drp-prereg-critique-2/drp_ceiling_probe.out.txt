@@ -1,0 +1,129 @@
+sha256 OK graph-lba-a6.bin 28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (= sidecar)
+pathfinding: C:\Users\charl\worktrees\music-app\penguin\api\src\artistpath_api\pathfinding.py
+N 87,394  CSR entries 2,490,728  measured 87,391  null 3
+fame_lb_pctl dtype float64; min 0.0 max 1.0; nodes > 1.0: 0; nodes == 1.0: 1
+distinct percentile values 19,121; min positive gap 1.144e-05; median gap 1.144e-05
+
+## 1. F_max(k) in float64 (DRP-AM3 item 2)
+| k | repr(F_max) | nodes > F_max | nodes == F_max | lowest distinct pctl >= F_max | gap |
+|---|---|---|---|---|---|
+| 0 | 1.0 | 0 | 1 | np.float64(1.0) | 0.000e+00 |
+| 1 | 1.0 | 0 | 1 | np.float64(1.0) | 0.000e+00 |
+| 2 | 1.0 | 0 | 1 | np.float64(1.0) | 0.000e+00 |
+| 3 | 1.0 | 0 | 1 | np.float64(1.0) | 0.000e+00 |
+| 4 | 0.985 | 1,311 | 0 | np.float64(0.9850097265133311) | 9.727e-06 |
+| 5 | 0.97 | 2,622 | 0 | np.float64(0.9700080100698021) | 8.010e-06 |
+| 6 | 0.955 | 3,933 | 0 | np.float64(0.955006293626273) | 6.294e-06 |
+| 7 | 0.94 | 5,244 | 0 | np.float64(0.940004577182744) | 4.577e-06 |
+| 8 | 0.925 | 6,554 | 0 | np.float64(0.9250143036960751) | 1.430e-05 |
+| 9 | 0.91 | 7,866 | 0 | np.float64(0.910001144295686) | 1.144e-06 |
+| 10 | 0.895 | 9,174 | 0 | np.float64(0.8950337567227371) | 3.376e-05 |
+| 11 | 0.88 | 10,487 | 0 | np.float64(0.880009154365488) | 9.154e-06 |
+| 12 | 0.865 | 11,798 | 0 | np.float64(0.865007437921959) | 7.438e-06 |
+| 13 | 0.85 | 13,109 | 0 | np.float64(0.85000572147843) | 5.721e-06 |
+| 14 | 0.835 | 14,419 | 0 | np.float64(0.8350154479917611) | 1.545e-05 |
+| 15 | 0.8200000000000001 | 15,729 | 0 | np.float64(0.8200251745050922) | 2.517e-05 |
+| 16 | 0.8049999999999999 | 17,042 | 0 | np.float64(0.805000572147843) | 5.721e-07 |
+| 17 | 0.79 | 18,350 | 0 | np.float64(0.7900331845748941) | 3.318e-05 |
+| 18 | 0.775 | 19,663 | 0 | np.float64(0.775008582217645) | 8.582e-06 |
+| 19 | 0.76 | 20,974 | 0 | np.float64(0.760006865774116) | 6.866e-06 |
+| 20 | 0.745 | 22,281 | 0 | np.float64(0.7450509211580272) | 5.092e-05 |
+tabulated check: F_max(4,7,10,20) = 0.985, 0.94, 0.895, 0.745
+k at which F_max first reaches 0.0: 70
+slope to reach 0.70 at k=20: 0.01765 (1.18x); to 0.50: 0.02941 (1.96x); to 0.30: 0.04118 (2.75x)
+
+## 2. Endpoint lower bound on any bottleneck: min neighbour fame_lb_pctl (nulls 0.0)
+T1 (>= 0.99): 874 nodes; min-neighbour pctl median 0.8710; share >= 0.90 (walled) 0.4359; > 0.91 0.4188; > 0.925 0.3902; > 0.94 0.3524; > 0.985 0.0675; > 0.99 0.0309
+T2 [0.95, 0.99): 3496 nodes; min-neighbour pctl median 0.3997; share >= 0.90 (walled) 0.0541; > 0.91 0.0452; > 0.925 0.0326; > 0.94 0.0195; > 0.985 0.0017; > 0.99 0.0011
+
+seed 20260927; FAMOUS pool 4,370; MID pool 34,957
+ApiConfig() read at run time: w_known_ramp_fame_pctl 0.01, floor_relax_known 0.15
+  FAMOUS 10/40  33s
+  FAMOUS 20/40  70s
+  FAMOUS 30/40  132s
+  FAMOUS 40/40  185s
+  MID 10/40  277s
+  MID 20/40  529s
+  MID 30/40  786s
+  MID 40/40  1020s
+own-ladder check vs graph_descriptives.out.txt d0/d5/d10 (FAMOUS): 40 of 40 match
+own-ladder check vs graph_descriptives.out.txt d0/d5/d10 (MID): 40 of 40 match
+b0 independent BFS check (reachable at b0, unreachable at next-lower): 80 of 80 pass
+
+## 3. b0 (no user exclusions) distribution, A0
+FAMOUS: finite 40/40; min 0.0979 p10 0.4200 median 0.8212 p90 0.9519 max 0.9881; > 0.99: 0; > 0.985: 1; > 0.94: 6; > 0.895: 10; == 0.0: 0
+   T1-like: n 2; b0 values 0.9306, 0.9881
+   T2-like: n 21; b0 values 0.0979, 0.1801, 0.1820, 0.2015, 0.4443, 0.4633, 0.4633, 0.5077, 0.5509, 0.5992, 0.6069, 0.6280, 0.7405, 0.7940, 0.8413, 0.8520, 0.8540, 0.8919, 0.8942, 0.8963, 0.9513
+   straddle: n 17; b0 values 0.6511, 0.6783, 0.6847, 0.7468, 0.7813, 0.8024, 0.8400, 0.8656, 0.8785, 0.8836, 0.8840, 0.9204, 0.9204, 0.9507, 0.9579, 0.9602, 0.9816
+FAMOUS: adjacent endpoint pairs 1/40; stop rule by depth d0: natural 39,forced 1,adjacent_only 0,none 0; d1: natural 39,forced 1,adjacent_only 0,none 0; d4: natural 39,forced 1,adjacent_only 0,none 0; d7: natural 39,forced 1,adjacent_only 0,none 0; d10: natural 39,forced 1,adjacent_only 0,none 0
+MID: finite 40/40; min 0.0938 p10 0.1347 median 0.2351 p90 0.4824 max 0.7544; > 0.99: 0; > 0.985: 0; > 0.94: 0; > 0.895: 0; == 0.0: 0
+MID: adjacent endpoint pairs 0/40; stop rule by depth d0: natural 40,forced 0,adjacent_only 0,none 0; d1: natural 40,forced 0,adjacent_only 0,none 0; d4: natural 40,forced 0,adjacent_only 0,none 0; d7: natural 40,forced 0,adjacent_only 0,none 0; d10: natural 40,forced 0,adjacent_only 0,none 0
+
+## 4. DRP-G9(e) red-control proxy: press 1 on A0 (FAMOUS draw), no ceiling routed
+pairs whose A0 press-1 journey has an interior with fame_lb_pctl > 0.99: 38 of 40
+pairs where a 0.99 ceiling (with relaxation) is forced to change the press-1 journey: 38 of 40
+  1: T1-like: m1 0.9988 b1 0.9306 interiors>0.99 3 diverge-forced True
+  2: straddle: m1 0.9977 b1 0.6783 interiors>0.99 6 diverge-forced True
+  3: T2-like: m1 0.9978 b1 0.0979 interiors>0.99 3 diverge-forced True
+  4: T2-like: m1 0.9950 b1 0.6280 interiors>0.99 5 diverge-forced True
+  5: straddle: m1 0.9988 b1 0.9204 interiors>0.99 4 diverge-forced True
+  6: straddle: m1 0.9971 b1 0.9204 interiors>0.99 1 diverge-forced True
+  7: T2-like: m1 0.9974 b1 0.8919 interiors>0.99 7 diverge-forced True
+  8: straddle: m1 0.9989 b1 0.9816 interiors>0.99 3 diverge-forced True
+  9: T2-like: m1 0.9993 b1 0.5509 interiors>0.99 3 diverge-forced True
+  10: straddle: m1 0.9961 b1 0.6847 interiors>0.99 2 diverge-forced True
+  11: T2-like: m1 0.9951 b1 0.8942 interiors>0.99 1 diverge-forced True
+  12: T2-like: m1 0.9988 b1 0.6069 interiors>0.99 2 diverge-forced True
+  13: T2-like: m1 0.9947 b1 0.4633 interiors>0.99 3 diverge-forced True
+  14: straddle: m1 0.9982 b1 0.9602 interiors>0.99 6 diverge-forced True
+  15: straddle: m1 0.9981 b1 0.9579 interiors>0.99 5 diverge-forced True
+  16: T2-like: m1 0.9972 b1 0.2015 interiors>0.99 5 diverge-forced True
+  17: straddle: m1 0.9995 b1 0.8785 interiors>0.99 6 diverge-forced True
+  18: straddle: m1 0.9898 b1 0.6511 interiors>0.99 0 diverge-forced False
+  19: T2-like: m1 0.9920 b1 0.9513 interiors>0.99 2 diverge-forced True
+  20: T2-like: m1 0.9959 b1 0.1801 interiors>0.99 5 diverge-forced True
+  21: straddle: m1 0.9988 b1 0.9507 interiors>0.99 4 diverge-forced True
+  22: straddle: m1 0.9979 b1 0.7468 interiors>0.99 4 diverge-forced True
+  23: T2-like: m1 0.9906 b1 0.4443 interiors>0.99 1 diverge-forced True
+  24: T2-like: m1 0.9979 b1 0.7940 interiors>0.99 4 diverge-forced True
+  25: straddle: m1 0.9989 b1 0.8400 interiors>0.99 4 diverge-forced True
+  26: T2-like: m1 0.9983 b1 0.4633 interiors>0.99 5 diverge-forced True
+  27: straddle: m1 0.9994 b1 0.8024 interiors>0.99 6 diverge-forced True
+  28: T2-like: m1 0.9992 b1 0.5992 interiors>0.99 6 diverge-forced True
+  29: straddle: m1 0.9976 b1 0.7813 interiors>0.99 4 diverge-forced True
+  30: T2-like: m1 0.9971 b1 0.8520 interiors>0.99 3 diverge-forced True
+  31: straddle: m1 0.9996 b1 0.8840 interiors>0.99 6 diverge-forced True
+  32: T2-like: m1 0.9991 b1 0.7405 interiors>0.99 6 diverge-forced True
+  33: straddle: m1 0.9984 b1 0.8656 interiors>0.99 4 diverge-forced True
+  34: T2-like: m1 0.9989 b1 0.8963 interiors>0.99 6 diverge-forced True
+  35: T2-like: m1 0.9994 b1 0.5077 interiors>0.99 3 diverge-forced True
+  36: T1-like: m1 0.9939 b1 0.9881 interiors>0.99 1 diverge-forced True
+  37: straddle: m1 0.9994 b1 0.8836 interiors>0.99 3 diverge-forced True
+  38: T2-like: m1 0.9999 b1 0.8540 interiors>0.99 6 diverge-forced True
+  39: T2-like: m1 0.9917 b1 0.8413 interiors>0.99 1 diverge-forced True
+  40: T2-like: m1 0.9730 b1 0.1820 interiors>0.99 0 diverge-forced False
+
+## 5. DRP-C6 on A0 at depths 0-3: share of journeys with >= 1 interior at >= 0.99
+FAMOUS all: d0 39/40; d1 38/40; d2 36/40; d3 35/40
+FAMOUS T1-like: d0 2/2; d1 2/2; d2 2/2; d3 2/2
+FAMOUS T2-like: d0 20/21; d1 20/21; d2 17/21; d3 17/21
+FAMOUS straddle: d0 17/17; d1 16/17; d2 17/17; d3 16/17
+MID all: d0 28/40; d1 28/40; d2 27/40; d3 26/40
+
+## 6. Victims pressed at presses 0-3 (identical in DRP-S0P3 by DRP-G9(e)) above F_max(4)=0.985
+FAMOUS: 155 of 160 press-0..3 victims have fame_lb_pctl > 0.985, so at press 4 they are in the user exclusions AND above the scheduled ceiling
+
+## 7. X_A0 (median over 7-10 of highest interior), H = X_A0 - b0, and DRP-R13 lower bounds
+FAMOUS: band-readable 40; X_A0 median 0.9965; H median 0.1773 min 0.0089; H < 0 (would violate the bound): 0; H >= 0.015: 38
+   r lower bound max(0, b0 - F_max(k)), k=7..10: per-pair median >= 0.05 on 2 of 40 (median over pairs 0.0000); pooled (pair, depth) median 0.0000; share > 0 0.200
+   T1-like: per-pair median r lower bound: 0.0131, 0.0706
+   T2-like: per-pair median r lower bound: 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0338
+   straddle: per-pair median r lower bound: 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0052, 0.0052, 0.0332, 0.0404, 0.0427, 0.0641
+MID: band-readable 40; X_A0 median 0.9925; H median 0.7313 min 0.2410; H < 0 (would violate the bound): 0; H >= 0.015: 40
+   r lower bound max(0, b0 - F_max(k)), k=7..10: per-pair median >= 0.05 on 0 of 40 (median over pairs 0.0000); pooled (pair, depth) median 0.0000; share > 0 0.000
+
+## 8. A0 per-depth payload (DRP-C2 form): median over pairs of interior n(d) / n(0)
+FAMOUS: d7 0.873 (n 40, distinct values 19); d8 1.000 (n 40, distinct values 20); d9 0.944 (n 40, distinct values 19); d10 1.000 (n 40, distinct values 19)
+MID: d7 0.889 (n 40, distinct values 23); d8 0.913 (n 40, distinct values 24); d9 0.894 (n 40, distinct values 23); d10 0.900 (n 40, distinct values 20)
+
+done
