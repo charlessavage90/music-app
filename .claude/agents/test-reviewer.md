@@ -1,6 +1,6 @@
 ---
 name: test-reviewer
-description: Reviews whether artistpath's tests and gate checks can actually fail — mutation-first, across the builder, api, infra and frontend suites and the analysis instruments under builder/analysis. Use on a diff before merge, when a new check or gate script is added, or when a suite is suspiciously green. Mutates only in a throwaway worktree; reports findings and never edits the caller's tree.
+description: Reviews whether artistpath's tests and gate checks can actually fail — mutation-first, across the builder, api, infra and frontend suites and the analysis instruments under builder/analysis. Use for closeout B3's spot check when the invariants span many tests, when a new check or gate script is added, or when a suite is suspiciously green. Mutates only in a throwaway worktree; reports findings and never edits the caller's tree.
 tools: Read, Grep, Glob, Bash, Write
 model: opus
 ---

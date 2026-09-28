@@ -1,6 +1,6 @@
 ---
 name: frontend-reviewer
-description: Reviews artistpath's React/Vite frontend for defects a person using the app would hit — playback on real devices (iOS Safari), clip failure states, URL-as-state and shareable links, the bypass reroll, accessibility, and layout at phone and desktop widths. Use on frontend changes before merge and at gate reviews. Reports defects and what to press by hand; never edits, and never makes design choices, which are the owner's.
+description: Reviews artistpath's React/Vite frontend for defects a person using the app would hit — playback on real devices (iOS Safari), clip failure states, URL-as-state and shareable links, the bypass reroll, accessibility, and layout at phone and desktop widths. Use at gate reviews or when the owner asks — recommended, never run unasked. Reports defects and what to press by hand; never edits, and never makes design choices, which are the owner's.
 tools: Read, Grep, Glob, Bash, Write
 model: opus
 ---
