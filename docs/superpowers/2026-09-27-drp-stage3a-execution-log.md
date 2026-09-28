@@ -93,3 +93,21 @@ under both press rules on all three strata plus `DRP-C8`, the Seam-B JSON per ce
 `find_journey` (§2.1 row; `DRP-AM5-F1`: test `F_max(k)` first). **Cost to budget:** an A0 ladder
 takes about 5–10 s per famous pair and about 50 s per middle-of-the-map pair at 21 presses on one
 core; the ceiling cells multiply that by the relaxation search at presses ≥ 4.
+
+## Closeout at Seam A. 2026-09-27
+
+- `NEXT.md` top block rewritten; the outgoing block is demoted to `NEXT-ARCHIVE.md` (nothing in it
+  still bound except the ordered actions and carried items, both kept). The handoff is
+  [`2026-09-27-HANDOFF-drp-stage3a.md`](2026-09-27-HANDOFF-drp-stage3a.md), and the previous handoff's
+  role line now points forward to it.
+- B1: `docs-lint` hard checks passed. Its candidates were generic decimals in older specs, none from
+  this work. The `doc-auditor`, scoped to this diff, reported **clean**, verifying every README figure
+  against the JSON, the sealing rule and the handoff chain. It did not open `docs/README.md`, whose rows
+  the lint's link check covers.
+- B6-budget, over and **not caused by this work**: `NEXT.md` 382 of 250 lines, `docs/README.md` 610
+  of 400 (#145 tracks both). This work added one row per new document to the map, and nothing to
+  `NEXT.md`'s length.
+- D4: builder 292 passed, api 347 passed. The frontend was untouched. D6: the standing context layer
+  is untouched (no `CLAUDE.md`, `.claude/` or memory edits), so the delta is 0. A5: no listener on
+  8000 or 5173, and no process of this session survives. C1: nothing the owner can press, so no
+  `TEST-QUEUE.md` entry.

@@ -47,29 +47,28 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-27, at the closeout of the #200 pre-registration's amendments `DRP-AM1`–`AM6`
-and its second stage-1 pass.** The live site is unchanged since 2026-09-25: it serves
-`graph-lba-a6.bin` (sha `28311d81…`), image and frontend built from `b3e197b`. The work is on branch
-`charlessavage90/issue-200-depth-remedy-prereg`, PR #245, tracking issue #244 (addresses; `git`/`gh`
-own the merge state). Handoff: [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md).
+**Last updated: 2026-09-27, at Seam A of the #200 remedy's stage 3a (the instruments).** The live
+site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and
+frontend built from `b3e197b`. The work is on branch `charlessavage90/issue-200-drp-stage3a`, PR #250,
+tracking issue #244 (addresses; `git`/`gh` own the merge state). Handoff:
+[`2026-09-27-HANDOFF-drp-stage3a.md`](2026-09-27-HANDOFF-drp-stage3a.md).
 
-# #200'S REMEDY IS PRE-REGISTERED, CRITIQUED TWICE AND AMENDED. NEXT: HIS STAGE-2 GO.
+# #200'S INSTRUMENTS ARE BUILT AND EVERY SEAM-A GATE PASSED. NEXT: STAGE 3B, A SESSION'S.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner:** his go on the amended design
-   ([`specs/2026-09-27-issue-200-depth-remedy-preregistration.md`](specs/2026-09-27-issue-200-depth-remedy-preregistration.md),
-   `DRP-`, §8 stage 2). **Posted on #244**, as his rulings and requests already are: the document's
-   own standard is "from the record rather than from a conversation" (`DRP-AM5-I2`). It is his
-   because spending the lattice is his.
-2. **A session, only after that go:** stage 3a, the instruments, per §8 and its named seams. It
-   executes **from the document body**, which carries the governing wording since `DRP-AM5` (the
-   legend at the head of §14). **No arm runs before the go.**
-3. **The owner:** his stage-4 go/no-go on at most one cell. Then the blind listen (stage 5, designed
-   cold by a session that has seen no journey) and his use gate (stage 6, on his criterion, recorded
-   verbatim as `DRP-AM6`).
-4. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+1. **The owner:** post his own one-line stage-2 go on #244. The go was given in session on
+   2026-09-27 and relayed there by the session, which does not meet `DRP-AM5-I2`'s "posted by him".
+   It blocks nothing already run; it is owed for the record.
+2. **A session:** stage 3b, the `DRP-S0` row (A0, `DRP-S0P1`, `DRP-S0P2`, `DRP-S0P3` with `DRP-G9`),
+   `DRP-G4`, `DRP-G5`, per the pre-registration's §8, to Seam B. It starts from the stage-3a
+   execution log's "Seam A" entry, which names what it inherits and must build.
+3. **A session:** stage 3c, the `DRP-S1` row, to Seam C. Then **3d**, the results note, written by a
+   session that ran no sweep.
+4. **The owner:** his stage-4 go/no-go on at most one cell; then the blind listen (stage 5, designed
+   cold) and his use gate (stage 6, `DRP-AM6`).
+5. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
    previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
 
 ---
