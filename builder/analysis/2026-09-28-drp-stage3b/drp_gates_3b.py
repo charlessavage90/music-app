@@ -1,5 +1,5 @@
-"""DRP- stage 3b gates on the DRP-S0 row: DRP-G4, DRP-G5, DRP-G9 (a)-(f) with every red control,
-and one harness-identity check of this stage's own. Reads the shards drp_sweep.py wrote; routes
+"""DRP- gates on one supply row, DRP-S0 (stage 3b, the default) or DRP-S1 (stage 3c): DRP-G4, DRP-G5,
+DRP-G9 (a)-(f) with every red control, and, on DRP-S0 only, one harness-identity check of stage 3b's own. Reads the shards drp_sweep.py wrote; routes
 only where a gate or red control says to, and keeps counts, never journeys, from those calls.
 
 Governing: the pre-registration's §6 rows for DRP-G4, DRP-G5 and DRP-G9 (executed from the body),
@@ -12,7 +12,12 @@ and DRP-C8, compared path for path; and the A0 random-rule shards for DRP-T1/DRP
 stage 3a's seed-1 random journeys (drp_noise_journeys.json, sha committed in its README).
 
     cd api && PYTHONIOENCODING=utf-8 uv run python -u \
-      ../builder/analysis/2026-09-28-drp-stage3b/drp_gates_3b.py
+      ../builder/analysis/2026-09-28-drp-stage3b/drp_gates_3b.py ROW g9 SET RULE   # x8, in parallel
+    cd api && PYTHONIOENCODING=utf-8 uv run python -u       ../builder/analysis/2026-09-28-drp-stage3b/drp_gates_3b.py ROW               # combine
+
+The DRP-G9 partials are written outside the repository as gates/g9__ROW__SET__RULE.json, and the
+combining run refuses a partial recorded for another row (keyed by row at stage 3c: both rows share
+one harness sha, so the sha alone could not tell them apart). Output: drp_gates_ROW.json.
 """
 from __future__ import annotations
 
