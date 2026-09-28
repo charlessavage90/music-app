@@ -633,7 +633,7 @@ sweeps until the harness is fixed; it is never widened.
 | **`DRP-G6`** power | *today's app, pressed two arbitrary ways, differs so much that the design cannot see a five-point change* | `N_noise` > **0.025** in either famous stratum | **stop before any arm is swept**; report to the owner; any remedy (e.g. more pairs) is an amendment written before any arm result exists | 0.025 = half the material bar: above it, the bootstrap bound in `DRP-C1`(2) cannot separate a −0.05 median from noise at this draw. ⚑ *Amended: `DRP-AM1-F1` (§14).* |
 | **`DRP-G7`** floor dead in the band | *the obscurity floor contributes nothing from press 7 on* | the shipped `effective_floor_raw` returns non-zero for any drawn pair at `k` = 7, or `max(pop_raw)` > 1, or `floor_relax_known` ≠ 0.15 | §2.7's derivation and the band's lower edge are wrong; **stop**; amendment | any non-zero |
 | **`DRP-G8`** readability | *enough journeys survive in every cell to compare* | fewer than **30 of 40** pairs in a famous stratum have all four band depths feasible in all six cells, under the primary rule | that stratum is **unreadable**: no pass, no fail, reported as such | 30 of 40 (three quarters), a choice stated as one; the `CRS-G3` precedent. ⚑ *Amended: `DRP-AM2` (§14).* |
-| **`DRP-G9`** ceiling-device identity *(added `DRP-AM2`, §14)* | *the ceiling removes only what it says, and nothing else about the router changes* | any of: (a) with `F_max` ≡ 1.0 at every press, a `DRP-P3` cell differs from its `DRP-P0` cell on any journey at any press; (b) any `DRP-P3` interior has `fame_lb_pctl` above its recorded `c`; (c) for any (pair, depth) with `r` > 0, a ceiling at the next-lower distinct percentile below `c` still admits an interior-bearing journey; **(d)** at any (pair, press) with `r` > 0, `c` ≠ the `DRP-C11` instrument's bottleneck re-evaluated for that pair on the same map under that press's user exclusions, or at any press `c` < that pair's `b₀`. `c` is found by the harness's own search over distinct percentiles with the shipped `find_journey`, and `DRP-C11` by its own minimax search, so the two sides are independent; **(e)** at presses 0–3 a `DRP-P3` journey differs from its `DRP-P0` cell's. ⚑ *Amended: `DRP-AM3` (§14).* **Red controls:** the real schedule must diverge from `DRP-P0` on ≥ 1 pair at some press (count only), or the ceiling is not being applied; and `DRP-G5` run with the ceiling exclusions passed as `KNOWN` must fire | instrument failure; the `DRP-P3` cells are not read until fixed | exact; any violation |
+| **`DRP-G9`** ceiling-device identity *(added `DRP-AM2`, §14)* | *the ceiling removes only what it says, and nothing else about the router changes* | any of: (a) with `F_max` ≡ 1.0 at every press, a `DRP-P3` cell differs from its `DRP-P0` cell on any journey at any press; (b) any `DRP-P3` interior has `fame_lb_pctl` above its recorded `c`; (c) for any (pair, depth) with `r` > 0, a ceiling at the next-lower distinct percentile below `c` still admits an interior-bearing journey; **(d)** at any (pair, press) with `r` > 0, `c` ≠ the `DRP-C11` instrument's bottleneck re-evaluated for that pair on the same map under that press's user exclusions, or at any press `c` < that pair's `b₀`. `c` is found by the harness's own search over distinct percentiles with the shipped `find_journey`, and `DRP-C11` by its own minimax search, so the two sides are independent; **(e)** at presses 0–3 a `DRP-P3` journey differs from its `DRP-P0` cell's. ⚑ *Amended: `DRP-AM3` (§14).* **Red controls:** for (e), press 1 re-run with the ceiling at 0.99 must diverge from `DRP-P0` on ≥ 1 pair (count only) ⚑ *Amended: `DRP-AM4` (§14).*; the real schedule must diverge from `DRP-P0` on ≥ 1 pair at some press (count only), or the ceiling is not being applied; and `DRP-G5` run with the ceiling exclusions passed as `KNOWN` must fire | instrument failure; the `DRP-P3` cells are not read until fixed | exact; any violation |
 | **`DRP-G10`** headroom instrument *(added `DRP-AM2`, §14)* | *the headroom figure really is the lowest possible ceiling* | for any pair and supply level, the shipped `find_journey` with ceiling exclusions at `c` = `b₀` fails to return an interior-bearing journey, or returns one at the next-lower distinct percentile | `DRP-C11` is not reported until fixed; nothing else stops, since it decides nothing | exact; any violation |
 
 ---
@@ -767,6 +767,7 @@ sentence, never bare.
   `acceptance.py`'s intent, never widened; recalibrating a bound so a new artifact can be adopted is
   **the owner's** risk acceptance (`LBA-` §8 item 2). Manifest pinning and `ARTISTPATH_GRAPH_SHA256`
   from the sidecar (`DEP-24`). The APG1 format is unchanged (every edge `edge_type` 0).
+- **A ceiling candidate** (`DRP-S0P3` or `DRP-S1P3`) **owes an identity gate between the harness form and a shipped in-router form before deploy**, with a red control. It is stated here and decided nowhere in this document (§14 `DRP-AM4` item 2). ⚑ *Amended: `DRP-AM4` (§14).*
 - **A switched-exits candidate exists only if `DRP-SW` was spent**, and then carries §2.10's deploy
   obligation.
 
@@ -1465,3 +1466,45 @@ Each is marked ⚑ `DRP-AM3` in place:
 
 **What this hands to §8 stage 2:** the design, amended three times, for the owner's go. His §9
 criterion is a separate owed item.
+
+### `DRP-AM4` — the ceiling's early-press identity gets its own red control, and the ceiling's adoption obligation is recorded. 2026-09-27
+
+**Result state when written: none.** No arm built, no `DRP-` pair drawn. **No bar's value changes,
+and no commit-before-results property is spent.** Asked by the owner. No new identifier series:
+`DRP-G9`(e) gains a red control, and §8 gains an obligation.
+
+**1. The early-press identity: already `DRP-G9`(e), now with its own red control.** The owner asked
+for an asserted identity: every ceiling cell reproduces A0 path for path at presses 0–3 on every
+pair, because the ceiling is 1.0 there and excludes nothing (`DRP-AM3` item 2). **It already exists
+as `DRP-G9`(e)** (added `DRP-AM3`): *"at presses 0–3 a `DRP-P3` journey differs from its `DRP-P0`
+cell's"*. **One correction to the request as worded.** The identity holds against each ceiling cell's
+**`DRP-P0` cell on the same supply level**, which is A0 only for `DRP-S0P3`. **`DRP-S1P3` reproduces
+`DRP-S1P0`, not A0**, because its map carries the added edges and A0's does not. So `DRP-G9`(e) is
+kept in its per-supply form.
+- **What it lacked was a red control of its own**: the gate's existing red controls test the real
+  schedule and a `KNOWN` leak, not this condition.
+- **Added:** re-run press 1 of both ceiling cells with the ceiling at **0.99** at press 1 in place of
+  1.0. At least one pair must diverge from its `DRP-P0` cell there, or (e) is blind.
+- **Why 0.99 rather than the 0.999 given as an example:** famous-pair journeys sit in roughly the top
+  1 % (critique F1–F2), so a ceiling at 0.99 is all but certain to remove an interior somewhere. A
+  0.999 ceiling removes only about a tenth of those artists, and a red control that fails for want
+  of a victim would stop the design for a reason that is not a fault.
+- **As with `DRP-G1r`:** only "diverged: yes/no" and the count are recorded, no journey is kept, and
+  0.99-at-press-1 is not a lattice schedule. Nothing reads it but this gate.
+
+**2. The ceiling's adoption obligation: stated, decided nowhere in this document.** The harness
+implements the ceiling by passing **every artist above `c`** to the shipped `find_journey` as
+exclusions under a third reason label, and it finds `c` by searching distinct percentiles with
+repeated `find_journey` calls (`DRP-AM3` item 4). **A shipped ceiling would compute it inside the
+router**: skipping nodes above `c` in the relaxation loop, and relaxing by its own mechanism. **These
+are two implementations of one device, and nothing in this design shows they agree.** So §8 records,
+beside `DRP-SW`'s typed-edge deploy obligation and in the same form:
+
+> **Adopting any ceiling cell owes an identity gate between the harness form and the shipped form,
+> before deploy**: the shipped router reproduces the harness's journeys **and its recorded `c`**,
+> path for path, at every press 0–20, on the `DRP-` pair set, on the adopted map. It needs a red
+> control that must fire: a perturbation of the shipped form's schedule or relaxation step that the
+> check detects. That is the `MSW-G2`/`DRP-G1` shape of exact identity. **Which shipped form, and
+> whether the wire contract carries `c` to the frontend, are adoption decisions, not this
+> document's.**
+
