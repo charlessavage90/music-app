@@ -181,7 +181,9 @@ that clears the item with no work.
 labels and the body shape are owned by `docs/superpowers/ISSUES.md`; the templates in
 `.github/ISSUE_TEMPLATE/` enforce them. The owner dispatches agent sessions from issues
 in Orca, so **write each one as the whole brief for a session that has nothing else**:
-*Condition*, *Whose*, *Done when*, and a *Source* path. File it at deferral time:
+*Condition*, *Whose*, *Done when*, a *Source* path, and *Reads / Changes contracts*
+(`ISSUES.md` §5). **An issue this session claimed and is not finishing is released** (§7):
+`claimed` off, a comment saying where it stopped. File each deferral at deferral time:
 
 ```bash
 gh issue create --title "[ID] plain-language title" --label deferred --label area:<pkg> --body-file <brief.md>  # + owner-decision / owner-hands if it is his
@@ -212,8 +214,9 @@ answers the first question.
 When a condition has come due, **strike the deferral in place where it lives** — struck, not
 deleted, with the date and what satisfied it. Deleting it destroys the evidence that it was
 tracked and discharged rather than forgotten. **For an issue, that is: close it with a comment
-naming what satisfied it** (or let the PR's `Closes #N` do it), and **add `agent-ready`** to one
-whose condition came due but whose work remains and is a session's. Never delete an issue.
+naming what satisfied it** (or let the PR's `Closes #N` do it), and for one whose condition came
+due but whose work remains and is a session's, **change its kind** (`deferred` → `task`/`bug`) and
+add `agent-ready` only once the `ISSUES.md` §4 checklist passes. Never delete an issue.
 
 ### A4. The default-flip check
 
@@ -704,6 +707,9 @@ Run them; do not assert green from memory. Evidence before assertions.
 discharge of D4 — it is D4 unanswered. **Name what you verified instead, and paste it.**
 
 - **`scripts/docs-lint.sh`** — hard checks must pass before the PR; candidates need a reader.
+- **`python scripts/issues-selftest.py`** — must pass before a PR that touches `scripts/issues.py`,
+  `.github/ISSUE_TEMPLATE/` or `ISSUES.md`: it is what catches the contract vocabulary drifting
+  between the three (`ISSUES.md` §5).
   Green is not clean; the script says so itself.
 - **Every command, path and section number the diff introduces, resolved.** A document naming
   a file or config value that does not exist is one of the two failure classes this whole
@@ -726,6 +732,12 @@ The PR body is where a reviewer picks up the context, so it carries:
   single most important thing a reviewer needs to know
 - Deferred findings with their success conditions (A3) — **by issue number**, each new one
   filed and each discharged one closed; `Closes #N` for every issue this work fixes
+- **The contracts this PR changes** (`Changes contracts: …`, the `ISSUES.md` §5 vocabulary, or
+  `none`) — and for each, run `python scripts/issues.py readers <contract>` and comment on
+  every open issue it lists that the contract changed here, pulling `agent-ready` off any whose
+  brief it invalidates. **This is the only step that catches a queued issue built on a meaning
+  this PR just changed**; git merges both cleanly. Then `python scripts/issues.py unblocked`:
+  anything this work unblocked gets the §4 checklist, not an automatic `agent-ready`
 - Checksums for any adopted artifact (D3)
 - **What is closed and should not be re-litigated** — decisions already taken with
   reasoning recorded. Without this, review reopens settled questions, which is expensive

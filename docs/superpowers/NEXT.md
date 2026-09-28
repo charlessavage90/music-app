@@ -353,7 +353,7 @@ Conventions and the lifecycle are owned by [`ISSUES.md`](ISSUES.md); the registr
 
 ```bash
 gh issue list --state open --label deferred --limit 100
-gh issue list --state open --label agent-ready   # condition met and a session's: dispatchable
+gh issue list --state open --label agent-ready   # passes ISSUES.md §4: dispatchable
 ```
 
 ## Accepted residuals and standing conditions — decisions, not work

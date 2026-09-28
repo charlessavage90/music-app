@@ -20,6 +20,14 @@ description: >-
 > that work* — do not re-derive it, and do not treat it as the whole instruction, since he may
 > add to it in the same breath.
 >
+> **If the scope is a GitHub issue — a URL or `#N`, which is how Orca dispatches — claim it
+> before anything else, on every track** (`docs/superpowers/ISSUES.md` §7):
+> `python scripts/issues.py conflicts N`; if that names a `claimed` issue, stop and tell him;
+> otherwise `gh issue edit N --add-label claimed --remove-label agent-ready` and a one-line
+> comment naming your branch. Then read the issue in full — it is the whole brief — and
+> orient for it. *(Here, not in §B, because the maintenance track skips §B and an
+> `area:apparatus` issue would go unclaimed.)*
+>
 > **He reaches this line by typing the scope after the command** — `/session-start continue the
 > documentation layer strategy work`. He cannot reach it by asking in prose: this skill is
 > marked `disable-model-invocation: true`, so a session **cannot** invoke it, however plainly it
@@ -95,13 +103,15 @@ still waste, and it is expensive to detect.
   gh issue list --state open --label deferred --limit 100
   gh issue list --state open --label agent-ready
   ```
-  A condition that has come due gets `agent-ready` if it is a session's work
-  (`gh issue edit N --add-label agent-ready`), or is named to the owner if it is his
-  (`owner-decision` / `owner-hands`). **Re-test each condition against reality; a list of
-  titles is not the check.**
+  A condition that has come due **changes kind** (`deferred` → `task` or `bug`) and gets
+  `agent-ready` only once the `ISSUES.md` §4 checklist passes, if it is a session's work — or
+  is named to the owner if it is his (`owner-decision` / `owner-hands`). **Re-test each
+  condition against reality; a list of titles is not the check.** Then the mechanical checks
+  (`ISSUES.md` §9) — `python scripts/issues.py lint`, `conflicts`, `stale`, `unblocked` — and
+  report what they find; a failing `agent-ready` loses the label, which needs no permission.
 - **If Orca dispatched this session from an issue, that issue is the scope** — read it in
-  full, including its *Whose* and *Done when*. An `owner-decision` issue is prepared for
-  him, never decided.
+  full, including its *Whose* and *Done when* — it was claimed at the top of this skill. An
+  `owner-decision` issue is prepared for him, never decided.
 
 ## C. What state is the repo in, and is anyone else in it?
 

@@ -5,7 +5,7 @@ labels: ["deferred"]
 body:
   - type: markdown
     attributes:
-      value: "A deferral without a success condition is an unranked backlog. When the condition comes due and the work is a session's, add **agent-ready**. Conventions: docs/superpowers/ISSUES.md."
+      value: "A deferral without a success condition is an unranked backlog. When the condition comes due, swap **deferred** for task or bug and run the agent-ready checklist (ISSUES.md §4) before adding **agent-ready**. Conventions: docs/superpowers/ISSUES.md."
   - type: textarea
     id: what
     attributes:
@@ -43,5 +43,45 @@ body:
     attributes:
       label: Done when
       description: The observable end state. A PR saying "Closes #N" must be able to satisfy it.
+    validations:
+      required: true
+  - type: dropdown
+    id: reads
+    attributes:
+      label: Reads contracts
+      description: "Shared meanings this work ASSUMES and would be wrong if they changed underneath it. Defined in ISSUES.md §5. Pick none if it touches none. Two live issues conflict when one changes a contract the other reads or changes."
+      multiple: true
+      options:
+        - "none"
+        - "graph-identity"
+        - "apg1-format"
+        - "quantities"
+        - "cost-function"
+        - "requirements"
+        - "api-wire"
+        - "url-state"
+        - "edge-behaviour"
+        - "deploy-path"
+        - "rituals"
+    validations:
+      required: true
+  - type: dropdown
+    id: changes
+    attributes:
+      label: Changes contracts
+      description: "Shared meanings this work would ALTER — not files it edits: would work that never opens those files be made wrong by it? A PR that changes one says so in its body, and closeout notifies every open issue that reads it (ISSUES.md §5)."
+      multiple: true
+      options:
+        - "none"
+        - "graph-identity"
+        - "apg1-format"
+        - "quantities"
+        - "cost-function"
+        - "requirements"
+        - "api-wire"
+        - "url-state"
+        - "edge-behaviour"
+        - "deploy-path"
+        - "rituals"
     validations:
       required: true
