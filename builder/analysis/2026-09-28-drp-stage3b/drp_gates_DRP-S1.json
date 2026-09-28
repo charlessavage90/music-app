@@ -1,0 +1,41 @@
+{
+ "row": "DRP-S1",
+ "graph_sha256": "418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f",
+ "harness_sha256": "6213bb1e71075511b09e7c48906ebbba917759961f4a7f2c0d67f69aa02e46fe",
+ "DRP-G4": {
+  "violations": [],
+  "red_press1_diverged": {
+   "DRP-S1P1": 57,
+   "DRP-S1P2": 99
+  },
+  "verdict": "PASS",
+  "red_control": "fired"
+ },
+ "DRP-G5": {
+  "violations": [],
+  "red_ceiling_as_known_fired": 320,
+  "verdict": "PASS",
+  "red_control": "fired"
+ },
+ "DRP-G9": {
+  "violations": {
+   "a": [],
+   "b": [],
+   "c": [],
+   "d": [],
+   "e": [],
+   "f": []
+  },
+  "n_relaxed_presses_checked": 708,
+  "search_modes": {
+   "certified": 708
+  },
+  "red_controls": {
+   "e_press1_at_0.99_diverged": 291,
+   "schedule_diverged_somewhere": 320,
+   "f_dislike_fired": 320
+  },
+  "verdict": "PASS",
+  "red_control": "all fired"
+ }
+}
