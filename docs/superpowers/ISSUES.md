@@ -267,4 +267,6 @@ and lists both in the PR body (D5) by number. **D5 also names the contracts the 
 **A session dispatched by Orca from an issue** is still acting on repository state. `session-start` is
 owner-invoked and a session never runs it itself; if it owes it and was not given it, it **says so
 once and proceeds** (`CLAUDE.md`). It reads the issue, **claims it (§7)**, then reads `CLAUDE.md`'s
-orient table, then works.
+orient table, then works. **In practice the owner starts these as `/session-start <issue URL>`**
+(Orca lets him edit the dispatch prompt), and `session-start` claims the issue at the top, before
+choosing a track — so the claim needs no line in `CLAUDE.md`.

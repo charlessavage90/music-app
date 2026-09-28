@@ -20,6 +20,14 @@ description: >-
 > that work* — do not re-derive it, and do not treat it as the whole instruction, since he may
 > add to it in the same breath.
 >
+> **If the scope is a GitHub issue — a URL or `#N`, which is how Orca dispatches — claim it
+> before anything else, on every track** (`docs/superpowers/ISSUES.md` §7):
+> `python scripts/issues.py conflicts N`; if that names a `claimed` issue, stop and tell him;
+> otherwise `gh issue edit N --add-label claimed --remove-label agent-ready` and a one-line
+> comment naming your branch. Then read the issue in full — it is the whole brief — and
+> orient for it. *(Here, not in §B, because the maintenance track skips §B and an
+> `area:apparatus` issue would go unclaimed.)*
+>
 > **He reaches this line by typing the scope after the command** — `/session-start continue the
 > documentation layer strategy work`. He cannot reach it by asking in prose: this skill is
 > marked `disable-model-invocation: true`, so a session **cannot** invoke it, however plainly it
@@ -102,8 +110,7 @@ still waste, and it is expensive to detect.
   (`ISSUES.md` §9) — `python scripts/issues.py lint`, `conflicts`, `stale`, `unblocked` — and
   report what they find; a failing `agent-ready` loses the label, which needs no permission.
 - **If Orca dispatched this session from an issue, that issue is the scope** — read it in
-  full, including its *Whose* and *Done when*, and **claim it before orienting further**
-  (`ISSUES.md` §7: `conflicts N`, then `claimed` on and `agent-ready` off). An
+  full, including its *Whose* and *Done when* — it was claimed at the top of this skill. An
   `owner-decision` issue is prepared for him, never decided.
 
 ## C. What state is the repo in, and is anyone else in it?
