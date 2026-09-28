@@ -96,6 +96,9 @@ tmpl = pathlib.Path(__file__).parents[1] / ".github" / "ISSUE_TEMPLATE"
 for f in sorted(tmpl.glob("[0-9]-*.yml")):
     text = f.read_text(encoding="utf-8")
     check(f"{f.name} offers every contract", all(f'"{c}"' in text for c in issues.CONTRACTS))
+    import re as _re
+    offered = set(_re.findall(r'^        - "([a-z0-9-]+)"$', text, _re.M)) - {"none"}
+    check(f"{f.name} offers nothing outside the vocabulary", offered == set(issues.CONTRACTS))
 doc = (pathlib.Path(__file__).parents[1] / "docs" / "superpowers" / "ISSUES.md").read_text(encoding="utf-8")
 check("ISSUES.md defines every contract", all(f"| `{c}` |" in doc for c in issues.CONTRACTS))
 

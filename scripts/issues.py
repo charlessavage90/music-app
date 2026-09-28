@@ -75,7 +75,7 @@ def ready_problems(issue: dict) -> list[str]:
     for lb in sorted(labels & OWNER_LABELS):
         out.append(f"carries {lb}: an owner's issue is never agent-ready — split off the session's part")
     if "claimed" in labels:
-        out.append("carries claimed: a claim removes agent-ready (§6)")
+        out.append("carries claimed: a claim removes agent-ready (§7, RDY-M2)")
     if "deferred" in labels:
         out.append("still labelled deferred: when the condition comes due, the kind becomes task/bug")
     deps = issue.get("issue_dependencies_summary") or {}

@@ -214,8 +214,9 @@ answers the first question.
 When a condition has come due, **strike the deferral in place where it lives** — struck, not
 deleted, with the date and what satisfied it. Deleting it destroys the evidence that it was
 tracked and discharged rather than forgotten. **For an issue, that is: close it with a comment
-naming what satisfied it** (or let the PR's `Closes #N` do it), and **add `agent-ready`** to one
-whose condition came due but whose work remains and is a session's. Never delete an issue.
+naming what satisfied it** (or let the PR's `Closes #N` do it), and for one whose condition came
+due but whose work remains and is a session's, **change its kind** (`deferred` → `task`/`bug`) and
+add `agent-ready` only once the `ISSUES.md` §4 checklist passes. Never delete an issue.
 
 ### A4. The default-flip check
 

@@ -68,7 +68,7 @@ the dispatcher trusts it:
 |---|---|---|
 | **Blocked by another issue or PR** | Native **"blocked by"** dependency | Clears itself when the blocker closes; a `blocked` label would outlive it |
 | **Has parallel parts** | Native **sub-issues** under a parent | The delegation plan in a form GitHub counts; each part is dispatchable and has its own state. A "parallelizable" label only says the plan is somewhere in the prose |
-| **Is one session's work** | **The definition of `agent-ready`** (§4, J2) | An `atomic` label would be a second name for "ready"; anything larger is a parent |
+| **Is one session's work** | **The definition of `agent-ready`** (§4, RDY-J2) | An `atomic` label would be a second name for "ready"; anything larger is a parent |
 
 **Blocked on the owner is a whose-label, not a fourth state.** `owner-decision` and `owner-hands`
 differ in what a session may do — prepare, or nothing — so they stay two labels. **An issue that is
@@ -101,30 +101,31 @@ the document; it never spells out a reproduction.**
 without asking anyone anything.** It is applied only after every item below passes, and **removed by
 anyone who finds one failing** — no permission needed; a wrong `agent-ready` is a defect.
 
-**Mechanical — `python scripts/issues.py lint N` checks these:**
+**Mechanical — `python scripts/issues.py lint N` checks these.** The items are prefixed `RDY-` because
+bare `M1`… already names Track 2's metrics (the `plan-discipline` collision rule):
 
 | # | Item |
 |---|---|
-| M1 | No `owner-decision` or `owner-hands` label |
-| M2 | Not `claimed` |
-| M3 | Kind is not `deferred` — a condition that came due changed the kind (§8) |
-| M4 | No open native "blocked by" issue |
-| M5 | No open sub-issues — dispatch the parts, not the parent |
-| M6 | Has a *Source* and a *Done when* |
-| M7 | Declares *Reads contracts* and *Changes contracts*, every token from the §5 vocabulary (`none` counts) |
+| RDY-M1 | No `owner-decision` or `owner-hands` label |
+| RDY-M2 | Not `claimed` |
+| RDY-M3 | Kind is not `deferred` — a condition that came due changed the kind (§8) |
+| RDY-M4 | No open native "blocked by" issue |
+| RDY-M5 | No open sub-issues — dispatch the parts, not the parent |
+| RDY-M6 | Has a *Source* and a *Done when* |
+| RDY-M7 | Declares *Reads contracts* and *Changes contracts*, every token from the §5 vocabulary (`none` counts) |
 
 **Judgement — the labeller confirms these and says so in one comment**, `Ready-checked <date> at
-<sha>: J1–J7`, naming any that needed work:
+<sha>: RDY-J1–RDY-J7`, naming any that needed work:
 
 | # | Item |
 |---|---|
-| J1 | **The condition was re-tested against reality**, not against the title — a deferral's condition, or a bug's still-reproduces |
-| J2 | **One session, one PR.** *Done when* can be satisfied without another session's output; if not, it is a parent (§7) |
-| J3 | ***Done when* is checkable by a cold session** — an observable end state, not "improve" or "review" |
-| J4 | **No owner decision is hidden inside.** If any step needs his call, split it off. **`Changes contracts: requirements` always does** — what counts as better is his (`CLAUDE.md`, "Whose decision is it") |
-| J5 | **A `research` issue links its committed pre-registration** — or writing that pre-registration *is* the issue |
-| J6 | **The Source resolves at current `main` and one load-bearing claim in it was verified against the code** (`session-start`'s verify-one-claim, applied at labelling time) |
-| J7 | **Prerequisites a fresh worktree lacks are named** — a gitignored graph artifact and its path (`ARTISTPATH_GRAPH`), an archive, credentials. Orca starts sessions in new worktrees, which carry none of these (`session-start` §C) |
+| RDY-J1 | **The condition was re-tested against reality**, not against the title — a deferral's condition, or a bug's still-reproduces |
+| RDY-J2 | **One session, one PR.** *Done when* can be satisfied without another session's output; if not, it is a parent (§7) |
+| RDY-J3 | ***Done when* is checkable by a cold session** — an observable end state, not "improve" or "review" |
+| RDY-J4 | **No owner decision is hidden inside.** If any step needs his call, split it off. **`Changes contracts: requirements` always does** — what counts as better is his (`CLAUDE.md`, "Whose decision is it") |
+| RDY-J5 | **A `research` issue links its committed pre-registration** — or writing that pre-registration *is* the issue |
+| RDY-J6 | **The Source resolves at current `main` and one load-bearing claim in it was verified against the code** (`session-start`'s verify-one-claim, applied at labelling time) |
+| RDY-J7 | **Prerequisites a fresh worktree lacks are named** — a gitignored graph artifact and its path (`ARTISTPATH_GRAPH`), an archive, credentials. Orca starts sessions in new worktrees, which carry none of these (`session-start` §C) |
 
 ## 5. Contracts — the logical-collision check
 
@@ -141,7 +142,7 @@ pair written on one side, and goes stale when either side changes.
 | `apg1-format` | The binary layout and metadata keys the builder writes and the API reads | `builder/…/artifact.py` and `api/…/graph_store.py` (kept in lockstep by hand, `CLAUDE.md`) |
 | `quantities` | What a shipped number *means* and how it is computed — `pop_raw`, the degree-derived terms, fame and its percentile. **The popularity-semantics case in the preamble is this contract** | `CLAUDE.md` "Quantities carry their currency"; `PRODUCT-REQUIREMENTS.md` "Definitions — the currencies"; the builder code that computes them |
 | `cost-function` | How a path is chosen: the cost terms, their weights, what a bypass press does | `ApiConfig` and `api/…/pathfinding.py` |
-| `requirements` | What counts as better | `PRODUCT-REQUIREMENTS.md` (`REQ-`), `WHAT-GOOD-LOOKS-LIKE.md`. **Changing it is always his call** (§4 J4) |
+| `requirements` | What counts as better | `PRODUCT-REQUIREMENTS.md` (`REQ-`), `WHAT-GOOD-LOOKS-LIKE.md`. **Changing it is always his call** (§4 RDY-J4) |
 | `api-wire` | The JSON shapes the API returns and the frontend consumes | `api/…/models.py` |
 | `url-state` | The routes and query parameters — every link already shared must keep resolving | `frontend/src/App.tsx` and the URL decoder; the API router's parameters |
 | `edge-behaviour` | What the edge serves, caches and adds for each route: cache behaviours and policies, response headers, edge functions. **Not** capacity or logging, which nobody else's work assumes | `infra/src/artistpath_infra/stack.py` (the distribution), `infra/README.md` |
@@ -173,7 +174,7 @@ coverage; it never shrinks without evidence (the removal rule in `CLAUDE.md`).
    `agent-ready` issue means you now hold the contract; the other must wait for your merge.
 2. **At merge** — a PR that changes a contract says so in its body (`Changes contracts: …`), and
    `closeout` D5 runs `python scripts/issues.py readers <contract>` and comments on each open issue
-   listed: *"`<contract>` changed in #PR — re-check before starting (§4 J1, J6)"*, removing
+   listed: *"`<contract>` changed in #PR — re-check before starting (§4 RDY-J1, RDY-J6)"*, removing
    `agent-ready` from any whose Source or *Done when* it invalidates. **This step is what catches the
    preamble's case when the second issue was queued but not yet started** — the case the claim-time
    check cannot see.
