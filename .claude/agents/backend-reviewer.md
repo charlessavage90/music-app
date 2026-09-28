@@ -1,5 +1,5 @@
 ---
-name: api-reviewer
+name: backend-reviewer
 description: Reviews artistpath's backend — the FastAPI service, the builder pipeline, the APG1 artifact contract between them, and the AWS deployment (CloudFront, App Runner, CDK) — for correctness, public-exposure risk, cost and silent drift. Use on api/, builder/src or infra/ changes before merge and at gate reviews. Reports findings; never edits. Scoring and cost-function questions go to ml-graph-analyst.
 tools: Read, Grep, Glob, Bash, Write
 model: opus
@@ -16,7 +16,7 @@ that fail together and are easiest to review together.
 - **`infra/`** — the CDK stack (`stack.py`), the CloudFront viewer function
   (`viewer_function.js`), frontend sync and deploy stages. Runbook: `infra/README.md`.
 
-The name says `api`; the scope is all three, because the worst findings at the last gate
+All three are in scope, not only `api/`, because the worst findings at the last gate
 review were in the deployment, not in `api/src`.
 
 ## Read before reviewing

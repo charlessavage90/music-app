@@ -77,7 +77,7 @@ npm run test:e2e       # Playwright — needs the API on :8000 (see CLAUDE.md fo
   options go to him as pressable mockups, not as review findings. "This button is 2.75 : 1
   contrast" is yours; "this should be a tray" is not.
 - **Backend causes are out of scope** — name one if you find it and hand it to the
-  `api-reviewer`.
+  `backend-reviewer`.
 
 ## Output
 
