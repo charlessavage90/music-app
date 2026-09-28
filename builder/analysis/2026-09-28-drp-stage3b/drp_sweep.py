@@ -84,7 +84,8 @@ def interior_bearing(res) -> bool:
 # ---- one press of a ceiling cell (§2.1 DRP-P3 row) ---------------------------------------------
 def ceiling_step(m: Map, cfg, s: int, t: int, user_ex: list, fm: float):
     """F_max(k) first (DRP-AM5-F1); otherwise the lowest distinct percentile ABOVE it at which the
-    shipped find_journey returns an interior-bearing journey. Returns (res, passed, c, r, calls).
+    shipped find_journey returns an interior-bearing journey. Returns (res, passed, c, r, calls,
+    mode), mode one of fmax / certified / bisected / none.
 
     The search is a bisection over the frame's distinct percentiles above fm. It relies on one
     property, argued from source and checked by DRP-G9(c): whether find_journey returns an
@@ -98,15 +99,35 @@ def ceiling_step(m: Map, cfg, s: int, t: int, user_ex: list, fm: float):
     res = find_journey(m.store, s, t, passed, cfg)
     calls = 1
     if interior_bearing(res):
-        return res, passed, fm, 0.0, calls
+        return res, passed, fm, 0.0, calls, "fmax"
     cands = m.distinct[m.distinct > fm]
     if cands.size == 0:  # fm = 1.0 already excludes nothing: no ceiling can admit more
-        return res, passed, None, None, calls
+        return res, passed, None, None, calls, "none"
+    # A candidate from stage 3a's own minimax search (drp_common.bottleneck), CERTIFIED by the
+    # shipped find_journey: it must admit an interior-bearing journey at the candidate and none at
+    # the next-lower distinct percentile (or at fm, already refused above). By the monotonicity in
+    # the docstring those two calls fix c exactly as the bisection would; a failed certification
+    # falls through to the bisection, and DRP-G9(d) then reports the disagreement. Decision and
+    # reasoning: the stage-3b execution log, task 2 (the bisection alone cost ~20 min per pair).
+    h = dc.bottleneck(m, s, t, {e.node for e in user_ex})
+    if h != float("inf") and h > fm:
+        j = int(np.searchsorted(cands, h, side="left"))
+        if j < cands.size and cands[j] == h:
+            trial = user_ex + ceiling_excludes(m, float(h), s, t)
+            r_at = find_journey(m.store, s, t, trial, cfg)
+            calls += 1
+            below_ok = False
+            if j > 0:
+                below = user_ex + ceiling_excludes(m, float(cands[j - 1]), s, t)
+                below_ok = interior_bearing(find_journey(m.store, s, t, below, cfg))
+                calls += 1
+            if interior_bearing(r_at) and not below_ok:
+                return r_at, trial, float(h), float(h) - fm, calls, "certified"
     top = user_ex + ceiling_excludes(m, float(cands[-1]), s, t)
     res_top = find_journey(m.store, s, t, top, cfg)
     calls += 1
     if not interior_bearing(res_top):
-        return find_journey(m.store, s, t, user_ex, cfg), user_ex, None, None, calls + 1
+        return find_journey(m.store, s, t, user_ex, cfg), user_ex, None, None, calls + 1, "none"
     lo, hi, best = 0, len(cands) - 1, (res_top, top)
     while lo < hi:
         mid = (lo + hi) // 2
@@ -119,7 +140,7 @@ def ceiling_step(m: Map, cfg, s: int, t: int, user_ex: list, fm: float):
             lo = mid + 1
     c = float(cands[lo])
     res, passed = best
-    return res, passed, c, c - fm, calls
+    return res, passed, c, c - fm, calls, "bisected"
 
 
 # ---- DRP-G9(f)'s per-press check, recorded at call time on the exact list passed --------------
@@ -177,8 +198,8 @@ def run_ladder(m: Map, cfg, s: int, t: int, rule: str, rng, ceiling: bool, sched
         rec = {"k": k}
         if ceiling:
             fm = schedule(k)
-            res, passed, c, r, calls = ceiling_step(m, cfg, s, t, user_ex, fm)
-            rec.update(fmax=fm, c=c, r=r, calls=calls,
+            res, passed, c, r, calls, mode = ceiling_step(m, cfg, s, t, user_ex, fm)
+            rec.update(fmax=fm, c=c, r=r, calls=calls, search=mode,
                        g9f_ok=passed_list_ok(m, cfg, s, t, passed, user_ex, k),
                        n_ceiling=sum(1 for e in passed if e.reason == CEILING))
         else:

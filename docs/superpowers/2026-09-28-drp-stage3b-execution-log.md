@@ -66,3 +66,26 @@ the shards.
   (the gate script refuses mixed versions).
 - `harness_sha256` in every shard is the sha of `drp_sweep.py` as committed (LF). A Windows checkout
   with CRLF conversion hashes differently; compare against `git show <commit>:<path> | sha256sum`.
+- **Second restart: the bisection was too slow on `DRP-T2`** (one pair ~19 min; one shard finished no
+  pair in 20 min). Every refused `find_journey` call exhausts the reachable map, and bisection spends
+  about nine of them per relaxed press; next-tier endpoints fall under the ceiling from press 4 on.
+- **Decision (mine, methodology), and it departs from `DRP-AM3` item 4's wording, so it is stated here
+  and in the PR for the owner or 3d to weigh:** the relaxation now takes a **candidate** `c` from stage
+  3a's own minimax search (`drp_common.bottleneck`) and **certifies** it with the shipped `find_journey`:
+  an interior-bearing journey at the candidate, and none at the next-lower distinct percentile (or at
+  `F_max(k)`, already refused). Under the monotonicity the bisection itself relied on, those two calls
+  fix `c` exactly as the bisection would. A failed certification falls back to the full bisection, and
+  each press records which route it took (`search`: `fmax` / `certified` / `bisected` / `none`).
+  - **What this does to `DRP-G9`(d).** Its purpose (`DRP-AM3` item 4) was that `find_journey`'s
+    admission threshold and the independent minimax bottleneck are computed separately and must agree.
+    Under certification the agreement is **tested by the certifying `find_journey` calls themselves**:
+    a wrong bottleneck fails certification, drops to bisection, and (d) then reports the mismatch. So
+    (d) still has force, but it is no longer two separate searches meeting at the same number. **Any
+    `bisected` press is a finding for the gate, not noise.**
+  - **The gate script re-routes both sides of every relaxed `c` itself** ((c): the next-lower ceiling
+    must admit nothing, and the recorded `c` must admit a journey), rather than trusting the sweep's
+    record.
+  - **Why not stop at a seam for this:** no bar, definition, pair or criterion changes; `c` is the same
+    quantity, and the gate keeps an independent side. A change to what is measured would be a material
+    amendment and a seam. A change to how the same quantity is found, checked from both sides, is not.
+- All shards discarded again and re-run on this harness.

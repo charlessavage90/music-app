@@ -141,6 +141,7 @@ b0 = {(sname, r["i"]): r["b0"] for sname, rows in
 g9 = {k: [] for k in ("a", "b", "c", "d", "e", "f")}
 red = {"e_press1_at_0.99_diverged": 0, "schedule_diverged_somewhere": 0, "f_dislike_fired": 0}
 n_relaxed = 0
+modes: dict = {}  # search mode per relaxed press; "bisected" means certification failed
 for key in A:
     sname, rule = key
     ident = paths(shard(CEIL, sname, rule, True))
@@ -186,7 +187,11 @@ for key in A:
                 j = int(np.searchsorted(m.distinct, d["c"], side="left"))
                 lower = max(float(m.distinct[j - 1]), d["fmax"]) if j > 0 else d["fmax"]
                 if interior_bearing(find_journey(store, s, t, ux + ceiling_excludes(m, lower, s, t), cfgc)):
-                    g9["c"].append([*key, i, k])
+                    g9["c"].append([*key, i, k, "the next-lower ceiling admits a journey"])
+                # and the upper side, re-routed here rather than read from the sweep's record
+                if not interior_bearing(find_journey(store, s, t, ux + ceiling_excludes(m, d["c"], s, t), cfgc)):
+                    g9["c"].append([*key, i, k, "the recorded c admits no journey"])
+                modes[d["search"]] = modes.get(d["search"], 0) + 1
             # (f) red: the ceiling passed as DISLIKE at press 10 must fail the check
             if k == 10:
                 bad = ux + [Exclusion(node=e.node, reason=DISLIKE)
@@ -196,11 +201,11 @@ for key in A:
     print(f"  G9 {key} done", flush=True)
 g9_viol = sum(len(v) for v in g9.values())
 reds_ok = all(v >= 1 for v in red.values())
-out["DRP-G9"] = {"violations": g9, "n_relaxed_presses_checked": n_relaxed, "red_controls": red,
+out["DRP-G9"] = {"violations": g9, "n_relaxed_presses_checked": n_relaxed, "search_modes": modes, "red_controls": red,
                  "verdict": "PASS" if g9_viol == 0 and reds_ok else "FAIL",
                  "red_control": "all fired" if reds_ok else "BLIND"}
 print(f"DRP-G9: {out['DRP-G9']['verdict']}; violations per condition "
-      f"{ {k: len(v) for k, v in g9.items()} }; relaxed presses checked {n_relaxed}; reds {red}", flush=True)
+      f"{ {k: len(v) for k, v in g9.items()} }; relaxed presses checked {n_relaxed} {modes}; reds {red}", flush=True)
 
 d = dc.write_json(HERE / f"drp_gates_{ROW}.json", out)
 print(f"wrote drp_gates_{ROW}.json sha256 {d}")
