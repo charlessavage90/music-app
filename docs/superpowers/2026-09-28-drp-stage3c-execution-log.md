@@ -64,3 +64,32 @@ Shard logs under `C:\unsung-fast\drp-stage3c\logs\`; shards and gate partials in
 
 - 40 shards (32 sweep, 8 `DRP-G9`(a) identity runs), 14 at a time, ceiling cell first; launch pattern
   `C:\unsung-fast\drp-stage3c\logs\jobs_all.txt` and `run1.sh`.
+- Merged the four cells (per-cell shas in the stage-3c README; each merge refuses mixed graph or
+  harness shas). **All 40 shards exit 0, one harness version, `6213bb1e…`.** About 2 h wall.
+
+## Task 3 — gates and the frontier count. 2026-09-28
+
+- `DRP-G9`'s eight partials on `DRP-S1` in parallel (about 18 min), then the combining run: **`DRP-G4`,
+  `DRP-G5`, `DRP-G9` (a)–(f) all PASS; every red control fired.** Every relaxed press certified; none
+  bisected. Outcomes and counts: the stage-3c README and `drp_gates_DRP-S1.json`.
+- **The gate-script edit changed no verdict:** the `DRP-S0` combining run, re-run on the edited script
+  and the renamed partials, reproduced `drp_gates_DRP-S0.json` **byte for byte** (`a8ebe145…`, the sha
+  stage 3b committed), H0 included.
+- Launch trap met here, for the next session: `cd api && (A) & (B) & wait` runs the `cd` inside the
+  first background job only, so B started in the worktree root and failed to find its script. Run both
+  from an explicit `cd` each, or one after the other.
+- `drp_c10_frontier.py` over all eight cells: red control fired, added-edge count matched stage 3a's,
+  320 rows per cell. **No fraction computed; no result read** (the Seam-B decision, kept).
+
+## Seam C — reached 2026-09-28
+
+**The `DRP-S1` row is *swept*** (§7), so **all eight cells are**: four cells here, both press rules, all
+four pair sets, `DRP-G4`, `G5`, `G9` passing, one committed JSON per cell, plus `DRP-C10`'s frontier
+count. **Nothing from 3d runs from this session** (§8: 3d is a session that ran no sweep).
+
+**What 3d inherits:** the eight cell files (all in `builder/analysis/2026-09-28-drp-stage3b/cells/`),
+both gate verdicts, stage 3a's instruments (`N_noise`, `b₀`, the pair set), `drp_c10_frontier.json`,
+and two choices left to it by design: which frontier count (`incident_all` or `incident_interior`)
+§2.4's condition reads, and forming §4's cross-cell drop set from the eight `dropped_in_this_cell`
+lists. It also reads `DRP-R11` (`DRP-SW`'s trigger, #246) from `DRP-S1P0`, and weighs stage 3b's
+search departure from `DRP-AM3` item 4, which this row inherited unchanged.

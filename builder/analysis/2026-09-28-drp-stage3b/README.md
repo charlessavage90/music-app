@@ -80,3 +80,9 @@ cells lack, except the identity runs, which only the gate reads.
 
 **For 3c:** `drp_sweep.py` already lists the `DRP-S1` cells and loads the `DRP-S1` map behind
 `DRP-G3`'s verdict; `drp_gates_3b.py DRP-S1 …` runs the same gates on that row (H0 is `DRP-S0`-only).
+
+**Stage 3c ran it (2026-09-28).** The `DRP-S1` cell files and `drp_gates_DRP-S1.json` now sit beside
+this row's, written by the same harness version; their shas and gate outcomes are owned by
+[`../2026-09-28-drp-stage3c/README.md`](../2026-09-28-drp-stage3c/README.md), not by this file. Stage 3c
+also keyed the `DRP-G9` partials by row (`g9__ROW__SET__RULE.json`) and renamed this row's eight to
+match; the verdict above is unchanged (3c's log, task 1).
