@@ -1,3 +1,5 @@
+> **Role: HISTORICAL — Superseded for scoring and metrics; retained as narrative history of how the reviews unfolded.** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 5b6a9e8af4bcbd178647246ff1baee48ed3d9577 -->
 # Architecture Review & Path-Quality Baseline
 
 > ## ⚠ SUPERSEDED for scoring and path-quality metrics

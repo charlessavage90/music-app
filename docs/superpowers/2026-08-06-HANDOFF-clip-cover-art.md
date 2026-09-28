@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED ON NEXT ACTIONS 2026-08-06 (later) by [`2026-08-06-HANDOFF-cocredit-investigation.md`](2026-08-06-HANDOFF-cocredit-investigation.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 5b74f9ab297bc07d3f5cc523f44b0b437f3e5cb3 -->
 # Handoff — the clip cover-art fix, shipped to production, 2026-08-06
 
 **Role: SUPERSEDED on next actions 2026-08-06 (later)** by

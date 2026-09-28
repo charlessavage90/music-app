@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-31 on next actions by [`2026-07-31-HANDOFF-tas-am3-am4.md`](2026-07-31-HANDOFF-tas-am3-am4.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: d295cb0ea8867e5a363f93e2894797ce03b4f5e7 -->
 # Handoff — tag discrimination probe, Tasks 1–3 of 8, 2026-07-30
 
 **Role: ⚠ SUPERSEDED 2026-07-31 on NEXT ACTIONS ONLY.** The current handoff is

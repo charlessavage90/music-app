@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-30 on next actions by [`2026-07-30-HANDOFF-track-b-design.md`](2026-07-30-HANDOFF-track-b-design.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 174a4254c31174c8159851777ff0c7a6137586ee -->
 # Handoff — graph rebuild Track A executed, 2026-07-29
 
 **Role: ⚠ SUPERSEDED 2026-07-30 on next actions** by

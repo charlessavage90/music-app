@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED on next actions 2026-08-06 by [`2026-08-06-HANDOFF-msw-adoption.md`](2026-08-06-HANDOFF-msw-adoption.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: ae552601528c5699bb459ebb97b191e80687b76e -->
 # Handoff — the `MSW-` map switch, Seam 3 reached, 2026-08-06
 
 **⚠ SUPERSEDED 2026-08-06 on next actions by

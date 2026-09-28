@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED on next actions 2026-08-06 (night) by [`2026-08-06-HANDOFF-msw-seam3.md`](2026-08-06-HANDOFF-msw-seam3.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 2fdca1422051f14ca8e3d1e70068dfb598c40d8a -->
 # Handoff — the `MSW-` map switch, Task 10 half done (mid-flight), 2026-08-06
 
 **Role: SUPERSEDED on next actions** by

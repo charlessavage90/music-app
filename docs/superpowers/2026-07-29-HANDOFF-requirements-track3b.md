@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-29 (later) on next actions by [`2026-07-29-HANDOFF-algorithm-selection.md`](2026-07-29-HANDOFF-algorithm-selection.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 1d5ff6e8cb19cd2978078db469fdb9c8e4d63990 -->
 # Handoff — requirements baseline + Track 3b executed, 2026-07-29
 
 **Role: SUPERSEDED — this is NOT the current handoff.** Superseded on **next actions only**

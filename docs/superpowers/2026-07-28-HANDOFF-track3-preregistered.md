@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED 2026-07-28 on next actions by [`2026-07-28-HANDOFF-track3-executed.md`](2026-07-28-HANDOFF-track3-executed.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 9c040bda8f3850187a30f89a361632a320392327 -->
 # Handoff — ASC-5 discharged and Track 3 pre-registered, 2026-07-28
 
 **Role: ⛔ HISTORICAL — SUPERSEDED 2026-07-28 on next actions** by

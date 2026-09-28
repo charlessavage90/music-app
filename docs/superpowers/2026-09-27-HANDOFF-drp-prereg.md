@@ -1,3 +1,5 @@
+> **Role: SUPERSEDED ON NEXT ACTIONS 2026-09-27 (later) by [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md).** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: c40b9c2eed816e9c3c6c57be9c5c86c024004045 -->
 # Handoff — #200 depth-remedy pre-registration committed and critiqued, 2026-09-27
 
 **Role: SUPERSEDED 2026-09-27 (later) on NEXT ACTIONS ONLY** by [`2026-09-27-HANDOFF-drp-amendments.md`](2026-09-27-HANDOFF-drp-amendments.md): `DRP-AM1` is written and the design has been amended through `DRP-AM6`. Its decisions list still stands. Supersedes

@@ -1,3 +1,5 @@
+> **Role: COMPLETE — Phase 2 design, IMPLEMENTED and adopted 2026-07-22 (`capfix`); do not read it as a live agenda.** Banner added 2026-09-28 under `DLS-Q1`; nothing below it has changed.
+<!-- frozen-below: 49b206febb193403a38da749d25344f4e6c6f83c -->
 # Phase 2 — Path Quality: Design
 
 **Date:** 2026-07-21

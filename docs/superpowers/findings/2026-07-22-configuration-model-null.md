@@ -1,5 +1,7 @@
 # Configuration-Model Null — Topological vs. Community-Structure Hub-Seeking
 
+**Role: AUTHORITATIVE for its own figures** — the configuration-model null that `2026-07-21-scoring-adjudication.md` §6 claims 19 and 22 cite.
+
 **Date:** 2026-07-22
 **Status:** Quantitative record for this experiment only. Resolves
 `2026-07-21-scoring-adjudication.md` §6 claims **19** and **22** (spec §A3, task-10).
