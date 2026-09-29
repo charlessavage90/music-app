@@ -1,0 +1,200 @@
+global
+global
+ok ms=0.7 m=0.1 w=2 e=1
+global
+global
+global
+global
+global
+global
+ok ms=0.7 m=0.05 w=1 e=1
+global
+global
+ok ms=0.7 m=0.1 w=2 e=2
+ok ms=0.7 m=0.1 w=1 e=1
+global
+ok ms=0.7 m=0.1 w=3 e=2
+ok ms=0.7 m=0.1 w=1 e=2
+ok ms=0.7 m=0.05 w=1 e=1
+global
+ok ms=0.7 m=0.05 w=2 e=0
+ok ms=0.7 m=0.05 w=3 e=0
+ok ms=0.7 m=0.1 w=2 e=2
+ok ms=0.7 m=0.1 w=1 e=1
+ok ms=0.7 m=0.05 w=1 e=0
+ok ms=0.7 m=0.05 w=3 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+global
+ok ms=0.7 m=0.1 w=2 e=2
+global
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.0 m=0.05 w=2 e=1
+ok ms=0.0 m=0.1 w=2 e=0
+fallback
+global
+ok ms=0.7 m=0.05 w=2 e=2
+ok ms=0.7 m=0.05 w=2 e=1
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.0 m=0.05 w=3 e=2
+ok ms=0.0 m=0.05 w=2 e=1
+fallback
+global
+global
+global
+fallback
+global
+global
+ok ms=0.0 m=0.05 w=2 e=2
+ok ms=0.0 m=0.05 w=2 e=2
+global
+ok ms=0.7 m=0.05 w=3 e=2
+global
+ok ms=0.0 m=0.1 w=2 e=2
+global
+global
+global
+global
+ok ms=0.0 m=0.1 w=3 e=2
+global
+global
+ok ms=0.0 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=1 e=2
+ok ms=0.0 m=0.1 w=2 e=1
+ok ms=0.0 m=0.1 w=3 e=2
+ok ms=0.0 m=0.05 w=3 e=1
+global
+ok ms=0.0 m=0.1 w=2 e=2
+fallback
+fallback
+global
+ok ms=0.7 m=0.05 w=2 e=1
+fallback
+global
+global
+global
+global
+ok ms=0.7 m=0.05 w=1 e=0
+global
+ok ms=0.7 m=0.1 w=1 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.0 m=0.05 w=3 e=2
+ok ms=0.7 m=0.1 w=2 e=0
+global
+global
+ok ms=0.7 m=0.05 w=2 e=0
+ok ms=0.7 m=0.05 w=3 e=2
+global
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=2 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+global
+ok ms=0.0 m=0.1 w=2 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.05 w=2 e=2
+ok ms=0.0 m=0.1 w=3 e=0
+global
+global
+global
+global
+global
+global
+fallback
+ok ms=0.7 m=0.05 w=3 e=2
+ok ms=0.0 m=0.05 w=2 e=1
+global
+global
+fallback
+ok ms=0.7 m=0.1 w=2 e=0
+global
+global
+ok ms=0.7 m=0.05 w=2 e=1
+global
+global
+global
+global
+global
+global
+ok ms=0.0 m=0.1 w=2 e=2
+ok ms=0.7 m=0.1 w=1 e=1
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=1 e=0
+global
+global
+global
+ok ms=0.7 m=0.05 w=1 e=1
+ok ms=0.7 m=0.1 w=3 e=2
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.05 w=1 e=1
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=2 e=1
+ok ms=0.0 m=0.05 w=2 e=1
+ok ms=0.7 m=0.05 w=2 e=0
+ok ms=0.0 m=0.1 w=1 e=2
+ok ms=0.0 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=2 e=2
+ok ms=0.7 m=0.1 w=2 e=0
+global
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=3 e=2
+ok ms=0.7 m=0.05 w=1 e=0
+ok ms=0.0 m=0.1 w=1 e=0
+global
+ok ms=0.7 m=0.1 w=1 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=2 e=1
+ok ms=0.7 m=0.1 w=1 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=1 e=1
+ok ms=0.0 m=0.1 w=2 e=2
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=2 e=1
+ok ms=0.0 m=0.1 w=2 e=1
+ok ms=0.7 m=0.1 w=2 e=1
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=3 e=0
+global
+ok ms=0.0 m=0.1 w=1 e=2
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.7 m=0.1 w=1 e=0
+global
+ok ms=0.0 m=0.1 w=2 e=2
+ok ms=0.0 m=0.1 w=1 e=0
+ok ms=0.7 m=0.05 w=3 e=2
+ok ms=0.0 m=0.1 w=3 e=1
+ok ms=0.0 m=0.1 w=2 e=1
+ok ms=0.0 m=0.1 w=1 e=1
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=3 e=0
+ok ms=0.7 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=1 e=1
+ok ms=0.7 m=0.1 w=1 e=0
+ok ms=0.0 m=0.1 w=2 e=0
+ok ms=0.0 m=0.1 w=3 e=0
+ok ms=0.7 m=0.05 w=2 e=2
+global
+global
+ok ms=0.0 m=0.1 w=2 e=2
+global
+ok ms=0.0 m=0.05 w=3 e=0
+ok ms=0.0 m=0.1 w=3 e=0
+global
+fallback
+global
+global

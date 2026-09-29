@@ -27,6 +27,18 @@ Run from `api/`: `PYTHONIOENCODING=utf-8 uv run python -u ../exploration/kit/qlo
 
 The real journey outscored its shuffled twin in 32/39 (5 ties) and its random twin in 38/39.
 
+### …and on obscure journeys (r1-search's fame-neutral soft-ceiling variant, presses 5 and 10)
+
+| version | mean step (0–3) | stretch or worse |
+|---|---|---|
+| as routed | 1.83 | 33 % |
+| shuffled | 1.38 | 55 % |
+| random same-fame swap | 0.76 | 89 % |
+
+Real beat its random twin 40/40, shuffled 32/40 (3 ties); rater "don't know" ≈ 1 %. The screen does
+not go blind on obscure artists. It may still be mildly harsher on them, so small coherence gaps
+between famous and obscure journeys are read as ties.
+
 ## Baseline — today's app (`baseline/today.txt`)
 
 Middle artists of famous-pair journeys sit at the 99th fame percentile at press 0 **and** press 10.

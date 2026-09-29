@@ -22,6 +22,9 @@ from qlook import Ctx, step_key  # noqa: E402
 import rate  # noqa: E402
 
 
+PRESSES = tuple(int(x) for x in (sys.argv[2].split(",") if len(sys.argv) > 2 else ["0", "10"]))
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     ctx = Ctx()
@@ -38,7 +41,7 @@ def main():
     versions = {"real": [], "shuffled": [], "swapped": []}
     for r in run["rows"]:
         for d in r["ladder"]:
-            if d["k"] not in (0, 10) or not d["path"] or len(d["path"]) < 4:
+            if d["k"] not in PRESSES or not d["path"] or len(d["path"]) < 4:
                 continue
             p = d["path"]
             mid = p[1:-1]
