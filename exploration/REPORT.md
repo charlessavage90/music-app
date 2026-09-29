@@ -69,6 +69,10 @@ Three more things cut against them:
 3. **Stop the router preferring a short all-famous hop over a long obscure detour.** That preference causes the plateau and the ~7 % of presses that briefly get more famous.
 4. **Put shared neighbours into the formal edge-price track, whatever happens to Dig deeper.**
 
+**After the report:** the owner's own notes from using the practice room are in
+`practice-room/logs/2026-09-29-notes.md` (verbatim, each beside its journey), and `HANDOFF.md` is the
+starting point for the session that reviews all of this with him.
+
 Files: `ROUND1.md` is the round-1 digest; each `r*/NOTES.md` has an explorer's full notes; `kit/` holds
 the measuring tools and their fail-checks; the finalist files are `r2-tiers/tiers_keep.py`,
 `r2-nsim/dig_overlap_gentle.py`, `r2-repair/finalist_repair.py` and `r2-simple/final_gentle.py`.
