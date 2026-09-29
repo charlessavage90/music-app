@@ -22,3 +22,4 @@ Aged in Harmony	Tilman Sillescu	6b578d80-8b2d-41f3-8a62-22dc94e3c48a	61ae5e61-64
 Soul Seekerz	Alexandra Stréliski	bf29f809-3beb-4c0e-a522-5b2e873316fd	393b5619-bc5f-4a15-aec9-6bda1a57195d	kit
 Emscherkurve 77	Juçara Marçal	ed387b7d-7fd0-4262-a360-e893d838a24e	ced96166-52c4-44e4-9699-ffd963f80f10	kit
 Radiohead	Portishead	a74b1b7f-71a5-4011-9441-d0b5e4122711	8f6bd1e4-fbe1-4f50-aa9b-94c450ec0f11	practice-room smoke test 2026-09-28
+Led Zeppelin	The Format	678d88b2-87b0-403b-b63d-5da7465aecc3	81b07a2a-cdf0-4c5e-a68c-8d910e1f0ea6	practice room 2026-09-29

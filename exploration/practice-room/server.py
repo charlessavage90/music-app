@@ -10,6 +10,7 @@ search and clip resolver by import (nothing in api/ is modified).
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import datetime
 import sys
@@ -119,6 +120,20 @@ def log_pair(s: int, t: int) -> None:
         fh.write(chr(9).join(row) + chr(10))
 
 
+SESSION_LOG = HERE / "session-log.jsonl"  # every journey shown and every note; gitignored
+
+
+def log_event(kind, vid, s, t, pressed, path, text=None) -> None:
+    rec = {"at": datetime.datetime.now().isoformat(timespec="seconds"), "kind": kind,
+           "column": vid, "from": ctx.names[s], "to": ctx.names[t], "press": len(pressed),
+           "dug_past": [ctx.names[v] for v in pressed],
+           "journey": [[ctx.names[v], round(ctx.pl[v] * 100, 1)] for v in path] if path else None}
+    if text is not None:
+        rec["note"] = text
+    with SESSION_LOG.open("a", encoding="utf-8") as fh:
+        fh.write(json.dumps(rec, ensure_ascii=False) + chr(10))
+
+
 class JourneyReq(BaseModel):
     variant: str
     source: str
@@ -150,12 +165,29 @@ def do_journey(req: JourneyReq):
     pressed = tuple(node_of(m) for m in req.pressed)
     path = journey(req.variant, s, t, pressed)
     if not path:
+        log_event("journey", req.variant, s, t, pressed, None)
         return {"artists": [], "note": "no journey"}
     mids = [ctx.pl[v] for v in path[1:-1] if ctx.measured[v]]
     mids.sort()
     med = mids[len(mids) // 2] if mids else None
+    log_event("journey", req.variant, s, t, pressed, path)
     return {"artists": [artist(v) for v in path],
             "median_mid_fame": round(med * 100, 1) if med is not None else None}
+
+
+class NoteReq(JourneyReq):
+    text: str
+
+
+@app.post("/api/note")
+def do_note(req: NoteReq):
+    """A note typed in a column, saved beside the exact journey it is about."""
+    if req.variant not in mods:
+        raise HTTPException(404, "unknown variant")
+    s, t = node_of(req.source), node_of(req.target)
+    pressed = tuple(node_of(m) for m in req.pressed)
+    log_event("note", req.variant, s, t, pressed, journey(req.variant, s, t, pressed), req.text[:4000])
+    return {"ok": True}
 
 
 @app.get("/api/track/{mbid}")
@@ -169,4 +201,4 @@ async def track(mbid: str, index: int = 0):
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8765, log_level="warning")
+    uvicorn.run(app, host="127.0.0.1", port=int(os.environ.get("PR_PORT", "8765")), log_level="warning")

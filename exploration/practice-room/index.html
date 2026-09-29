@@ -51,6 +51,11 @@
   .colbar { display: flex; gap: 6px; margin-top: 8px; }
   .pressed { font-size: 12px; color: var(--muted); margin-top: 8px; }
   .busy { opacity: .45; }
+  .note { width: 100%; margin-top: 10px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--bg); color: var(--ink); font: inherit; font-size: 13px; resize: vertical; }
+  .notebar { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+  .notebar button { font-size: 12px; padding: 4px 8px; }
+  .saved { font-size: 12px; color: var(--muted); }
   .legend { font-size: 12px; color: var(--muted); margin-top: 8px; }
   @media (max-width: 640px) { main { padding: 12px 16px; } .col { flex-basis: 85vw; } }
 </style>
@@ -170,6 +175,27 @@ function render(vid) {
   bar.append(undo, reset);
   col.appendChild(bar);
   if (s.names && s.names.length) col.appendChild(el("div", "pressed", "Dug past: " + s.names.join(", ")));
+  // A note about THIS journey at THIS press, saved with the journey itself.
+  const note = el("textarea", "note");
+  note.rows = 2;
+  note.placeholder = "Note on this journey…";
+  note.value = s.draft || "";
+  note.oninput = () => { s.draft = note.value; };
+  const save = el("button", "savenote", "Save note");
+  const saved = el("span", "saved", "");
+  save.onclick = async () => {
+    if (!note.value.trim()) return;
+    const r = await fetch("/api/note", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ variant: vid, source: pick.a.mbid, target: pick.b.mbid,
+                             pressed: s.pressed, text: note.value }),
+    });
+    if (r.ok) { s.draft = ""; note.value = ""; saved.textContent = "saved ✓"; }
+    else saved.textContent = "not saved";
+  };
+  const nb = el("div", "notebar");
+  nb.append(save, saved);
+  col.append(note, nb);
 }
 
 async function playClip(a, btn) {
