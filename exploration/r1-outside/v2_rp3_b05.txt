@@ -1,0 +1,104 @@
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+# variant ../exploration/r1-outside/v2_rp3_b05.py   20 pairs   162s
+
+## Lupe Fiasco -> Kid Rock  [famous]
+  p0  Lupe Fiasco (99) > Adam Levine (95) > Myles Kennedy (92) > Kid Rock (99)
+  p10 Lupe Fiasco (99) > John Legend (100) > The Script (99) > Uncle Kracker (96) > Kid Rock (99)
+
+## Survivor -> Nas  [famous]
+  p0  Survivor (99) > Alice Cooper (99) > Faith No More (100) > Beastie Boys (100) > Nas (100)
+  p10 Survivor (99) > Ray Parker Jr. (97) > Whodini (91) > Grandmaster Flash & The Furious Five (93) > N.W.A (99) > Nas (100)
+
+## Friendly Fires -> Steve Miller Band  [famous]
+  p0  Friendly Fires (100) > Little Boots (99) > Vince Clarke (41) > Pete Townshend (96) > Joe Walsh (97) > Steve Miller Band (99)
+  p10 Friendly Fires (100) > The Big Pink (99) > Bachelorette (84) > Luke Buda (46) > Tim Finn (86) > The Little Heroes (22) > The J. Geils Band (97) > Steve Miller Band (99)
+
+## She & Him -> Andrew Bird  [famous]
+  p0  She & Him (100) > Feist (100) > Andrew Bird (100)
+  p10 She & Him (100) > the bird and the bee (99) > Kings of Convenience (100) > Andrew Bird (100)
+
+## Explosions in the Sky -> Sepultura  [famous]
+  p0  Explosions in the Sky (100) > Pelican (98) > Baroness (98) > Mastodon (99) > Sepultura (99)
+  p10 Explosions in the Sky (100) > Pelican (98) > Intronaut (92) > Strapping Young Lad (97) > At the Gates (97) > Sepultura (99)
+
+## Louis Armstrong -> Ozzy Osbourne  [famous]
+  p0  Louis Armstrong (100) > Bill Withers (99) > Steely Dan (99) > Blue Öyster Cult (99) > Ozzy Osbourne (100)
+  p10 Louis Armstrong (100) > Frank Sinatra (100) > Elton John (100) > AC/DC (100) > Ozzy Osbourne (100)
+
+## Janet Jackson -> 311  [famous]
+  p0  Janet Jackson (99) > Des’ree (97) > Eagle‐Eye Cherry (99) > Third Eye Blind (99) > 311 (99)
+  p10 Janet Jackson (99) > Bobby Brown (96) > Stephen Marley (96) > Rebelution (94) > 311 (99)
+
+## Built to Spill -> Billie Holiday  [famous]
+  p0  Built to Spill (99) > Ween (99) > Tom Waits (100) > Nina Simone (100) > Billie Holiday (100)
+  p10 Built to Spill (99) > Songs: Ohia (97) > Townes Van Zandt (98) > Marty Robbins (96) > Margaret Whiting (85) > Billie Holiday (100)
+
+## Too $hort -> The Wallflowers  [famous]
+  p0  Too $hort (97) > Kurupt (98) > Everlast (99) > The Wallflowers (99)
+  p10 Too $hort (97) > Jill Scott (98) > Corinne Bailey Rae (99) > Sixpence None the Richer (99) > The Wallflowers (99)
+
+## Anastacia -> Mungo Jerry  [famous]
+  p0  Anastacia (98) > Jennifer Paige (95) > Big Mountain (94) > Arrow (73) > Mungo Jerry (97)
+  p10 Anastacia (98) > Alesha Dixon (96) > Koza Mostra (14) > Stacked Like Pancakes (23) > Anti-Venöm (8) > The Rivieras (80) > Mungo Jerry (97)
+
+## The Shirelles -> Wire  [famous]
+  p0  The Shirelles (97) > Dionne Warwick (98) > Burt Bacharach (95) > Elvis Costello (99) > Wire (98)
+  p10 The Shirelles (97) > The Shangri‐Las (98) > eden ahbez (79) > Ken Nordine (80) > Can (98) > Wire (98)
+
+## The O’Jays -> Midnight Oil  [famous]
+  p0  The O’Jays (98) > Marvin Gaye (100) > Prince (100) > INXS (99) > Midnight Oil (98)
+  p10 The O’Jays (98) > Earth, Wind & Fire (99) > Jamiroquai (100) > The Cardigans (100) > Divinyls (96) > Midnight Oil (98)
+
+## Pete Townshend -> Silverstein  [famous]
+  p0  Pete Townshend (96) > Lucia Micarelli (71) > Jack’s Mannequin (99) > Anberlin (99) > Silverstein (99)
+  p10 Pete Townshend (96) > Lucia Micarelli (71) > Jack’s Mannequin (99) > Copeland (98) > Circa Survive (98) > Silverstein (99)
+
+## SOFI -> New York Dolls  [famous]
+  p0  SOFI (95) > Greta Svabo Bech (93) > Raw Man (51) > Vicarious Bliss (89) > Zongamin (95) > New York Dolls (98)
+  p10 SOFI (95) > Midnight Conspiracy (22) > BreakBeatBuddha (54) > Apple (44) > Art (60) > The Fallen Angels (23) > The Chob (35) > New York Dolls (98)
+
+## Comeback Kid -> Ivy  [famous]
+  p0  Comeback Kid (97) > The Bronx (96) > Terror Squad (94) > Houston (83) > Taxi Doll (65) > Ivy (97)
+  p10 Comeback Kid (97) > Boysetsfire (95) > Passage 4 (21) > Sober (23) > Frost (13) > Frost (76) > Echo (21) > Ivy (97)
+
+## Compton’s Most Wanted -> Alabina  [mid]
+  p0  Compton’s Most Wanted (64) > Coolio (99) > TNN (42) > Kaoma (95) > Alabina (69)
+  p10 Compton’s Most Wanted (64) > Boss (53) > Little Foot Long Foot (5) > “Whispering” Jack Smith (32) > Lil Green (59) > Buster Bailey and His Rhythm Busters (4) > Vanessa Quiñones (67) > Mory Kanté (90) > Alabina (69)
+
+## Mano Le Tough -> Quando Rondo  [mid]
+  p0  Mano Le Tough (65) > Róisín Murphy (99) > Cazwell (75) > RuPaul (91) > Mike WiLL Made‐It (76) > NLE Choppa (76) > Quando Rondo (35)
+  p10 Mano Le Tough (65) > Palms Trax (39) > Tlim Shug (15) > DJ Playstation (4) > Ugly God (56) > Tee Grizzley (67) > Quando Rondo (35)
+
+## Aged in Harmony -> Tilman Sillescu  [mid]
+  p0  Aged in Harmony (31) > Letta Mbulu (77) > Bruno Spoerri (57) > Christopher Franke (80) > Simon Ravn (7) > Tilman Sillescu (64)
+  p10 Aged in Harmony (31) > Robert Lowe (32) > Cheyenne (36) > Highland (67) > Fright Ranger (37) > SGX (44) > Siamey (22) > Nathan Rich (37) > Tilman Sillescu (64)
+
+## Soul Seekerz -> Alexandra Stréliski  [mid]
+  p0  Soul Seekerz (55) > Victoria Beckham (87) > S Club 8 (74) > Busted (96) > Guy Chambers (23) > Alexandra Stréliski (59)
+  p10 Soul Seekerz (55) > The White Tie Affair (90) > DJ Pickee (0) > A Kiss Could Be Deadly (62) > Digital Daggers (77) > Phildel (64) > Alexandra Stréliski (59)
+
+## Emscherkurve 77 -> Juçara Marçal  [mid]
+  p0  Emscherkurve 77 (36) > Alpha Boy School (54) > Stubborn All-Stars (75) > Victor Rice (73) > Juçara Marçal (32)
+  p10 Emscherkurve 77 (36) > Alpha Boy School (54) > Les Partisans (22) > Garotos Podres (80) > Rogério Skylab (65) > Fernandinho Beatbox (6) > Cabruêra (37) > Juçara Marçal (32)
+
+press | fame mid-artists (famous pairs) | (mid pairs) |  len | weakest link | top10% share | coherence | bad steps
+------------------------------------------------------------------------------------------------------------------
+    0 |                           98.3 |        76.1 |  5.2 |        0.750 |          87% |       nan |      nan%
+    1 |                           98.8 |        71.5 |  5.3 |        0.667 |          82% |       nan |      nan%
+    2 |                           98.2 |        48.3 |  5.7 |        0.565 |          73% |       nan |      nan%
+    3 |                           97.8 |        44.3 |  5.8 |        0.434 |          68% |       nan |      nan%
+    4 |                           97.2 |        37.5 |  6.0 |        0.415 |          72% |       nan |      nan%
+    5 |                           97.8 |        54.0 |  6.2 |        0.407 |          74% |       nan |      nan%
+    6 |                           93.9 |        42.4 |  6.7 |        0.302 |          67% |       nan |      nan%
+    7 |                           94.3 |        41.2 |  6.5 |        0.346 |          68% |       nan |      nan%
+    8 |                           95.2 |        54.0 |  6.2 |        0.379 |          73% |       nan |      nan%
+    9 |                           96.9 |        40.0 |  6.5 |        0.353 |          69% |       nan |      nan%
+   10 |                           96.4 |        45.6 |  6.5 |        0.532 |          71% |       nan |      nan%
+
+routing time per journey: median 3.49s  max 10.75s

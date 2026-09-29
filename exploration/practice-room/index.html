@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practice Room</title>
+<style>
+  :root {
+    --bg: #f6f4ef; --panel: #ffffff; --ink: #1d1b18; --muted: #6b665d; --line: #e2ddd3;
+    --accent: #2f5d50; --accent-ink: #ffffff; --warm: #b4532a;
+    --f-hi: #b4532a; --f-mid: #b88a2a; --f-lo: #2f7a5d; --f-vlo: #2d5f8a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #161513; --panel: #201e1b; --ink: #ece8e1; --muted: #a39d92; --line: #36332e;
+      --accent: #6fb39c; --accent-ink: #10201b; --warm: #e0875f;
+      --f-hi: #e0875f; --f-mid: #d9b15a; --f-lo: #6fc39f; --f-vlo: #79a9d6; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+    font: 15px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  h1 { font-size: 18px; margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .pick { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; }
+  .field { position: relative; flex: 1 1 220px; }
+  .field input { width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--bg); color: var(--ink); font: inherit; }
+  .field .chosen { font-size: 12px; color: var(--muted); margin-top: 3px; min-height: 16px; }
+  .drop { position: absolute; top: 40px; left: 0; right: 0; z-index: 5; background: var(--panel);
+    border: 1px solid var(--line); border-radius: 8px; max-height: 280px; overflow: auto; display: none; }
+  .drop div { padding: 6px 10px; cursor: pointer; }
+  .drop div:hover { background: var(--bg); }
+  button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    border-radius: 8px; padding: 7px 12px; cursor: pointer; }
+  button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+  main { display: flex; gap: 12px; padding: 16px; overflow-x: auto; align-items: flex-start; }
+  .col { flex: 0 0 300px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px; }
+  .col h2 { font-size: 15px; margin: 0; }
+  .col .desc { color: var(--muted); font-size: 12px; margin: 2px 0 8px; min-height: 32px; }
+  .stats { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;
+    margin-bottom: 8px; }
+  .card { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line); }
+  .card .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fame { font-size: 12px; font-variant-numeric: tabular-nums; min-width: 38px; text-align: right;
+    font-weight: 600; }
+  .play { width: 30px; height: 30px; padding: 0; border-radius: 50%; flex: none; }
+  .dig { font-size: 12px; padding: 4px 8px; flex: none; }
+  .end .name { font-weight: 600; }
+  .colbar { display: flex; gap: 6px; margin-top: 8px; }
+  .pressed { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .busy { opacity: .45; }
+  .note { width: 100%; margin-top: 10px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--bg); color: var(--ink); font: inherit; font-size: 13px; resize: vertical; }
+  .notebar { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+  .notebar button { font-size: 12px; padding: 4px 8px; }
+  .saved { font-size: 12px; color: var(--muted); }
+  .legend { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  @media (max-width: 640px) { main { padding: 12px 16px; } .col { flex-basis: 85vw; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Practice room — Dig deeper, side by side</h1>
+  <p class="sub">Exploratory. Each column is one way of answering Dig deeper. The number beside each artist is
+    its fame percentile on the map (100 = most listened). Press Dig deeper on any middle artist, in any column.</p>
+  <div class="pick">
+    <div class="field"><input id="qa" placeholder="First artist…" autocomplete="off"><div class="drop" id="da"></div><div class="chosen" id="ca"></div></div>
+    <div class="field"><input id="qb" placeholder="Second artist…" autocomplete="off"><div class="drop" id="db"></div><div class="chosen" id="cb"></div></div>
+    <button class="primary" id="go" disabled>Build journeys</button>
+    <button id="all" disabled title="Press Dig deeper on the most famous middle artist in every column">Dig deeper everywhere</button>
+  </div>
+  <div class="legend">Fame colours: <span style="color:var(--f-hi)">≥ 95</span> ·
+    <span style="color:var(--f-mid)">80–95</span> · <span style="color:var(--f-lo)">50–80</span> ·
+    <span style="color:var(--f-vlo)">&lt; 50</span></div>
+</header>
+<main id="cols"></main>
+<audio id="audio"></audio>
+<script>
+const $ = (id) => document.getElementById(id);
+const pick = { a: null, b: null };
+let variants = [];
+const state = new Map();  // variant id -> {pressed: [mbid], artists: []}
+const audio = $("audio");
+let playing = null;
+
+function fameColour(f) {
+  return f >= 95 ? "var(--f-hi)" : f >= 80 ? "var(--f-mid)" : f >= 50 ? "var(--f-lo)" : "var(--f-vlo)";
+}
+
+function wireSearch(inputId, dropId, chosenId, slot) {
+  const inp = $(inputId), drop = $(dropId);
+  let timer;
+  inp.addEventListener("input", () => {
+    clearTimeout(timer);
+    timer = setTimeout(async () => {
+      if (!inp.value.trim()) { drop.style.display = "none"; return; }
+      const r = await fetch("/api/search?q=" + encodeURIComponent(inp.value));
+      const rows = await r.json();
+      drop.innerHTML = "";
+      rows.forEach((a) => {
+        const d = document.createElement("div");
+        d.textContent = `${a.name}  (${a.fame})`;
+        d.onclick = () => {
+          pick[slot] = a; inp.value = a.name; drop.style.display = "none";
+          $(chosenId).textContent = `fame ${a.fame}`;
+          $("go").disabled = !(pick.a && pick.b);
+        };
+        drop.appendChild(d);
+      });
+      drop.style.display = rows.length ? "block" : "none";
+    }, 180);
+  });
+  document.addEventListener("click", (e) => { if (!drop.contains(e.target) && e.target !== inp) drop.style.display = "none"; });
+}
+
+async function load(vid) {
+  const col = $("col-" + vid);
+  col.classList.add("busy");
+  const r = await fetch("/api/journey", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ variant: vid, source: pick.a.mbid, target: pick.b.mbid, pressed: state.get(vid).pressed }),
+  });
+  const j = await r.json();
+  state.get(vid).artists = j.artists;
+  state.get(vid).median = j.median_mid_fame;
+  col.classList.remove("busy");
+  render(vid);
+}
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = String(text);
+  return e;
+}
+
+function render(vid) {
+  const v = variants.find((x) => x.id === vid), s = state.get(vid);
+  const col = $("col-" + vid);
+  col.replaceChildren();
+  col.appendChild(el("h2", "", v.label));
+  col.appendChild(el("div", "desc", v.desc));
+  const stats = el("div", "stats");
+  stats.appendChild(el("span", "", "presses: " + s.pressed.length));
+  stats.appendChild(el("span", "", "typical middle fame: " + (s.median ?? "–")));
+  stats.appendChild(el("span", "", s.artists.length + " artists"));
+  col.appendChild(stats);
+  if (!s.artists.length) col.appendChild(el("div", "desc", "No journey."));
+  s.artists.forEach((a, i) => {
+    const end = i === 0 || i === s.artists.length - 1;
+    const row = el("div", "card" + (end ? " end" : ""));
+    const play = el("button", "play", "▶");
+    play.title = "Play a 30-second clip";
+    play.onclick = (e) => playClip(a, e.currentTarget);
+    const name = el("span", "name", a.name);
+    name.title = String(a.name);
+    const fame = el("span", "fame", a.measured ? a.fame : "?");
+    fame.style.color = fameColour(Number(a.fame));
+    row.append(play, name, fame);
+    if (!end) {
+      const b = el("button", "dig", "Dig deeper");
+      b.onclick = () => { s.pressed.push(a.mbid); s.names = (s.names || []).concat(a.name); load(vid); };
+      row.appendChild(b);
+    }
+    col.appendChild(row);
+  });
+  const bar = el("div", "colbar");
+  const undo = el("button", "undo", "Undo press");
+  const reset = el("button", "reset", "Reset");
+  undo.disabled = reset.disabled = !s.pressed.length;
+  undo.onclick = () => { s.pressed.pop(); (s.names || []).pop(); load(vid); };
+  reset.onclick = () => { s.pressed = []; s.names = []; load(vid); };
+  bar.append(undo, reset);
+  col.appendChild(bar);
+  if (s.names && s.names.length) col.appendChild(el("div", "pressed", "Dug past: " + s.names.join(", ")));
+  // A note about THIS journey at THIS press, saved with the journey itself.
+  const note = el("textarea", "note");
+  note.rows = 2;
+  note.placeholder = "Note on this journey…";
+  note.value = s.draft || "";
+  note.oninput = () => { s.draft = note.value; };
+  const save = el("button", "savenote", "Save note");
+  const saved = el("span", "saved", "");
+  save.onclick = async () => {
+    if (!note.value.trim()) return;
+    const r = await fetch("/api/note", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ variant: vid, source: pick.a.mbid, target: pick.b.mbid,
+                             pressed: s.pressed, text: note.value }),
+    });
+    if (r.ok) { s.draft = ""; note.value = ""; saved.textContent = "saved ✓"; }
+    else saved.textContent = "not saved";
+  };
+  const nb = el("div", "notebar");
+  nb.append(save, saved);
+  col.append(note, nb);
+}
+
+async function playClip(a, btn) {
+  if (playing === btn) { audio.pause(); btn.textContent = "▶"; playing = null; return; }
+  if (playing) playing.textContent = "▶";
+  btn.textContent = "…";
+  const r = await fetch("/api/track/" + a.mbid);
+  if (r.status !== 200) { btn.textContent = "–"; btn.title = "No preview found"; return; }
+  const t = await r.json();
+  audio.src = t.preview_url; audio.play();
+  btn.textContent = "❚❚"; btn.title = t.title; playing = btn;
+  audio.onended = () => { btn.textContent = "▶"; playing = null; };
+}
+
+async function build() {
+  $("all").disabled = false;
+  const cols = $("cols");
+  cols.innerHTML = "";
+  variants.forEach((v) => {
+    state.set(v.id, { pressed: [], names: [], artists: [] });
+    const d = document.createElement("section");
+    d.className = "col"; d.id = "col-" + v.id;
+    cols.appendChild(d);
+  });
+  await Promise.all(variants.map((v) => load(v.id)));
+}
+
+$("go").onclick = build;
+$("all").onclick = () => {
+  variants.forEach((v) => {
+    const s = state.get(v.id);
+    const mids = s.artists.slice(1, -1);
+    if (!mids.length) return;
+    const top = mids.reduce((m, a) => (a.fame > m.fame ? a : m));
+    s.pressed.push(top.mbid); s.names.push(top.name);
+    load(v.id);
+  });
+};
+
+wireSearch("qa", "da", "ca", "a");
+wireSearch("qb", "db", "cb", "b");
+fetch("/api/variants").then((r) => r.json()).then((v) => { variants = v; });
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{
+ "0": {
+  "fame_famous": 0.9946561391463554,
+  "fame_mid": 0.9885684860968074,
+  "length": 8.05,
+  "weakest": 0.9842910170555115,
+  "top10_share": 0.9392857142857143,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "1": {
+  "fame_famous": 0.9921272456802838,
+  "fame_mid": 0.8564595491474997,
+  "length": 8.05,
+  "weakest": 0.9455027282238007,
+  "top10_share": 0.77,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "2": {
+  "fame_famous": 0.9937521455544113,
+  "fame_mid": 0.8315139031925849,
+  "length": 8.3,
+  "weakest": 0.9088135063648224,
+  "top10_share": 0.7854497354497354,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "3": {
+  "fame_famous": 0.9913777320059503,
+  "fame_mid": 0.778910630506923,
+  "length": 8.5,
+  "weakest": 0.9269111752510071,
+  "top10_share": 0.7416666666666667,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "4": {
+  "fame_famous": 0.9908055841629477,
+  "fame_mid": 0.7637086623183431,
+  "length": 8.5,
+  "weakest": 0.9181879460811615,
+  "top10_share": 0.8,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "5": {
+  "fame_famous": 0.9913262387000801,
+  "fame_mid": 0.7451310218560476,
+  "length": 8.6,
+  "weakest": 0.8986883163452148,
+  "top10_share": 0.7555555555555556,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "6": {
+  "fame_famous": 0.9925391921272457,
+  "fame_mid": 0.6524888431170615,
+  "length": 8.8,
+  "weakest": 0.8861275315284729,
+  "top10_share": 0.7333333333333333,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "7": {
+  "fame_famous": 0.9919899301979631,
+  "fame_mid": 0.6356219247053438,
+  "length": 9.1,
+  "weakest": 0.8931290209293365,
+  "top10_share": 0.8,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "8": {
+  "fame_famous": 0.9884654994850669,
+  "fame_mid": 0.6201682114658428,
+  "length": 9.6,
+  "weakest": 0.7786752879619598,
+  "top10_share": 0.6606349206349207,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "9": {
+  "fame_famous": 0.9904622954571461,
+  "fame_mid": 0.6095090971507038,
+  "length": 9.85,
+  "weakest": 0.7905756831169128,
+  "top10_share": 0.6666666666666666,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ },
+ "10": {
+  "fame_famous": 0.9907884197276576,
+  "fame_mid": 0.5907254834649274,
+  "length": 10.15,
+  "weakest": 0.7566335797309875,
+  "top10_share": 0.6666666666666666,
+  "coherence": NaN,
+  "bad_steps": NaN,
+  "n": 20
+ }
+}

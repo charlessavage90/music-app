@@ -1,0 +1,7714 @@
+{
+"variant": "../exploration/r1-search/splice.py",
+"rows": [
+{
+"tag": "famous",
+"source": 70811,
+"target": 59124,
+"ladder": [
+{
+"k": 0,
+"path": [
+70811,
+40131,
+24995,
+52361,
+25846,
+50052,
+60292,
+69765,
+59124
+],
+"secs": 0.36,
+"victim": 25846,
+"names": [
+"Lupe Fiasco",
+"John Legend",
+"Mariah Carey",
+"TLC",
+"Alanis Morissette",
+"Third Eye Blind",
+"Silverchair",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9965,
+0.9964,
+0.9897,
+0.9975,
+0.9923,
+0.9919,
+0.9926,
+0.9904
+]
+},
+{
+"k": 1,
+"path": [
+70811,
+40131,
+24995,
+52361,
+50634,
+50052,
+60292,
+69765,
+59124
+],
+"secs": 0.4,
+"victim": 40131,
+"names": [
+"Lupe Fiasco",
+"John Legend",
+"Mariah Carey",
+"TLC",
+"Smash Mouth",
+"Third Eye Blind",
+"Silverchair",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9965,
+0.9964,
+0.9897,
+0.9937,
+0.9923,
+0.9919,
+0.9926,
+0.9904
+]
+},
+{
+"k": 2,
+"path": [
+70811,
+70556,
+54921,
+52361,
+50634,
+50052,
+60292,
+69765,
+59124
+],
+"secs": 1.93,
+"victim": 50634,
+"names": [
+"Lupe Fiasco",
+"T‐Pain",
+"Missy Elliott",
+"TLC",
+"Smash Mouth",
+"Third Eye Blind",
+"Silverchair",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9935,
+0.9927,
+0.9897,
+0.9937,
+0.9923,
+0.9919,
+0.9926,
+0.9904
+]
+},
+{
+"k": 3,
+"path": [
+70811,
+70556,
+54921,
+52361,
+66618,
+43928,
+50052,
+60292,
+69765,
+59124
+],
+"secs": 2.32,
+"victim": 43928,
+"names": [
+"Lupe Fiasco",
+"T‐Pain",
+"Missy Elliott",
+"TLC",
+"Sixpence None the Richer",
+"Sheryl Crow",
+"Third Eye Blind",
+"Silverchair",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9935,
+0.9927,
+0.9897,
+0.9913,
+0.9945,
+0.9923,
+0.9919,
+0.9926,
+0.9904
+]
+},
+{
+"k": 4,
+"path": [
+70811,
+7498,
+1857,
+5993,
+18982,
+47901,
+69765,
+59124
+],
+"secs": 2.28,
+"victim": 1857,
+"names": [
+"Lupe Fiasco",
+"Ye",
+"Daft Punk",
+"The White Stripes",
+"Rage Against the Machine",
+"Stone Temple Pilots",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9995,
+0.9999,
+0.9998,
+0.9994,
+0.9954,
+0.9926,
+0.9904
+]
+},
+{
+"k": 5,
+"path": [
+70811,
+7498,
+23019,
+36956,
+16600,
+47901,
+69765,
+59124
+],
+"secs": 2.71,
+"victim": 16600,
+"names": [
+"Lupe Fiasco",
+"Ye",
+"Bon Iver",
+"The Shins",
+"Beck",
+"Stone Temple Pilots",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9995,
+0.9991,
+0.9988,
+0.9996,
+0.9954,
+0.9926,
+0.9904
+]
+},
+{
+"k": 6,
+"path": [
+70811,
+70556,
+63694,
+65591,
+54746,
+50466,
+69765,
+59124
+],
+"secs": 2.6,
+"victim": 54746,
+"names": [
+"Lupe Fiasco",
+"T‐Pain",
+"Taio Cruz",
+"Train",
+"Counting Crows",
+"Bush",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9935,
+0.9929,
+0.9964,
+0.9973,
+0.9943,
+0.9926,
+0.9904
+]
+},
+{
+"k": 7,
+"path": [
+70811,
+70556,
+63694,
+65591,
+50052,
+60292,
+69765,
+59124
+],
+"secs": 2.69,
+"victim": 65591,
+"names": [
+"Lupe Fiasco",
+"T‐Pain",
+"Taio Cruz",
+"Train",
+"Third Eye Blind",
+"Silverchair",
+"Chris Cornell",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9935,
+0.9929,
+0.9964,
+0.9923,
+0.9919,
+0.9926,
+0.9904
+]
+},
+{
+"k": 8,
+"path": [
+70811,
+50584,
+18523,
+6507,
+59124
+],
+"secs": 2.97,
+"victim": 50584,
+"names": [
+"Lupe Fiasco",
+"Big Sean",
+"Gucci Mane",
+"Yelawolf",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9805,
+0.9711,
+0.9511,
+0.9904
+]
+},
+{
+"k": 9,
+"path": [
+70811,
+6643,
+18523,
+6507,
+59124
+],
+"secs": 2.71,
+"victim": 6643,
+"names": [
+"Lupe Fiasco",
+"Rick Ross",
+"Gucci Mane",
+"Yelawolf",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9866,
+0.9711,
+0.9511,
+0.9904
+]
+},
+{
+"k": 10,
+"path": [
+70811,
+55112,
+15752,
+59124
+],
+"secs": 2.57,
+"victim": 55112,
+"names": [
+"Lupe Fiasco",
+"Adam Levine",
+"Myles Kennedy",
+"Kid Rock"
+],
+"pctl": [
+0.9944,
+0.9536,
+0.9225,
+0.9904
+]
+}
+],
+"source_name": "Lupe Fiasco",
+"target_name": "Kid Rock"
+},
+{
+"tag": "famous",
+"source": 29262,
+"target": 71033,
+"ladder": [
+{
+"k": 0,
+"path": [
+29262,
+19586,
+28389,
+39510,
+71033
+],
+"secs": 0.17,
+"victim": 39510,
+"names": [
+"Survivor",
+"Men at Work",
+"Earth, Wind & Fire",
+"OutKast",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9912,
+0.9938,
+0.9985,
+0.9967
+]
+},
+{
+"k": 1,
+"path": [
+29262,
+36709,
+62836,
+85834,
+57727,
+71033
+],
+"secs": 0.11,
+"victim": 57727,
+"names": [
+"Survivor",
+"Pat Benatar",
+"Stevie Nicks",
+"Bootie Brown",
+"De La Soul",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9883,
+0.9843,
+0.8977,
+0.9992,
+0.9967
+]
+},
+{
+"k": 2,
+"path": [
+29262,
+72952,
+41308,
+45631,
+58988,
+71033
+],
+"secs": 0.14,
+"victim": 41308,
+"names": [
+"Survivor",
+"Wham!",
+"Madonna",
+"Beyoncé",
+"Lil Wayne",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9936,
+0.9992,
+0.9987,
+0.9965,
+0.9967
+]
+},
+{
+"k": 3,
+"path": [
+29262,
+7068,
+1461,
+51200,
+71033
+],
+"secs": 0.16,
+"victim": 7068,
+"names": [
+"Survivor",
+"Kenny Loggins",
+"Thundercat",
+"Danny Brown",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9871,
+0.9677,
+0.9744,
+0.9967
+]
+},
+{
+"k": 4,
+"path": [
+29262,
+62299,
+44996,
+53203,
+71033
+],
+"secs": 0.11,
+"victim": 44996,
+"names": [
+"Survivor",
+"Van Halen",
+"Pearl Jam",
+"Beastie Boys",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.997,
+0.9993,
+0.9991,
+0.9967
+]
+},
+{
+"k": 5,
+"path": [
+29262,
+81406,
+60621,
+53203,
+71033
+],
+"secs": 0.17,
+"victim": 53203,
+"names": [
+"Survivor",
+"Alice Cooper",
+"Faith No More",
+"Beastie Boys",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9936,
+0.9962,
+0.9991,
+0.9967
+]
+},
+{
+"k": 6,
+"path": [
+29262,
+72952,
+24995,
+48806,
+79321,
+71033
+],
+"secs": 0.59,
+"victim": 48806,
+"names": [
+"Survivor",
+"Wham!",
+"Mariah Carey",
+"Alicia Keys",
+"Ms. Lauryn Hill",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9936,
+0.9964,
+0.9978,
+0.9919,
+0.9967
+]
+},
+{
+"k": 7,
+"path": [
+29262,
+72952,
+24995,
+40131,
+65840,
+71033
+],
+"secs": 0.61,
+"victim": 40131,
+"names": [
+"Survivor",
+"Wham!",
+"Mariah Carey",
+"John Legend",
+"Common",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9936,
+0.9964,
+0.9965,
+0.9944,
+0.9967
+]
+},
+{
+"k": 8,
+"path": [
+29262,
+72952,
+24995,
+45631,
+58988,
+71033
+],
+"secs": 0.56,
+"victim": 45631,
+"names": [
+"Survivor",
+"Wham!",
+"Mariah Carey",
+"Beyoncé",
+"Lil Wayne",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9936,
+0.9964,
+0.9987,
+0.9965,
+0.9967
+]
+},
+{
+"k": 9,
+"path": [
+29262,
+72952,
+24995,
+57285,
+79321,
+71033
+],
+"secs": 0.6,
+"victim": 24995,
+"names": [
+"Survivor",
+"Wham!",
+"Mariah Carey",
+"Destiny’s Child",
+"Ms. Lauryn Hill",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9936,
+0.9964,
+0.9897,
+0.9919,
+0.9967
+]
+},
+{
+"k": 10,
+"path": [
+29262,
+14009,
+1032,
+57285,
+79321,
+71033
+],
+"secs": 0.68,
+"victim": 1032,
+"names": [
+"Survivor",
+"Belinda Carlisle",
+"Whitney Houston",
+"Destiny’s Child",
+"Ms. Lauryn Hill",
+"Nas"
+],
+"pctl": [
+0.9931,
+0.9818,
+0.9946,
+0.9897,
+0.9919,
+0.9967
+]
+}
+],
+"source_name": "Survivor",
+"target_name": "Nas"
+},
+{
+"tag": "famous",
+"source": 81757,
+"target": 78389,
+"ladder": [
+{
+"k": 0,
+"path": [
+81757,
+69315,
+58952,
+37822,
+36956,
+52492,
+39901,
+78389
+],
+"secs": 0.12,
+"victim": 36956,
+"names": [
+"Friendly Fires",
+"Cut Copy",
+"Empire of the Sun",
+"Two Door Cinema Club",
+"The Shins",
+"Nick Drake",
+"Neil Young",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9962,
+0.997,
+0.998,
+0.9988,
+0.9967,
+0.9979,
+0.9913
+]
+},
+{
+"k": 1,
+"path": [
+81757,
+50509,
+84694,
+70800,
+52492,
+39901,
+78389
+],
+"secs": 0.08,
+"victim": 39901,
+"names": [
+"Friendly Fires",
+"Metronomy",
+"The Whitest Boy Alive",
+"Kings of Convenience",
+"Nick Drake",
+"Neil Young",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9942,
+0.9927,
+0.9966,
+0.9967,
+0.9979,
+0.9913
+]
+},
+{
+"k": 2,
+"path": [
+81757,
+69315,
+45776,
+25339,
+31994,
+47374,
+57451,
+78389
+],
+"secs": 0.09,
+"victim": 25339,
+"names": [
+"Friendly Fires",
+"Cut Copy",
+"Justice",
+"The Prodigy",
+"Marilyn Manson",
+"Ozzy Osbourne",
+"ZZ Top",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9962,
+0.9986,
+0.9994,
+0.9988,
+0.9976,
+0.9955,
+0.9913
+]
+},
+{
+"k": 3,
+"path": [
+81757,
+74024,
+68657,
+53627,
+56103,
+78389
+],
+"secs": 0.07,
+"victim": 53627,
+"names": [
+"Friendly Fires",
+"Hot Chip",
+"Little Dragon",
+"Lou Reed",
+"Van Morrison",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9979,
+0.9957,
+0.9989,
+0.9964,
+0.9913
+]
+},
+{
+"k": 4,
+"path": [
+81757,
+50509,
+84694,
+70800,
+52492,
+56103,
+78389
+],
+"secs": 0.16,
+"victim": 52492,
+"names": [
+"Friendly Fires",
+"Metronomy",
+"The Whitest Boy Alive",
+"Kings of Convenience",
+"Nick Drake",
+"Van Morrison",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9942,
+0.9927,
+0.9966,
+0.9967,
+0.9964,
+0.9913
+]
+},
+{
+"k": 5,
+"path": [
+81757,
+69315,
+45776,
+83427,
+66556,
+56103,
+78389
+],
+"secs": 0.66,
+"victim": 66556,
+"names": [
+"Friendly Fires",
+"Cut Copy",
+"Justice",
+"Jamiroquai",
+"Bob Marley & The Wailers",
+"Van Morrison",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9962,
+0.9986,
+0.9976,
+0.9993,
+0.9964,
+0.9913
+]
+},
+{
+"k": 6,
+"path": [
+81757,
+69315,
+42102,
+65860,
+48637,
+72106,
+78389
+],
+"secs": 1.0,
+"victim": 42102,
+"names": [
+"Friendly Fires",
+"Cut Copy",
+"Goldfrapp",
+"Tori Amos",
+"Peter Gabriel",
+"Supertramp",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9962,
+0.9977,
+0.9958,
+0.9953,
+0.9937,
+0.9913
+]
+},
+{
+"k": 7,
+"path": [
+81757,
+69315,
+58952,
+47939,
+42857,
+27752,
+57451,
+78389
+],
+"secs": 1.14,
+"victim": 47939,
+"names": [
+"Friendly Fires",
+"Cut Copy",
+"Empire of the Sun",
+"Bloc Party",
+"Queens of the Stone Age",
+"Black Sabbath",
+"ZZ Top",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9962,
+0.997,
+0.9994,
+0.9993,
+0.9991,
+0.9955,
+0.9913
+]
+},
+{
+"k": 8,
+"path": [
+81757,
+64011,
+56885,
+19683,
+31933,
+57451,
+78389
+],
+"secs": 1.18,
+"victim": 19683,
+"names": [
+"Friendly Fires",
+"The Temper Trap",
+"Snow Patrol",
+"Oasis",
+"Bon Jovi",
+"ZZ Top",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9971,
+0.9993,
+0.9998,
+0.9986,
+0.9955,
+0.9913
+]
+},
+{
+"k": 9,
+"path": [
+81757,
+50509,
+48262,
+16600,
+57870,
+76555,
+78389
+],
+"secs": 1.06,
+"victim": 16600,
+"names": [
+"Friendly Fires",
+"Metronomy",
+"Phoenix",
+"Beck",
+"Talking Heads",
+"Steely Dan",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9942,
+0.999,
+0.9996,
+0.9973,
+0.9882,
+0.9913
+]
+},
+{
+"k": 10,
+"path": [
+81757,
+74024,
+68657,
+57727,
+44632,
+56103,
+78389
+],
+"secs": 1.09,
+"victim": 57727,
+"names": [
+"Friendly Fires",
+"Hot Chip",
+"Little Dragon",
+"De La Soul",
+"Otis Redding",
+"Van Morrison",
+"Steve Miller Band"
+],
+"pctl": [
+0.9955,
+0.9979,
+0.9957,
+0.9992,
+0.9961,
+0.9964,
+0.9913
+]
+}
+],
+"source_name": "Friendly Fires",
+"target_name": "Steve Miller Band"
+},
+{
+"tag": "famous",
+"source": 85829,
+"target": 2740,
+"ladder": [
+{
+"k": 0,
+"path": [
+85829,
+56894,
+2740
+],
+"secs": 0.15,
+"victim": 56894,
+"names": [
+"She & Him",
+"Feist",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9989,
+0.996
+]
+},
+{
+"k": 1,
+"path": [
+85829,
+58077,
+30681,
+2740
+],
+"secs": 0.03,
+"victim": 58077,
+"names": [
+"She & Him",
+"Fiona Apple",
+"Sharon Van Etten",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9963,
+0.9807,
+0.996
+]
+},
+{
+"k": 2,
+"path": [
+85829,
+64011,
+2626,
+2740
+],
+"secs": 0.05,
+"victim": 2626,
+"names": [
+"She & Him",
+"The Temper Trap",
+"Band of Horses",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9971,
+0.9983,
+0.996
+]
+},
+{
+"k": 3,
+"path": [
+85829,
+85890,
+70312,
+2740
+],
+"secs": 0.04,
+"victim": 85890,
+"names": [
+"She & Him",
+"Regina Spektor",
+"Laura Marling",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9988,
+0.993,
+0.996
+]
+},
+{
+"k": 4,
+"path": [
+85829,
+50569,
+21859,
+2740
+],
+"secs": 0.02,
+"victim": 50569,
+"names": [
+"She & Him",
+"Camera Obscura",
+"The Magnetic Fields",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9938,
+0.9922,
+0.996
+]
+},
+{
+"k": 5,
+"path": [
+85829,
+80235,
+41255,
+2740
+],
+"secs": 0.02,
+"victim": 41255,
+"names": [
+"She & Him",
+"Rilo Kiley",
+"Bright Eyes",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9934,
+0.9979,
+0.996
+]
+},
+{
+"k": 6,
+"path": [
+85829,
+34496,
+2740
+],
+"secs": 0.01,
+"victim": 34496,
+"names": [
+"She & Him",
+"M. Ward",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9921,
+0.996
+]
+},
+{
+"k": 7,
+"path": [
+85829,
+79997,
+2740
+],
+"secs": 0.01,
+"victim": 79997,
+"names": [
+"She & Him",
+"My Morning Jacket",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9952,
+0.996
+]
+},
+{
+"k": 8,
+"path": [
+85829,
+22847,
+1861,
+2740
+],
+"secs": 0.01,
+"victim": 1861,
+"names": [
+"She & Him",
+"Low",
+"Cat Power",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9906,
+0.9986,
+0.996
+]
+},
+{
+"k": 9,
+"path": [
+85829,
+71525,
+51746,
+2740
+],
+"secs": 0.02,
+"victim": 51746,
+"names": [
+"She & Him",
+"Tegan and Sara",
+"The Decemberists",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9969,
+0.9972,
+0.996
+]
+},
+{
+"k": 10,
+"path": [
+85829,
+30924,
+15957,
+2740
+],
+"secs": 0.01,
+"victim": 15957,
+"names": [
+"She & Him",
+"Stars",
+"Broken Social Scene",
+"Andrew Bird"
+],
+"pctl": [
+0.9951,
+0.9954,
+0.9973,
+0.996
+]
+}
+],
+"source_name": "She & Him",
+"target_name": "Andrew Bird"
+},
+{
+"tag": "famous",
+"source": 22599,
+"target": 10057,
+"ladder": [
+{
+"k": 0,
+"path": [
+22599,
+27479,
+27475,
+49567,
+24627,
+25506,
+40694,
+14944,
+9608,
+10057
+],
+"secs": 0.16,
+"victim": 27475,
+"names": [
+"Explosions in the Sky",
+"Helios",
+"Max Richter",
+"SYML",
+"AURORA",
+"Poppy",
+"Sleep Token",
+"Ghost",
+"Gojira",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9809,
+0.9855,
+0.8418,
+0.9,
+0.8718,
+0.8244,
+0.9608,
+0.9804,
+0.992
+]
+},
+{
+"k": 1,
+"path": [
+22599,
+31196,
+55060,
+43084,
+42920,
+79581,
+35855,
+25506,
+40694,
+14944,
+9608,
+10057
+],
+"secs": 0.16,
+"victim": 31196,
+"names": [
+"Explosions in the Sky",
+"Hammock",
+"Stars of the Lid",
+"Grouper",
+"Alex G",
+"Vundabar",
+"Mother Mother",
+"Poppy",
+"Sleep Token",
+"Ghost",
+"Gojira",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9805,
+0.9752,
+0.9745,
+0.8432,
+0.7748,
+0.964,
+0.8718,
+0.8244,
+0.9608,
+0.9804,
+0.992
+]
+},
+{
+"k": 2,
+"path": [
+22599,
+53551,
+10470,
+55060,
+43084,
+42920,
+79581,
+35855,
+25506,
+40694,
+14944,
+9608,
+10057
+],
+"secs": 0.0,
+"victim": 9608,
+"names": [
+"Explosions in the Sky",
+"Lights & Motion",
+"August Wilhelmsson",
+"Stars of the Lid",
+"Grouper",
+"Alex G",
+"Vundabar",
+"Mother Mother",
+"Poppy",
+"Sleep Token",
+"Ghost",
+"Gojira",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.654,
+0.6402,
+0.9752,
+0.9745,
+0.8432,
+0.7748,
+0.964,
+0.8718,
+0.8244,
+0.9608,
+0.9804,
+0.992
+]
+},
+{
+"k": 3,
+"path": [
+22599,
+27479,
+29810,
+82116,
+78014,
+47425,
+10057
+],
+"secs": 0.31,
+"victim": 78014,
+"names": [
+"Explosions in the Sky",
+"Helios",
+"Jóhann Jóhannsson",
+"Ramin Djawadi",
+"Serj Tankian",
+"Static‐X",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9809,
+0.9653,
+0.978,
+0.9922,
+0.974,
+0.992
+]
+},
+{
+"k": 4,
+"path": [
+22599,
+69984,
+81527,
+64355,
+10057
+],
+"secs": 1.0,
+"victim": 64355,
+"names": [
+"Explosions in the Sky",
+"Russian Circles",
+"Baroness",
+"Mastodon",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9816,
+0.9777,
+0.9933,
+0.992
+]
+},
+{
+"k": 5,
+"path": [
+22599,
+69984,
+75648,
+66090,
+10057
+],
+"secs": 1.03,
+"victim": 66090,
+"names": [
+"Explosions in the Sky",
+"Russian Circles",
+"Alcest",
+"Opeth",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9816,
+0.9664,
+0.9931,
+0.992
+]
+},
+{
+"k": 6,
+"path": [
+22599,
+27479,
+35747,
+48964,
+45253,
+60621,
+10057
+],
+"secs": 1.22,
+"victim": 45253,
+"names": [
+"Explosions in the Sky",
+"Helios",
+"Boards of Canada",
+"Portishead",
+"Placebo",
+"Faith No More",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9809,
+0.9965,
+0.9991,
+0.9994,
+0.9962,
+0.992
+]
+},
+{
+"k": 7,
+"path": [
+22599,
+84256,
+79103,
+85277,
+60621,
+10057
+],
+"secs": 1.19,
+"victim": 84256,
+"names": [
+"Explosions in the Sky",
+"Sigur Rós",
+"PJ Harvey",
+"Garbage",
+"Faith No More",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.999,
+0.9975,
+0.9972,
+0.9962,
+0.992
+]
+},
+{
+"k": 8,
+"path": [
+22599,
+69984,
+81527,
+70973,
+10057
+],
+"secs": 1.06,
+"victim": 70973,
+"names": [
+"Explosions in the Sky",
+"Russian Circles",
+"Baroness",
+"Meshuggah",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9816,
+0.9777,
+0.9843,
+0.992
+]
+},
+{
+"k": 9,
+"path": [
+22599,
+69984,
+81527,
+79911,
+35028,
+10057
+],
+"secs": 1.05,
+"victim": 35028,
+"names": [
+"Explosions in the Sky",
+"Russian Circles",
+"Baroness",
+"Kyuss",
+"Tool",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9816,
+0.9777,
+0.9858,
+0.9976,
+0.992
+]
+},
+{
+"k": 10,
+"path": [
+22599,
+18522,
+13789,
+12005,
+79868,
+10057
+],
+"secs": 1.2,
+"victim": 18522,
+"names": [
+"Explosions in the Sky",
+"Godspeed You! Black Emperor",
+"Slint",
+"Fugazi",
+"Suicidal Tendencies",
+"Sepultura"
+],
+"pctl": [
+0.9972,
+0.9912,
+0.9731,
+0.9892,
+0.9801,
+0.992
+]
+}
+],
+"source_name": "Explosions in the Sky",
+"target_name": "Sepultura"
+},
+{
+"tag": "famous",
+"source": 81512,
+"target": 47374,
+"ladder": [
+{
+"k": 0,
+"path": [
+81512,
+86347,
+76066,
+58734,
+47374
+],
+"secs": 0.1,
+"victim": 58734,
+"names": [
+"Louis Armstrong",
+"Bill Withers",
+"Daryl Hall & John Oates",
+"Journey",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9946,
+0.9955,
+0.9967,
+0.9976
+]
+},
+{
+"k": 1,
+"path": [
+81512,
+86347,
+56103,
+67464,
+47374
+],
+"secs": 0.02,
+"victim": 67464,
+"names": [
+"Louis Armstrong",
+"Bill Withers",
+"Van Morrison",
+"Lynyrd Skynyrd",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9946,
+0.9964,
+0.9979,
+0.9976
+]
+},
+{
+"k": 2,
+"path": [
+81512,
+86347,
+76555,
+68189,
+47374
+],
+"secs": 0.02,
+"victim": 86347,
+"names": [
+"Louis Armstrong",
+"Bill Withers",
+"Steely Dan",
+"Blue Öyster Cult",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9946,
+0.9882,
+0.9939,
+0.9976
+]
+},
+{
+"k": 3,
+"path": [
+81512,
+85956,
+63645,
+33196,
+41361,
+47374
+],
+"secs": 0.03,
+"victim": 33196,
+"names": [
+"Louis Armstrong",
+"Nat King Cole",
+"Paul McCartney",
+"Eric Clapton",
+"Deep Purple",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9951,
+0.9975,
+0.9988,
+0.9983,
+0.9976
+]
+},
+{
+"k": 4,
+"path": [
+81512,
+85956,
+78262,
+76066,
+31933,
+47374
+],
+"secs": 0.02,
+"victim": 31933,
+"names": [
+"Louis Armstrong",
+"Nat King Cole",
+"The Jacksons",
+"Daryl Hall & John Oates",
+"Bon Jovi",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9951,
+0.9969,
+0.9955,
+0.9986,
+0.9976
+]
+},
+{
+"k": 5,
+"path": [
+81512,
+51966,
+41354,
+33119,
+41361,
+47374
+],
+"secs": 0.04,
+"victim": 41361,
+"names": [
+"Louis Armstrong",
+"Norah Jones",
+"Sting",
+"Dire Straits",
+"Deep Purple",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9982,
+0.9972,
+0.998,
+0.9983,
+0.9976
+]
+},
+{
+"k": 6,
+"path": [
+81512,
+85956,
+63645,
+76555,
+68189,
+47374
+],
+"secs": 0.04,
+"victim": 63645,
+"names": [
+"Louis Armstrong",
+"Nat King Cole",
+"Paul McCartney",
+"Steely Dan",
+"Blue Öyster Cult",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9951,
+0.9975,
+0.9882,
+0.9939,
+0.9976
+]
+},
+{
+"k": 7,
+"path": [
+81512,
+51966,
+41354,
+66967,
+47374
+],
+"secs": 0.04,
+"victim": 51966,
+"names": [
+"Louis Armstrong",
+"Norah Jones",
+"Sting",
+"Scorpions",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9982,
+0.9972,
+0.9969,
+0.9976
+]
+},
+{
+"k": 8,
+"path": [
+81512,
+44632,
+31697,
+38208,
+57451,
+47374
+],
+"secs": 0.04,
+"victim": 31697,
+"names": [
+"Louis Armstrong",
+"Otis Redding",
+"Simon & Garfunkel",
+"Bruce Springsteen",
+"ZZ Top",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9961,
+0.9992,
+0.9985,
+0.9955,
+0.9976
+]
+},
+{
+"k": 9,
+"path": [
+81512,
+44632,
+56103,
+38208,
+57451,
+47374
+],
+"secs": 0.05,
+"victim": 38208,
+"names": [
+"Louis Armstrong",
+"Otis Redding",
+"Van Morrison",
+"Bruce Springsteen",
+"ZZ Top",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9961,
+0.9964,
+0.9985,
+0.9955,
+0.9976
+]
+},
+{
+"k": 10,
+"path": [
+81512,
+44632,
+56103,
+78389,
+57451,
+47374
+],
+"secs": 0.04,
+"victim": 56103,
+"names": [
+"Louis Armstrong",
+"Otis Redding",
+"Van Morrison",
+"Steve Miller Band",
+"ZZ Top",
+"Ozzy Osbourne"
+],
+"pctl": [
+0.998,
+0.9961,
+0.9964,
+0.9913,
+0.9955,
+0.9976
+]
+}
+],
+"source_name": "Louis Armstrong",
+"target_name": "Ozzy Osbourne"
+},
+{
+"tag": "famous",
+"source": 36748,
+"target": 65418,
+"ladder": [
+{
+"k": 0,
+"path": [
+36748,
+52361,
+25846,
+50052,
+65418
+],
+"secs": 0.01,
+"victim": 25846,
+"names": [
+"Janet Jackson",
+"TLC",
+"Alanis Morissette",
+"Third Eye Blind",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9975,
+0.9923,
+0.9906
+]
+},
+{
+"k": 1,
+"path": [
+36748,
+52361,
+50634,
+50052,
+65418
+],
+"secs": 0.01,
+"victim": 50634,
+"names": [
+"Janet Jackson",
+"TLC",
+"Smash Mouth",
+"Third Eye Blind",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9937,
+0.9923,
+0.9906
+]
+},
+{
+"k": 2,
+"path": [
+36748,
+52361,
+66618,
+43928,
+50052,
+65418
+],
+"secs": 0.01,
+"victim": 43928,
+"names": [
+"Janet Jackson",
+"TLC",
+"Sixpence None the Richer",
+"Sheryl Crow",
+"Third Eye Blind",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9913,
+0.9945,
+0.9923,
+0.9906
+]
+},
+{
+"k": 3,
+"path": [
+36748,
+52361,
+66618,
+46092,
+50052,
+65418
+],
+"secs": 0.04,
+"victim": 50052,
+"names": [
+"Janet Jackson",
+"TLC",
+"Sixpence None the Richer",
+"Barenaked Ladies",
+"Third Eye Blind",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9913,
+0.9914,
+0.9923,
+0.9906
+]
+},
+{
+"k": 4,
+"path": [
+36748,
+52361,
+66618,
+40141,
+58150,
+65418
+],
+"secs": 0.1,
+"victim": 40141,
+"names": [
+"Janet Jackson",
+"TLC",
+"Sixpence None the Richer",
+"Matchbox Twenty",
+"Collective Soul",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9913,
+0.993,
+0.9897,
+0.9906
+]
+},
+{
+"k": 5,
+"path": [
+36748,
+52361,
+66618,
+52332,
+65418
+],
+"secs": 0.24,
+"victim": 66618,
+"names": [
+"Janet Jackson",
+"TLC",
+"Sixpence None the Richer",
+"Sugar Ray",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9913,
+0.9825,
+0.9906
+]
+},
+{
+"k": 6,
+"path": [
+36748,
+52361,
+21322,
+54746,
+69648,
+65418
+],
+"secs": 0.46,
+"victim": 21322,
+"names": [
+"Janet Jackson",
+"TLC",
+"The Cardigans",
+"Counting Crows",
+"Live",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9981,
+0.9973,
+0.9913,
+0.9906
+]
+},
+{
+"k": 7,
+"path": [
+36748,
+35223,
+57770,
+51954,
+54746,
+69648,
+65418
+],
+"secs": 0.6,
+"victim": 54746,
+"names": [
+"Janet Jackson",
+"Sade",
+"Simply Red",
+"Crowded House",
+"Counting Crows",
+"Live",
+"311"
+],
+"pctl": [
+0.9915,
+0.9939,
+0.9868,
+0.9896,
+0.9973,
+0.9913,
+0.9906
+]
+},
+{
+"k": 8,
+"path": [
+36748,
+52361,
+32786,
+25353,
+52332,
+65418
+],
+"secs": 0.73,
+"victim": 32786,
+"names": [
+"Janet Jackson",
+"TLC",
+"Natalie Imbruglia",
+"Eagle‐Eye Cherry",
+"Sugar Ray",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9932,
+0.9912,
+0.9825,
+0.9906
+]
+},
+{
+"k": 9,
+"path": [
+36748,
+48806,
+65591,
+77450,
+69648,
+65418
+],
+"secs": 0.84,
+"victim": 48806,
+"names": [
+"Janet Jackson",
+"Alicia Keys",
+"Train",
+"Goo Goo Dolls",
+"Live",
+"311"
+],
+"pctl": [
+0.9915,
+0.9978,
+0.9964,
+0.9974,
+0.9913,
+0.9906
+]
+},
+{
+"k": 10,
+"path": [
+36748,
+52361,
+85934,
+69648,
+65418
+],
+"secs": 1.0,
+"victim": 85934,
+"names": [
+"Janet Jackson",
+"TLC",
+"No Doubt",
+"Live",
+"311"
+],
+"pctl": [
+0.9915,
+0.9897,
+0.9985,
+0.9913,
+0.9906
+]
+}
+],
+"source_name": "Janet Jackson",
+"target_name": "311"
+},
+{
+"tag": "famous",
+"source": 20050,
+"target": 73022,
+"ladder": [
+{
+"k": 0,
+"path": [
+20050,
+15957,
+56894,
+51966,
+73022
+],
+"secs": 0.11,
+"victim": 56894,
+"names": [
+"Built to Spill",
+"Broken Social Scene",
+"Feist",
+"Norah Jones",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9973,
+0.9989,
+0.9982,
+0.9957
+]
+},
+{
+"k": 1,
+"path": [
+20050,
+27020,
+30681,
+58077,
+51966,
+73022
+],
+"secs": 0.59,
+"victim": 51966,
+"names": [
+"Built to Spill",
+"Deerhunter",
+"Sharon Van Etten",
+"Fiona Apple",
+"Norah Jones",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9947,
+0.9807,
+0.9963,
+0.9982,
+0.9957
+]
+},
+{
+"k": 2,
+"path": [
+20050,
+12005,
+41366,
+53627,
+63061,
+77233,
+73022
+],
+"secs": 0.71,
+"victim": 53627,
+"names": [
+"Built to Spill",
+"Fugazi",
+"The Stooges",
+"Lou Reed",
+"Dusty Springfield",
+"Etta James",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9892,
+0.995,
+0.9989,
+0.9957,
+0.9925,
+0.9957
+]
+},
+{
+"k": 3,
+"path": [
+20050,
+21859,
+52492,
+56103,
+74133,
+77233,
+73022
+],
+"secs": 0.85,
+"victim": 52492,
+"names": [
+"Built to Spill",
+"The Magnetic Fields",
+"Nick Drake",
+"Van Morrison",
+"The Temptations",
+"Etta James",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9922,
+0.9967,
+0.9964,
+0.9938,
+0.9925,
+0.9957
+]
+},
+{
+"k": 4,
+"path": [
+20050,
+12005,
+50749,
+31697,
+44632,
+77233,
+73022
+],
+"secs": 1.15,
+"victim": 31697,
+"names": [
+"Built to Spill",
+"Fugazi",
+"The Velvet Underground",
+"Simon & Garfunkel",
+"Otis Redding",
+"Etta James",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9892,
+0.9989,
+0.9992,
+0.9961,
+0.9925,
+0.9957
+]
+},
+{
+"k": 5,
+"path": [
+20050,
+45240,
+81322,
+76468,
+77233,
+73022
+],
+"secs": 1.16,
+"victim": 76468,
+"names": [
+"Built to Spill",
+"of Montreal",
+"Janelle Monáe",
+"Amy Winehouse",
+"Etta James",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9961,
+0.9896,
+0.9992,
+0.9925,
+0.9957
+]
+},
+{
+"k": 6,
+"path": [
+20050,
+1252,
+34432,
+14056,
+73022
+],
+"secs": 1.13,
+"victim": 1252,
+"names": [
+"Built to Spill",
+"Elliott Smith",
+"Leonard Cohen",
+"Nina Simone",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9976,
+0.9968,
+0.9974,
+0.9957
+]
+},
+{
+"k": 7,
+"path": [
+20050,
+54045,
+39901,
+63645,
+85956,
+73022
+],
+"secs": 1.24,
+"victim": 39901,
+"names": [
+"Built to Spill",
+"Wilco",
+"Neil Young",
+"Paul McCartney",
+"Nat King Cole",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9969,
+0.9979,
+0.9975,
+0.9951,
+0.9957
+]
+},
+{
+"k": 8,
+"path": [
+20050,
+5316,
+7782,
+36025,
+48274,
+77233,
+73022
+],
+"secs": 1.48,
+"victim": 77233,
+"names": [
+"Built to Spill",
+"Car Seat Headrest",
+"Father John Misty",
+"Leon Bridges",
+"Sharon Jones and the Dap‐Kings",
+"Etta James",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.8413,
+0.9651,
+0.8734,
+0.9829,
+0.9925,
+0.9957
+]
+},
+{
+"k": 9,
+"path": [
+20050,
+41255,
+23019,
+10887,
+72207,
+85956,
+73022
+],
+"secs": 1.53,
+"victim": 23019,
+"names": [
+"Built to Spill",
+"Bright Eyes",
+"Bon Iver",
+"Taylor Swift",
+"Kelly Clarkson",
+"Nat King Cole",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9979,
+0.9991,
+0.9968,
+0.9969,
+0.9951,
+0.9957
+]
+},
+{
+"k": 10,
+"path": [
+20050,
+12005,
+50749,
+26338,
+32135,
+73022
+],
+"secs": 1.38,
+"victim": 50749,
+"names": [
+"Built to Spill",
+"Fugazi",
+"The Velvet Underground",
+"John Lennon",
+"Dean Martin",
+"Billie Holiday"
+],
+"pctl": [
+0.991,
+0.9892,
+0.9989,
+0.9984,
+0.994,
+0.9957
+]
+}
+],
+"source_name": "Built to Spill",
+"target_name": "Billie Holiday"
+},
+{
+"tag": "famous",
+"source": 48525,
+"target": 74443,
+"ladder": [
+{
+"k": 0,
+"path": [
+48525,
+9857,
+5665,
+44039,
+52361,
+25846,
+46092,
+74443
+],
+"secs": 0.29,
+"victim": 25846,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Busta Rhymes",
+"Nelly",
+"TLC",
+"Alanis Morissette",
+"Barenaked Ladies",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9938,
+0.994,
+0.9897,
+0.9975,
+0.9914,
+0.9878
+]
+},
+{
+"k": 1,
+"path": [
+48525,
+9857,
+5665,
+44039,
+52361,
+50634,
+74443
+],
+"secs": 0.29,
+"victim": 44039,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Busta Rhymes",
+"Nelly",
+"TLC",
+"Smash Mouth",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9938,
+0.994,
+0.9897,
+0.9937,
+0.9878
+]
+},
+{
+"k": 2,
+"path": [
+48525,
+9857,
+5665,
+5844,
+6527,
+32786,
+43928,
+74443
+],
+"secs": 0.31,
+"victim": 6527,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Busta Rhymes",
+"Akon",
+"Nelly Furtado",
+"Natalie Imbruglia",
+"Sheryl Crow",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9938,
+0.9972,
+0.9983,
+0.9932,
+0.9945,
+0.9878
+]
+},
+{
+"k": 3,
+"path": [
+48525,
+9857,
+5665,
+54921,
+52361,
+50634,
+74443
+],
+"secs": 0.35,
+"victim": 5665,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Busta Rhymes",
+"Missy Elliott",
+"TLC",
+"Smash Mouth",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9938,
+0.9927,
+0.9897,
+0.9937,
+0.9878
+]
+},
+{
+"k": 4,
+"path": [
+48525,
+9857,
+69332,
+52361,
+50634,
+74443
+],
+"secs": 0.33,
+"victim": 50634,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Diddy",
+"TLC",
+"Smash Mouth",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9914,
+0.9897,
+0.9937,
+0.9878
+]
+},
+{
+"k": 5,
+"path": [
+48525,
+9857,
+69332,
+52361,
+66618,
+43928,
+74443
+],
+"secs": 0.45,
+"victim": 43928,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Diddy",
+"TLC",
+"Sixpence None the Richer",
+"Sheryl Crow",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9914,
+0.9897,
+0.9913,
+0.9945,
+0.9878
+]
+},
+{
+"k": 6,
+"path": [
+48525,
+9857,
+69332,
+52361,
+66618,
+40141,
+74443
+],
+"secs": 0.65,
+"victim": 40141,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Diddy",
+"TLC",
+"Sixpence None the Richer",
+"Matchbox Twenty",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9914,
+0.9897,
+0.9913,
+0.993,
+0.9878
+]
+},
+{
+"k": 7,
+"path": [
+48525,
+9857,
+69332,
+52361,
+66618,
+46092,
+74443
+],
+"secs": 0.65,
+"victim": 46092,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Diddy",
+"TLC",
+"Sixpence None the Richer",
+"Barenaked Ladies",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9914,
+0.9897,
+0.9913,
+0.9914,
+0.9878
+]
+},
+{
+"k": 8,
+"path": [
+48525,
+9857,
+69332,
+52361,
+66618,
+74443
+],
+"secs": 0.71,
+"victim": 69332,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Diddy",
+"TLC",
+"Sixpence None the Richer",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9914,
+0.9897,
+0.9913,
+0.9878
+]
+},
+{
+"k": 9,
+"path": [
+48525,
+9857,
+79321,
+52361,
+66618,
+74443
+],
+"secs": 0.79,
+"victim": 79321,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Ms. Lauryn Hill",
+"TLC",
+"Sixpence None the Richer",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9919,
+0.9897,
+0.9913,
+0.9878
+]
+},
+{
+"k": 10,
+"path": [
+48525,
+9857,
+79951,
+52361,
+66618,
+74443
+],
+"secs": 0.95,
+"victim": 79951,
+"names": [
+"Too $hort",
+"Ice Cube",
+"Fugees",
+"TLC",
+"Sixpence None the Richer",
+"The Wallflowers"
+],
+"pctl": [
+0.9686,
+0.9903,
+0.9929,
+0.9897,
+0.9913,
+0.9878
+]
+}
+],
+"source_name": "Too $hort",
+"target_name": "The Wallflowers"
+},
+{
+"tag": "famous",
+"source": 72346,
+"target": 74372,
+"ladder": [
+{
+"k": 0,
+"path": [
+72346,
+76391,
+16358,
+24995,
+26338,
+7986,
+17569,
+31413,
+74372
+],
+"secs": 2.17,
+"victim": 7986,
+"names": [
+"Anastacia",
+"Sugababes",
+"Kylie Minogue",
+"Mariah Carey",
+"John Lennon",
+"The Kinks",
+"The Turtles",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9976,
+0.9964,
+0.9984,
+0.9988,
+0.9902,
+0.9689,
+0.9671
+]
+},
+{
+"k": 1,
+"path": [
+72346,
+76391,
+16358,
+24995,
+10455,
+4497,
+31413,
+74372
+],
+"secs": 2.81,
+"victim": 10455,
+"names": [
+"Anastacia",
+"Sugababes",
+"Kylie Minogue",
+"Mariah Carey",
+"Stevie Wonder",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9976,
+0.9964,
+0.9987,
+0.9876,
+0.9689,
+0.9671
+]
+},
+{
+"k": 2,
+"path": [
+72346,
+65577,
+32957,
+4497,
+31413,
+74372
+],
+"secs": 2.6,
+"victim": 65577,
+"names": [
+"Anastacia",
+"Cher",
+"Diana Ross",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9909,
+0.9894,
+0.9876,
+0.9689,
+0.9671
+]
+},
+{
+"k": 3,
+"path": [
+72346,
+76391,
+16358,
+68087,
+26338,
+13679,
+17569,
+31413,
+74372
+],
+"secs": 2.72,
+"victim": 26338,
+"names": [
+"Anastacia",
+"Sugababes",
+"Kylie Minogue",
+"Chris Rea",
+"John Lennon",
+"The Byrds",
+"The Turtles",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9976,
+0.9861,
+0.9984,
+0.994,
+0.9902,
+0.9689,
+0.9671
+]
+},
+{
+"k": 4,
+"path": [
+72346,
+76391,
+16358,
+33047,
+8622,
+15320,
+4497,
+31413,
+74372
+],
+"secs": 3.23,
+"victim": 8622,
+"names": [
+"Anastacia",
+"Sugababes",
+"Kylie Minogue",
+"Michael Bublé",
+"Frank Sinatra",
+"Ray Charles",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9976,
+0.9962,
+0.9988,
+0.9971,
+0.9876,
+0.9689,
+0.9671
+]
+},
+{
+"k": 5,
+"path": [
+72346,
+74925,
+70016,
+28389,
+4497,
+31413,
+74372
+],
+"secs": 2.88,
+"victim": 74925,
+"names": [
+"Anastacia",
+"Robbie Williams",
+"George Michael",
+"Earth, Wind & Fire",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9973,
+0.9956,
+0.9938,
+0.9876,
+0.9689,
+0.9671
+]
+},
+{
+"k": 6,
+"path": [
+72346,
+76391,
+16358,
+24995,
+30342,
+36964,
+31413,
+74372
+],
+"secs": 2.74,
+"victim": 16358,
+"names": [
+"Anastacia",
+"Sugababes",
+"Kylie Minogue",
+"Mariah Carey",
+"Chuck Berry",
+"Sam Cooke",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9976,
+0.9964,
+0.9964,
+0.9914,
+0.9689,
+0.9671
+]
+},
+{
+"k": 7,
+"path": [
+72346,
+76391,
+65301,
+24995,
+30342,
+36964,
+31413,
+74372
+],
+"secs": 2.58,
+"victim": 24995,
+"names": [
+"Anastacia",
+"Sugababes",
+"Spice Girls",
+"Mariah Carey",
+"Chuck Berry",
+"Sam Cooke",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9925,
+0.9964,
+0.9964,
+0.9914,
+0.9689,
+0.9671
+]
+},
+{
+"k": 8,
+"path": [
+72346,
+82057,
+36748,
+32957,
+4497,
+31413,
+74372
+],
+"secs": 2.7,
+"victim": 82057,
+"names": [
+"Anastacia",
+"Jennifer Lopez",
+"Janet Jackson",
+"Diana Ross",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.995,
+0.9915,
+0.9894,
+0.9876,
+0.9689,
+0.9671
+]
+},
+{
+"k": 9,
+"path": [
+72346,
+76391,
+65301,
+36748,
+32957,
+4497,
+31413,
+74372
+],
+"secs": 2.32,
+"victim": 65301,
+"names": [
+"Anastacia",
+"Sugababes",
+"Spice Girls",
+"Janet Jackson",
+"Diana Ross",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9925,
+0.9915,
+0.9894,
+0.9876,
+0.9689,
+0.9671
+]
+},
+{
+"k": 10,
+"path": [
+72346,
+76391,
+57285,
+36748,
+32957,
+4497,
+31413,
+74372
+],
+"secs": 2.64,
+"victim": 36748,
+"names": [
+"Anastacia",
+"Sugababes",
+"Destiny’s Child",
+"Janet Jackson",
+"Diana Ross",
+"Four Tops",
+"The Foundations",
+"Mungo Jerry"
+],
+"pctl": [
+0.9824,
+0.9914,
+0.9897,
+0.9915,
+0.9894,
+0.9876,
+0.9689,
+0.9671
+]
+}
+],
+"source_name": "Anastacia",
+"target_name": "Mungo Jerry"
+},
+{
+"tag": "famous",
+"source": 57535,
+"target": 43368,
+"ladder": [
+{
+"k": 0,
+"path": [
+57535,
+36964,
+10455,
+21905,
+42219,
+26282,
+51776,
+43368
+],
+"secs": 0.18,
+"victim": 10455,
+"names": [
+"The Shirelles",
+"Sam Cooke",
+"Stevie Wonder",
+"Phil Collins",
+"Cyndi Lauper",
+"Blondie",
+"XTC",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9914,
+0.9987,
+0.997,
+0.9959,
+0.9981,
+0.9856,
+0.984
+]
+},
+{
+"k": 1,
+"path": [
+57535,
+36964,
+14056,
+34432,
+71513,
+41237,
+43368
+],
+"secs": 0.27,
+"victim": 14056,
+"names": [
+"The Shirelles",
+"Sam Cooke",
+"Nina Simone",
+"Leonard Cohen",
+"Patti Smith",
+"Siouxsie and the Banshees",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9914,
+0.9974,
+0.9968,
+0.9921,
+0.9921,
+0.984
+]
+},
+{
+"k": 2,
+"path": [
+57535,
+53984,
+63061,
+53627,
+70056,
+43368
+],
+"secs": 0.27,
+"victim": 53627,
+"names": [
+"The Shirelles",
+"The Drifters",
+"Dusty Springfield",
+"Lou Reed",
+"Echo & the Bunnymen",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9853,
+0.9957,
+0.9989,
+0.9944,
+0.984
+]
+},
+{
+"k": 3,
+"path": [
+57535,
+36964,
+16290,
+28389,
+42439,
+57198,
+51776,
+43368
+],
+"secs": 0.39,
+"victim": 16290,
+"names": [
+"The Shirelles",
+"Sam Cooke",
+"Aretha Franklin",
+"Earth, Wind & Fire",
+"Tears for Fears",
+"Talk Talk",
+"XTC",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9914,
+0.9971,
+0.9938,
+0.9965,
+0.9883,
+0.9856,
+0.984
+]
+},
+{
+"k": 4,
+"path": [
+57535,
+36964,
+70535,
+28389,
+42439,
+57198,
+51776,
+43368
+],
+"secs": 0.53,
+"victim": 42439,
+"names": [
+"The Shirelles",
+"Sam Cooke",
+"Tammi Terrell",
+"Earth, Wind & Fire",
+"Tears for Fears",
+"Talk Talk",
+"XTC",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9914,
+0.9853,
+0.9938,
+0.9965,
+0.9883,
+0.9856,
+0.984
+]
+},
+{
+"k": 5,
+"path": [
+57535,
+53984,
+44632,
+31697,
+50749,
+48044,
+43368
+],
+"secs": 0.5,
+"victim": 31697,
+"names": [
+"The Shirelles",
+"The Drifters",
+"Otis Redding",
+"Simon & Garfunkel",
+"The Velvet Underground",
+"My Bloody Valentine",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9853,
+0.9961,
+0.9992,
+0.9989,
+0.9953,
+0.984
+]
+},
+{
+"k": 6,
+"path": [
+57535,
+36964,
+18913,
+11940,
+41366,
+43368
+],
+"secs": 0.48,
+"victim": 41366,
+"names": [
+"The Shirelles",
+"Sam Cooke",
+"Booker T. & the MG’s",
+"The Zombies",
+"The Stooges",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9914,
+0.97,
+0.9923,
+0.995,
+0.984
+]
+},
+{
+"k": 7,
+"path": [
+57535,
+53984,
+30342,
+63645,
+79819,
+51776,
+43368
+],
+"secs": 0.62,
+"victim": 63645,
+"names": [
+"The Shirelles",
+"The Drifters",
+"Chuck Berry",
+"Paul McCartney",
+"Pretenders",
+"XTC",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9853,
+0.9964,
+0.9975,
+0.9921,
+0.9856,
+0.984
+]
+},
+{
+"k": 8,
+"path": [
+57535,
+36964,
+70535,
+28389,
+39308,
+37119,
+51776,
+43368
+],
+"secs": 0.54,
+"victim": 39308,
+"names": [
+"The Shirelles",
+"Sam Cooke",
+"Tammi Terrell",
+"Earth, Wind & Fire",
+"a‐ha",
+"Orchestral Manoeuvres in the Dark",
+"XTC",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9914,
+0.9853,
+0.9938,
+0.996,
+0.9894,
+0.9856,
+0.984
+]
+},
+{
+"k": 9,
+"path": [
+57535,
+53984,
+30342,
+7986,
+68518,
+57927,
+43368
+],
+"secs": 0.59,
+"victim": 7986,
+"names": [
+"The Shirelles",
+"The Drifters",
+"Chuck Berry",
+"The Kinks",
+"T. Rex",
+"The Stranglers",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9853,
+0.9964,
+0.9988,
+0.9956,
+0.9936,
+0.984
+]
+},
+{
+"k": 10,
+"path": [
+57535,
+25384,
+28389,
+75025,
+43561,
+41237,
+43368
+],
+"secs": 0.61,
+"victim": 28389,
+"names": [
+"The Shirelles",
+"The Isley Brothers",
+"Earth, Wind & Fire",
+"Rick Astley",
+"Soft Cell",
+"Siouxsie and the Banshees",
+"Wire"
+],
+"pctl": [
+0.9747,
+0.9912,
+0.9938,
+0.9868,
+0.9918,
+0.9921,
+0.984
+]
+}
+],
+"source_name": "The Shirelles",
+"target_name": "Wire"
+},
+{
+"tag": "famous",
+"source": 44130,
+"target": 1706,
+"ladder": [
+{
+"k": 0,
+"path": [
+44130,
+28389,
+21905,
+24557,
+1706
+],
+"secs": 0.6,
+"victim": 21905,
+"names": [
+"The O’Jays",
+"Earth, Wind & Fire",
+"Phil Collins",
+"INXS",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9938,
+0.997,
+0.9947,
+0.9801
+]
+},
+{
+"k": 1,
+"path": [
+44130,
+28389,
+39308,
+24557,
+1706
+],
+"secs": 0.88,
+"victim": 39308,
+"names": [
+"The O’Jays",
+"Earth, Wind & Fire",
+"a‐ha",
+"INXS",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9938,
+0.996,
+0.9947,
+0.9801
+]
+},
+{
+"k": 2,
+"path": [
+44130,
+28389,
+72952,
+24557,
+1706
+],
+"secs": 0.65,
+"victim": 24557,
+"names": [
+"The O’Jays",
+"Earth, Wind & Fire",
+"Wham!",
+"INXS",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9938,
+0.9936,
+0.9947,
+0.9801
+]
+},
+{
+"k": 3,
+"path": [
+44130,
+25384,
+32957,
+49309,
+51954,
+1706
+],
+"secs": 0.64,
+"victim": 25384,
+"names": [
+"The O’Jays",
+"The Isley Brothers",
+"Diana Ross",
+"Tina Turner",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9912,
+0.9894,
+0.9912,
+0.9896,
+0.9801
+]
+},
+{
+"k": 4,
+"path": [
+44130,
+28389,
+75025,
+42219,
+51954,
+1706
+],
+"secs": 0.66,
+"victim": 42219,
+"names": [
+"The O’Jays",
+"Earth, Wind & Fire",
+"Rick Astley",
+"Cyndi Lauper",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9938,
+0.9868,
+0.9959,
+0.9896,
+0.9801
+]
+},
+{
+"k": 5,
+"path": [
+44130,
+36183,
+32957,
+49309,
+51954,
+1706
+],
+"secs": 0.66,
+"victim": 49309,
+"names": [
+"The O’Jays",
+"The Miracles",
+"Diana Ross",
+"Tina Turner",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9674,
+0.9894,
+0.9912,
+0.9896,
+0.9801
+]
+},
+{
+"k": 6,
+"path": [
+44130,
+28389,
+72952,
+26501,
+51954,
+1706
+],
+"secs": 0.66,
+"victim": 26501,
+"names": [
+"The O’Jays",
+"Earth, Wind & Fire",
+"Wham!",
+"Bryan Adams",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9938,
+0.9936,
+0.9966,
+0.9896,
+0.9801
+]
+},
+{
+"k": 7,
+"path": [
+44130,
+28389,
+19586,
+51954,
+1706
+],
+"secs": 0.61,
+"victim": 28389,
+"names": [
+"The O’Jays",
+"Earth, Wind & Fire",
+"Men at Work",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9938,
+0.9912,
+0.9896,
+0.9801
+]
+},
+{
+"k": 8,
+"path": [
+44130,
+12393,
+20734,
+57770,
+51954,
+1706
+],
+"secs": 0.61,
+"victim": 12393,
+"names": [
+"The O’Jays",
+"Kool & the Gang",
+"Lionel Richie",
+"Simply Red",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9946,
+0.9902,
+0.9868,
+0.9896,
+0.9801
+]
+},
+{
+"k": 9,
+"path": [
+44130,
+49158,
+20734,
+57770,
+51954,
+1706
+],
+"secs": 0.74,
+"victim": 20734,
+"names": [
+"The O’Jays",
+"Commodores",
+"Lionel Richie",
+"Simply Red",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.9873,
+0.9902,
+0.9868,
+0.9896,
+0.9801
+]
+},
+{
+"k": 10,
+"path": [
+44130,
+11198,
+2412,
+8848,
+51954,
+1706
+],
+"secs": 0.75,
+"victim": 2412,
+"names": [
+"The O’Jays",
+"James Brown",
+"Prince",
+"Duran Duran",
+"Crowded House",
+"Midnight Oil"
+],
+"pctl": [
+0.9755,
+0.997,
+0.9976,
+0.9973,
+0.9896,
+0.9801
+]
+}
+],
+"source_name": "The O’Jays",
+"target_name": "Midnight Oil"
+},
+{
+"tag": "famous",
+"source": 85690,
+"target": 74037,
+"ladder": [
+{
+"k": 0,
+"path": [
+85690,
+46086,
+29953,
+28504,
+33047,
+60850,
+10887,
+23474,
+82241,
+74037
+],
+"secs": 0.34,
+"victim": 23474,
+"names": [
+"Pete Townshend",
+"Jean‐Michel Jarre",
+"Vangelis",
+"John Williams",
+"Michael Bublé",
+"Meghan Trainor",
+"Taylor Swift",
+"Paramore",
+"The Red Jumpsuit Apparatus",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.8319,
+0.9904,
+0.9916,
+0.9962,
+0.8827,
+0.9968,
+0.9988,
+0.989,
+0.9851
+]
+},
+{
+"k": 1,
+"path": [
+85690,
+68071,
+38889,
+28367,
+25838,
+12132,
+60984,
+77455,
+74037
+],
+"secs": 0.61,
+"victim": 12132,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Allman Brothers Band",
+"Rush",
+"Alice in Chains",
+"The Offspring",
+"Good Charlotte",
+"Story of the Year",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9926,
+0.995,
+0.9977,
+0.9994,
+0.9963,
+0.9873,
+0.9851
+]
+},
+{
+"k": 2,
+"path": [
+85690,
+68071,
+38889,
+28367,
+25838,
+28635,
+44591,
+53654,
+74037
+],
+"secs": 0.69,
+"victim": 25838,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Allman Brothers Band",
+"Rush",
+"Alice in Chains",
+"Pantera",
+"Killswitch Engage",
+"Asking Alexandria",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9926,
+0.995,
+0.9977,
+0.9958,
+0.9922,
+0.9717,
+0.9851
+]
+},
+{
+"k": 3,
+"path": [
+85690,
+68071,
+30152,
+68189,
+47374,
+31994,
+32821,
+82241,
+74037
+],
+"secs": 1.0,
+"victim": 31994,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Doobie Brothers",
+"Blue Öyster Cult",
+"Ozzy Osbourne",
+"Marilyn Manson",
+"Rise Against",
+"The Red Jumpsuit Apparatus",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9881,
+0.9939,
+0.9976,
+0.9988,
+0.9977,
+0.989,
+0.9851
+]
+},
+{
+"k": 4,
+"path": [
+85690,
+54574,
+13679,
+19725,
+5644,
+5993,
+27732,
+82241,
+74037
+],
+"secs": 0.94,
+"victim": 5993,
+"names": [
+"Pete Townshend",
+"Traffic",
+"The Byrds",
+"Jefferson Airplane",
+"Creedence Clearwater Revival",
+"The White Stripes",
+"Fall Out Boy",
+"The Red Jumpsuit Apparatus",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9716,
+0.994,
+0.997,
+0.9987,
+0.9998,
+0.9985,
+0.989,
+0.9851
+]
+},
+{
+"k": 5,
+"path": [
+85690,
+54574,
+13679,
+19725,
+5644,
+1194,
+2791,
+60984,
+77455,
+74037
+],
+"secs": 1.01,
+"victim": 1194,
+"names": [
+"Pete Townshend",
+"Traffic",
+"The Byrds",
+"Jefferson Airplane",
+"Creedence Clearwater Revival",
+"Queen",
+"Green Day",
+"Good Charlotte",
+"Story of the Year",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9716,
+0.994,
+0.997,
+0.9987,
+0.9999,
+0.9999,
+0.9963,
+0.9873,
+0.9851
+]
+},
+{
+"k": 6,
+"path": [
+85690,
+68071,
+38889,
+36225,
+29823,
+28635,
+44591,
+53654,
+74037
+],
+"secs": 1.23,
+"victim": 29823,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Allman Brothers Band",
+"Thin Lizzy",
+"Motörhead",
+"Pantera",
+"Killswitch Engage",
+"Asking Alexandria",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9926,
+0.9932,
+0.9966,
+0.9958,
+0.9922,
+0.9717,
+0.9851
+]
+},
+{
+"k": 7,
+"path": [
+85690,
+68071,
+38889,
+28367,
+13749,
+16880,
+56155,
+53654,
+74037
+],
+"secs": 1.32,
+"victim": 28367,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Allman Brothers Band",
+"Rush",
+"Dream Theater",
+"In Flames",
+"Parkway Drive",
+"Asking Alexandria",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9926,
+0.995,
+0.9946,
+0.9948,
+0.9792,
+0.9717,
+0.9851
+]
+},
+{
+"k": 8,
+"path": [
+85690,
+68071,
+30152,
+68189,
+47374,
+25796,
+32821,
+82241,
+74037
+],
+"secs": 1.18,
+"victim": 32821,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Doobie Brothers",
+"Blue Öyster Cult",
+"Ozzy Osbourne",
+"Disturbed",
+"Rise Against",
+"The Red Jumpsuit Apparatus",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9881,
+0.9939,
+0.9976,
+0.9969,
+0.9977,
+0.989,
+0.9851
+]
+},
+{
+"k": 9,
+"path": [
+85690,
+68071,
+38889,
+41361,
+57760,
+43149,
+53654,
+74037
+],
+"secs": 1.23,
+"victim": 41361,
+"names": [
+"Pete Townshend",
+"Joe Walsh",
+"The Allman Brothers Band",
+"Deep Purple",
+"Megadeth",
+"Five Finger Death Punch",
+"Asking Alexandria",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9736,
+0.9926,
+0.9983,
+0.9953,
+0.9837,
+0.9717,
+0.9851
+]
+},
+{
+"k": 10,
+"path": [
+85690,
+54574,
+48019,
+52492,
+41255,
+50194,
+74037
+],
+"secs": 1.25,
+"victim": 41255,
+"names": [
+"Pete Townshend",
+"Traffic",
+"The Band",
+"Nick Drake",
+"Bright Eyes",
+"Brand New",
+"Silverstein"
+],
+"pctl": [
+0.9625,
+0.9716,
+0.9929,
+0.9967,
+0.9979,
+0.9933,
+0.9851
+]
+}
+],
+"source_name": "Pete Townshend",
+"target_name": "Silverstein"
+},
+{
+"tag": "famous",
+"source": 65358,
+"target": 9334,
+"ladder": [
+{
+"k": 0,
+"path": [
+65358,
+25233,
+8551,
+29101,
+11966,
+17029,
+9334
+],
+"secs": 1.05,
+"victim": 8551,
+"names": [
+"SOFI",
+"deadmau5",
+"The Chemical Brothers",
+"Primal Scream",
+"The Jam",
+"Buzzcocks",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9989,
+0.9949,
+0.992,
+0.9893,
+0.9826
+]
+},
+{
+"k": 1,
+"path": [
+65358,
+25233,
+9633,
+14564,
+10597,
+34857,
+12005,
+41366,
+9334
+],
+"secs": 1.15,
+"victim": 10597,
+"names": [
+"SOFI",
+"deadmau5",
+"Röyksopp",
+"LCD Soundsystem",
+"The Flaming Lips",
+"The Breeders",
+"Fugazi",
+"The Stooges",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9983,
+0.9983,
+0.9984,
+0.9886,
+0.9892,
+0.995,
+0.9826
+]
+},
+{
+"k": 2,
+"path": [
+65358,
+25233,
+9633,
+14564,
+15957,
+20050,
+12005,
+41366,
+9334
+],
+"secs": 1.5,
+"victim": 14564,
+"names": [
+"SOFI",
+"deadmau5",
+"Röyksopp",
+"LCD Soundsystem",
+"Broken Social Scene",
+"Built to Spill",
+"Fugazi",
+"The Stooges",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9983,
+0.9983,
+0.9973,
+0.991,
+0.9892,
+0.995,
+0.9826
+]
+},
+{
+"k": 3,
+"path": [
+65358,
+25233,
+9633,
+18020,
+21322,
+33888,
+11966,
+17029,
+9334
+],
+"secs": 1.83,
+"victim": 9633,
+"names": [
+"SOFI",
+"deadmau5",
+"Röyksopp",
+"Fatboy Slim",
+"The Cardigans",
+"Supergrass",
+"The Jam",
+"Buzzcocks",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9983,
+0.9982,
+0.9981,
+0.9943,
+0.992,
+0.9893,
+0.9826
+]
+},
+{
+"k": 4,
+"path": [
+65358,
+25233,
+25339,
+48964,
+31605,
+41366,
+9334
+],
+"secs": 1.79,
+"victim": 25339,
+"names": [
+"SOFI",
+"deadmau5",
+"The Prodigy",
+"Portishead",
+"Sonic Youth",
+"The Stooges",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9994,
+0.9991,
+0.9984,
+0.995,
+0.9826
+]
+},
+{
+"k": 5,
+"path": [
+65358,
+25233,
+69749,
+68657,
+53627,
+41366,
+9334
+],
+"secs": 1.62,
+"victim": 53627,
+"names": [
+"SOFI",
+"deadmau5",
+"Tycho",
+"Little Dragon",
+"Lou Reed",
+"The Stooges",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9891,
+0.9957,
+0.9989,
+0.995,
+0.9826
+]
+},
+{
+"k": 6,
+"path": [
+65358,
+25233,
+42041,
+33688,
+24706,
+33888,
+11966,
+9334
+],
+"secs": 1.76,
+"victim": 24706,
+"names": [
+"SOFI",
+"deadmau5",
+"Digitalism",
+"Klaxons",
+"The Hives",
+"Supergrass",
+"The Jam",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9942,
+0.9971,
+0.9976,
+0.9943,
+0.992,
+0.9826
+]
+},
+{
+"k": 7,
+"path": [
+65358,
+25233,
+60608,
+46386,
+31605,
+41366,
+9334
+],
+"secs": 1.64,
+"victim": 46386,
+"names": [
+"SOFI",
+"deadmau5",
+"Crystal Castles",
+"Björk",
+"Sonic Youth",
+"The Stooges",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9986,
+0.9991,
+0.9984,
+0.995,
+0.9826
+]
+},
+{
+"k": 8,
+"path": [
+65358,
+25233,
+42041,
+33688,
+44635,
+33888,
+11966,
+9334
+],
+"secs": 1.75,
+"victim": 33688,
+"names": [
+"SOFI",
+"deadmau5",
+"Digitalism",
+"Klaxons",
+"The Libertines",
+"Supergrass",
+"The Jam",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9942,
+0.9971,
+0.9953,
+0.9943,
+0.992,
+0.9826
+]
+},
+{
+"k": 9,
+"path": [
+65358,
+25233,
+45776,
+48262,
+60938,
+31605,
+41366,
+9334
+],
+"secs": 2.04,
+"victim": 48262,
+"names": [
+"SOFI",
+"deadmau5",
+"Justice",
+"Phoenix",
+"Interpol",
+"Sonic Youth",
+"The Stooges",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9986,
+0.999,
+0.9989,
+0.9984,
+0.995,
+0.9826
+]
+},
+{
+"k": 10,
+"path": [
+65358,
+25233,
+45776,
+39298,
+27020,
+18677,
+24903,
+9334
+],
+"secs": 1.94,
+"victim": 45776,
+"names": [
+"SOFI",
+"deadmau5",
+"Justice",
+"Caribou",
+"Deerhunter",
+"Pavement",
+"Television",
+"New York Dolls"
+],
+"pctl": [
+0.9509,
+0.9968,
+0.9986,
+0.9956,
+0.9947,
+0.9945,
+0.9838,
+0.9826
+]
+}
+],
+"source_name": "SOFI",
+"target_name": "New York Dolls"
+},
+{
+"tag": "famous",
+"source": 37135,
+"target": 33026,
+"ladder": [
+{
+"k": 0,
+"path": [
+37135,
+42080,
+20893,
+61641,
+51748,
+23278,
+17266,
+73189,
+33026
+],
+"secs": 3.79,
+"victim": 23278,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"Daniel Caesar",
+"Santigold",
+"Metric",
+"Imogen Heap",
+"Frou Frou",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.8827,
+0.9969,
+0.9981,
+0.9974,
+0.9942,
+0.966
+]
+},
+{
+"k": 1,
+"path": [
+37135,
+42080,
+20893,
+31327,
+66428,
+73189,
+33026
+],
+"secs": 4.75,
+"victim": 66428,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"Tricky",
+"Zero 7",
+"Frou Frou",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.9951,
+0.9967,
+0.9942,
+0.966
+]
+},
+{
+"k": 2,
+"path": [
+37135,
+42080,
+20893,
+31327,
+42102,
+61064,
+33026
+],
+"secs": 4.66,
+"victim": 42102,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"Tricky",
+"Goldfrapp",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.9951,
+0.9977,
+0.9939,
+0.966
+]
+},
+{
+"k": 3,
+"path": [
+37135,
+42080,
+20893,
+41707,
+69117,
+73189,
+33026
+],
+"secs": 4.6,
+"victim": 73189,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"The Marías",
+"bôa",
+"Frou Frou",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.8708,
+0.9232,
+0.9942,
+0.966
+]
+},
+{
+"k": 4,
+"path": [
+37135,
+42080,
+20893,
+31327,
+33652,
+61064,
+33026
+],
+"secs": 4.71,
+"victim": 31327,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"Tricky",
+"Hooverphonic",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.9951,
+0.9926,
+0.9939,
+0.966
+]
+},
+{
+"k": 5,
+"path": [
+37135,
+42080,
+65064,
+14564,
+9633,
+33652,
+61064,
+33026
+],
+"secs": 5.01,
+"victim": 14564,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"IDLES",
+"LCD Soundsystem",
+"Röyksopp",
+"Hooverphonic",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.8406,
+0.9983,
+0.9983,
+0.9926,
+0.9939,
+0.966
+]
+},
+{
+"k": 6,
+"path": [
+37135,
+42080,
+20893,
+56872,
+8551,
+9633,
+33652,
+61064,
+33026
+],
+"secs": 5.03,
+"victim": 8551,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"The Avalanches",
+"The Chemical Brothers",
+"Röyksopp",
+"Hooverphonic",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.991,
+0.9989,
+0.9983,
+0.9926,
+0.9939,
+0.966
+]
+},
+{
+"k": 7,
+"path": [
+37135,
+64254,
+44512,
+50194,
+41255,
+70800,
+61064,
+33026
+],
+"secs": 5.02,
+"victim": 41255,
+"names": [
+"Comeback Kid",
+"Alexisonfire",
+"The Used",
+"Brand New",
+"Bright Eyes",
+"Kings of Convenience",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.9876,
+0.9943,
+0.9933,
+0.9979,
+0.9966,
+0.9939,
+0.966
+]
+},
+{
+"k": 8,
+"path": [
+37135,
+42080,
+20893,
+56872,
+8835,
+2204,
+61064,
+33026
+],
+"secs": 5.01,
+"victim": 2204,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"The Avalanches",
+"RJD2",
+"Morcheeba",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.991,
+0.9942,
+0.995,
+0.9939,
+0.966
+]
+},
+{
+"k": 9,
+"path": [
+37135,
+42080,
+20893,
+19930,
+20411,
+5672,
+33652,
+61064,
+33026
+],
+"secs": 5.21,
+"victim": 5672,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"Toro y Moi",
+"Four Tet",
+"Massive Attack",
+"Hooverphonic",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.9929,
+0.995,
+0.9996,
+0.9926,
+0.9939,
+0.966
+]
+},
+{
+"k": 10,
+"path": [
+37135,
+42080,
+20893,
+19930,
+20411,
+9633,
+33652,
+61064,
+33026
+],
+"secs": 5.03,
+"victim": 9633,
+"names": [
+"Comeback Kid",
+"Turnstile",
+"Blood Orange",
+"Toro y Moi",
+"Four Tet",
+"Röyksopp",
+"Hooverphonic",
+"Emilíana Torrini",
+"Ivy"
+],
+"pctl": [
+0.9695,
+0.8208,
+0.9657,
+0.9929,
+0.995,
+0.9983,
+0.9926,
+0.9939,
+0.966
+]
+}
+],
+"source_name": "Comeback Kid",
+"target_name": "Ivy"
+},
+{
+"tag": "mid",
+"source": 42214,
+"target": 3251,
+"ladder": [
+{
+"k": 0,
+"path": [
+42214,
+48525,
+9857,
+79321,
+76468,
+66556,
+40034,
+23414,
+3251
+],
+"secs": 10.51,
+"victim": 66556,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"Ms. Lauryn Hill",
+"Amy Winehouse",
+"Bob Marley & The Wailers",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9919,
+0.9992,
+0.9993,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 1,
+"path": [
+42214,
+48525,
+9857,
+27688,
+69768,
+40034,
+23414,
+3251
+],
+"secs": 11.37,
+"victim": 27688,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"Cypress Hill",
+"Damian “Jr. Gong” Marley",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9961,
+0.9901,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 2,
+"path": [
+42214,
+48525,
+9857,
+5665,
+5844,
+6527,
+47512,
+40034,
+23414,
+3251
+],
+"secs": 10.58,
+"victim": 6527,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"Busta Rhymes",
+"Akon",
+"Nelly Furtado",
+"Juanes",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9938,
+0.9972,
+0.9983,
+0.9848,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 3,
+"path": [
+42214,
+48525,
+9857,
+48640,
+66985,
+58501,
+40034,
+23414,
+3251
+],
+"secs": 10.26,
+"victim": 48640,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"50 Cent",
+"Sean Paul",
+"Stromae",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9961,
+0.9948,
+0.9832,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 4,
+"path": [
+42214,
+48525,
+9857,
+5665,
+5844,
+63694,
+58501,
+40034,
+23414,
+3251
+],
+"secs": 9.71,
+"victim": 5844,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"Busta Rhymes",
+"Akon",
+"Taio Cruz",
+"Stromae",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9938,
+0.9972,
+0.9929,
+0.9832,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 5,
+"path": [
+42214,
+66698,
+32456,
+70811,
+70556,
+66985,
+58501,
+40034,
+23414,
+3251
+],
+"secs": 9.53,
+"victim": 32456,
+"names": [
+"Compton’s Most Wanted",
+"Eazy‐E",
+"Dr. Dre",
+"Lupe Fiasco",
+"T‐Pain",
+"Sean Paul",
+"Stromae",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9575,
+0.9962,
+0.9944,
+0.9935,
+0.9948,
+0.9832,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 6,
+"path": [
+42214,
+48525,
+44305,
+43738,
+70257,
+59451,
+69768,
+40034,
+23414,
+3251
+],
+"secs": 9.05,
+"victim": 59451,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Baby Keem",
+"Trippie Redd",
+"Bladee",
+"Skrillex",
+"Damian “Jr. Gong” Marley",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.8576,
+0.8725,
+0.8159,
+0.9962,
+0.9901,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 7,
+"path": [
+42214,
+48525,
+44305,
+43738,
+70257,
+60411,
+77975,
+69768,
+40034,
+23414,
+3251
+],
+"secs": 0.0,
+"victim": 40034,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Baby Keem",
+"Trippie Redd",
+"Bladee",
+"Bobby Raps",
+"Sirah",
+"Damian “Jr. Gong” Marley",
+"Manu Chao",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.8576,
+0.8725,
+0.8159,
+0.6322,
+0.8187,
+0.9901,
+0.9939,
+0.9839,
+0.6924
+]
+},
+{
+"k": 8,
+"path": [
+42214,
+48525,
+9857,
+79321,
+35223,
+14056,
+43362,
+5851,
+3251
+],
+"secs": 8.61,
+"victim": 14056,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"Ms. Lauryn Hill",
+"Sade",
+"Nina Simone",
+"Madeleine Peyroux",
+"Pink Martini",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9919,
+0.9939,
+0.9974,
+0.9848,
+0.9783,
+0.6924
+]
+},
+{
+"k": 9,
+"path": [
+42214,
+45689,
+21974,
+71512,
+51966,
+43362,
+5851,
+3251
+],
+"secs": 8.38,
+"victim": 51966,
+"names": [
+"Compton’s Most Wanted",
+"Warren G",
+"Nate Dogg",
+"Dido",
+"Norah Jones",
+"Madeleine Peyroux",
+"Pink Martini",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9812,
+0.9937,
+0.9981,
+0.9982,
+0.9848,
+0.9783,
+0.6924
+]
+},
+{
+"k": 10,
+"path": [
+42214,
+48525,
+9857,
+65342,
+62201,
+67485,
+68189,
+52603,
+14513,
+23414,
+3251
+],
+"secs": 8.82,
+"victim": 52603,
+"names": [
+"Compton’s Most Wanted",
+"Too $hort",
+"Ice Cube",
+"Public Enemy",
+"Anthrax",
+"Dio",
+"Blue Öyster Cult",
+"Santana",
+"Buena Vista Social Club",
+"Gipsy Kings",
+"Alabina"
+],
+"pctl": [
+0.6426,
+0.9686,
+0.9903,
+0.9942,
+0.9909,
+0.9907,
+0.9939,
+0.9972,
+0.9856,
+0.9839,
+0.6924
+]
+}
+],
+"source_name": "Compton’s Most Wanted",
+"target_name": "Alabina"
+},
+{
+"tag": "mid",
+"source": 65289,
+"target": 3207,
+"ladder": [
+{
+"k": 0,
+"path": [
+65289,
+26021,
+37713,
+28020,
+29511,
+40768,
+4620,
+6494,
+6217,
+3207
+],
+"secs": 3.31,
+"victim": 26021,
+"names": [
+"Mano Le Tough",
+"Róisín Murphy",
+"Jessie Ware",
+"Rina Sawayama",
+"Chappell Roan",
+"JENNIE",
+"BTS",
+"Jack Harlow",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.9911,
+0.9868,
+0.8291,
+0.8853,
+0.8469,
+0.9047,
+0.887,
+0.834,
+0.346
+]
+},
+{
+"k": 1,
+"path": [
+65289,
+75578,
+75250,
+39298,
+36685,
+10924,
+6494,
+6217,
+3207
+],
+"secs": 3.7,
+"victim": 39298,
+"names": [
+"Mano Le Tough",
+"DJ Koze",
+"Apparat",
+"Caribou",
+"Jungle",
+"Glass Animals",
+"Jack Harlow",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.952,
+0.9913,
+0.9956,
+0.8718,
+0.9108,
+0.887,
+0.834,
+0.346
+]
+},
+{
+"k": 2,
+"path": [
+65289,
+75578,
+75250,
+70328,
+1475,
+36685,
+10924,
+6494,
+6217,
+3207
+],
+"secs": 0.0,
+"victim": 75250,
+"names": [
+"Mano Le Tough",
+"DJ Koze",
+"Apparat",
+"Weval",
+"Holly Walker",
+"Jungle",
+"Glass Animals",
+"Jack Harlow",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.952,
+0.9913,
+0.725,
+0.7222,
+0.8718,
+0.9108,
+0.887,
+0.834,
+0.346
+]
+},
+{
+"k": 3,
+"path": [
+65289,
+75578,
+54978,
+70328,
+1475,
+36685,
+10924,
+6494,
+6217,
+3207
+],
+"secs": 0.0,
+"victim": 75578,
+"names": [
+"Mano Le Tough",
+"DJ Koze",
+"Christian Löffler",
+"Weval",
+"Holly Walker",
+"Jungle",
+"Glass Animals",
+"Jack Harlow",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.952,
+0.7633,
+0.725,
+0.7222,
+0.8718,
+0.9108,
+0.887,
+0.834,
+0.346
+]
+},
+{
+"k": 4,
+"path": [
+65289,
+42837,
+54978,
+70328,
+1475,
+36685,
+10924,
+6494,
+6217,
+3207
+],
+"secs": 0.0,
+"victim": 10924,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Christian Löffler",
+"Weval",
+"Holly Walker",
+"Jungle",
+"Glass Animals",
+"Jack Harlow",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.7633,
+0.725,
+0.7222,
+0.8718,
+0.9108,
+0.887,
+0.834,
+0.346
+]
+},
+{
+"k": 5,
+"path": [
+65289,
+42837,
+40680,
+61655,
+18845,
+746,
+6217,
+3207
+],
+"secs": 3.41,
+"victim": 40680,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Moderat",
+"Nosaj Thing",
+"Chance the Rapper",
+"Migos",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.9782,
+0.9778,
+0.9204,
+0.8813,
+0.834,
+0.346
+]
+},
+{
+"k": 6,
+"path": [
+65289,
+42837,
+70328,
+43752,
+61655,
+18845,
+746,
+6217,
+3207
+],
+"secs": 0.0,
+"victim": 61655,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Weval",
+"Rival Consoles",
+"Nosaj Thing",
+"Chance the Rapper",
+"Migos",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.725,
+0.8767,
+0.9778,
+0.9204,
+0.8813,
+0.834,
+0.346
+]
+},
+{
+"k": 7,
+"path": [
+65289,
+42837,
+2369,
+6412,
+32253,
+6217,
+3207
+],
+"secs": 3.72,
+"victim": 6412,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Nicolas Jaar",
+"Sampha",
+"Kodak Black",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.9823,
+0.9839,
+0.8682,
+0.834,
+0.346
+]
+},
+{
+"k": 8,
+"path": [
+65289,
+42837,
+70328,
+43752,
+53562,
+62322,
+56883,
+6217,
+3207
+],
+"secs": 3.47,
+"victim": 53562,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Weval",
+"Rival Consoles",
+"Oneohtrix Point Never",
+"Yves Tumor",
+"Lil Yachty",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.725,
+0.8767,
+0.973,
+0.853,
+0.8903,
+0.834,
+0.346
+]
+},
+{
+"k": 9,
+"path": [
+65289,
+42837,
+70328,
+43752,
+63361,
+79681,
+62322,
+56883,
+6217,
+3207
+],
+"secs": 0.0,
+"victim": 56883,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Weval",
+"Rival Consoles",
+"Leon Vynehall",
+"Vegyn",
+"Yves Tumor",
+"Lil Yachty",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.725,
+0.8767,
+0.7222,
+0.7386,
+0.853,
+0.8903,
+0.834,
+0.346
+]
+},
+{
+"k": 10,
+"path": [
+65289,
+42837,
+70328,
+43752,
+20411,
+59451,
+70257,
+43738,
+6217,
+3207
+],
+"secs": 3.62,
+"victim": 59451,
+"names": [
+"Mano Le Tough",
+"Pional",
+"Weval",
+"Rival Consoles",
+"Four Tet",
+"Skrillex",
+"Bladee",
+"Trippie Redd",
+"YoungBoy Never Broke Again",
+"Quando Rondo"
+],
+"pctl": [
+0.6519,
+0.813,
+0.725,
+0.8767,
+0.995,
+0.9962,
+0.8159,
+0.8725,
+0.834,
+0.346
+]
+}
+],
+"source_name": "Mano Le Tough",
+"target_name": "Quando Rondo"
+},
+{
+"tag": "mid",
+"source": 36539,
+"target": 33239,
+"ladder": [
+{
+"k": 0,
+"path": [
+36539,
+67338,
+64449,
+44305,
+19009,
+33104,
+28056,
+37458,
+33047,
+28504,
+52990,
+62991,
+53552,
+80719,
+33239
+],
+"secs": 4.6,
+"victim": 33047,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"21 Savage",
+"Quavo",
+"Charlie Puth",
+"Jonas Brothers",
+"Michael Bublé",
+"John Williams",
+"Howard Shore",
+"Trevor Morris",
+"Marcin Przybyłowicz",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.904,
+0.8916,
+0.8962,
+0.9792,
+0.9962,
+0.9916,
+0.9913,
+0.8742,
+0.8318,
+0.7805,
+0.6406
+]
+},
+{
+"k": 1,
+"path": [
+36539,
+67338,
+64449,
+44305,
+19009,
+33104,
+28056,
+37458,
+41546,
+28504,
+52990,
+62991,
+53552,
+80719,
+33239
+],
+"secs": 0.0,
+"victim": 28504,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"21 Savage",
+"Quavo",
+"Charlie Puth",
+"Jonas Brothers",
+"Pentatonix",
+"John Williams",
+"Howard Shore",
+"Trevor Morris",
+"Marcin Przybyłowicz",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.904,
+0.8916,
+0.8962,
+0.9792,
+0.8732,
+0.9916,
+0.9913,
+0.8742,
+0.8318,
+0.7805,
+0.6406
+]
+},
+{
+"k": 2,
+"path": [
+36539,
+67338,
+64449,
+44305,
+19009,
+33104,
+28056,
+37458,
+41546,
+41969,
+51523,
+52990,
+62991,
+53552,
+80719,
+33239
+],
+"secs": 0.0,
+"victim": 52990,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"21 Savage",
+"Quavo",
+"Charlie Puth",
+"Jonas Brothers",
+"Pentatonix",
+"Peter Hollens",
+"The Dwarf Cast",
+"Howard Shore",
+"Trevor Morris",
+"Marcin Przybyłowicz",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.904,
+0.8916,
+0.8962,
+0.9792,
+0.8732,
+0.6487,
+0.7451,
+0.9913,
+0.8742,
+0.8318,
+0.7805,
+0.6406
+]
+},
+{
+"k": 3,
+"path": [
+36539,
+67338,
+64449,
+44305,
+39607,
+74167,
+43090,
+37282,
+78854,
+83298,
+80719,
+33239
+],
+"secs": 5.51,
+"victim": 37282,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"PinkPantheress",
+"Caroline Polachek",
+"Grimes",
+"M83",
+"Hans Zimmer",
+"Jeremy Soule",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.8877,
+0.8848,
+0.9938,
+0.9991,
+0.9967,
+0.9551,
+0.7805,
+0.6406
+]
+},
+{
+"k": 4,
+"path": [
+36539,
+67338,
+64449,
+44305,
+39607,
+41707,
+54576,
+54422,
+9533,
+19427,
+41246,
+53552,
+80719,
+33239
+],
+"secs": 6.03,
+"victim": 39607,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"PinkPantheress",
+"The Marías",
+"Wallows",
+"Jack Stauber",
+"Toby Fox",
+"Christopher Larkin",
+"Austin Wintory",
+"Marcin Przybyłowicz",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.8877,
+0.8708,
+0.8432,
+0.8204,
+0.8728,
+0.7342,
+0.8123,
+0.8318,
+0.7805,
+0.6406
+]
+},
+{
+"k": 5,
+"path": [
+36539,
+67338,
+64449,
+44305,
+32503,
+57441,
+71194,
+85369,
+78854,
+83298,
+80719,
+33239
+],
+"secs": 5.53,
+"victim": 78854,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"Denzel Curry",
+"Run the Jewels",
+"Nils Frahm",
+"Ludovico Einaudi",
+"Hans Zimmer",
+"Jeremy Soule",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.8929,
+0.8969,
+0.9673,
+0.9891,
+0.9967,
+0.9551,
+0.7805,
+0.6406
+]
+},
+{
+"k": 6,
+"path": [
+36539,
+67338,
+64449,
+44305,
+67099,
+32047,
+9533,
+19427,
+80719,
+33239
+],
+"secs": 5.61,
+"victim": 9533,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"JPEGMAFIA",
+"Kero Kero Bonito",
+"Toby Fox",
+"Christopher Larkin",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.8593,
+0.8353,
+0.8728,
+0.7342,
+0.7805,
+0.6406
+]
+},
+{
+"k": 7,
+"path": [
+36539,
+67338,
+64449,
+44305,
+67099,
+32047,
+71066,
+4842,
+19427,
+80719,
+33239
+],
+"secs": 0.0,
+"victim": 64449,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Fred again..",
+"Baby Keem",
+"JPEGMAFIA",
+"Kero Kero Bonito",
+"Snail’s House",
+"Louie Zong",
+"Christopher Larkin",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8724,
+0.8576,
+0.8593,
+0.8353,
+0.7481,
+0.7089,
+0.7342,
+0.7805,
+0.6406
+]
+},
+{
+"k": 8,
+"path": [
+36539,
+67338,
+21371,
+43752,
+34807,
+27475,
+82116,
+83298,
+80719,
+33239
+],
+"secs": 4.22,
+"victim": 34807,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Daniel Avery",
+"Rival Consoles",
+"Ólafur Arnalds",
+"Max Richter",
+"Ramin Djawadi",
+"Jeremy Soule",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8233,
+0.8767,
+0.9881,
+0.9855,
+0.978,
+0.9551,
+0.7805,
+0.6406
+]
+},
+{
+"k": 9,
+"path": [
+36539,
+67338,
+21371,
+43752,
+55493,
+59238,
+27475,
+82116,
+83298,
+80719,
+33239
+],
+"secs": 0.0,
+"victim": 27475,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Daniel Avery",
+"Rival Consoles",
+"Ben Lukas Boysen",
+"Lambert",
+"Max Richter",
+"Ramin Djawadi",
+"Jeremy Soule",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8233,
+0.8767,
+0.729,
+0.6833,
+0.9855,
+0.978,
+0.9551,
+0.7805,
+0.6406
+]
+},
+{
+"k": 10,
+"path": [
+36539,
+67338,
+21371,
+15524,
+3744,
+29810,
+82116,
+53552,
+80719,
+33239
+],
+"secs": 4.61,
+"victim": 3744,
+"names": [
+"Aged in Harmony",
+"HAAi",
+"Daniel Avery",
+"Max Cooper",
+"Jon Hopkins",
+"Jóhann Jóhannsson",
+"Ramin Djawadi",
+"Marcin Przybyłowicz",
+"Borislav Slavov",
+"Tilman Sillescu"
+],
+"pctl": [
+0.3141,
+0.6207,
+0.8233,
+0.8977,
+0.9829,
+0.9653,
+0.978,
+0.8318,
+0.7805,
+0.6406
+]
+}
+],
+"source_name": "Aged in Harmony",
+"target_name": "Tilman Sillescu"
+},
+{
+"tag": "mid",
+"source": 65334,
+"target": 19537,
+"ladder": [
+{
+"k": 0,
+"path": [
+65334,
+85746,
+67215,
+65301,
+16358,
+33047,
+28504,
+52844,
+27475,
+19537
+],
+"secs": 1.23,
+"victim": 16358,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Kylie Minogue",
+"Michael Bublé",
+"John Williams",
+"Dario Marianelli",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9976,
+0.9962,
+0.9916,
+0.9625,
+0.9855,
+0.5927
+]
+},
+{
+"k": 1,
+"path": [
+65334,
+85746,
+67215,
+65301,
+24995,
+33047,
+28504,
+52844,
+27475,
+19537
+],
+"secs": 1.37,
+"victim": 24995,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Mariah Carey",
+"Michael Bublé",
+"John Williams",
+"Dario Marianelli",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9964,
+0.9962,
+0.9916,
+0.9625,
+0.9855,
+0.5927
+]
+},
+{
+"k": 2,
+"path": [
+65334,
+85746,
+67215,
+32751,
+37458,
+28073,
+49567,
+27475,
+19537
+],
+"secs": 1.76,
+"victim": 32751,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"*NSYNC",
+"Jonas Brothers",
+"Lewis Capaldi",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9885,
+0.9792,
+0.8526,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 3,
+"path": [
+65334,
+85746,
+67215,
+65301,
+23734,
+10887,
+23019,
+58046,
+49567,
+27475,
+19537
+],
+"secs": 1.72,
+"victim": 23019,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Britney Spears",
+"Taylor Swift",
+"Bon Iver",
+"The Paper Kites",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9987,
+0.9968,
+0.9991,
+0.8882,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 4,
+"path": [
+65334,
+85746,
+67215,
+65301,
+23734,
+10887,
+84987,
+55599,
+58046,
+49567,
+27475,
+19537
+],
+"secs": 0.0,
+"victim": 23734,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Britney Spears",
+"Taylor Swift",
+"Tate McRae",
+"Noah Kahan",
+"The Paper Kites",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9987,
+0.9968,
+0.8781,
+0.8537,
+0.8882,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 5,
+"path": [
+65334,
+85746,
+67215,
+65301,
+74925,
+80562,
+86972,
+49567,
+27475,
+19537
+],
+"secs": 1.86,
+"victim": 74925,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Robbie Williams",
+"James Blunt",
+"Tom Odell",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9973,
+0.9965,
+0.9469,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 6,
+"path": [
+65334,
+85746,
+67215,
+65301,
+66618,
+68083,
+86972,
+49567,
+27475,
+19537
+],
+"secs": 1.83,
+"victim": 68083,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Sixpence None the Richer",
+"Keane",
+"Tom Odell",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9913,
+0.9986,
+0.9469,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 7,
+"path": [
+65334,
+85746,
+67215,
+65301,
+66618,
+44733,
+36281,
+49567,
+27475,
+19537
+],
+"secs": 1.9,
+"victim": 44733,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"Sixpence None the Richer",
+"Jason Mraz",
+"James Bay",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9913,
+0.9973,
+0.8295,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 8,
+"path": [
+65334,
+85746,
+67215,
+65301,
+21322,
+5672,
+20411,
+43752,
+34807,
+27475,
+19537
+],
+"secs": 1.86,
+"victim": 5672,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"The Cardigans",
+"Massive Attack",
+"Four Tet",
+"Rival Consoles",
+"Ólafur Arnalds",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9981,
+0.9996,
+0.995,
+0.8767,
+0.9881,
+0.9855,
+0.5927
+]
+},
+{
+"k": 9,
+"path": [
+65334,
+85746,
+67215,
+65301,
+42310,
+43391,
+24627,
+49567,
+27475,
+19537
+],
+"secs": 1.82,
+"victim": 43391,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"t.A.T.u.",
+"MARINA",
+"AURORA",
+"SYML",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9921,
+0.9943,
+0.9,
+0.8418,
+0.9855,
+0.5927
+]
+},
+{
+"k": 10,
+"path": [
+65334,
+85746,
+67215,
+65301,
+21322,
+67213,
+43084,
+55060,
+27475,
+19537
+],
+"secs": 2.07,
+"victim": 21322,
+"names": [
+"Soul Seekerz",
+"Holly Valance",
+"S Club",
+"Spice Girls",
+"The Cardigans",
+"Mazzy Star",
+"Grouper",
+"Stars of the Lid",
+"Max Richter",
+"Alexandra Stréliski"
+],
+"pctl": [
+0.552,
+0.9209,
+0.9665,
+0.9925,
+0.9981,
+0.9934,
+0.9745,
+0.9752,
+0.9855,
+0.5927
+]
+}
+],
+"source_name": "Soul Seekerz",
+"target_name": "Alexandra Stréliski"
+},
+{
+"tag": "mid",
+"source": 81017,
+"target": 70731,
+"ladder": [
+{
+"k": 0,
+"path": [
+81017,
+4904,
+17490,
+17029,
+11966,
+29101,
+8551,
+56872,
+76823,
+7521,
+70731
+],
+"secs": 6.76,
+"victim": 8551,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Buzzcocks",
+"The Jam",
+"Primal Scream",
+"The Chemical Brothers",
+"The Avalanches",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9893,
+0.992,
+0.9949,
+0.9989,
+0.991,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 1,
+"path": [
+81017,
+4904,
+17490,
+17029,
+12005,
+18677,
+27020,
+19930,
+56872,
+76823,
+7521,
+70731
+],
+"secs": 7.12,
+"victim": 27020,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Buzzcocks",
+"Fugazi",
+"Pavement",
+"Deerhunter",
+"Toro y Moi",
+"The Avalanches",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9893,
+0.9892,
+0.9945,
+0.9947,
+0.9929,
+0.991,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 2,
+"path": [
+81017,
+4904,
+17490,
+17029,
+12005,
+18677,
+5316,
+47934,
+19930,
+56872,
+76823,
+7521,
+70731
+],
+"secs": 0.0,
+"victim": 18677,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Buzzcocks",
+"Fugazi",
+"Pavement",
+"Car Seat Headrest",
+"Japanese Breakfast",
+"Toro y Moi",
+"The Avalanches",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9893,
+0.9892,
+0.9945,
+0.8413,
+0.843,
+0.9929,
+0.991,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 3,
+"path": [
+81017,
+4904,
+17490,
+17029,
+12005,
+46323,
+5316,
+47934,
+19930,
+56872,
+76823,
+7521,
+70731
+],
+"secs": 0.0,
+"victim": 19930,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Buzzcocks",
+"Fugazi",
+"Duster",
+"Car Seat Headrest",
+"Japanese Breakfast",
+"Toro y Moi",
+"The Avalanches",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9893,
+0.9892,
+0.8542,
+0.8413,
+0.843,
+0.9929,
+0.991,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 4,
+"path": [
+81017,
+4904,
+17490,
+17029,
+12005,
+46323,
+5316,
+47934,
+62597,
+83778,
+56872,
+76823,
+7521,
+70731
+],
+"secs": 0.01,
+"victim": 56872,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Buzzcocks",
+"Fugazi",
+"Duster",
+"Car Seat Headrest",
+"Japanese Breakfast",
+"Crumb",
+"King Gizzard & the Lizard Wizard",
+"The Avalanches",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9893,
+0.9892,
+0.8542,
+0.8413,
+0.843,
+0.8237,
+0.878,
+0.991,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 5,
+"path": [
+81017,
+4904,
+17490,
+17029,
+12005,
+46323,
+69117,
+39607,
+50355,
+43437,
+7521,
+70731
+],
+"secs": 7.6,
+"victim": 17029,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Buzzcocks",
+"Fugazi",
+"Duster",
+"bôa",
+"PinkPantheress",
+"Shygirl",
+"Eartheater",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9893,
+0.9892,
+0.8542,
+0.9232,
+0.8877,
+0.7938,
+0.7076,
+0.6253,
+0.3161
+]
+},
+{
+"k": 6,
+"path": [
+81017,
+61382,
+61398,
+82952,
+61138,
+25339,
+59451,
+30170,
+7521,
+70731
+],
+"secs": 7.43,
+"victim": 25339,
+"names": [
+"Emscherkurve 77",
+"Krawallbrüder",
+"Böhse Onkelz",
+"Die Ärzte",
+"Bloodhound Gang",
+"The Prodigy",
+"Skrillex",
+"Flowdan",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4944,
+0.8845,
+0.9701,
+0.9968,
+0.9994,
+0.9962,
+0.8703,
+0.6253,
+0.3161
+]
+},
+{
+"k": 7,
+"path": [
+81017,
+61382,
+61398,
+82952,
+61138,
+60984,
+23474,
+35767,
+39607,
+50355,
+43437,
+7521,
+70731
+],
+"secs": 7.16,
+"victim": 23474,
+"names": [
+"Emscherkurve 77",
+"Krawallbrüder",
+"Böhse Onkelz",
+"Die Ärzte",
+"Bloodhound Gang",
+"Good Charlotte",
+"Paramore",
+"Olivia Rodrigo",
+"PinkPantheress",
+"Shygirl",
+"Eartheater",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4944,
+0.8845,
+0.9701,
+0.9968,
+0.9963,
+0.9988,
+0.9094,
+0.8877,
+0.7938,
+0.7076,
+0.6253,
+0.3161
+]
+},
+{
+"k": 8,
+"path": [
+81017,
+4904,
+17490,
+78515,
+41237,
+31605,
+54045,
+76673,
+76823,
+7521,
+70731
+],
+"secs": 7.07,
+"victim": 31605,
+"names": [
+"Emscherkurve 77",
+"Stomper 98",
+"Sham 69",
+"Sex Pistols",
+"Siouxsie and the Banshees",
+"Sonic Youth",
+"Wilco",
+"Kurt Vile",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4622,
+0.9543,
+0.9966,
+0.9921,
+0.9984,
+0.9969,
+0.9856,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 9,
+"path": [
+81017,
+54912,
+64140,
+51999,
+19040,
+31455,
+40831,
+21648,
+76673,
+76823,
+7521,
+70731
+],
+"secs": 7.01,
+"victim": 21648,
+"names": [
+"Emscherkurve 77",
+"Stage Bottles",
+"Cock Sparrer",
+"The Exploited",
+"Dead Kennedys",
+"Hüsker Dü",
+"Dinosaur Jr.",
+"Yo La Tengo",
+"Kurt Vile",
+"Pink Siifu",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.6751,
+0.9082,
+0.9632,
+0.993,
+0.9763,
+0.9941,
+0.9951,
+0.9856,
+0.7217,
+0.6253,
+0.3161
+]
+},
+{
+"k": 10,
+"path": [
+81017,
+61382,
+61398,
+82952,
+61138,
+45253,
+49274,
+7521,
+70731
+],
+"secs": 6.56,
+"victim": 45253,
+"names": [
+"Emscherkurve 77",
+"Krawallbrüder",
+"Böhse Onkelz",
+"Die Ärzte",
+"Bloodhound Gang",
+"Placebo",
+"Michael Stipe",
+"Moor Mother",
+"Juçara Marçal"
+],
+"pctl": [
+0.358,
+0.4944,
+0.8845,
+0.9701,
+0.9968,
+0.9994,
+0.9182,
+0.6253,
+0.3161
+]
+}
+],
+"source_name": "Emscherkurve 77",
+"target_name": "Juçara Marçal"
+}
+]
+}

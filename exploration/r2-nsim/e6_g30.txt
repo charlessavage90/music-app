@@ -1,0 +1,101 @@
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+# variant ../exploration/r2-nsim/eng.py   20 pairs   102s
+
+## Lupe Fiasco -> Kid Rock  [famous]
+  p0  Lupe Fiasco (99) > John Legend (100) > Mariah Carey (100) > TLC (99) > Alanis Morissette (100) > Third Eye Blind (99) > Silverchair (99) > Chris Cornell (99) > Kid Rock (99)
+  p10 Lupe Fiasco (99) > DJ Premier (98) > PRhyme (45) > Brady Watt (23) > Yelawolf (95) > Kid Rock (99)
+
+## Survivor -> Nas  [famous]
+  p0  Survivor (99) > Men at Work (99) > Earth, Wind & Fire (99) > OutKast (100) > Nas (100)
+  p10 Survivor (99) > Joan Jett & The Blackhearts (98) > The Brood (9) > Jackal (9) > Hucci (38) > Massappeals (17) > DMNDZ (9) > Payday (16) > Payday (40) > Paris Texas (59) > redveil (67) > Danny Brown (97) > Nas (100)
+
+## Friendly Fires -> Steve Miller Band  [famous]
+  p0  Friendly Fires (100) > Cut Copy (100) > Empire of the Sun (100) > Two Door Cinema Club (100) > The Shins (100) > Nick Drake (100) > Neil Young (100) > Steve Miller Band (99)
+  p10 Friendly Fires (100) > Chromeo (99) > Joey Dosik (46) > Scary Goldings (29) > Josh Smith (17) > Devon Allman (13) > Devon Allman’s Honeytribe (44) > Derek and the Dominos (99) > Steve Miller Band (99)
+
+## She & Him -> Andrew Bird  [famous]
+  p0  She & Him (100) > Feist (100) > Andrew Bird (100)
+  p10 She & Him (100) > Neko Case (99) > Phosphorescent (98) > Andrew Bird (100)
+
+## Explosions in the Sky -> Sepultura  [famous]
+  p0  Explosions in the Sky (100) > Helios (98) > Max Richter (99) > SYML (84) > AURORA (90) > Poppy (87) > Sleep Token (82) > Ghost (96) > Gojira (98) > Sepultura (99)
+  p10 Explosions in the Sky (100) > sleepmakeswaves (93) > Meniscus (79) > Bossk (83) > Conjurer (45) > Cloud Rat (52) > Wormrot (83) > Napalm Death (98) > Sepultura (99)
+
+## Louis Armstrong -> Ozzy Osbourne  [famous]
+  p0  Louis Armstrong (100) > Bill Withers (99) > Daryl Hall & John Oates (100) > Journey (100) > Ozzy Osbourne (100)
+  p10 Louis Armstrong (100) > Chet Baker (99) > Art Pepper (94) > Scott Hamilton (82) > Brian Blade Fellowship (54) > Julian Lage (72) > Snarky Puppy (78) > KNOWER (68) > clown core (63) > Igorrr (90) > Anthrax (99) > Ozzy Osbourne (100)
+
+## Janet Jackson -> 311  [famous]
+  p0  Janet Jackson (99) > TLC (99) > Alanis Morissette (100) > Third Eye Blind (99) > 311 (99)
+  p10 Janet Jackson (99) > Mark Morrison (94) > Zeni (6) > Talamanca (14) > Sam Davies (14) > Eskai (11) > DENM (36) > Iya Terra (23) > Bumpin Uglies (30) > Sublime with Rome (88) > 311 (99)
+
+## Built to Spill -> Billie Holiday  [famous]
+  p0  Built to Spill (99) > Broken Social Scene (100) > Feist (100) > Norah Jones (100) > Billie Holiday (100)
+  p10 Built to Spill (99) > Deerhoof (99) > Paul Jacobs (22) > The Exorcist GBG (27) > Hedersleben (4) > Joel Vandroogenbroeck (35) > Mladen Franko (17) > John Leach (26) > Sid Phillips (45) > Bob Crosby and the Bob Cats (61) > Billie Holiday (100)
+
+## Too $hort -> The Wallflowers  [famous]
+  p0  Too $hort (97) > Ice Cube (99) > Busta Rhymes (99) > Nelly (99) > TLC (99) > Alanis Morissette (100) > Barenaked Ladies (99) > The Wallflowers (99)
+  p10 Too $hort (97) > Kristen Wiig (27) > Rogue Valley (62) > A Boy & His Kite (16) > The Native Sibling (11) > Flannel Graph (16) > Truslow (28) > Davide Rossi (13) > Duncan Sheik (96) > The Wallflowers (99)
+
+## Anastacia -> Mungo Jerry  [famous]
+  p0  Anastacia (98) > Sugababes (99) > Kylie Minogue (100) > Mariah Carey (100) > John Lennon (100) > The Kinks (100) > The Turtles (99) > The Foundations (97) > Mungo Jerry (97)
+  p10 Anastacia (98) > Delta Goodrem (96) > Alicja (10) > Senhit (25) > Destiny Chukunyere (21) > Grethe og Jørgen Ingmann (26) > Séverine (22) > Brotherhood of Man (86) > Mungo Jerry (97)
+
+## The Shirelles -> Wire  [famous]
+  p0  The Shirelles (97) > Sam Cooke (99) > Stevie Wonder (100) > Phil Collins (100) > Cyndi Lauper (100) > Blondie (100) > XTC (99) > Wire (98)
+  p10 The Shirelles (97) > Mary Wells (97) > Eddie Holland (25) > Miracles (16) > The Holy Mess (14) > MakeWar (14) > Kali Masi (12) > Jail Socks (18) > American Beauty (12) > Aesthetics Across the Color Line (19) > botanichesky sad (9) > Зарница (6) > Группа Хмурый (19) > Blind Seagull (22) > House of Harm (26) > Fearing (22) > Bauhaus (99) > Wire (98)
+
+## The O’Jays -> Midnight Oil  [famous]
+  p0  The O’Jays (98) > Earth, Wind & Fire (99) > Phil Collins (100) > INXS (99) > Midnight Oil (98)
+  p10 The O’Jays (98) > Teddy Pendergrass (95) > Johnny Williams (42) > The Rollers (33) > Andy Hart (15) > Anjei (17) > Toby Tech (15) > Nathan Behrens (7) > Alltag (8) > Muringa (17) > Ayla (16) > Olympia (16) > Luca Brasi (25) > The Hard Aches (18) > The Pretty Littles (17) > Private Function (16) > The Meanies (27) > The Mavis’s (58) > The Superjesus (71) > Midnight Oil (98)
+
+## Pete Townshend -> Silverstein  [famous]
+  p0  Pete Townshend (96) > Jean‐Michel Jarre (83) > Vangelis (99) > John Williams (99) > Michael Bublé (100) > Meghan Trainor (88) > Taylor Swift (100) > Paramore (100) > The Red Jumpsuit Apparatus (99) > Silverstein (99)
+  p10 Pete Townshend (96) > Russ Ballard (71) > Clif Magness (11) > Rob Moratti (7) > Deceptic (16) > The Northern (15) > If I Were You (32) > Annisokay (64) > The Amity Affliction (92) > Silverstein (99)
+
+## SOFI -> New York Dolls  [famous]
+  p0  SOFI (95) > deadmau5 (100) > The Chemical Brothers (100) > Primal Scream (99) > The Jam (99) > Buzzcocks (99) > New York Dolls (98)
+  p10 SOFI (95) > Luna Lenta (23) > Dead Pony (36) > Bad Waitress (25) > Cheap Perfume (32) > The Runaways (97) > New York Dolls (98)
+
+## Comeback Kid -> Ivy  [famous]
+  p0  Comeback Kid (97) > Turnstile (82) > Blood Orange (97) > Daniel Caesar (88) > Santigold (100) > Metric (100) > Imogen Heap (100) > Frou Frou (99) > Ivy (97)
+  p10 Comeback Kid (97) > Chris Cresswell (13) > The Homeless Gospel Choir (16) > Jesse Stewart (15) > King Strang (8) > JD Wilkes & The Dirt Daubers (13) > Electro Swingers (8) > Dutty Moonshine (17) > Marcella Puppini (11) > Amanaska (75) > Ivy (97)
+
+## Compton’s Most Wanted -> Alabina  [mid]
+  p0  Compton’s Most Wanted (64) > Too $hort (97) > Ice Cube (99) > Ms. Lauryn Hill (99) > Amy Winehouse (100) > Bob Marley & The Wailers (100) > Manu Chao (99) > Gipsy Kings (98) > Alabina (69)
+  p10 Compton’s Most Wanted (64) > Samuelle (41) > Whitey Shafer (64) > Ed Bruce (65) > Johnny Rodriguez (39) > Del Reeves (49) > Dick Curless (36) > Jimmy Wakely (62) > Pee Wee King (63) > Rex Stewart (53) > Oscar Alemán (66) > Tchavolo Schmitt (66) > New Quintette du Hot Club de France (45) > Marc Perrone (33) > Les Yeux Noirs (70) > Banda Ionica (70) > Alabina (69)
+
+## Mano Le Tough -> Quando Rondo  [mid]
+  p0  Mano Le Tough (65) > Róisín Murphy (99) > Jessie Ware (99) > Rina Sawayama (83) > Chappell Roan (89) > JENNIE (85) > BTS (90) > Jack Harlow (89) > YoungBoy Never Broke Again (83) > Quando Rondo (35)
+  p10 Mano Le Tough (65) > Talaboman (39) > Alex Burkat (10) > Boya (1) > Wanda Group (5) > Inkke (11) > Trends (8) > The Heavytrackerz (6) > Dapz on the Map (11) > Grim Sickers (8) > 23 Unofficial (4) > Belly Squad (6) > LD (11) > Carns Hill (6) > Fredo Bang (33) > Quando Rondo (35)
+
+## Aged in Harmony -> Tilman Sillescu  [mid]
+  p0  Aged in Harmony (31) > HAAi (62) > Fred again.. (87) > Baby Keem (86) > 21 Savage (90) > Quavo (89) > Charlie Puth (90) > Jonas Brothers (98) > Michael Bublé (100) > John Williams (99) > Howard Shore (99) > Trevor Morris (87) > Marcin Przybyłowicz (83) > Borislav Slavov (78) > Tilman Sillescu (64)
+  p10 Aged in Harmony (31) > L'Renee (18) > DJ Sense (6) > Regular Citizen (5) > WCC (6) > Via Maris (9) > Metrist (9) > Last Life (4) > Ancestral Voices (8) > Pact Infernal (7) > Draugurinn (6) > Torulf (9) > Max Aruj (12) > Winifred Phillips (58) > Tilman Sillescu (64)
+
+## Soul Seekerz -> Alexandra Stréliski  [mid]
+  p0  Soul Seekerz (55) > Holly Valance (92) > S Club (97) > Spice Girls (99) > Kylie Minogue (100) > Michael Bublé (100) > John Williams (99) > Dario Marianelli (96) > Max Richter (99) > Alexandra Stréliski (59)
+  p10 Soul Seekerz (55) > Flower Power (47) > Eyeopener (62) > Booty Callers (59) > Club Enforcer (27) > KB Project (46) > Alex Picone (50) > Even Tuell (42) > Leif (53) > Carmen Villain (57) > Li Yilei (38) > 冥丁 (50) > The Vernon Spring (50) > Shida Shahabi (34) > Erland Cooper (55) > James Heather (64) > Alexandra Stréliski (59)
+
+## Emscherkurve 77 -> Juçara Marçal  [mid]
+  p0  Emscherkurve 77 (36) > Stomper 98 (46) > Sham 69 (95) > Buzzcocks (99) > The Jam (99) > Primal Scream (99) > The Chemical Brothers (100) > The Avalanches (99) > Pink Siifu (72) > Moor Mother (63) > Juçara Marçal (32)
+  p10 Emscherkurve 77 (36) > Goitzsche Front (8) > Local Bastards (2) > Krayenzeit (10) > Sündenklang (7) > Null Positiv (10) > Beneath the Silence (8) > Louis Viallet (3) > Dismissed (1) > Lisa Ajax (9) > Alvaro Estrella (4) > Kadiatou (3) > Athena Manoukian (7) > Elisa (5) > Bárbara Bandeira (9) > Ivandro (7) > Papillon (7) > Hot e Oreia (7) > Rodrigo Ogi (26) > Juçara Marçal (32)
+
+press | fame mid-artists (famous pairs) | (mid pairs) |  len | weakest link | top10% share | coherence | bad steps
+------------------------------------------------------------------------------------------------------------------
+    0 |                           99.5 |        98.9 |  8.1 |        0.984 |          94% |       nan |      nan%
+    1 |                           88.6 |        65.0 |  8.8 |        0.655 |          49% |       nan |      nan%
+    2 |                           79.0 |        64.0 | 10.0 |        0.548 |          30% |       nan |      nan%
+    3 |                           67.6 |        50.9 | 10.9 |        0.469 |          27% |       nan |      nan%
+    4 |                           60.6 |        44.9 | 11.6 |        0.478 |          19% |       nan |      nan%
+    5 |                           52.2 |        41.5 | 12.1 |        0.390 |          24% |       nan |      nan%
+    6 |                           43.5 |        32.1 | 11.1 |        0.368 |          20% |       nan |      nan%
+    7 |                           41.2 |        23.3 | 11.0 |        0.379 |          21% |       nan |      nan%
+    8 |                           31.4 |        20.6 | 11.8 |        0.326 |          16% |       nan |      nan%
+    9 |                           29.8 |        11.9 | 10.8 |        0.288 |          22% |       nan |      nan%
+   10 |                           26.8 |         7.9 | 12.2 |        0.337 |          24% |       nan |      nan%
+
+routing time per journey: median 0.68s  max 11.05s
