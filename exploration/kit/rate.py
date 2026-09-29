@@ -26,7 +26,7 @@ KIT = Path(__file__).resolve().parent
 CACHE = KIT / "step_cache.jsonl"
 MODEL = os.environ.get("RATER_MODEL", "sonnet")
 BATCH = 40
-WORKERS = 6
+WORKERS = int(os.environ.get("RATER_WORKERS", "3"))
 CLAUDE = shutil.which("claude.cmd") or shutil.which("claude") or "claude"
 
 SYSTEM = (
