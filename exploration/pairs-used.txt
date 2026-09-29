@@ -1,0 +1,23 @@
+# Every artist pair touched by the Dig-deeper exploration (2026-09-28). Formal testing must use pairs NOT in this list.
+# Format: source_name<TAB>target_name<TAB>source_mbid<TAB>target_mbid<TAB>where used
+# The 20 kit pairs are the first 8 DRP-T1, 7 DRP-T2, 5 DRP-MID pairs of drp_pairs.json (already used by DRP-).
+Lupe Fiasco	Kid Rock	cf15719f-51f9-4db8-a15d-5eed9664ce69	ad0ecd8b-805e-406e-82cb-5b00c3a3a29e	kit
+Survivor	Nas	55ef024a-6cc0-49ed-8ce2-2e12193c0f46	cfbc0924-0035-4d6c-8197-f024653af823	kit
+Friendly Fires	Steve Miller Band	ef656595-bbe8-4386-8953-be8df9f54472	e57f0cac-4f56-473c-8d7e-d93f753fd586	kit
+She & Him	Andrew Bird	fb821608-35fd-4a45-a4b2-1a0537cee111	081b133e-ce74-42ba-92c1-c18234acb532	kit
+Explosions in the Sky	Sepultura	4236acde-2ce2-441c-a3d4-38d55f1b5474	1d93c839-22e7-4f76-ad84-d27039efc048	kit
+Louis Armstrong	Ozzy Osbourne	eea8a864-fcda-4602-9569-38ab446decd6	8aa5b65a-5b3c-4029-92bf-47a544356934	kit
+Janet Jackson	311	6be2828f-6c0d-4059-99d4-fa18acf1a296	bf600e2b-dc2d-4839-a1be-6ebef4087cd0	kit
+Built to Spill	Billie Holiday	3ac482b8-1494-4071-a0e9-f192f9d2c2b0	d59c4cda-11d9-48db-8bfe-b557ee602aed	kit
+Too $hort	The Wallflowers	8e0fe7bd-bd17-4d25-9b68-1e6a60705477	d9c90718-d54d-4ccf-a92e-37a5415ce299	kit
+Anastacia	Mungo Jerry	d3b2bec4-b70e-460e-b433-a865ceac2de8	d99a6247-94ab-4685-87df-572ba6ef44b7	kit
+The Shirelles	Wire	a8540ea0-1a74-4c22-8b70-1348a77a74a0	7f2a8098-50e3-451c-8696-c5d9f64f4762	kit
+The O’Jays	Midnight Oil	8153c6ef-026c-481f-b081-974f2c948d9f	05072650-4b05-4e8b-83d0-dba2576e306a	kit
+Pete Townshend	Silverstein	fb147b8f-0144-4418-acaa-90b2d9779840	d89de379-665d-425c-b2e9-41b95d1edb36	kit
+SOFI	New York Dolls	bf38b715-176e-4d24-9de5-a0698d282d49	1b96b9c9-0832-40cb-9f8d-7274de3733fc	kit
+Comeback Kid	Ivy	6d152109-c447-446d-9a06-3621c920bebd	610404f9-26bd-4be2-8697-f916495f14a4	kit
+Compton’s Most Wanted	Alabina	7bd7a6aa-9aea-463d-989e-3fb24c3b0c2a	099997a3-0cb5-4f0e-9587-d270948b2bb9	kit
+Mano Le Tough	Quando Rondo	bf002b6a-ea40-45fa-baa0-6218846292b6	09742c4c-4e39-435a-8418-7623b0d44e46	kit
+Aged in Harmony	Tilman Sillescu	6b578d80-8b2d-41f3-8a62-22dc94e3c48a	61ae5e61-646a-44bd-9b04-d2760e5e8c7b	kit
+Soul Seekerz	Alexandra Stréliski	bf29f809-3beb-4c0e-a522-5b2e873316fd	393b5619-bc5f-4a15-aec9-6bda1a57195d	kit
+Emscherkurve 77	Juçara Marçal	ed387b7d-7fd0-4262-a360-e893d838a24e	ced96166-52c4-44e4-9699-ffd963f80f10	kit
