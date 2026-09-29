@@ -76,7 +76,7 @@
 const $ = (id) => document.getElementById(id);
 const pick = { a: null, b: null };
 let variants = [];
-const state = {};  // variant id -> {pressed: [mbid], artists: []}
+const state = new Map();  // variant id -> {pressed: [mbid], artists: []}
 const audio = $("audio");
 let playing = null;
 
@@ -115,50 +115,61 @@ async function load(vid) {
   col.classList.add("busy");
   const r = await fetch("/api/journey", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ variant: vid, source: pick.a.mbid, target: pick.b.mbid, pressed: state[vid].pressed }),
+    body: JSON.stringify({ variant: vid, source: pick.a.mbid, target: pick.b.mbid, pressed: state.get(vid).pressed }),
   });
   const j = await r.json();
-  state[vid].artists = j.artists;
-  state[vid].median = j.median_mid_fame;
+  state.get(vid).artists = j.artists;
+  state.get(vid).median = j.median_mid_fame;
   col.classList.remove("busy");
   render(vid);
 }
 
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = String(text);
+  return e;
+}
+
 function render(vid) {
-  const v = variants.find((x) => x.id === vid), s = state[vid];
+  const v = variants.find((x) => x.id === vid), s = state.get(vid);
   const col = $("col-" + vid);
-  col.innerHTML = `<h2>${v.label}</h2><div class="desc">${v.desc}</div>
-    <div class="stats"><span>presses: ${s.pressed.length}</span>
-    <span>typical middle fame: ${s.median ?? "–"}</span><span>${s.artists.length} artists</span></div>`;
-  if (!s.artists.length) { col.innerHTML += `<div class="desc">No journey.</div>`; }
+  col.replaceChildren();
+  col.appendChild(el("h2", "", v.label));
+  col.appendChild(el("div", "desc", v.desc));
+  const stats = el("div", "stats");
+  stats.appendChild(el("span", "", "presses: " + s.pressed.length));
+  stats.appendChild(el("span", "", "typical middle fame: " + (s.median ?? "–")));
+  stats.appendChild(el("span", "", s.artists.length + " artists"));
+  col.appendChild(stats);
+  if (!s.artists.length) col.appendChild(el("div", "desc", "No journey."));
   s.artists.forEach((a, i) => {
     const end = i === 0 || i === s.artists.length - 1;
-    const row = document.createElement("div");
-    row.className = "card" + (end ? " end" : "");
-    row.innerHTML = `<button class="play" title="Play a 30-second clip">▶</button>
-      <span class="name" title="${a.name}">${a.name}</span>
-      <span class="fame" style="color:${fameColour(a.fame)}">${a.measured ? a.fame : "?"}</span>`;
-    row.querySelector(".play").onclick = (e) => playClip(a, e.currentTarget);
+    const row = el("div", "card" + (end ? " end" : ""));
+    const play = el("button", "play", "▶");
+    play.title = "Play a 30-second clip";
+    play.onclick = (e) => playClip(a, e.currentTarget);
+    const name = el("span", "name", a.name);
+    name.title = String(a.name);
+    const fame = el("span", "fame", a.measured ? a.fame : "?");
+    fame.style.color = fameColour(Number(a.fame));
+    row.append(play, name, fame);
     if (!end) {
-      const b = document.createElement("button");
-      b.className = "dig"; b.textContent = "Dig deeper";
+      const b = el("button", "dig", "Dig deeper");
       b.onclick = () => { s.pressed.push(a.mbid); s.names = (s.names || []).concat(a.name); load(vid); };
       row.appendChild(b);
     }
     col.appendChild(row);
   });
-  const bar = document.createElement("div");
-  bar.className = "colbar";
-  bar.innerHTML = `<button class="undo" ${s.pressed.length ? "" : "disabled"}>Undo press</button>
-    <button class="reset" ${s.pressed.length ? "" : "disabled"}>Reset</button>`;
-  bar.querySelector(".undo").onclick = () => { s.pressed.pop(); (s.names || []).pop(); load(vid); };
-  bar.querySelector(".reset").onclick = () => { s.pressed = []; s.names = []; load(vid); };
+  const bar = el("div", "colbar");
+  const undo = el("button", "undo", "Undo press");
+  const reset = el("button", "reset", "Reset");
+  undo.disabled = reset.disabled = !s.pressed.length;
+  undo.onclick = () => { s.pressed.pop(); (s.names || []).pop(); load(vid); };
+  reset.onclick = () => { s.pressed = []; s.names = []; load(vid); };
+  bar.append(undo, reset);
   col.appendChild(bar);
-  if (s.names && s.names.length) {
-    const p = document.createElement("div");
-    p.className = "pressed"; p.textContent = "Dug past: " + s.names.join(", ");
-    col.appendChild(p);
-  }
+  if (s.names && s.names.length) col.appendChild(el("div", "pressed", "Dug past: " + s.names.join(", ")));
 }
 
 async function playClip(a, btn) {
@@ -178,7 +189,7 @@ async function build() {
   const cols = $("cols");
   cols.innerHTML = "";
   variants.forEach((v) => {
-    state[v.id] = { pressed: [], names: [], artists: [] };
+    state.set(v.id, { pressed: [], names: [], artists: [] });
     const d = document.createElement("section");
     d.className = "col"; d.id = "col-" + v.id;
     cols.appendChild(d);
@@ -189,7 +200,7 @@ async function build() {
 $("go").onclick = build;
 $("all").onclick = () => {
   variants.forEach((v) => {
-    const s = state[v.id];
+    const s = state.get(v.id);
     const mids = s.artists.slice(1, -1);
     if (!mids.length) return;
     const top = mids.reduce((m, a) => (a.fame > m.fame ? a : m));
