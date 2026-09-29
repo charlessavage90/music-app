@@ -1,0 +1,30 @@
+  reach w=2 hmax=3 seg=none old=[90, 101]
+  reach w=2 hmax=5 seg=none old=[90, 101]
+  reach w=3 hmax=4 seg=none old=[89, 90, 101]
+  reach w=3 hmax=6 seg=[100, 97, 85, 70, 59, 99, 100] old=[89, 90, 101]
+1	pull0 w=1 h=2/2	0.02	Journey(100)	len=5/10	pos=3
+  reach w=2 hmax=3 seg=none old=[90, 101]
+  reach w=2 hmax=5 seg=none old=[90, 101]
+  reach w=3 hmax=4 seg=none old=[89, 90, 101]
+  reach w=3 hmax=6 seg=[100, 97, 85, 70, 59, 99, 100] old=[89, 90, 101]
+2	pull0 w=1 h=3/4	0.02	Bon Jovi(100)	len=5/10	pos=3
+3	band w=3 h=7/7	0.05	Daryl Hall & John Oates(100)	len=6/10	pos=2
+  reach w=2 hmax=3 seg=none old=[49, 101]
+  reach w=2 hmax=5 seg=none old=[49, 101]
+  reach w=3 hmax=4 seg=none old=[78, 49, 101]
+  reach w=3 hmax=6 seg=none old=[78, 49, 101]
+4	pull0 w=1 h=4/4	0.03	Alice Cooper(99)	len=8/10	pos=6
+  reach w=2 hmax=3 seg=none old=[89, 101]
+  reach w=2 hmax=5 seg=none old=[89, 101]
+  reach w=3 hmax=4 seg=none old=[87, 89, 101]
+  reach w=3 hmax=6 seg=none old=[87, 89, 101]
+5	pull0 w=2 h=3/3	0.03	Rush(99)	len=10/10	pos=8
+6	band w=1 h=2/2	0.00	Dio(99)	len=10/10	pos=8
+  reach w=2 hmax=3 seg=none old=[87, 101]
+  reach w=2 hmax=5 seg=none old=[87, 101]
+  reach w=3 hmax=4 seg=none old=[87, 87, 101]
+  reach w=3 hmax=6 seg=none old=[87, 87, 101]
+7	pull0 w=1 h=2/2	0.02	Accept(98)	len=10/10	pos=8
+8	band w=1 h=2/2	0.00	Blue Öyster Cult(99)	len=10/10	pos=8
+9	band w=1 h=2/2	0.00	Thin Lizzy(99)	len=10/10	pos=8
+10	band w=1 h=2/2	0.00	Twisted Sister(99)	len=10/10	pos=8

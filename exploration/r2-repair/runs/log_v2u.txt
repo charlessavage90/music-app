@@ -1,0 +1,199 @@
+1	band w=1 h=2/2	0.00	Feist(100)	len=3/10	pos=1
+2	band w=1 h=3/4	0.00	M. Ward(99)	len=3/10	pos=1
+3	band w=1 h=3/4	0.00	Neko Case(99)	len=4/10	pos=1
+4	band w=1 h=4/4	0.00	The Civil Wars(98)	len=5/10	pos=1
+5	band w=1 h=2/2	0.00	Fruit Bats(97)	len=7/10	pos=5
+6	band w=1 h=3/4	0.00	Bahamas(93)	len=7/10	pos=5
+7	band w=1 h=2/2	0.00	The Barr Brothers(87)	len=8/10	pos=4
+8	band w=1 h=2/2	0.00	The Milk Carton Kids(87)	len=8/10	pos=3
+9	band w=1 h=4/4	0.00	Hiss Golden Messenger(80)	len=8/10	pos=5
+1	pull0 w=1 h=2/2	0.03	Journey(100)	len=5/10	pos=3
+1	pull0 w=1 h=4/4	0.02	OutKast(100)	len=5/10	pos=3
+2	pull0 w=1 h=4/4	0.00	De La Soul(100)	len=7/10	pos=5
+3	pull0 w=1 h=3/4	0.00	Norah Jones(100)	len=9/10	pos=5
+4	pull0 w=1 h=2/2	0.00	Ella Fitzgerald(100)	len=10/10	pos=5
+5	band w=2 h=4/4	0.00	John Legend(100)	len=10/10	pos=7
+1	band w=1 h=4/4	0.00	Max Richter(99)	len=10/13	pos=2
+2	band w=1 h=2/2	0.00	Helios(98)	len=12/13	pos=1
+3	band w=1 h=3/4	0.00	Gojira(98)	len=12/13	pos=10
+4	band w=1 h=3/4	0.00	Exodus(97)	len=13/13	pos=11
+5	band w=1 h=2/2	0.00	Sodom(96)	len=13/13	pos=11
+2	pull0 w=1 h=3/4	0.03	Bon Jovi(100)	len=5/10	pos=3
+10	pull0 w=1 h=3/4	0.06	Kevin Morby(77)	len=10/10	pos=8
+6	band w=4 h=7/8	0.04	Otis Redding(100)	len=10/10	pos=4
+7	band w=1 h=2/2	0.00	Mac Miller(98)	len=9/10	pos=7
+1	band w=2 h=6/6	0.01	Alanis Morissette(100)	len=5/10	pos=2
+2	band w=1 h=4/4	0.00	D’Angelo(99)	len=7/10	pos=1
+3	reach w=3 h=2/4	0.01	India.Arie(98)	len=9/10	pos=1
+4	band w=1 h=4/4	0.00	Erykah Badu(99)	len=7/10	pos=1
+5	band w=1 h=3/4	0.00	Brandy(99)	len=9/10	pos=1
+6	band w=1 h=2/2	0.00	Toni Braxton(98)	len=10/10	pos=1
+3	band w=3 h=7/7	0.06	Toto(100)	len=6/10	pos=3
+8	pull1 w=3 h=5/6	0.05	Ray Parker Jr.(97)	len=9/10	pos=1
+9	band w=3 h=5/6	0.00	Kenny Loggins(99)	len=10/10	pos=1
+4	pull0 w=1 h=4/4	0.04	Alice Cooper(99)	len=8/10	pos=6
+5	band w=1 h=2/2	0.00	Dio(99)	len=10/10	pos=8
+6	reach w=3 h=2/4	0.12	Overkill(96)	len=13/13	pos=11
+7	band w=1 h=4/4	0.00	Testament(98)	len=11/13	pos=9
+8	band w=1 h=2/2	0.00	Kreator(98)	len=13/13	pos=11
+6	pull0 w=1 h=2/2	0.03	Accept(98)	len=10/10	pos=8
+7	band w=1 h=2/2	0.00	Twisted Sister(99)	len=10/10	pos=8
+8	band w=1 h=2/2	0.00	Skid Row(99)	len=10/10	pos=8
+9	band w=1 h=2/2	0.00	Danzig(99)	len=10/10	pos=8
+10	pull0 w=1 h=2/2	0.03	Quiet Riot(98)	len=10/10	pos=8
+10	pull1 w=4 h=5/5	0.08	Katrina and the Waves(98)	len=10/10	pos=1
+1	band w=3 h=4/6	0.01	Alanis Morissette(100)	len=9/12	pos=4
+1	pull0 w=1 h=2/2	0.00	Alanis Morissette(100)	len=8/11	pos=5
+2	band w=1 h=3/4	0.00	John Legend(100)	len=7/12	pos=1
+3	band w=1 h=4/4	0.00	Chris Cornell(99)	len=8/12	pos=6
+4	band w=1 h=4/4	0.00	Skylar Grey(99)	len=10/12	pos=1
+5	band w=1 h=4/4	0.00	Slash(98)	len=12/12	pos=10
+6	band w=1 h=3/4	0.00	Beth Hart(93)	len=12/12	pos=10
+7	band w=2 h=4/4	0.00	X Ambassadors(89)	len=12/12	pos=4
+2	band w=3 h=3/6	0.01	Nelly(99)	len=8/11	pos=3
+3	band w=3 h=3/4	0.00	Barenaked Ladies(99)	len=5/11	pos=3
+4	band w=1 h=3/4	0.00	Everlast(99)	len=4/11	pos=2
+5	band w=1 h=2/2	0.00	Kurupt(98)	len=5/11	pos=1
+8	band w=4 h=5/5	0.02	Warren Haynes(86)	len=12/12	pos=10
+9	reach w=3 h=2/4	0.12	Annihilator(97)	len=13/13	pos=11
+10	band w=1 h=2/2	0.00	Trivium(99)	len=11/13	pos=9
+6	band w=3 h=6/6	0.02	Blues Traveler(97)	len=5/11	pos=3
+10	pull0 w=1 h=4/4	0.00	Nikki Jean(77)	len=12/12	pos=1
+1	band w=2 h=6/6	0.02	Feist(100)	len=5/10	pos=2
+2	band w=1 h=2/2	0.00	Wilco(100)	len=7/10	pos=1
+3	band w=1 h=2/2	0.00	Yo La Tengo(100)	len=7/10	pos=1
+1	pull0 w=1 h=3/4	0.45	The Shins(100)	len=8/11	pos=4
+2	band w=1 h=2/2	0.00	Two Door Cinema Club(100)	len=9/11	pos=3
+3	band w=1 h=2/2	0.00	Neil Young(100)	len=9/11	pos=7
+1	pull0 w=1 h=3/4	0.09	Stevie Wonder(100)	len=8/11	pos=2
+2	pull0 w=1 h=3/4	0.00	Blondie(100)	len=9/11	pos=6
+7	pull1 w=2 h=3/3	0.37	Rebelution(94)	len=10/10	pos=8
+3	pull0 w=1 h=2/2	0.08	Aretha Franklin(100)	len=10/11	pos=2
+7	reach w=2 h=4/5	0.21	Spacehog(94)	len=7/11	pos=5
+4	pull0 w=1 h=3/4	0.25	Dean Martin(99)	len=7/10	pos=5
+5	band w=3 h=6/6	0.04	The Andrews Sisters(98)	len=8/10	pos=6
+4	pull0 w=1 h=3/4	0.30	José González(100)	len=9/11	pos=5
+5	band w=2 h=4/4	0.00	Empire of the Sun(100)	len=10/11	pos=2
+6	band w=3 h=6/7	0.03	Nick Drake(100)	len=10/11	pos=7
+7	band w=1 h=2/2	0.00	alt‐J(99)	len=11/11	pos=4
+8	reach w=2 h=4/5	0.02	PNAU(98)	len=11/11	pos=1
+9	pull0 w=1 h=3/4	0.04	Ra Ra Riot(99)	len=11/11	pos=1
+10	pull0 w=1 h=2/2	0.04	Miike Snow(100)	len=11/11	pos=1
+8	pull1 w=2 h=3/3	0.36	Slightly Stoopid(97)	len=10/10	pos=8
+9	band w=3 h=5/5	0.02	Collie Buddz(95)	len=10/10	pos=7
+4	pull0 w=1 h=2/2	0.41	Phil Collins(100)	len=10/11	pos=4
+1	pull0 w=1 h=2/2	0.01	Phil Collins(100)	len=5/10	pos=2
+2	pull0 w=1 h=2/2	0.01	a‐ha(100)	len=5/10	pos=2
+8	pull1 w=2 h=4/5	0.45	10,000 Maniacs(97)	len=8/11	pos=6
+9	band w=1 h=2/2	0.00	Lit(98)	len=9/11	pos=7
+3	pull0 w=1 h=3/4	0.03	INXS(99)	len=5/10	pos=3
+10	pull0 w=1 h=2/2	0.14	Sublime with Rome(88)	len=10/10	pos=8
+4	pull0 w=1 h=2/2	0.08	Earth, Wind & Fire(99)	len=6/10	pos=1
+1	band w=2 h=5/6	0.08	Paramore(100)	len=10/13	pos=7
+2	band w=1 h=2/2	0.00	Michael Bublé(100)	len=11/13	pos=4
+3	band w=1 h=4/4	0.00	John Williams(99)	len=11/13	pos=3
+4	band w=1 h=3/4	0.00	Vangelis(99)	len=13/13	pos=2
+5	band w=3 h=4/4	0.02	Falling in Reverse(94)	len=13/13	pos=11
+6	pull0 w=2 h=3/3	0.01	Lang Lang(88)	len=13/13	pos=1
+10	pull0 w=1 h=2/2	0.27	Nine Days(97)	len=9/11	pos=7
+5	pull0 w=1 h=3/4	0.24	Kool & the Gang(99)	len=6/10	pos=1
+1	pull0 w=1 h=2/2	0.48	The Kinks(100)	len=9/12	pos=5
+2	band w=2 h=6/6	0.03	John Lennon(100)	len=9/12	pos=4
+3	band w=2 h=3/4	0.00	Kylie Minogue(100)	len=11/12	pos=2
+4	band w=2 h=5/6	0.02	The Turtles(99)	len=10/12	pos=7
+5	pull0 w=1 h=3/4	0.10	The Foundations(97)	len=11/12	pos=9
+6	reach w=2 h=3/3	0.03	The Archies(96)	len=12/12	pos=10
+7	pull0 w=1 h=2/2	0.04	Sarah Connor(95)	len=12/12	pos=1
+8	band w=2 h=3/3	0.00	Ronan Keating(98)	len=12/12	pos=1
+9	band w=4 h=4/5	0.03	Jessica Simpson(97)	len=12/12	pos=1
+6	pull0 w=1 h=2/2	0.38	Wham!(99)	len=7/10	pos=3
+5	pull0 w=1 h=2/2	0.95	a‐ha(100)	len=10/11	pos=4
+6	pull0 w=1 h=2/2	0.02	Cyndi Lauper(100)	len=10/11	pos=5
+10	pull1 w=3 h=5/6	0.37	Eros Ramazzotti(96)	len=11/12	pos=1
+7	pull0 w=1 h=3/4	0.46	Lionel Richie(99)	len=7/10	pos=2
+8	pull0 w=3 h=6/6	0.18	Crowded House(99)	len=8/10	pos=6
+1	band w=4 h=5/6	0.29	The Chemical Brothers(100)	len=7/10	pos=2
+7	uncapped	1.24	John Carpenter(93)	len=13/13	pos=1
+8	pull0 w=1 h=3/4	0.05	Tangerine Dream(98)	len=14/13	pos=2
+9	pull0 w=1 h=2/2	0.27	Diana Ross(99)	len=10/10	pos=2
+7	pull0 w=1 h=3/4	0.73	Earth, Wind & Fire(99)	len=10/11	pos=3
+8	pull0 w=1 h=2/2	0.01	Soft Cell(99)	len=11/11	pos=6
+9	band w=1 h=2/2	0.00	Sam Cooke(99)	len=11/11	pos=1
+10	pull0 w=1 h=2/2	0.01	The Human League(99)	len=11/11	pos=7
+9	band w=4 h=6/8	0.30	Meghan Trainor(88)	len=14/13	pos=8
+10	pull0 w=4 h=4/5	0.03	Jean‐Michel Jarre(83)	len=12/13	pos=1
+2	pull1 w=3 h=5/6	0.72	Zongamin(95)	len=6/10	pos=4
+3	reach w=2 h=5/5	0.17	X‐Ray Spex(95)	len=7/10	pos=5
+4	pull0 w=1 h=3/4	0.60	The Runaways(97)	len=9/10	pos=7
+10	pull0 w=1 h=3/4	1.72	Frankie Goes to Hollywood(99)	len=10/10	pos=4
+5	pull0 w=1 h=4/4	0.53	The Slits(96)	len=10/10	pos=8
+6	band w=2 h=4/5	0.02	T. Rex(100)	len=10/10	pos=8
+1	band w=2 h=3/4	0.01	Metric(100)	len=9/12	pos=5
+7	pull1 w=2 h=3/3	0.66	The Gun Club(96)	len=10/10	pos=8
+8	band w=4 h=5/5	0.05	Television(98)	len=10/10	pos=8
+1	band w=1 h=4/4	0.00	Róisín Murphy(99)	len=10/13	pos=1
+2	band w=1 h=2/2	0.00	Jessie Ware(99)	len=12/13	pos=4
+3	band w=1 h=2/2	0.00	DJ Koze(95)	len=12/13	pos=1
+4	band w=1 h=2/2	0.00	BTS(90)	len=12/13	pos=8
+5	band w=2 h=5/6	0.03	Jack Harlow(89)	len=12/13	pos=9
+6	band w=2 h=5/6	0.05	Chappell Roan(89)	len=13/13	pos=6
+7	band w=1 h=2/2	0.00	BANKS(87)	len=13/13	pos=4
+9	pull1 w=2 h=3/3	0.40	Sparks(98)	len=10/10	pos=8
+8	band w=3 h=5/6	0.03	Romy(82)	len=13/13	pos=3
+9	band w=2 h=4/4	0.01	Mahalia(77)	len=12/13	pos=8
+6	uncapped	5.04	Wynonie Harris(86)	len=10/10	pos=7
+2	reach w=3 h=6/6	0.98	Frou Frou(99)	len=8/12	pos=6
+3	band w=1 h=3/4	0.00	Blood Orange(97)	len=10/12	pos=2
+10	band w=4 h=6/6	0.35	Sleater‐Kinney(98)	len=10/10	pos=7
+10	band w=4 h=6/8	0.72	LANY(77)	len=12/13	pos=5
+1	pull0 w=1 h=2/2	0.01	Kylie Minogue(100)	len=10/13	pos=4
+2	pull0 w=1 h=2/2	0.01	Mariah Carey(100)	len=10/13	pos=4
+3	band w=1 h=2/2	0.00	Michael Bublé(100)	len=10/13	pos=5
+4	pull0 w=1 h=2/2	0.00	Spice Girls(99)	len=10/13	pos=3
+5	band w=1 h=4/4	0.00	John Williams(99)	len=10/13	pos=6
+6	pull0 w=1 h=2/2	0.00	Savage Garden(99)	len=12/13	pos=3
+7	pull0 w=1 h=4/4	0.01	*NSYNC(99)	len=12/13	pos=4
+8	band w=1 h=2/2	0.00	Max Richter(99)	len=13/13	pos=11
+9	pull0 w=1 h=2/2	0.01	Shania Twain(99)	len=13/13	pos=4
+10	band w=1 h=2/2	0.00	Westlife(98)	len=13/13	pos=3
+4	band w=4 h=6/8	1.09	Daniel Caesar(88)	len=11/12	pos=4
+5	band w=1 h=4/4	0.00	Turnstile(82)	len=9/12	pos=1
+6	band w=1 h=4/4	0.00	Turnover(71)	len=11/12	pos=4
+7	band w=1 h=2/2	0.00	Day Wave(71)	len=12/12	pos=6
+1	band w=1 h=2/2	0.00	Michael Bublé(100)	len=15/18	pos=8
+2	band w=2 h=5/6	0.06	John Williams(99)	len=15/18	pos=9
+3	band w=1 h=3/4	0.00	Jonas Brothers(98)	len=16/18	pos=7
+4	band w=1 h=2/2	0.00	21 Savage(90)	len=17/18	pos=4
+5	band w=2 h=4/4	0.00	Charlie Puth(90)	len=17/18	pos=6
+6	band w=1 h=2/2	0.00	Trevor Morris(87)	len=17/18	pos=13
+7	band w=1 h=3/4	0.00	Pentatonix(87)	len=17/18	pos=9
+8	band w=1 h=4/4	0.00	Fred again..(87)	len=18/18	pos=2
+9	band w=1 h=2/2	0.00	Baby Keem(86)	len=18/18	pos=5
+10	band w=1 h=3/4	0.00	Lil Tecca(79)	len=18/18	pos=6
+7	pull0 w=1 h=3/4	2.15	Amos Milburn(87)	len=11/10	pos=7
+8	band w=2 h=5/6	0.01	Big Thief(85)	len=11/10	pos=2
+8	pull1 w=3 h=6/6	1.04	Data Romance(69)	len=12/12	pos=10
+9	pull0 w=1 h=3/4	0.48	Club 8(96)	len=12/12	pos=10
+9	pull0 w=2 h=4/4	1.05	Big Maybelle(85)	len=11/10	pos=8
+10	reach w=2 h=2/3	0.00	Car Seat Headrest(84)	len=11/10	pos=1
+10	pull0 w=1 h=3/4	1.00	Love Spirals Downwards(91)	len=12/12	pos=9
+1	band w=3 h=8/8	0.02	The Chemical Brothers(100)	len=11/14	pos=6
+2	band w=1 h=2/2	0.00	Buzzcocks(99)	len=13/14	pos=3
+3	pull0 w=1 h=3/4	0.00	Sham 69(95)	len=13/14	pos=2
+4	pull0 w=3 h=4/6	0.03	The Members(89)	len=14/14	pos=4
+5	pull0 w=1 h=3/4	0.00	Radio Birdman(88)	len=12/14	pos=4
+6	pull0 w=2 h=5/6	0.02	The Boys(87)	len=13/14	pos=4
+7	band w=1 h=2/2	0.00	Dead Moon(86)	len=14/14	pos=7
+8	band w=4 h=6/8	0.05	Royal Headache(85)	len=14/14	pos=9
+9	pull0 w=1 h=3/4	0.00	Slaughter and the Dogs(83)	len=12/14	pos=3
+10	pull0 w=2 h=4/4	0.00	Urinals(80)	len=13/14	pos=6
+1	pull0 w=1 h=3/4	0.91	Bob Marley & The Wailers(100)	len=9/12	pos=5
+2	band w=3 h=5/6	0.01	Amy Winehouse(100)	len=10/12	pos=4
+3	band w=1 h=4/4	0.00	Manu Chao(99)	len=9/12	pos=6
+4	pull1 w=3 h=5/6	0.63	Gipsy Kings(98)	len=11/12	pos=9
+5	pull1 w=2 h=4/5	0.11	Too $hort(97)	len=12/12	pos=1
+6	pull0 w=1 h=3/4	0.21	Khaled(94)	len=12/12	pos=10
+7	pull1 w=3 h=6/6	5.64	Lila Downs(92)	len=12/12	pos=7
+8	reach w=3 h=4/4	0.01	Tha Dogg Pound(91)	len=12/12	pos=1
+9	pull1 w=3 h=4/4	0.15	Fat Joe(97)	len=12/12	pos=1
+10	band w=2 h=3/3	0.00	Warren G(98)	len=12/12	pos=1
