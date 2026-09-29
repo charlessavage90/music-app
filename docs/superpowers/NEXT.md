@@ -47,23 +47,23 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-28, at Seam C of the #200 remedy's stage 3c (the `DRP-S1` row).** The live
-site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend
-built from `b3e197b`. The work is on branch `charlessavage90/DRP-stage-3c`, PR #259, tracking issue #244
-(addresses; `git`/`gh` own the merge state). Handoff:
-[`2026-09-28-HANDOFF-drp-stage3c.md`](2026-09-28-HANDOFF-drp-stage3c.md).
+**Last updated: 2026-09-28, at Seam D of the #200 remedy: stage 3 is finished.** The live site is
+unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend built
+from `b3e197b`. The work is on branch `charlessavage90/drp-stage-3d`, tracking issue #244 (addresses;
+`git`/`gh` own the PR and merge state). Handoff:
+[`2026-09-28-HANDOFF-drp-stage3d.md`](2026-09-28-HANDOFF-drp-stage3d.md).
 
-# ALL EIGHT #200 CELLS ARE SWEPT AND EVERY GATE PASSED. NEXT: STAGE 3D, THE RESULTS NOTE.
+# THE #200 LATTICE IS READ. NEXT: THE OWNER'S STAGE-4 GO/NO-GO.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **A session that ran no sweep** (§8; not the 3b or 3c session): stage 3d, the results note, from
-   the committed per-cell JSON and `DRP-C10`'s frontier count, never from a sweep session's prose. It
-   starts from the stage-3c log's "Seam C" entry, which names what it inherits and the two choices left
-   to it. It reads `DRP-R11` (#246's trigger).
-2. **The owner:** his stage-4 go/no-go on at most one cell; then the blind listen (stage 5, designed
-   cold) and his use gate (stage 6, `DRP-AM6`).
+1. **The owner:** stage 4, his go/no-go on at most one cell or none, with the results note in hand:
+   [`findings/2026-09-28-drp-lattice-results.md`](findings/2026-09-28-drp-lattice-results.md). It names
+   no candidate (`DRP-R10`) and gives the options in its §4. Also his, and only at stage 4: whether to
+   name #249's second condition.
+2. **If he names a cell:** a session that has seen no journey designs the stage-5 blind listen cold as
+   an amendment; then his use gate (stage 6, `DRP-AM6`).
 3. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
    previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
 

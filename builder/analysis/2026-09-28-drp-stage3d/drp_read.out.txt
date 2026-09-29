@@ -1,0 +1,36 @@
+sha256 OK  graph-lba-a6.bin  28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  graph-drp-s1.bin  418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f (== sidecar == pin)
+cell OK  DRP-S0P0  LF sha 339998556fcd…  graph 28311d81
+cell OK  DRP-S0P1  LF sha f4dd248ddee3…  graph 28311d81
+cell OK  DRP-S0P2  LF sha d54dd214dd70…  graph 28311d81
+cell OK  DRP-S0P3  LF sha 25262a0a9baf…  graph 28311d81
+cell OK  DRP-S1P0  LF sha a35b9fd3a0e6…  graph 418fe666
+cell OK  DRP-S1P1  LF sha 113b8d926cb4…  graph 418fe666
+cell OK  DRP-S1P2  LF sha a8fb47ef4bd7…  graph 418fe666
+cell OK  DRP-S1P3  LF sha 2937eee2a380…  graph 418fe666
+DRP-G8 {'DRP-T1': {'band_readable': 40, 'readable': True}, 'DRP-T2': {'band_readable': 40, 'readable': True}}
+read DRP-S0P0
+read DRP-S0P1
+read DRP-S0P2
+read DRP-S0P3
+read DRP-S1P0
+read DRP-S1P1
+read DRP-S1P2
+read DRP-S1P3
+wrote drp_results.json
+DRP-S0P1 DRP-T1: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=0.0 ub=0.00011 medG=0.0 C2=0.93333 C6fires=[]
+DRP-S0P1 DRP-T2: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=-0.00031 ub=0.0 medG=-0.00031 C2=0.91228 C6fires=[]
+DRP-S0P2 DRP-T1: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=0.0 ub=0.00014 medG=0.0 C2=0.9 C6fires=[]
+DRP-S0P2 DRP-T2: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=-0.00058 ub=0.0 medG=-0.00058 C2=0.85965 C6fires=[]
+DRP-S0P3 DRP-T1: {'outcome': 'BELOW BAR', 'qualifiers': ['vi', 'vii']}  n=40 medD=-0.03215 ub=-0.0242 medG=-0.03215 C2=1.8 C6fires=[]
+DRP-S0P3 DRP-T2: {'outcome': 'MOVES', 'qualifiers': ['vii']}  n=40 medD=-0.14994 ub=-0.14316 medG=-0.14994 C2=1.38947 C6fires=[]
+DRP-S1P0 DRP-T1: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=0.0 ub=0.0 medG=0.0 C2=0.93333 C6fires=[]
+DRP-S1P0 DRP-T2: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=0.0 ub=0.0 medG=0.0 C2=0.98246 C6fires=[]
+DRP-S1P1 DRP-T1: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=0.0 ub=4e-05 medG=0.0 C2=0.91667 C6fires=[]
+DRP-S1P1 DRP-T2: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=-0.0003 ub=0.0 medG=0.0 C2=0.88889 C6fires=[]
+DRP-S1P2 DRP-T1: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=0.0 ub=0.00014 medG=0.0 C2=0.83333 C6fires=[]
+DRP-S1P2 DRP-T2: {'outcome': 'NO MOVEMENT', 'qualifiers': ['vi']}  n=40 medD=-0.00042 ub=0.0 medG=-0.00025 C2=0.8655 C6fires=[]
+DRP-S1P3 DRP-T1: {'outcome': 'MOVES', 'qualifiers': ['vii']}  n=40 medD=-0.1489 ub=-0.14103 medG=-0.1489 C2=1.86667 C6fires=[]
+DRP-S1P3 DRP-T2: {'outcome': 'MOVES', 'qualifiers': ['vii']}  n=40 medD=-0.14994 ub=-0.14316 medG=-0.14759 C2=1.4269 C6fires=[]
+reads {"DRP-R0": false, "DRP-R1 DRP-T1": false, "DRP-R2 DRP-T1": false, "DRP-R3 DRP-T1": false, "DRP-R4 DRP-T1": false, "DRP-R1 DRP-T2": false, "DRP-R2 DRP-T2": false, "DRP-R3 DRP-T2": false, "DRP-R4 DRP-T2": false, "DRP-R5": ["DRP-S0P3"], "DRP-R6": [], "DRP-R7": [], "DRP-R11": false, "DRP-R12": ["DRP-S0P3 DRP-T2", "DRP-S1P3 DRP-T1", "DRP-S1P3 DRP-T2"], "succeeds_on_famous_pairs": ["DRP-S1P3"]}
+SW {"DRP-T1": {"den": 40, "identical": 39, "share_identical": 0.975, "changed_using_added_edge": 1, "changed_without_added_edge": 0, "median_M0_shift": 0.0, "fires": false}, "DRP-T2": {"den": 40, "identical": 36, "share_identical": 0.9, "changed_using_added_edge": 4, "changed_without_added_edge": 0, "median_M0_shift": 0.0, "fires": false}, "DRP-MID": {"den": 40, "identical": 37, "share_identical": 0.925, "changed_using_added_edge": 3, "changed_without_added_edge": 0, "median_M0_shift": 0.0}, "DRP-R11_fires": false}
