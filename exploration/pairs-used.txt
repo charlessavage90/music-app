@@ -23,3 +23,5 @@ Soul Seekerz	Alexandra Stréliski	bf29f809-3beb-4c0e-a522-5b2e873316fd	393b5619-
 Emscherkurve 77	Juçara Marçal	ed387b7d-7fd0-4262-a360-e893d838a24e	ced96166-52c4-44e4-9699-ffd963f80f10	kit
 Radiohead	Portishead	a74b1b7f-71a5-4011-9441-d0b5e4122711	8f6bd1e4-fbe1-4f50-aa9b-94c450ec0f11	practice-room smoke test 2026-09-28
 Led Zeppelin	The Format	678d88b2-87b0-403b-b63d-5da7465aecc3	81b07a2a-cdf0-4c5e-a68c-8d910e1f0ea6	practice room 2026-09-29
+Wishbone Ash	The Shins	406f1b42-0c9e-4427-aeb7-02f78e188ec4	6c8b9855-ba8b-48f9-ac1d-42167f7f7b18	practice room 2026-09-29
+Young Gun Silver Fox	Fruit Bats	2e111d6d-fce9-46ff-b33a-7eed7300f9d4	e3f139c7-11bc-4803-82be-2bac85ca3c61	practice room 2026-09-29

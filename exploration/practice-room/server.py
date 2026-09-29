@@ -19,6 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 EXP = HERE.parent
 sys.path.insert(0, str(EXP / "kit"))
+sys.path.insert(0, str(HERE))
 
 import httpx  # noqa: E402
 import uvicorn  # noqa: E402
@@ -30,26 +31,7 @@ from qlook import Ctx  # noqa: E402
 from artistpath_api.clips import CatalogueUnavailable, ClipResolver, InMemoryClipCache  # noqa: E402
 from artistpath_api.search import ArtistSearch  # noqa: E402
 
-# (id, label shown on the column, variant file relative to exploration/, one-line description)
-VARIANTS = [
-    ("today", "Today's app", "baseline/today.py",
-     "The shipped router. Each press rebuilds the journey without the artist you pressed."),
-    ("tiers", "Fame ladder", "r2-tiers/tiers_keep.py",
-     "Each press lowers a fame ceiling one step, set from your two artists; the rest of the journey is held where it still fits."),
-    ("overlap", "Shared neighbours", "r2-nsim/dig_overlap_gentle.py",
-     "Each press eases toward less famous artists, judging each step by how many neighbours two artists share."),
-    ("repair", "Local repair", "r2-repair/finalist_repair.py",
-     "Each press keeps the journey and re-routes only the few cards around the one you pressed, through less famous artists."),
-    ("simple", "Fame toll", "r2-simple/final_gentle.py",
-     "Today's router plus a toll on famous artists that grows with each press, and no weak steps."),
-]
-if os.environ.get("PR_ALL"):  # runners-up, for curiosity
-    VARIANTS += [
-        ("tiers_fast", "Fame ladder (faster)", "r2-tiers/tiers_fast.py", "Deeper, keeps less of the previous journey."),
-        ("overlap_a", "Shared neighbours (deeper)", "r2-nsim/dig_overlap.py", "Digs deepest; mid-fame pairs go very obscure."),
-        ("shaped", "Shaped toll", "r2-shaped/f1_shaped_charge.py", "Toll that is loose next to your two artists and strict in the middle."),
-        ("bold", "Fame toll (bold)", "r2-simple/final_bold.py", "Stronger toll."),
-    ]
+from variants import VARIANTS  # noqa: E402  -- the column list lives in variants.py
 
 
 def load(path: Path):
@@ -107,20 +89,26 @@ def journey(vid: str, s: int, t: int, pressed: tuple):
 
 PAIRS_LOG = EXP / "pairs-used.txt"  # the one list formal testing must avoid
 _logged: set = set()
+if PAIRS_LOG.exists():  # a restart must not re-append pairs already recorded
+    for _line in PAIRS_LOG.read_text(encoding="utf-8").splitlines():
+        _f = _line.split(chr(9))
+        if len(_f) >= 4 and not _line.startswith("#"):
+            _logged.add((_f[2], _f[3]))
 
 
 def log_pair(s: int, t: int) -> None:
     """Every pair built here is 'used' by the exploration; keep the record complete."""
-    if (s, t) in _logged:
+    key = (ctx.store.mbids[s], ctx.store.mbids[t])
+    if key in _logged:
         return
-    _logged.add((s, t))
+    _logged.add(key)
     with PAIRS_LOG.open("a", encoding="utf-8") as fh:
         row = [ctx.names[s], ctx.names[t], ctx.store.mbids[s], ctx.store.mbids[t],
                f"practice room {datetime.date.today()}"]
         fh.write(chr(9).join(row) + chr(10))
 
 
-SESSION_LOG = HERE / "session-log.jsonl"  # every journey shown and every note; gitignored
+LOG_DIR = HERE / "logs"  # every journey shown and every note, one file per day; COMMITTED (the owner's listening record)
 
 
 def log_event(kind, vid, s, t, pressed, path, text=None) -> None:
@@ -130,7 +118,8 @@ def log_event(kind, vid, s, t, pressed, path, text=None) -> None:
            "journey": [[ctx.names[v], round(ctx.pl[v] * 100, 1)] for v in path] if path else None}
     if text is not None:
         rec["note"] = text
-    with SESSION_LOG.open("a", encoding="utf-8") as fh:
+    LOG_DIR.mkdir(exist_ok=True)
+    with (LOG_DIR / f"{datetime.date.today()}.jsonl").open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(rec, ensure_ascii=False) + chr(10))
 
 
