@@ -17,7 +17,7 @@ import engine
 
 P = dict(mix0=1.0, mix_per=0.0, w_rank=0.0, w_sim=3.0, w_jump=1.0, w_hop=0.02, sim_pow=1.0,
          w_lift=0.0, w_climb=0.0, w_climb0=0.0, w_desc=0.0, w_deg=0.0, w_deg_k=0.0,
-         w_fame_k=0.0, fame_thr=0.0, keep_floor=1, keep_ramp=1)
+         w_fame_k=0.0, fame_thr=0.0, thr_per=0.0, thr_min=0.5, keep_floor=1, keep_ramp=1)
 P.update(json.loads(os.environ.get("R1", "{}")))
 
 
@@ -48,6 +48,8 @@ def journey(ctx, s, t, pressed, prev):
         nc += cfg.w_floor * np.maximum(0.0, floor - E["pop"])
     if P["keep_ramp"]:
         nc += cfg.w_known_ramp_fame_pctl * k * E["fame"]
-    nc += (P["w_deg"] + P["w_deg_k"] * k) * ctx.logdeg + P["w_fame_k"] * k * np.maximum(0.0, E["fame"] - P["fame_thr"]) / (1 - P["fame_thr"])
+    thr = max(P["thr_min"], P["fame_thr"] - P["thr_per"] * k) if P["thr_per"] else P["fame_thr"]
+    # thresholded fame toll: only artists above the (optionally falling) threshold pay, scaled 0..1
+    nc += (P["w_deg"] + P["w_deg_k"] * k) * ctx.logdeg + P["w_fame_k"] * k * np.maximum(0.0, E["fame"] - thr) / (1 - thr)
     m = min(1.0, max(0.0, P["mix0"] + P["mix_per"] * k))
     return engine.journey_with(E, s, t, (ctx.A, ctx.D, m, ctx.C, k), nc.tolist(), pressed)

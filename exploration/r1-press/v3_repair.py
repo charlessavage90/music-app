@@ -9,7 +9,8 @@ MARGIN = float(os.environ.get("R1_MARGIN", "0.10"))
 W_X = float(os.environ.get("R1_WX", "0.0"))
 W_FAME = float(os.environ.get("R1_WFAME", "0.0"))
 LADDER = [(1, 0), (1, 1), (2, 0), (1, 2), (2, 1), (2, 2), (3, 2)]
-LOG = os.environ.get("R1_LOG")
+_LOGNAME = os.path.basename(os.environ.get("R1_LOG", ""))  # debug log, confined to ./runs/
+LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runs", _LOGNAME) if _LOGNAME else None
 
 
 def _log(msg):

@@ -84,3 +84,45 @@ def route(ctx, s, t, allowed, w_sim=3.0, w_jump=1.0, w_hop=0.02, w_fame=0.0, ban
 def baseline(ctx, s, t, pressed):
     res = ctx.find_journey(ctx.store, s, t, ctx.known(pressed), ctx.cfg)
     return res[0] if res else None
+
+
+def route2(ctx, s, t, allowed, nodecost=None, w_sim=3.0, w_jump=1.0, w_hop=0.02, banned_edge=None,
+           max_pops=30000):
+    """Unbounded constrained Dijkstra with an optional per-node cost (applied to v != t);
+    gives up after max_pops expansions. Returns (path, cost) or (None, None)."""
+    pop = ctx.store.pop_raw
+    off, nbr, sc = ctx.off, ctx.nbr, ctx.sc
+    dist = {s: 0.0}
+    prv = {}
+    pq = [(0.0, s)]
+    pops = 0
+    while pq:
+        d, u = heapq.heappop(pq)
+        if u == t:
+            break
+        if d > dist.get(u, 1e18):
+            continue
+        pops += 1
+        if pops > max_pops:
+            return None, None
+        pu = float(pop[u])
+        for j in range(off[u], off[u + 1]):
+            v = nbr[j]
+            if v != t and not allowed(v):
+                continue
+            if banned_edge and u in banned_edge and v in banned_edge:
+                continue
+            c = w_sim * (1.0 - sc[j]) + w_jump * abs(pu - float(pop[v])) + w_hop
+            if nodecost is not None and v != t:
+                c += nodecost(v)
+            nd = d + c
+            if nd < dist.get(v, 1e18):
+                dist[v] = nd
+                prv[v] = u
+                heapq.heappush(pq, (nd, v))
+    if t not in prv:
+        return None, None
+    p = [t]
+    while p[-1] != s:
+        p.append(prv[p[-1]])
+    return p[::-1], dist[t]

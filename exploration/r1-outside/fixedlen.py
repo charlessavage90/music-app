@@ -35,45 +35,66 @@ def setup_arrays(ctx):
     ctx.L0 = {}
 
 
-def exact_hops(ctx, s, t, hard, node_cost, hmin, hmax):
-    """Min-cost s->t walk with exactly h hops for h in [hmin, hmax]; returns best simple path."""
+def exact_hops(ctx, s, t, hard, node_cost, hmin, hmax, min_sim=0.0):
+    """Min-cost s->t NON-BACKTRACKING walk with exactly h hops, h in [hmin, hmax] (top-2 labels per
+    node so u->v may not use the label that came from v). Returns the cheapest walk that is a
+    simple path, else None."""
     n = ctx.n
     owner, nbr, off = ctx.A_owner, ctx.A_nbr, ctx.A_off
     ecost = ctx.A_static + node_cost[owner]
-    dist = np.full(n, np.inf)
-    dist[s] = 0.0
+    if min_sim > 0:
+        ecost = np.where(ctx.A_sc < min_sim, np.inf, ecost)
+    d1 = np.full(n, np.inf); d1[s] = 0.0
+    d2 = np.full(n, np.inf)
+    p1 = np.full(n, -1, dtype=np.int64); p2 = np.full(n, -1, dtype=np.int64)
     blocked = np.zeros(n, bool)
-    blocked[list(hard)] = True
+    if hard:
+        blocked[list(hard)] = True
     blocked[s] = True
-    blocked[s] = True
-    bps = []
+    layers = [(d1, d2, p1, p2)]
     best = []
+    starts = off[:-1]
     for h in range(1, hmax + 1):
-        cand = dist[nbr] + ecost
-        new = np.minimum.reduceat(cand, off[:-1])
-        # backpointer: first argmin per segment
-        hit = np.flatnonzero(cand == new[owner])
+        use2 = p1[nbr] == owner
+        cand = np.where(use2, d2[nbr], d1[nbr]) + ecost
+        m1 = np.minimum.reduceat(cand, starts)
+        hit = np.flatnonzero(cand == m1[owner])
         own = owner[hit]
         first = np.unique(own, return_index=True)[1]
-        bp = np.full(n, -1, dtype=np.int64)
-        bp[own[first]] = nbr[hit[first]]
-        bps.append(bp)
-        if h >= hmin and np.isfinite(new[t]):
-            best.append((float(new[t]), h))
-        new[blocked] = np.inf
-        new[t] = np.inf  # t never interior
-        dist = new
+        a1 = np.full(n, -1, dtype=np.int64); a1[own[first]] = hit[first]
+        cand2 = cand.copy(); cand2[a1[a1 >= 0]] = np.inf
+        m2 = np.minimum.reduceat(cand2, starts)
+        hit2 = np.flatnonzero((cand2 == m2[owner]) & np.isfinite(cand2))
+        own2 = owner[hit2]
+        first2 = np.unique(own2, return_index=True)[1]
+        a2 = np.full(n, -1, dtype=np.int64); a2[own2[first2]] = hit2[first2]
+        nd1, nd2 = m1.copy(), m2.copy()
+        np1 = np.where(a1 >= 0, nbr[np.maximum(a1, 0)], -1)
+        np2 = np.where(a2 >= 0, nbr[np.maximum(a2, 0)], -1)
+        if h >= hmin and np.isfinite(nd1[t]):
+            best.append((float(nd1[t]), h))
+        for arr in (nd1, nd2):
+            arr[blocked] = np.inf
+            arr[t] = np.inf
+        layers.append((nd1, nd2, np1, np2))
+        d1, d2, p1, p2 = nd1, nd2, np1, np2
     for cost, h in sorted(best):
-        p = [t]
-        for layer in range(h - 1, -1, -1):
-            p.append(int(bps[layer][p[-1]]))
+        p = [t]; slot = 1
+        for layer in range(h, 0, -1):
+            _, _, lp1, lp2 = layers[layer]
+            u = int(lp1[p[-1]] if slot == 1 else lp2[p[-1]])
+            if u < 0:
+                break
+            prev_p1 = layers[layer - 1][2]
+            slot = 2 if prev_p1[u] == p[-1] else 1
+            p.append(u)
         p = p[::-1]
         if p[0] == s and len(set(p)) == len(p):
             return p
     return None
 
 
-def make(b=0.3, pen="logwdeg", slack=2, floor=True, ramp=True):
+def make(b=0.3, pen="logwdeg", slack=2, floor=True, ramp=True, min_sim=0.0):
     def setup(ctx):
         setup_arrays(ctx)
 
@@ -98,6 +119,17 @@ def make(b=0.3, pen="logwdeg", slack=2, floor=True, ramp=True):
         nc[t] = 0.0
         if floor:
             nc = nc + cfg.w_floor * np.maximum(0.0, fl - ctx.A_pop)
-        return exact_hops(ctx, s, t, set(pressed) - {s, t}, nc, max(2, L0), max(2, L0) + slack)
+        p = exact_hops(ctx, s, t, set(pressed) - {s, t}, nc, max(2, L0), max(2, L0) + slack, min_sim)
+        if p is None and min_sim > 0:
+            p = exact_hops(ctx, s, t, set(pressed) - {s, t}, nc, max(2, L0), max(2, L0) + slack)
+        if p is None:  # no simple walk of that length: fall back to Dijkstra with the same penalty
+            ctx.fallbacks = getattr(ctx, "fallbacks", 0) + 1
+            pc = nc.tolist()
+            st = ctx.A_static  # not indexable by (u, v) cheaply; recompute inline
+            pop = ctx.pop
+            def cost(u, v, sim):
+                return cfg.w_sim * (1 - sim) + cfg.w_jump * abs(pop[u] - pop[v]) + cfg.w_hop + pc[v]
+            p = router.find_journey(ctx, s, t, pressed, cost)
+        return p
 
     return setup, journey

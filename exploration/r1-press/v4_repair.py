@@ -10,7 +10,8 @@ MINSIM = float(os.environ.get("R1_MINSIM", "0.7"))
 MAXGROW = int(os.environ.get("R1_MAXGROW", "4"))
 W_X = float(os.environ.get("R1_WX", "0.0"))
 LADDER = [(1, 0), (1, 1), (2, 0), (2, 1), (1, 2), (2, 2), (3, 2)]
-LOG = os.environ.get("R1_LOG")
+_LOGNAME = os.path.basename(os.environ.get("R1_LOG", ""))  # debug log, confined to ./runs/
+LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runs", _LOGNAME) if _LOGNAME else None
 _P0 = {}
 
 

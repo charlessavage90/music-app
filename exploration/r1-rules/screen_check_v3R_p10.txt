@@ -1,0 +1,6 @@
+[rate] 304 new steps to rate (7767 cached), model sonnet
+     real: 20 journeys, 172 steps, mean step 1.88/3, bad (0-1) 29%, unknown 1%
+ shuffled: 20 journeys, 172 steps, mean step 1.17/3, bad (0-1) 63%, unknown 1%
+  swapped: 20 journeys, 172 steps, mean step 0.71/3, bad (0-1) 89%, unknown 0%
+real beats shuffled twin in 18/20 journeys (1 ties)
+real beats swapped twin in 20/20 journeys (0 ties)

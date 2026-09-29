@@ -19,7 +19,8 @@ def setup(ctx):
     if RANK:
         rank_sims(ctx)
 
-def route(ctx, s, t, pressed, c, forbidden=None):
+def route(ctx, s, t, pressed, c, forbidden=None, minsim=None):
+    minsim = MINSIM if minsim is None else minsim
     cfg = ctx.cfg
     k = len(pressed)
     hard = set(pressed) - {s, t}
@@ -49,7 +50,7 @@ def route(ctx, s, t, pressed, c, forbidden=None):
             v = nbr[j]
             if v in hard:
                 continue
-            if ctx.sc[j] < MINSIM:
+            if ctx.sc[j] < minsim:
                 continue
             if forbidden and u == s and v == t:
                 continue
@@ -88,6 +89,11 @@ def journey(ctx, s, t, pressed, prev):
         p = route(ctx, s, t, pressed, c)
         if p is not None and len(p) == 2:
             p = route(ctx, s, t, pressed, c, forbidden=True) or p
-        if (p is not None and len(p) > 2) or c >= 1.0:
+        if p is not None and len(p) > 2:
+            return p
+        if c >= 1.0:   # still blocked: drop the similarity rule, then give up
+            p = route(ctx, s, t, pressed, 1.0, minsim=0.0)
+            if p is not None and len(p) == 2:
+                p = route(ctx, s, t, pressed, 1.0, forbidden=True, minsim=0.0) or p
             return p
         c = min(1.0, c + 0.05)

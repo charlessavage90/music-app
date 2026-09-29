@@ -5,8 +5,15 @@ import sys, json, bisect, statistics
 sys.path.insert(0, '../exploration/kit')
 from qlook import Ctx
 ctx = Ctx()
+from pathlib import Path
+BASE = Path(__file__).resolve().parents[1]
+def safe(f):
+    q = Path(f).resolve()
+    if BASE not in q.parents:
+        raise SystemExit(f'refusing path outside exploration/: {f}')
+    return q
 for f in sys.argv[1:]:
-    d = json.load(open(f, encoding='utf-8'))
+    d = json.loads(safe(f).read_text(encoding='utf-8'))
     hit, tot, early = 0, 0, []
     for r in d['rows']:
         lad = r['ladder']
@@ -20,7 +27,7 @@ for f in sys.argv[1:]:
     print(f"{f}: similar-and-less-famous replacement {hit}/{tot} = {hit/tot:.0%}; presses 1-5 {sum(early)/len(early):.0%}")
 
 # fail-check: victim of row i vs next journey of row i+1 (unrelated journeys) should score low
-d = json.load(open(sys.argv[1], encoding='utf-8')); rows = d['rows']; hit = tot = 0
+d = json.loads(safe(sys.argv[1]).read_text(encoding='utf-8')); rows = d['rows']; hit = tot = 0
 for i, r in enumerate(rows):
     o = rows[(i + 1) % len(rows)]['ladder']
     for k in range(min(len(r['ladder']), len(o)) - 1):
