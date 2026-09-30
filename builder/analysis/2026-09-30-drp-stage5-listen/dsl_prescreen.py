@@ -219,9 +219,10 @@ def main(argv: list | None = None) -> int:
     if g1.get("verdict") != "PASS":
         raise SystemExit("REFUSING: DSL-G1 has not passed (dsl_g1.json). Run dsl_g1.py first.")
 
+    # dsl_journeys first: importing it puts the lattice's directories on sys.path, which drp_common needs.
+    from dsl_journeys import adjacent, at_depths, cfg, load_maps, side_ladder
     import drp_common as dc
     from artistpath_api.search import normalise
-    from dsl_journeys import adjacent, at_depths, cfg, load_maps, side_ladder
     from lal_pool_am7 import presented_endpoints
     from lal_prescreen import draw, rank_key
 

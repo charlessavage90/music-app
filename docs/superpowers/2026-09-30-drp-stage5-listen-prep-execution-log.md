@@ -42,3 +42,13 @@ returns before any write, including the sealed directory.
 Reproduction exact on both sides for every `DRP-T1` and `DRP-T2` lattice pair; the red control
 (ceiling off on `DRP-S1`) diverged from `DRP-S1P3` at press ≥ 4 on every pair. Counts and timing:
 `dsl_g1.json`. Committed before the pre-screen ran.
+
+### Step 2 — pre-screen: an import-order fault, fixed before its first successful run
+
+The first launch died at import (`ModuleNotFoundError: drp_common`) before it read any input or wrote
+anything: `main()` imported `drp_common` before `dsl_journeys`, which is what puts the lattice's
+directories on `sys.path`. The tests import only the pure functions and never run `main()`, so they
+could not see it. **Fix: the two import lines swapped, nothing else** — no rule, gate, key or
+selection line touched. Committed on its own before the pre-screen ran again, so the commit order
+still shows the script preceding its output (the `855b090` precedent). `dsl_generate.py` imports
+`dsl_journeys` alone and is not affected.
