@@ -1735,11 +1735,15 @@ because `DRP-G3` holds the node set, `pop_raw` and `fame_lb_pctl` identical acro
 pairs and depths (one set by construction); clips (keyed by the artist alone, `DRP-AM7-6`); the
 page, its questions and the listener.
 
-**Held constant in configuration, not in effect.** The floor, avoidance and hub terms carry the same
-weights on both sides, but the ceiling moves journeys into territory where they may bind differently
-(`DRP-C9`: the router's accepted similarity cost in the band goes from 0.000 to 0.12–0.35). That is
-part of what adoption would ship. **Consequence, a bar:** no sentence may attribute a row's difference
-to any single cost term.
+**Held constant in configuration, not in effect.** Every cost weight is the same on both sides. The
+live terms are similarity, jump, floor, hop and the known-press ramp (`w_known_ramp_fame_pctl`, whose
+`k` counts only `KNOWN` entries, so the ceiling's exclusions never add to it: `passed_list_ok`).
+`w_degree_hub` is 0.0 in `ApiConfig`, so the degree penalty, which does differ between the maps, is
+inert; avoidance is empty on both sides (no dislikes). The ceiling moves journeys into territory where
+the live terms bind differently (`DRP-C9`, results note §1.7). That is part of what adoption would
+ship. **Consequence, a bar:** no sentence may attribute a row's difference to any single cost term.
+⚑ *Corrected at seam 5A (`S5R-11`): this paragraph named the floor, avoidance and hub terms as the
+ones in play and omitted the ramp.*
 
 **Generation uses the harness form, the one the lattice measured**: `drp_sweep.run_ladder(…,
 ceiling=True, schedule=f_max)` on the `DRP-S1` map, and `ceiling=False` on A0. **Not** a shipped
@@ -1755,23 +1759,32 @@ better.*
 
 1. **Pool.** `lal_am7_known.json`'s `pool` — the artists he vetted by name as known (`LBA-AM7-2`), in
    its committed order — **restricted to the famous tiers on A0**: `DRP-T1`'s band and `DRP-T2`'s,
-   exactly as `drp_common.STRATA` bounds them.
+   exactly as `drp_common.STRATA` bounds them (measured fame only, as `stratum_pool` reads them).
+   **Pool rank** is the position in the whole 141-artist known pool, not within a tier.
 2. **Excluded at ARTIST level** (a remembered interior could identify a side):
    - every endpoint `LBA-AM6-2` step 2 excludes (`GBL-`, listens 1 and 2);
    - `LAL-`'s eight primaries (`lal_pairs.json`), because its candidate is today's map;
-   - every endpoint in `lba_g5_pair_log.md`, because he used today's map on them, unblinded;
-   - every endpoint in `exploration/pairs-used.txt`, because the practice room showed him today's app
-     beside ceiling-like variants on those pairs. This includes the pair of the one exploration
-     journey this session read.
+   - every endpoint in `lba_g5_pair_log.md`, because he used today's map on them, unblinded. The log
+     records names only, so each is resolved with the app's `normalise` to **every** matching node on
+     A0: a homonym is over-excluded, which is the safe direction;
+   - every endpoint in `exploration/pairs-used.txt`: 4 of its lines are practice-room pairs, where he
+     heard today's app beside ceiling-like variants; the other 20 are the exploration kit's pairs,
+     which are `drp_pairs.json`'s first 8 `DRP-T1`, 7 `DRP-T2` and 5 `DRP-MID` pairs, run on variants
+     and model-rated, with one kit journey written into `exploration/REPORT.md` (the one this session
+     read).
 3. **Excluded as PAIRS, artists kept:** every pair in `drp_pairs.json` (all strata and the
-   replication set). None was shown to him, but the lattice read them, and the listen should not
-   re-hear the pairs the offline result came from.
+   replication set). The lattice read them, and the listen should not re-hear the pairs the offline
+   result came from. The 20 the exploration touched are excluded more strongly by step 2 anyway.
+   ⚑ *Corrected at seam 5A (`S5R-9`, `S5R-10`): step 3 said none of these pairs "was shown to him",
+   which the exploration's kit contradicts, and step 2 gave no name-resolution rule.*
 4. **Membership.** Both endpoints are nodes of both maps (always true under `DRP-G3`; asserted anyway).
 5. **Pairing, within a tier.** A `DRP-T1` artist pairs only with a `DRP-T1` artist, and a `DRP-T2`
    artist only with a `DRP-T2` artist. Greedily in pool order, each artist takes the earliest
    still-unpaired artist of its tier **not directly connected in either map** (`lbl_pairs.py` step 4).
 6. **Pre-screen**, generating both sides exactly as `DRP-AM7-3` will, with `LBA-AM6-2`'s three gates
-   applied at this listen's depths:
+   applied at this listen's depths. `lal_prescreen.screen` and `familiarity` are bound to `LAL-`'s
+   depths, so they are **copied** with the depths changed to (5, 10, 20) and nothing else
+   (`S5R-8`):
    - **Gate L:** at least 3 interior artists at every depth on both sides.
    - **Gate D:** the two sides' interior sets differ at every depth.
    - **Gate N:** at every depth, the symmetric difference contains at least one artist absent from the
@@ -1781,19 +1794,30 @@ better.*
    the unfamiliar symmetric-difference count over the three depths, most first; then fewest familiar
    interiors; then pool rank; then MBID. **No gate or key reads which side an artist is on, which side
    is longer, or which is more or less famous.**
-8. **Selection: 4 primaries per tier (8 in all), with 2 ordered reserves per tier.** If a tier has
-   fewer than 6 survivors, it takes all it has and **the other tier fills the shortfall** in its own
-   rank order. Fewer than 12 survivors across both: stop and report, and the owner supplies pairs,
-   which must pass the same gates. The tier split actually drawn is recorded.
+8. **Selection: 4 primaries per tier (8 in all), with 2 ordered reserves per tier.** Fewer than 12
+   survivors across both tiers: stop and report, and the owner supplies pairs, which must pass the
+   same gates. Otherwise, **primaries first, then reserves, each counted per tier**: each tier's
+   primary slots take its own survivors in rank order; a slot its tier cannot fill takes the other
+   tier's next survivor in rank order. Reserves are then filled the same way. The tier each pair
+   came from is recorded.
 9. **The owner's strike**, exactly `LBA-AM6-2` step 9: endpoint names only, with no interior, length or
-   side shown. He may strike any pair, and the next reserve **of the same tier** fills it. After the
-   page is first served, no pair changes.
+   side shown. He may strike any pair. A struck primary is filled by the next unstruck reserve **of
+   its own tier**, or, if its tier has none left, by the other tier's next (recorded). No reserve
+   left: stop, and he supplies pairs. After the page is first served, no pair changes. **Generation's
+   substitutions (`DRP-AM7-3`) follow the same order.**
+   ⚑ *Steps 8 and 9 corrected at seam 5A (`S5R-2`): the shortfall rule did not say how filled slots
+   split between primaries and reserves, and nothing covered a tier running out of reserves.*
 
 > ⚠ **`DRP-X8` — the pool is the famous artists he knows, not a random draw from the tiers.** The
 > lattice's pairs were random (`DRP-X3`). These are famous artists he knows, so that `REQ-41` holds.
 > **Consequence, a bar:** the verdict holds for famous pairs he knows, on which the two sides differ at
 > every depth in artists he does not know. No sentence may generalise it to the lattice's random pairs,
 > or to either tier alone (four pairs a tier cannot carry a per-tier read).
+>
+> **On the `DRP-T2` half, the comparison is close to ceiling-only** (`S5R-12`). The lattice found the
+> extra connections all but unused on that tier (results note §1.4 and §1.5, and §2's *"on the next
+> tier it does not use them"*). **Consequence, a bar:** the write-up may not count `DRP-T2` rows as
+> evidence about the extra connections.
 
 #### `DRP-AM7-3` — what is generated
 
@@ -1815,16 +1839,21 @@ on both sides.
 **Generation gates, in this order, before anything is shown to anyone:**
 
 - **`DSL-G1` — the generator is the candidate the lattice measured.** Before any listen pair is
-  generated, re-run the primary ladder for **every `DRP-T1` and `DRP-T2` pair** in `drp_pairs.json`,
-  on both sides. Assert node-for-node equality at every depth 0–20 with
-  `2026-09-28-drp-stage3b/cells/DRP-S0P0.json` and `…/DRP-S1P3.json`, checking the cell files' identity
-  on LF-normalised bytes (stage-3d handoff). **Effect size: exact; any divergence stops generation.**
-  **Red control:** the same run with the ceiling off on `DRP-S1` must diverge from `DRP-S1P3` on at
-  least one pair at some depth ≥ 4, or the ceiling is not being applied. Only counts are recorded, and
-  the script prints no path.
-- **A primary is replaced by its next same-tier reserve** if (a) an endpoint is not a node of both
-  maps, (b) the endpoints are directly connected in either map, (c) Gate L fails, or (d) either side's
-  ladder stops before d20. Gates D and N are then **asserted**: they passed at the pre-screen, so a
+  drawn, re-run the primary ladder for **every `DRP-T1` and `DRP-T2` pair** in `drp_pairs.json`, on
+  both sides. Assert node-for-node equality, **at every depth each cell records** (ladders stop
+  early), with `2026-09-28-drp-stage3b/cells/DRP-S0P0.json` and `…/DRP-S1P3.json`. Their identity is
+  checked on LF-normalised bytes (stage-3d handoff) against shas pinned in the harness, which equal the
+  committed blobs recorded by the stage-3b and stage-3c READMEs; each cell's own `graph_sha256` must
+  equal the loaded map's. **Effect size: exact; any divergence stops.** It is this equality against
+  `DRP-S1P3` that shows the ceiling is applied as the lattice applied it. **Red control:** the same run
+  with the ceiling off on `DRP-S1` must diverge from `DRP-S1P3` on at least one pair at some depth ≥ 4.
+  That shows the comparison can see a difference at all. Only counts are recorded, and the script
+  prints no path. Any harness-identity check hashes LF-normalised bytes.
+  ⚑ *Corrected at seam 5A (`S5R-13`).*
+- **A primary is replaced** — by the next reserve of its tier, then of the other tier (step 9's order)
+  — if (a) an endpoint is not a node of both maps, (b) the endpoints are directly connected in either
+  map, (c) Gate L fails, or (d) either side's ladder stops before a presented depth. Reserves
+  exhausted: stop and report. Gates D and N are then **asserted**: they passed at the pre-screen, so a
   failure means the maps or the code moved, and generation stops.
 - **Before serving**, the differential check refuses a page serving one side against itself.
 
@@ -1878,10 +1907,14 @@ monthly-listener or ListenBrainz lookups during the listen. Nobody computes a ru
 
 **Tells, disclosed now:**
 
-1. **`DRP-X9` — the candidate's signature is visible.** From press 4, no top-1% artist appears in the
-   candidate's middle (`DRP-C6`, descriptive), and its journeys carry about 1.4–1.9× as many middle
-   artists (`DRP-C2`). A listener who notices that one side is longer and has no stars can identify it.
-   **Nothing can hide this without hiding the thing being compared.** `DSL-Q4` measures it.
+1. **`DRP-X9` — the candidate's signature is visible.** At presses 4, 7 and 10 no top-1% artist
+   appeared in the candidate's middle on the lattice's pairs, and a relaxed ceiling can still admit
+   one, as it did on one journey at press 20 (`DRP-C6`, results note §1.7). The candidate's journeys
+   also carry more middle artists than today's at the same depth (`DRP-C2`, results note §1.2 and
+   §1.7). A listener who notices that one side is longer and has no stars can identify it. **Nothing
+   can hide this without hiding the thing being compared.** `DSL-Q4` measures it. ⚑ *Corrected at
+   seam 5A (`S5R-5`, `S5R-14`): this said "from press 4, no top-1% artist" without the relaxation
+   exception, and restated the results note's figures.*
 2. **Memory of today's app.** He uses it daily. Step 2's exclusions and his strike limit this, and
    `DSL-Q4` measures the rest.
 3. **Practice-room exposure** (2026-09-29). He has heard ceiling-like journeys, unblinded, on other
@@ -1892,16 +1925,29 @@ monthly-listener or ListenBrainz lookups during the listen. Nobody computes a ru
 deciding nothing:** per journey, interior `fame_lb_pctl` (one ruler, `DRP-G3`), length, the ceiling `c`
 and relaxation `r` per press on the candidate side, whether the journey traverses an added connection,
 per-side clip coverage, and, **per row, the count of artists with no clip that appear on only one
-side** (`LAL-` results §4 item 2). That last count **discharges #137's condition**, because this
-pre-registration adds it.
+side** (`LAL-` results §4 item 2), computed when clips are resolved.
+
+**#137 asks that this count be added to the pre-screen, or that the pre-registration state why not.
+It is not added, for this reason.** In this listen, one side is built to put less-listened artists in
+the middle, and whether an artist has a clip is not independent of how listened-to they are. A
+pre-screen gate or ranking term on single-side clipless artists would therefore select pairs by a
+quantity that leans toward one side. That is exactly what step 7 bars ("never direction"). So the
+tell is handled after the pin instead: the card says *"no clip found"*, the clip-problem box marks
+any row it spoils, and the count is sealed and reported beside the verdict. **That statement is
+#137's condition, met.** ⚑ *Corrected at seam 5A (`S5R-1`): this said the post-pin count alone
+discharged #137, which asks for the pre-screen.*
 
 #### `DRP-AM7-6` — clips
 
 `LBA-AM6-6`, unchanged in substance. Every presented artist resolves through the app's own
-`ClipResolver.resolve(mbid, name, deezer_artist_id, index)`, with the name and Deezer id read from
-**one** source for both sides. **Generation refuses if the two artifacts record a different Deezer id,
-name or disambiguation for any MBID.** `DRP-G3` says they are identical; this refusal checks that
-rather than trusting it. *Plain: an artist sounds the same whichever side put them on the page.*
+`ClipResolver.resolve(mbid, name, deezer_artist_id, index)`, with the name, disambiguation and Deezer
+id read from **one** source for both sides: **today's artifact, `graph-lba-a6.bin`**. **Generation
+refuses if the two artifacts record a different Deezer id, name or disambiguation for any MBID, or if
+either holds an MBID the other lacks.** `DRP-G3` does **not** check this metadata. It is identical by
+construction (`drp_build_s1.py` builds the `DRP-S1` store with `dataclasses.replace` from today's), so
+this refusal is the only check, and the harness implements it. *Plain: an artist sounds the same
+whichever side put them on the page.* ⚑ *Corrected at seam 5A (`S5R-6`): this said `DRP-G3`
+establishes the identity.*
 
 #### `DRP-AM7-7` — the verdict reads, `DSL-R1`–`DSL-R4`, fixed before any journey exists
 
@@ -1911,9 +1957,9 @@ rounded up: `GBL-`'s scaling rule). Per axis, with the candidate as challenger:
 
 - **candidate better**: margin ≥ 8 toward `DRP-S1P3`;
 - **today's better**: margin ≥ 8 toward today's app;
-- **no detectable difference**: margin < 8;
 - **underpowered**: margin < 8 **and** at least 8 of that axis's *no-preference* rows carry the
-  clip-problem box.
+  clip-problem box. **Checked before the next line** (`LAL-`'s precedence, `S5R-15`);
+- **no detectable difference**: margin < 8, and not underpowered.
 
 | read | when | *plain sentence* |
 |---|---|---|
@@ -1953,22 +1999,35 @@ already know most of them?*
 
 - **Population:** every **distinct** middle artist that appears on the **candidate side** at d5, d10 or
   d20 **and on no incumbent-side card of the same row**. These are the artists the candidate put there
-  in place of today's. Every one sits under the ceiling in force at its press (up to its relaxation
-  `r`, sealed), so all are below the top 1% (`DRP-C6`).
-- **Known:** marked *"I know this artist"* on **any** card where it appears. The number of artists
-  marked on some cards and not on others is reported beside the read.
-- **`DSL-P` fires if more than half of that population is marked known** (at least ⌊n/2⌋ + 1 of n),
-  and only if n ≥ 10. With fewer than 10 it is reported as unreadable. **That threshold is his word**
-  (*"most"*), **and so is what firing licenses**: *"that is when a proxy fix goes first, and it comes
-  with the lattice re-run."* A session reads it and reports it. It does not start the fix.
+  in place of today's. Most sit under the ceiling in force at their press. A relaxed ceiling can admit
+  a more famous one, and the sealed `c` and `r` record where it did.
+- **Known:** marked *"I know this artist"* on **any** card where the artist appears. The number of
+  artists marked on some cards and not on others is reported beside the read.
+- **Three outcomes, each with its sentence:**
+  - **Fires** — n ≥ 10 and at least ⌊n/2⌋ + 1 marked known. *"Most of the less-famous artists the
+    candidate put in the middle were ones I already know."* **What it licenses is his rule, in his
+    words:** *"that is when a proxy fix goes first, and it comes with the lattice re-run."* A session
+    reads it and reports it. It does not start the fix.
+  - **Does not fire** — n ≥ 10 and at most ⌊n/2⌋ marked known. *"Most of the less-famous artists the
+    candidate put in the middle were new to me."* By his rule the proxy fix does not go first. That
+    is **not** evidence that the fame proxy ranks correctly: it says only that on these journeys the
+    artists it demoted were mostly new to him.
+  - **Unreadable** — n < 10. *"Too few artists to say."*
+- **Two choices, each stated as one:** "most" is **his word**, read as a strict majority; the n ≥ 10
+  floor is **this design's choice, with no calibration**, so that a handful of artists cannot carry it.
 - **"The band that matters", reported beside it, deciding nothing:** the known share within each
-  `fame_lb_pctl` band of [0.60, 0.70), [0.70, 0.80), [0.80, 0.90) and [0.90, 0.99), on the candidate side
-  and, as a reference, the same for incumbent-only artists. The practice room's mis-rankings sat at
-  81–89 (`exploration/HANDOFF.md`). The per-band counts are what he asked to see.
+  `fame_lb_pctl` band — [0.60, 0.70), [0.70, 0.80), [0.80, 0.90), [0.90, 0.99) — plus **catch-all rows
+  for below 0.60, 0.99 and above, and unmeasured**, so that the rows sum to n. This is given for the
+  candidate side and, as a reference, the same for incumbent-only artists. His observation that
+  prompted this read is recorded in `exploration/HANDOFF.md`, and it is not interpreted here.
 - **Independent of the verdict.** `DSL-P` reads marks, and the verdict reads picks. Neither reads the
   other, and the unblind script is tested for that (`DRP-AM7-10`).
 - **Run state:** the full run and the unblind, as for `DSL-R1`–`R4`, because which side is the
   candidate is sealed until then.
+
+⚑ *Corrected at seam 5A (`S5R-3`, `S5R-5`, `S5R-14`): the population line said every such artist is
+below the top 1%, which relaxation contradicts; the bands left most d20 artists uncounted; the null
+outcome had no sentence; and the practice room's figures were interpreted rather than cited.*
 
 #### `DRP-AM7-9` — `DSL-E`, the weak-step position read (his stage-4 instruction 3; #249)
 
@@ -1976,16 +2035,35 @@ already know most of them?*
 
 - **End step:** a step with an endpoint on one side of it (two per journey). **Middle step:** every
   other step.
-- **`DSL-E` fires if** there are at least **5** `DSL-W` marks on candidate-side steps **and** the share of
-  those marks falling on end steps is **at least 1.5 times** the share of end steps among all
-  candidate-side steps shown. The multiple is a **choice with no prior calibration, stated as one**,
-  set so that one or two marks landing on end steps by chance cannot fire it.
+- **Three outcomes, each with its sentence:**
+  - **Fires** — at least **8** `DSL-W` marks on candidate-side steps, **and** end steps take **a
+    majority** of those marks, **and** that majority is **at least 1.5 times** the share of end steps
+    among all candidate-side steps shown. *"When the candidate's journey breaks, it is mostly on the
+    step off an endpoint."*
+  - **Does not fire** — at least 8 marks, and either condition fails. *"The candidate's weak steps
+    are not mostly at the ends."*
+  - **Unreadable** — fewer than 8 marks. *"Too few weak steps were marked to say where the candidate
+    breaks."* This is distinct from not firing: few marks is not evidence about the ends.
 - **What firing licenses:** his decision whether to revive #249, as he worded it (*"if the ends are
   where it breaks, revive this by decision"*). Nothing is revived by the read itself.
+- **The rule's false-alarm rate, computed rather than asserted.** If marks fell on steps at random,
+  independently, the chance of firing is the binomial tail. The majority condition is what holds it
+  down: the 1.5× condition alone would fire by chance 16–37% of the time at 5 marks. With both
+  conditions, and **8** marks, it fires by chance about 1%, 3%, 6%, 9% and 17% when end steps are 20%,
+  25%, 30%, 33% and 40% of the steps shown. Candidate journeys run longer (`DRP-C2`), which puts them
+  toward the low end. At 12 marks the same figures are about 0.4%, 1%, 4%, 7% and 6%. **The 8-mark
+  floor, the majority and the 1.5× multiple are all this design's choices, with no calibration.**
+  Random independent marking is itself an assumption: real marks cluster. The firing is only ever a
+  prompt to his decision.
 - **Reported beside it:** the same figures for the incumbent side, so that he can see whether end steps
   are weak in today's app too, in which case the ends are not the candidate's own problem. Also the
   per-depth split.
 - **Run state:** as `DSL-P`.
+
+⚑ *Corrected at seam 5A (`S5R-3`, `S5R-4`): the rule was ≥ 5 marks and ≥ 1.5× alone, with a stated
+rationale ("one or two marks by chance cannot fire it") that is false, since two of five marks can fire
+it and chance firing reaches 37%. It did not match its own plain sentence ("mostly"), and "too few
+marks" was indistinguishable from "not at the ends".*
 
 #### `DRP-AM7-10` — descriptive reads that decide nothing
 
@@ -1995,7 +2073,10 @@ These are reported beside the verdict, marked as deciding nothing, with no thres
 - `DSL-Q3` strength, `DSL-K` ticks, and the computed trade-off rows (where `DSL-Q1` and `DSL-Q2` name
   opposite sides).
 - The sealed metrics of `DRP-AM7-5`, including the single-side clipless count, and whether any of them
-  tracked his picks.
+  tracked his picks, **defined as** `LAL-` results §1.5 did: over the rows where he made a clear pick
+  on an axis, how many times the picked side also had the lower mean interior fame, the longer
+  journey, or more added connections traversed. Counts only, and barred from being read as what his
+  ear was responding to (`DRP-AM7-11`). ⚑ *Defined at seam 5A (`S5R-16`).*
 
 **The unblind script is tested for invariance:** the verdict must be identical under every assignment
 of `DSL-Q3`, `DSL-Q4`, `DSL-K`, `DSL-M` and `DSL-W`; and `DSL-P` and `DSL-E` must be identical under
@@ -2031,13 +2112,16 @@ that `DSL-G1` tests the very code that produced the result. The side mapping and
 **Seams (the >8-task rule), named now:**
 
 - **5A**: this amendment committed and checked against the repo by `experiment-reviewer`.
-- **5B**: the harness built and committed, with its tests green on the 500-node fixtures. **No listen
-  pair is drawn and no journey is generated on either real map.** The pre-screen script is committed
+- **5B**: the harness built and committed, with its tests green: the pure logic (page, tally, the
+  three reads and their invariances, selection, strike, gates), plus the lattice's own ceiling code run
+  on the 500-node fixture with a **synthetic** fame ranking, because the fixture carries no fame and no
+  sidecar (`S5R-7`). **No listen pair is drawn and no journey is generated on either real map.** The pre-screen script is committed
   with step 6's rule in its docstring **before it first runs** (the `855b090` precedent).
 - **5C**: `DSL-G1` run, then pre-screen, draw, his strike, and pin. This is the preparation session.
 - **5D**: the listen. This is the runner.
 - **5E**: the unblind and the findings note, covering `DSL-R*`, `DSL-P` and `DSL-E`. This is the
-  write-up session. Then stage 6, his use gate, which avoids this listen's pairs at artist level.
+  write-up session. Then stage 6, his use gate, on his criterion (`DRP-AM6`), unchanged. ⚑ *Corrected
+  at seam 5A (`S5R-17`): this line added a condition on his use gate, which is his to set.*
 
 **What does not change:** every `DRP-` bar, gate, read and exposure before this amendment; the stage-4
 decision; `DRP-AM6`'s criterion; `DRP-AM4`'s deploy obligation; `ApiConfig`; the served artifact. **It
@@ -2046,3 +2130,23 @@ adopts nothing, changes no default, touches no shipped code, and recommends noth
 **Identifiers `DRP-AM7` (`-1`–`-12`), `DSL-` (`Q1`–`Q4`, `K`, `M`, `W`, `G1`, `R1`–`R4`, `P`, `E`),
 `DRP-X8`, `DRP-X9`.** Collision-checked 2026-09-30 by `git grep -lE` over every local and remote ref for
 `\bDRP-AM7`, `\bDSL-` and `\bDRP-X[89]\b`: **all free.**
+
+#### `DRP-AM7` — seam 5A review, and what it changed
+
+`experiment-reviewer` checked this amendment against the repo on 2026-09-30, at `f02ac86`, before any
+harness existed and before any pair was drawn. Its findings are namespaced `S5R-` (collision-checked
+free). Every one is resolved in place above, and each changed clause carries a ⚑ note naming it. The
+original wording is `f02ac86`'s. **Two MUST-FIX findings**: `S5R-1` (#137's condition, now met by a
+stated reason) and `S5R-2` (the tier shortfall and reserve rules, now written). **SHOULD-FIX**:
+`S5R-3`–`S5R-10`. **NOTE**: `S5R-11`–`S5R-17` are resolved above. `S5R-18` needs no action: `DSL-Q3`/`Q4`
+sit one letter-swap from `DLS-Q3`/`Q4`, and readers should mind it. Nothing is renamed.
+
+**What the review did not change:** the question, the comparison, the depths, the questions and their
+wording, the margin bar, and the verdict reads. The owner approved the wording of `DSL-M` and `DSL-P`
+before the review (2026-09-30), and no correction touches it. `DSL-E`'s rule did change (`S5R-4`),
+to match its own plain sentence.
+
+**Its tier count, recorded because it is the draw's thin side** (membership and fame only, no routing):
+76 of the 141 known artists are in `DRP-T1` and 42 in `DRP-T2`. After step 2 there are 64 and 36
+eligible, and greedy pairing gives 32 and 18 candidate pairs. **Each tier needs 6 survivors of Gates
+L, D and N**, so `DRP-T2` is where a shortfall would show. Step 8 now says what happens then.
