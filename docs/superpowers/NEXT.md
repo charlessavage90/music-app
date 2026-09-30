@@ -47,26 +47,34 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-28, at Seam D of the #200 remedy: stage 3 is finished.** The live site is
-unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend built
-from `b3e197b`. The work is on branch `charlessavage90/drp-stage-3d`, tracking issue #244 (addresses;
-`git`/`gh` own the PR and merge state). Handoff:
-[`2026-09-28-HANDOFF-drp-stage3d.md`](2026-09-28-HANDOFF-drp-stage3d.md).
+**Last updated: 2026-09-30, at seam 5B of the #200 remedy: stage 4 is decided, and stage 5 is
+designed and built.** The live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha
+`28311d81…`), and the image and frontend were built from `b3e197b`. Addresses: the work is on branch
+`charlessavage90/session-start-orientation`, PR #265, tracking issue #244; `git` and `gh` own the PR
+and merge state. Handoff: [`2026-09-30-HANDOFF-drp-stage5b.md`](2026-09-30-HANDOFF-drp-stage5b.md).
 
-# THE #200 LATTICE IS READ. NEXT: THE OWNER'S STAGE-4 GO/NO-GO.
+# STAGE 4 PICKED `DRP-S1P3`. THE BLIND LISTEN IS DESIGNED AND BUILT. NEXT: THE PREPARATION SESSION.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner:** stage 4, his go/no-go on at most one cell or none, with the results note in hand:
-   [`findings/2026-09-28-drp-lattice-results.md`](findings/2026-09-28-drp-lattice-results.md). It names
-   no candidate (`DRP-R10`) and gives the options in its §4. Also his, and only at stage 4: whether to
-   name #249's second condition.
-2. **If he names a cell:** a session that has seen no journey designs the stage-5 blind listen cold as
-   an amendment; then his use gate (stage 6, `DRP-AM6`).
-3. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
-   previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
-
+1. **A fresh preparation session** (seam 5C, `DRP-AM7-12`). It runs `DSL-G1`, the pre-screen and the
+   draw, then shows the owner the 12 pairs **by endpoint name only**, and he strikes any he wants.
+   Then it pins the pairs. Steps: the handoff and the harness README. **The session that designed the
+   listen may not run it.**
+2. **A fresh runner** runs the blind listen (`RUNNER-BRIEF.md`). He listens: 24 rows, with recognition
+   and weak-step marks.
+3. **A fresh write-up session** unblinds it and writes the findings note: the verdict (`DSL-R1`–`R4`),
+   `DSL-P` and `DSL-E`.
+4. **The owner:** his use gate (stage 6, `DRP-AM6`), then adoption (stage 7). What each listen read
+   licenses is in `DRP-AM7-7`–`-9`. If `DSL-P` fires, a proxy fix and a lattice re-run go first, by
+   his own rule. If `DSL-E` fires, reviving #249 is his decision.
+5. **Carried, his and not blocking:**
+   - press the unticked `TEST-QUEUE.md` boxes;
+   - #237, pruning the previous frontend's assets, which needs his AWS access;
+   - #233, the landing page's sample journeys;
+   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), **after the listen**, so that
+     its journeys cannot shape what he hears.
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never
@@ -161,6 +169,9 @@ old heading.)*
 
 ## Closed — do not re-plan or re-investigate
 
+- **#200 stage 4 is decided (owner, 2026-09-30, verbatim on #244): `DRP-S1P3`.** The fame proxy is
+  **not** fixed before the listen; it is decided after it, from `DSL-P`. #249 is deferred, and is
+  revived only by his decision. Do not re-offer `DRP-S0P3` or "none" before the listen reads.
 - **`LBA-A6` has NO pre-set production revert trigger** — owner ruling 2026-09-25, verbatim in the
   deploy log §6: a revert is simply his decision, whenever he makes it. **Do not propose a revert
   criterion, and do not read `LBA-G5`'s criterion as one.** The mechanics are `infra/README.md` §9.

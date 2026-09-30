@@ -19,6 +19,30 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-30 (seam 5B) — the stage-3d top block
+
+**Last updated: 2026-09-28, at Seam D of the #200 remedy: stage 3 is finished.** The live site is
+unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), image and frontend built
+from `b3e197b`. The work is on branch `charlessavage90/drp-stage-3d`, tracking issue #244 (addresses;
+`git`/`gh` own the PR and merge state). Handoff:
+[`2026-09-28-HANDOFF-drp-stage3d.md`](2026-09-28-HANDOFF-drp-stage3d.md).
+
+# THE #200 LATTICE IS READ. NEXT: THE OWNER'S STAGE-4 GO/NO-GO.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner:** stage 4, his go/no-go on at most one cell or none, with the results note in hand:
+   [`findings/2026-09-28-drp-lattice-results.md`](findings/2026-09-28-drp-lattice-results.md). It names
+   no candidate (`DRP-R10`) and gives the options in its §4. Also his, and only at stage 4: whether to
+   name #249's second condition.
+2. **If he names a cell:** a session that has seen no journey designs the stage-5 blind listen cold as
+   an amendment; then his use gate (stage 6, `DRP-AM6`).
+3. **Carried, his and not blocking:** press the unticked `TEST-QUEUE.md` boxes; #237 (prune the
+   previous frontend's assets, with his AWS hands); #233 (the landing's sample journeys).
+
+---
+
 ## Demoted 2026-09-28 (Seam D) — the stage-3c top block
 
 **Last updated: 2026-09-28, at Seam C of the #200 remedy's stage 3c (the `DRP-S1` row).** The live
