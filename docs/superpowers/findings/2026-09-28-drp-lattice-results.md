@@ -5,7 +5,9 @@
 (`DRP-`) requires, **written by a session that ran no sweep**, from the committed per-cell JSON and
 never from a sweep session's prose. **Raw record:**
 [`../../../builder/analysis/2026-09-28-drp-stage3d/drp_results.json`](../../../builder/analysis/2026-09-28-drp-stage3d/drp_results.json)
-(sha256 `a453e0f2101e23700a9cc50ddbcd1873372980d4c1beb5472eb40949044f3a4a`), written by `drp_read.py`
+(sha256 of the committed, LF bytes `33f2b60f2a8e1ca516fc92019dc8f4a196e25408fa3d5c0200e7ed65c9c483bf`;
+an `autocrlf=true` working copy hashes to `a453e0f2…`, which this line gave until 2026-09-30 and which
+is not an identity record, per the stage-3d handoff), written by `drp_read.py`
 beside it and committed (`0b80dab`) before this note was opened. Cite that file or this note for any
 `DRP-` result. Execution log: [`../2026-09-28-drp-stage3d-execution-log.md`](../2026-09-28-drp-stage3d-execution-log.md);
 the choices the design leaves to 3d were committed there (`1c1e874`) before any figure was computed.
