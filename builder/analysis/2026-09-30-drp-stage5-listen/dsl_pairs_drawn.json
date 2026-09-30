@@ -1,0 +1,178 @@
+{
+  "what": "DRP-AM7-2 step 8: 4 primaries and 2 ordered reserves per tier, before the owner's strike",
+  "note": "Endpoint names, MBIDs, tiers and pool ranks only. Nothing here identifies a side.",
+  "prescreen_script_sha256_lf": "3d8ec7ff5775a3095ae0ad51956d17b24e90cd701876a193a2ffcf59674bda36",
+  "primary": [
+    {
+      "tier": "DRP-T1",
+      "slot_tier": "DRP-T1",
+      "a": {
+        "name": "Grimes",
+        "mbid": "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222",
+        "rank": 28
+      },
+      "b": {
+        "name": "The Police",
+        "mbid": "9e0e2b01-41db-4008-bd8b-988977d6019a",
+        "rank": 31
+      }
+    },
+    {
+      "tier": "DRP-T1",
+      "slot_tier": "DRP-T1",
+      "a": {
+        "name": "Lil Wayne",
+        "mbid": "ac9a487a-d9d2-4f27-bb23-0f4686488345",
+        "rank": 36
+      },
+      "b": {
+        "name": "The Kinks",
+        "mbid": "17b53d9f-5c63-4a09-a593-dde4608e0db9",
+        "rank": 37
+      }
+    },
+    {
+      "tier": "DRP-T1",
+      "slot_tier": "DRP-T1",
+      "a": {
+        "name": "GROUPLOVE",
+        "mbid": "d8e41375-bd8d-4e39-9da7-f0c171e97086",
+        "rank": 134
+      },
+      "b": {
+        "name": "Dire Straits",
+        "mbid": "614e3804-7d34-41ba-857f-811bad7c2b7a",
+        "rank": 135
+      }
+    },
+    {
+      "tier": "DRP-T1",
+      "slot_tier": "DRP-T1",
+      "a": {
+        "name": "Fleet Foxes",
+        "mbid": "fa97dd36-1b82-43d7-a6e4-2adeafd59cef",
+        "rank": 15
+      },
+      "b": {
+        "name": "Rush",
+        "mbid": "534ee493-bfac-4575-a44a-0ae41e2c3fe4",
+        "rank": 16
+      }
+    },
+    {
+      "tier": "DRP-T2",
+      "slot_tier": "DRP-T2",
+      "a": {
+        "name": "Dr. Dog",
+        "mbid": "e9aed5e5-ed35-4244-872e-194862290295",
+        "rank": 53
+      },
+      "b": {
+        "name": "Matisyahu",
+        "mbid": "e8993e9d-9313-4447-ad23-791459a3790d",
+        "rank": 65
+      }
+    },
+    {
+      "tier": "DRP-T2",
+      "slot_tier": "DRP-T2",
+      "a": {
+        "name": "The Hold Steady",
+        "mbid": "4883523d-fc0e-4d0d-802c-91379e767083",
+        "rank": 66
+      },
+      "b": {
+        "name": "Big Star",
+        "mbid": "21d177ba-3d51-461e-9b3f-ad9a80b419dc",
+        "rank": 78
+      }
+    },
+    {
+      "tier": "DRP-T2",
+      "slot_tier": "DRP-T2",
+      "a": {
+        "name": "Sea Power",
+        "mbid": "8830afec-83b3-4213-aad0-f6377f1d73ac",
+        "rank": 137
+      },
+      "b": {
+        "name": "The Head And The Heart",
+        "mbid": "98cb416e-5271-484c-ab3b-6bed6b4aae12",
+        "rank": 138
+      }
+    },
+    {
+      "tier": "DRP-T2",
+      "slot_tier": "DRP-T2",
+      "a": {
+        "name": "Crosby, Stills, Nash & Young",
+        "mbid": "46a782ea-4308-476b-abd1-a91b197f3037",
+        "rank": 80
+      },
+      "b": {
+        "name": "Dawes",
+        "mbid": "59bc9caa-5700-4c77-9ab7-f089aa7a357f",
+        "rank": 85
+      }
+    }
+  ],
+  "reserve": [
+    {
+      "tier": "DRP-T1",
+      "slot_tier": "DRP-T1",
+      "a": {
+        "name": "The New Pornographers",
+        "mbid": "25b75a66-ce83-4db3-b136-395a3c3784c4",
+        "rank": 1
+      },
+      "b": {
+        "name": "The Who",
+        "mbid": "9fdaa16b-a6c4-4831-b87c-bc9ca8ce7eaa",
+        "rank": 2
+      }
+    },
+    {
+      "tier": "DRP-T1",
+      "slot_tier": "DRP-T1",
+      "a": {
+        "name": "Neutral Milk Hotel",
+        "mbid": "a506f761-2c22-4b2f-8a94-bd748c2c8f75",
+        "rank": 76
+      },
+      "b": {
+        "name": "The Beach Boys",
+        "mbid": "ebfc1398-8d96-47e3-82c3-f782abcdb13d",
+        "rank": 82
+      }
+    },
+    {
+      "tier": "DRP-T2",
+      "slot_tier": "DRP-T2",
+      "a": {
+        "name": "Badfinger",
+        "mbid": "44632683-c340-44de-a65d-328212559f91",
+        "rank": 112
+      },
+      "b": {
+        "name": "Future Islands",
+        "mbid": "74963434-dcb6-4b14-98cc-99873b06db66",
+        "rank": 115
+      }
+    },
+    {
+      "tier": "DRP-T2",
+      "slot_tier": "DRP-T2",
+      "a": {
+        "name": "A.C. Newman",
+        "mbid": "bb40af12-0dfd-4a53-bfe1-666a9e49dfb2",
+        "rank": 43
+      },
+      "b": {
+        "name": "Phantogram",
+        "mbid": "dfe78af2-779e-4137-826a-3073a16e3278",
+        "rank": 51
+      }
+    }
+  ],
+  "finished_utc": "2026-09-30T23:24:52.550271+00:00"
+}

@@ -52,3 +52,8 @@ could not see it. **Fix: the two import lines swapped, nothing else** — no rul
 selection line touched. Committed on its own before the pre-screen ran again, so the commit order
 still shows the script preceding its output (the `855b090` precedent). `dsl_generate.py` imports
 `dsl_journeys` alone and is not affected.
+
+Second launch, on `88f45c3`, ran to completion: enough survivors in both tiers, 12 selected, no
+cross-tier fill (so correction 3 above stayed inert). The outputs record the script's LF sha, which
+equals the committed `88f45c3` script. Counts: `dsl_prescreen.json` (**side-labelled**). Draw:
+`dsl_pairs_drawn.json` (names, MBIDs, tiers, pool ranks only).
