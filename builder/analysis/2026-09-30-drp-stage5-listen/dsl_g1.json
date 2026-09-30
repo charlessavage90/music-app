@@ -1,0 +1,37 @@
+{
+  "what": "DSL-G1 (DRP-AM7-3): the listen generator reproduces the DRP-S0P0 and DRP-S1P3 cells, primary rule, every DRP-T1/DRP-T2 pair, depths 0-20. Counts only.",
+  "verdict": "PASS",
+  "reproduction": {
+    "incumbent": {
+      "pairs": 80,
+      "identical": 80,
+      "diverged": []
+    },
+    "challenger": {
+      "pairs": 80,
+      "identical": 80,
+      "diverged": []
+    }
+  },
+  "red_control": {
+    "pairs": 80,
+    "diverged_at_or_after_press_4": 80,
+    "passed": true,
+    "rule": "ceiling off on DRP-S1 must diverge from DRP-S1P3 at some press >= 4 on >= 1 pair"
+  },
+  "map_sha256": {
+    "incumbent": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b",
+    "challenger": "418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f"
+  },
+  "cell_sha256_lf": {
+    "incumbent": "339998556fcd91f9287a026746e2fe7185cbaa44eb25129135a61b35d588a113",
+    "challenger": "2937eee2a38026259d3a9e3d50b8b4cca58a6d50f7e1cd11789303268400d4ad"
+  },
+  "harness_sha256_lf": {
+    "dsl_g1.py": "7b77a6aa13ae80898fc91f9b0ee2405f1d4da6724eaad476e4e31bc4c66a7c04",
+    "dsl_journeys.py": "fbb826b5d828bdbf2fbb428a50219320d78bb6eba04e95fdfe24bad5a0881252",
+    "dsl_common.py": "ebdd9f8221d25815e503fef34c55025cfe19f07f099736ecac8719aa34dc2a8e"
+  },
+  "seconds": 3755.7,
+  "finished_utc": "2026-09-30T23:06:47.544035+00:00"
+}
