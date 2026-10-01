@@ -1,12 +1,21 @@
 # Handoff — Dig-deeper exploration, for the review session, 2026-09-29
 
-**Role: ACTIVE — this is the CURRENT handoff for the exploration.** It is *not* in the
+**Role: COMPLETE — the review session ran 2026-10-01; this handoff is discharged.** It is *not* in the
 `docs/superpowers/` handoff chain and does not state project status: for that read
 [`docs/superpowers/NEXT.md`](../docs/superpowers/NEXT.md). EXPLORATORY: nothing here is evidence
 (the owner's brief; see `REPORT.md`'s first line).
 
-**Where this lives:** branch `charlessavage90/dig-deeper-exploration`, draft PR #264. Nothing is on
-`main`. Start the review session from that branch.
+> **Discharged 2026-10-01 by the review session** (branch `charlessavage90/exploration-review`). Its
+> open items now live as GitHub issues: the famous-to-famous defect is **#270** (the successor to
+> #244, closed at stage 7). Its leads are **#271** (shared neighbours as a step measure, blocked by
+> #165's trigger), **#272** (a listen of two digging variants side by side) and **#273** (a fame-proxy
+> check in the band below the top). The fame-score question below was answered by the owner's
+> stage-4 rule on #244, and the listen's `DSL-P` read did not fire, so a proxy fix does not go first.
+> Below is the handoff as written.
+
+**Where this lived:** branch `charlessavage90/dig-deeper-exploration`, PR #264, merged to `main`
+2026-09-29; `exploration/` on `main` is the current copy. *(This line read "Nothing is on `main`" until
+2026-10-01.)*
 
 ## What the owner wants from the next session
 He has used the practice room on three pairs and wants a fresh session to review **the results, his

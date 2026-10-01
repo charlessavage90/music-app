@@ -19,6 +19,39 @@ Newest first.
 
 ---
 
+## Demoted 2026-10-01 (exploration review) — the seam-5E top block
+
+**Last updated: 2026-10-01, at seam 5E of the #200 remedy: the stage-5 blind listen has run and been
+read.** The live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the
+image and frontend were built from `b3e197b`. Addresses: the work is on branch `dsl-listen-run` (the runner's
+worktree), PR #268, tracking issue #244; `git` and `gh` own the PR and merge state. Handoff:
+[`2026-10-01-HANDOFF-drp-stage5e.md`](2026-10-01-HANDOFF-drp-stage5e.md).
+
+# THE `DSL-` LISTEN READ `DSL-R3`, FAIL ON COHERENCE. WHAT FOLLOWS IS THE OWNER'S.
+
+**The read is owned by [`findings/2026-10-01-dsl-listen-results.md`](findings/2026-10-01-dsl-listen-results.md)**:
+read its §0 and §4 before citing it. `DSL-P` and `DSL-E` did not fire. *What `DSL-R3` licenses
+(`DRP-AM7-7`): "`REQ-38` bars any offline figure from overriding it. What follows is his."*
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner merges PR #268.**
+2. **The owner decides what follows a FAIL** for #200's remedy: whether stage 6 (his use gate,
+   `DRP-AM6`) or stage 7 (adoption) proceed at all, and anything else. **No session starts any of it.**
+   By his own rules: `DSL-P` did not fire, so a proxy fix does not go first; `DSL-E` did not fire, so
+   #249 stays deferred unless he revives it.
+3. **The owner may then remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`)
+   once #268 has merged. Its `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics.
+4. **Carried, his and not blocking:**
+   - press the unticked `TEST-QUEUE.md` boxes;
+   - #237, pruning the previous frontend's assets, which needs his AWS access;
+   - #233, the landing page's sample journeys;
+   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), held until after the listen,
+     which has now been read.
+
+---
+
 ## Demoted 2026-10-01 (seam 5E) — the seam-5C top block
 
 **Last updated: 2026-09-30, at seam 5C of the #200 remedy: the stage-5 blind listen is prepared.** The
