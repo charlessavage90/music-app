@@ -47,25 +47,24 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-30, at seam 5B of the #200 remedy: stage 4 is decided, and stage 5 is
-designed and built.** The live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha
-`28311d81…`), and the image and frontend were built from `b3e197b`. Addresses: the work is on branch
-`charlessavage90/session-start-orientation`, PR #265, tracking issue #244; `git` and `gh` own the PR
-and merge state. Handoff: [`2026-09-30-HANDOFF-drp-stage5b.md`](2026-09-30-HANDOFF-drp-stage5b.md).
+**Last updated: 2026-09-30, at seam 5C of the #200 remedy: the stage-5 blind listen is prepared.** The
+live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and
+frontend were built from `b3e197b`. Addresses: the work is on branch `charlessavage90/drp-listen-prep`, PR
+#266, tracking issue #244; `git` and `gh` own the PR and merge state. Handoff:
+[`2026-09-30-HANDOFF-drp-stage5c.md`](2026-09-30-HANDOFF-drp-stage5c.md).
 
-# STAGE 4 PICKED `DRP-S1P3`. THE BLIND LISTEN IS DESIGNED AND BUILT. NEXT: THE PREPARATION SESSION.
+# THE `DSL-` BLIND LISTEN IS PREPARED: PAIRS STRUCK AND PINNED, EVERY GATE DRY-RUN. NEXT: THE RUNNER.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **A fresh preparation session** (seam 5C, `DRP-AM7-12`). It runs `DSL-G1`, the pre-screen and the
-   draw, then shows the owner the 12 pairs **by endpoint name only**, and he strikes any he wants.
-   Then it pins the pairs. Steps: the handoff and the harness README. **The session that designed the
-   listen may not run it.**
-2. **A fresh runner** runs the blind listen (`RUNNER-BRIEF.md`). He listens: 24 rows, with recognition
-   and weak-step marks.
-3. **A fresh write-up session** unblinds it and writes the findings note: the verdict (`DSL-R1`–`R4`),
-   `DSL-P` and `DSL-E`.
+1. **The owner merges PR #266.** The runner's worktree is cut from `origin/main` (`RUNNER-BRIEF.md`).
+2. **A fresh runner** (seam 5D), launched with the one prompt in the handoff and pointed **only** at
+   `RUNNER-BRIEF.md`, which names its worktree, `C:/Users/charl/worktrees/music-app-dsl-runner`. That
+   worktree must outlive it. He listens: 24 rows, with recognition and weak-step marks.
+3. **A fresh write-up session** (seam 5E) works in that worktree, unblinds it and writes the findings
+   note: the verdict (`DSL-R1`–`R4`), `DSL-P` and `DSL-E`. **Neither the designing session nor the
+   preparation session may run 5D or 5E** (`DRP-AM7-5`).
 4. **The owner:** his use gate (stage 6, `DRP-AM6`), then adoption (stage 7). What each listen read
    licenses is in `DRP-AM7-7`–`-9`. If `DSL-P` fires, a proxy fix and a lattice re-run go first, by
    his own rule. If `DSL-E` fires, reviving #249 is his decision.
@@ -75,6 +74,7 @@ got.**
    - #233, the landing page's sample journeys;
    - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), **after the listen**, so that
      its journeys cannot shape what he hears.
+
 ---
 
 **Superseded status blocks live in [`NEXT-ARCHIVE.md`](NEXT-ARCHIVE.md), frozen and never

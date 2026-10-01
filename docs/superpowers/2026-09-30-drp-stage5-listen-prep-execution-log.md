@@ -57,3 +57,65 @@ Second launch, on `88f45c3`, ran to completion: enough survivors in both tiers, 
 cross-tier fill (so correction 3 above stayed inert). The outputs record the script's LF sha, which
 equals the committed `88f45c3` script. Counts: `dsl_prescreen.json` (**side-labelled**). Draw:
 `dsl_pairs_drawn.json` (names, MBIDs, tiers, pool ranks only).
+
+### Step 3 — the owner's strike and the pin
+
+Shown the 12 drawn pairs by endpoint name only (positions 1–8 primary, 9–12 reserve; no interior,
+length, side or tier), **he struck position 8**. `dsl_pairs_final.py --strike 8` filled it with the
+next unstruck reserve of the same tier (position 11), as `DRP-AM7-2` step 9 requires; no cross-tier
+fill. `dsl_pairs.json` committed first, then `DSL_PAIRS_SHA` pinned in `dsl_common.py` in its own
+commit; the committed blob's sha equals the pin.
+
+### Step 4 — generation `--dry-run`: every gate passed, nothing written
+
+G1 (PASS on this `dsl_journeys.py`), G2 (both maps against sidecar and pin; `DRP-G3` on `DRP-S1`), G3
+(pairs pinned, 8 primaries), G6 (name, disambiguation and Deezer id identical for every MBID —
+`DRP-AM7-6`'s refusal did not fire), G4 (0 substitutions), G4' (Gates D and N re-asserted), G5
+(differential) and G7 (page leak guard) all ran before the dry-run's early return. A sha256 listing of
+the harness directory and of `.superpowers/` taken before and after is identical, and `.superpowers/`
+does not exist.
+
+## Defects found in the plan and the harness
+
+- **Import order in `dsl_prescreen.main()`** (above): untested because the suite exercises only the
+  pure functions. Fixed before the first successful run.
+- **The runner cannot read the handoff.** `RUNNER-BRIEF.md`'s do-not-read list covers every handoff
+  and execution log under `docs/superpowers/`, so a "handoff for the runner" there would unblind it if
+  read. The seam-5C handoff is therefore addressed to the **owner**, and carries a launch prompt that
+  points the runner at `RUNNER-BRIEF.md` only.
+- **Merge before the runner is the clean order, not the only one.** The brief cuts the runner's
+  worktree from `origin/main`, and also allows branching from a branch the owner names if this PR is
+  not merged. Correction 4 above overstated it as a hard dependency.
+- **"Each tier needs 6"** (`DRP-AM7`'s closing count) is not step 8's stop rule (correction 2). Inert
+  this time — both tiers had more than 6 survivors. The amendment is left unedited; this log is the
+  correction's address.
+
+## Operational
+
+`DSL-G1`: about an hour (80 pairs × 3 ladders, ~45 s a pair). Pre-screen: under an hour (50 pairs ×
+2 ladders). Dry-run: a few minutes. All run from `api/` with `python -u` in the background.
+
+## Provenance (D3)
+
+Maps read by absolute path and verified by the lattice's loader at every step: today's
+`graph-lba-a6.bin` sha `28311d81…`, `graph-drp-s1.bin` sha `418fe666…` (full values: `dsl_g1.json`'s
+`map_sha256`). Post-strike pairs: `dsl_common.DSL_PAIRS_SHA`.
+
+## Deferred
+
+- **#267** — `select()`'s fill order for a short *first* tier, and `main()` having no test. Condition:
+  before any future listen adapts `dsl_prescreen.py`. This listen's copy stays as run.
+
+## Closeout measurements
+
+- **D6:** no edit to `CLAUDE.md`, `.claude/` or memory, so delta 0 in both layers. Totals measured
+  against `C:/Users/charl/.claude/projects/C--dev-music-app/memory`: unconditional 46,650 characters,
+  conditional 3,538 lines.
+- **D4:** harness 52 passed, api 347 passed, builder 292 passed; frontend untouched, not run.
+- **Snyk:** the harness directory scanned after the import-order edit: 0 issues.
+- **B2:** no module added. **B3:** the only code change is an import swap, and its proof is the
+  pre-screen's successful run; the missing `main()` test is #267. **C1:** nothing the owner can
+  press changed, so nothing is queued. **A4:** no config knob added. **A5:** no server or listener
+  started; every background job finished.
+- **B6:** `NEXT.md` 360 lines (budget 250) and `docs/README.md` (budget 400) were over before this
+  session; its net additions are the new top block, which replaced the old one, and three map rows.

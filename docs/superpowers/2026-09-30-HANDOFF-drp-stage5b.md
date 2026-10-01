@@ -1,6 +1,7 @@
 # Handoff — #200 `DRP-` stage 5 designed (`DRP-AM7`) and its harness built, at seam 5B, 2026-09-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**Role: SUPERSEDED on next actions by [`2026-09-30-HANDOFF-drp-stage5c.md`](2026-09-30-HANDOFF-drp-stage5c.md)**
+(seam 5C done). Its decisions below still stand. Supersedes
 [`2026-09-28-HANDOFF-drp-stage3d.md`](2026-09-28-HANDOFF-drp-stage3d.md) on next actions. It does **not**
 state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 
