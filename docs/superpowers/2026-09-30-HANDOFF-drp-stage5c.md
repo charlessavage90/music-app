@@ -19,7 +19,17 @@ about the experiment:
 
 > *You are the runner for a blind listen. Read `builder/analysis/2026-09-30-drp-stage5-listen/RUNNER-BRIEF.md`
 > and follow it exactly; read nothing it forbids. Work only in the worktree it names,
-> `C:/Users/charl/worktrees/music-app-dsl-runner`.*
+> `C:/Users/charl/worktrees/music-app-dsl-runner`. Orca has given you a worktree of your own: do not
+> work in it. Create the brief's worktree and run every command there by absolute path (`cd` into
+> its `api/` inside each command), because the sealed files you generate are gitignored and must
+> outlive you, and Orca removes the worktrees it creates.*
+
+**Under Orca, the write-up session (5E) needs the same instruction.** `dsl_unblind.py` reads the
+sealed mapping relative to its own location, so it must be run as
+`C:/Users/charl/worktrees/music-app-dsl-runner/builder/analysis/2026-09-30-drp-stage5-listen/dsl_unblind.py`
+from that tree's `api/`, never from the copy in its own Orca worktree. Tell it so in its launch
+prompt. **If `music-app-dsl-runner` ever appears in Orca, do not archive or delete it there**: it
+holds the only copy of the mapping until the write-up is committed.
 
 **Merge PR #266 first.** The brief cuts that worktree from `origin/main`, and generation refuses
 without the pinned pair sha. If it is not merged, tell the runner to branch from
