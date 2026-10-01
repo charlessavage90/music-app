@@ -1,6 +1,6 @@
 # Handoff — #200 `DRP-` stage 5 listen PREPARED (seam 5C): `DSL-G1`, pre-screen, strike, pin, dry-run, 2026-09-30
 
-**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it. Supersedes
+**⚠ SUPERSEDED ON NEXT ACTIONS 2026-10-01 by [`2026-10-01-HANDOFF-drp-stage5e.md`](2026-10-01-HANDOFF-drp-stage5e.md)**; the runner and the write-up have run. ~~**Role: ACTIVE — this is the CURRENT handoff.** Nothing supersedes it.~~ Supersedes
 [`2026-09-30-HANDOFF-drp-stage5b.md`](2026-09-30-HANDOFF-drp-stage5b.md) on next actions. It does
 **not** state project status: for that read [`NEXT.md`](NEXT.md), which owns it.
 

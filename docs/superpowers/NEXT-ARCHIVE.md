@@ -19,6 +19,38 @@ Newest first.
 
 ---
 
+## Demoted 2026-10-01 (seam 5E) — the seam-5C top block
+
+**Last updated: 2026-09-30, at seam 5C of the #200 remedy: the stage-5 blind listen is prepared.** The
+live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and
+frontend were built from `b3e197b`. Addresses: the work is on branch `charlessavage90/drp-listen-prep`, PR
+#266, tracking issue #244; `git` and `gh` own the PR and merge state. Handoff:
+[`2026-09-30-HANDOFF-drp-stage5c.md`](2026-09-30-HANDOFF-drp-stage5c.md).
+
+# THE `DSL-` BLIND LISTEN IS PREPARED: PAIRS STRUCK AND PINNED, EVERY GATE DRY-RUN. NEXT: THE RUNNER.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner merges PR #266.** The runner's worktree is cut from `origin/main` (`RUNNER-BRIEF.md`).
+2. **A fresh runner** (seam 5D), launched with the one prompt in the handoff and pointed **only** at
+   `RUNNER-BRIEF.md`, which names its worktree, `C:/Users/charl/worktrees/music-app-dsl-runner`. That
+   worktree must outlive it. He listens: 24 rows, with recognition and weak-step marks.
+3. **A fresh write-up session** (seam 5E) works in that worktree, unblinds it and writes the findings
+   note: the verdict (`DSL-R1`–`R4`), `DSL-P` and `DSL-E`. **Neither the designing session nor the
+   preparation session may run 5D or 5E** (`DRP-AM7-5`).
+4. **The owner:** his use gate (stage 6, `DRP-AM6`), then adoption (stage 7). What each listen read
+   licenses is in `DRP-AM7-7`–`-9`. If `DSL-P` fires, a proxy fix and a lattice re-run go first, by
+   his own rule. If `DSL-E` fires, reviving #249 is his decision.
+5. **Carried, his and not blocking:**
+   - press the unticked `TEST-QUEUE.md` boxes;
+   - #237, pruning the previous frontend's assets, which needs his AWS access;
+   - #233, the landing page's sample journeys;
+   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), **after the listen**, so that
+     its journeys cannot shape what he hears.
+
+---
+
 ## Demoted 2026-09-30 (seam 5C) — the seam-5B top block
 
 **Last updated: 2026-09-30, at seam 5B of the #200 remedy: stage 4 is decided, and stage 5 is
