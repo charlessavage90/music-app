@@ -19,6 +19,39 @@ Newest first.
 
 ---
 
+## Demoted 2026-09-30 (seam 5C) — the seam-5B top block
+
+**Last updated: 2026-09-30, at seam 5B of the #200 remedy: stage 4 is decided, and stage 5 is
+designed and built.** The live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha
+`28311d81…`), and the image and frontend were built from `b3e197b`. Addresses: the work is on branch
+`charlessavage90/session-start-orientation`, PR #265, tracking issue #244; `git` and `gh` own the PR
+and merge state. Handoff: [`2026-09-30-HANDOFF-drp-stage5b.md`](2026-09-30-HANDOFF-drp-stage5b.md).
+
+# STAGE 4 PICKED `DRP-S1P3`. THE BLIND LISTEN IS DESIGNED AND BUILT. NEXT: THE PREPARATION SESSION.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **A fresh preparation session** (seam 5C, `DRP-AM7-12`). It runs `DSL-G1`, the pre-screen and the
+   draw, then shows the owner the 12 pairs **by endpoint name only**, and he strikes any he wants.
+   Then it pins the pairs. Steps: the handoff and the harness README. **The session that designed the
+   listen may not run it.**
+2. **A fresh runner** runs the blind listen (`RUNNER-BRIEF.md`). He listens: 24 rows, with recognition
+   and weak-step marks.
+3. **A fresh write-up session** unblinds it and writes the findings note: the verdict (`DSL-R1`–`R4`),
+   `DSL-P` and `DSL-E`.
+4. **The owner:** his use gate (stage 6, `DRP-AM6`), then adoption (stage 7). What each listen read
+   licenses is in `DRP-AM7-7`–`-9`. If `DSL-P` fires, a proxy fix and a lattice re-run go first, by
+   his own rule. If `DSL-E` fires, reviving #249 is his decision.
+5. **Carried, his and not blocking:**
+   - press the unticked `TEST-QUEUE.md` boxes;
+   - #237, pruning the previous frontend's assets, which needs his AWS access;
+   - #233, the landing page's sample journeys;
+   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), **after the listen**, so that
+     its journeys cannot shape what he hears.
+
+---
+
 ## Demoted 2026-09-30 (seam 5B) — the stage-3d top block
 
 **Last updated: 2026-09-28, at Seam D of the #200 remedy: stage 3 is finished.** The live site is

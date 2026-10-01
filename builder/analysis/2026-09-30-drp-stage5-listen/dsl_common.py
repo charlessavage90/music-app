@@ -51,7 +51,7 @@ G1_RESULT = HERE / "dsl_g1.json"                      # DSL-G1's outcome; counts
 # The post-strike pair file (DRP-AM7-2 step 9). Pinned here, by commit, after the owner's strike;
 # empty until then, so generation refuses rather than running on an un-struck draw.
 DSL_PAIRS = HERE / "dsl_pairs.json"
-DSL_PAIRS_SHA = ""
+DSL_PAIRS_SHA = "34699ace50ba5c24538ff12ca2e2ee339140e17dab470ab0392856d154946903"
 
 # ---- DRP-AM7 constants -------------------------------------------------------------------------
 ROLES = ("incumbent", "challenger")   # today's app (A0), DRP-S1P3. Sealed, never shown.
