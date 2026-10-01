@@ -1,0 +1,314 @@
+{
+  "axes": {
+    "coherence": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 2,
+        "incumbent": 15
+      },
+      "margin_toward_candidate": -13,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "today_better"
+    },
+    "novelty": {
+      "rows": 24,
+      "clear_picks": {
+        "challenger": 24,
+        "incumbent": 0
+      },
+      "margin_toward_candidate": 24,
+      "clip_blocked_no_preference_rows": 0,
+      "bar": 8,
+      "verdict": "candidate_better"
+    }
+  },
+  "read": "DSL-R3",
+  "axes_named": [
+    "coherence"
+  ],
+  "sentence": "After several presses, today's app gives better journeys on coherence.",
+  "DSL-P": {
+    "population": "distinct candidate-side middle artists on no incumbent-side card of the same row",
+    "n": 153,
+    "known": 24,
+    "threshold": 77,
+    "min_n": 10,
+    "readable": true,
+    "fires": false,
+    "outcome": "does_not_fire",
+    "sentence": "Most of the less-famous artists the candidate put in the middle were new to me.",
+    "licenses": "the owner's rule: a proxy fix goes first, with the lattice re-run. A session does not start it.",
+    "artists_marked_on_some_cards_not_others": 3,
+    "by_band_candidate_only": {
+      "[0.60, 0.70)": {
+        "n": 22,
+        "known": 1
+      },
+      "[0.70, 0.80)": {
+        "n": 31,
+        "known": 2
+      },
+      "[0.80, 0.90)": {
+        "n": 59,
+        "known": 15
+      },
+      "[0.90, 0.99)": {
+        "n": 24,
+        "known": 6
+      },
+      "below 0.60": {
+        "n": 17,
+        "known": 0
+      }
+    },
+    "by_band_incumbent_only_reference": {
+      "0.99 and above": {
+        "n": 69,
+        "known": 59
+      },
+      "[0.70, 0.80)": {
+        "n": 1,
+        "known": 1
+      },
+      "[0.80, 0.90)": {
+        "n": 2,
+        "known": 2
+      },
+      "[0.90, 0.99)": {
+        "n": 11,
+        "known": 6
+      }
+    }
+  },
+  "DSL-E": {
+    "rule": "candidate side: >= 8 weak-step marks, a strict majority on end steps, and end-step share of marks >= 1.5 x end-step share of steps",
+    "readable": true,
+    "fires": false,
+    "outcome": "does_not_fire",
+    "sentence": "The candidate's weak steps are not mostly at the ends.",
+    "licenses": "the owner's decision whether to revive #249; nothing is revived by the read",
+    "candidate": {
+      "steps": 197,
+      "end_steps": 48,
+      "marks": 43,
+      "end_marks": 13,
+      "by_depth": {
+        "5": {
+          "marks": 17,
+          "end_marks": 7
+        },
+        "10": {
+          "marks": 13,
+          "end_marks": 4
+        },
+        "20": {
+          "marks": 13,
+          "end_marks": 2
+        }
+      },
+      "end_share_of_steps": 0.2436548223350254,
+      "end_share_of_marks": 0.3023255813953488
+    },
+    "today_reference": {
+      "steps": 119,
+      "end_steps": 48,
+      "marks": 9,
+      "end_marks": 7,
+      "by_depth": {
+        "5": {
+          "marks": 4,
+          "end_marks": 3
+        },
+        "10": {
+          "marks": 3,
+          "end_marks": 2
+        },
+        "20": {
+          "marks": 2,
+          "end_marks": 2
+        }
+      },
+      "end_share_of_steps": 0.40336134453781514,
+      "end_share_of_marks": 0.7777777777777778
+    }
+  },
+  "descriptive_only": {
+    "decides": "nothing — DSL-R1 to DSL-R4 read the row tally only",
+    "DSL-Q4_identification": {
+      "5": {
+        "no": 1,
+        "yes_right": 7,
+        "yes_wrong": 0
+      },
+      "10": {
+        "no": 1,
+        "yes_right": 6,
+        "yes_wrong": 1
+      },
+      "20": {
+        "no": 0,
+        "yes_right": 8,
+        "yes_wrong": 0
+      }
+    },
+    "DSL-Q3_strength": {
+      "coherence": {
+        "slight": {
+          "challenger": 2,
+          "incumbent": 1
+        },
+        "strong": {
+          "challenger": 0,
+          "incumbent": 14
+        }
+      },
+      "novelty": {
+        "slight": {
+          "challenger": 2,
+          "incumbent": 0
+        },
+        "strong": {
+          "challenger": 22,
+          "incumbent": 0
+        }
+      }
+    },
+    "DSL-K_known_everyone": {
+      "by_depth": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      },
+      "on_no_preference_rows": {
+        "coherence": 0,
+        "novelty": 0
+      }
+    },
+    "computed_tradeoff_rows": {
+      "rows": 15,
+      "of": 24
+    },
+    "ear_tracking": {
+      "coherence": {
+        "rows": 17,
+        "fame_rows": 17,
+        "fame_lower": 2,
+        "length_longer": 2,
+        "more_added_connections": 0
+      },
+      "novelty": {
+        "rows": 24,
+        "fame_rows": 24,
+        "fame_lower": 24,
+        "length_longer": 19,
+        "more_added_connections": 12
+      }
+    },
+    "clip_coverage_by_side": {
+      "incumbent": {
+        "slots": 143,
+        "no_clip": 0
+      },
+      "challenger": {
+        "slots": 221,
+        "no_clip": 3
+      }
+    },
+    "single_side_clipless_by_row": {
+      "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222|9e0e2b01-41db-4008-bd8b-988977d6019a": {
+        "5": 0,
+        "10": 0,
+        "20": 1
+      },
+      "ac9a487a-d9d2-4f27-bb23-0f4686488345|17b53d9f-5c63-4a09-a593-dde4608e0db9": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      },
+      "d8e41375-bd8d-4e39-9da7-f0c171e97086|614e3804-7d34-41ba-857f-811bad7c2b7a": {
+        "5": 0,
+        "10": 1,
+        "20": 1
+      },
+      "fa97dd36-1b82-43d7-a6e4-2adeafd59cef|534ee493-bfac-4575-a44a-0ae41e2c3fe4": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      },
+      "e9aed5e5-ed35-4244-872e-194862290295|e8993e9d-9313-4447-ad23-791459a3790d": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      },
+      "4883523d-fc0e-4d0d-802c-91379e767083|21d177ba-3d51-461e-9b3f-ad9a80b419dc": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      },
+      "8830afec-83b3-4213-aad0-f6377f1d73ac|98cb416e-5271-484c-ab3b-6bed6b4aae12": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      },
+      "44632683-c340-44de-a65d-328212559f91|74963434-dcb6-4b14-98cc-99873b06db66": {
+        "5": 0,
+        "10": 0,
+        "20": 0
+      }
+    }
+  },
+  "mapping_unsealed": {
+    "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222|9e0e2b01-41db-4008-bd8b-988977d6019a": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "ac9a487a-d9d2-4f27-bb23-0f4686488345|17b53d9f-5c63-4a09-a593-dde4608e0db9": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "d8e41375-bd8d-4e39-9da7-f0c171e97086|614e3804-7d34-41ba-857f-811bad7c2b7a": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "fa97dd36-1b82-43d7-a6e4-2adeafd59cef|534ee493-bfac-4575-a44a-0ae41e2c3fe4": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "e9aed5e5-ed35-4244-872e-194862290295|e8993e9d-9313-4447-ad23-791459a3790d": {
+      "L": "incumbent",
+      "R": "challenger"
+    },
+    "4883523d-fc0e-4d0d-802c-91379e767083|21d177ba-3d51-461e-9b3f-ad9a80b419dc": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "8830afec-83b3-4213-aad0-f6377f1d73ac|98cb416e-5271-484c-ab3b-6bed6b4aae12": {
+      "L": "challenger",
+      "R": "incumbent"
+    },
+    "44632683-c340-44de-a65d-328212559f91|74963434-dcb6-4b14-98cc-99873b06db66": {
+      "L": "incumbent",
+      "R": "challenger"
+    }
+  },
+  "tiers": {
+    "7e5a2a59-6d9f-4a17-b7c2-e1eedb7bd222|9e0e2b01-41db-4008-bd8b-988977d6019a": "DRP-T1",
+    "ac9a487a-d9d2-4f27-bb23-0f4686488345|17b53d9f-5c63-4a09-a593-dde4608e0db9": "DRP-T1",
+    "d8e41375-bd8d-4e39-9da7-f0c171e97086|614e3804-7d34-41ba-857f-811bad7c2b7a": "DRP-T1",
+    "fa97dd36-1b82-43d7-a6e4-2adeafd59cef|534ee493-bfac-4575-a44a-0ae41e2c3fe4": "DRP-T1",
+    "e9aed5e5-ed35-4244-872e-194862290295|e8993e9d-9313-4447-ad23-791459a3790d": "DRP-T2",
+    "4883523d-fc0e-4d0d-802c-91379e767083|21d177ba-3d51-461e-9b3f-ad9a80b419dc": "DRP-T2",
+    "8830afec-83b3-4213-aad0-f6377f1d73ac|98cb416e-5271-484c-ab3b-6bed6b4aae12": "DRP-T2",
+    "44632683-c340-44de-a65d-328212559f91|74963434-dcb6-4b14-98cc-99873b06db66": "DRP-T2"
+  },
+  "maps": {
+    "incumbent": {
+      "sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b"
+    },
+    "challenger": {
+      "sha256": "418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f"
+    }
+  },
+  "substitutions": []
+}

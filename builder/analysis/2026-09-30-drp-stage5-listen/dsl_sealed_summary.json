@@ -1,0 +1,72 @@
+{
+  "decides": "nothing (DRP-AM7-10); reads no answer file",
+  "by_role_and_depth": {
+    "incumbent": {
+      "5": {
+        "journeys": 8,
+        "median_mean_interior_fame_pctl": 0.9939,
+        "median_nodes": 6.0,
+        "journeys_with_added_connection": 0,
+        "added_connections_traversed": 0,
+        "unmeasured_interiors": 0
+      },
+      "10": {
+        "journeys": 8,
+        "median_mean_interior_fame_pctl": 0.9964,
+        "median_nodes": 6.0,
+        "journeys_with_added_connection": 0,
+        "added_connections_traversed": 0,
+        "unmeasured_interiors": 0
+      },
+      "20": {
+        "journeys": 8,
+        "median_mean_interior_fame_pctl": 0.9961,
+        "median_nodes": 6.0,
+        "journeys_with_added_connection": 0,
+        "added_connections_traversed": 0,
+        "unmeasured_interiors": 0
+      }
+    },
+    "challenger": {
+      "5": {
+        "journeys": 8,
+        "median_mean_interior_fame_pctl": 0.8877,
+        "median_nodes": 8.0,
+        "journeys_with_added_connection": 4,
+        "added_connections_traversed": 4,
+        "unmeasured_interiors": 0,
+        "ceiling_c_min_max": [
+          0.97,
+          0.97
+        ],
+        "journeys_relaxed": 0
+      },
+      "10": {
+        "journeys": 8,
+        "median_mean_interior_fame_pctl": 0.7656,
+        "median_nodes": 9.0,
+        "journeys_with_added_connection": 4,
+        "added_connections_traversed": 5,
+        "unmeasured_interiors": 0,
+        "ceiling_c_min_max": [
+          0.895,
+          0.895
+        ],
+        "journeys_relaxed": 0
+      },
+      "20": {
+        "journeys": 8,
+        "median_mean_interior_fame_pctl": 0.6348,
+        "median_nodes": 10.5,
+        "journeys_with_added_connection": 4,
+        "added_connections_traversed": 7,
+        "unmeasured_interiors": 0,
+        "ceiling_c_min_max": [
+          0.745,
+          0.8682343517564939
+        ],
+        "journeys_relaxed": 3
+      }
+    }
+  }
+}
