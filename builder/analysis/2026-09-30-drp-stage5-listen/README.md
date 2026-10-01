@@ -42,6 +42,7 @@ its sidecar and its pin, and `DRP-S1` is refused unless `DRP-G3` passed on it.
 | `.superpowers/dsl/dsl_sealed.json`, `dsl_clips.json`, `dsl_clip_tells.json` | `dsl_generate.py`, `dsl_clips.py` | **YES — sealed** |
 | `dsl_verdicts.json` | `dsl_page.py`, as he saves | no |
 | `dsl_result.json` | `dsl_unblind.py` (write-up session) | yes — after the unblind |
+| `dsl_sealed_summary.json` | `dsl_sealed_summary.py` (write-up session, added at seam 5E) — `DRP-AM7-5`'s sealed metrics summarised for `DRP-AM7-10`; reads no answer file | yes — after the unblind |
 
 ## For the write-up session
 

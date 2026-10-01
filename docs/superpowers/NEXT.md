@@ -47,33 +47,34 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-09-30, at seam 5C of the #200 remedy: the stage-5 blind listen is prepared.** The
-live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and
-frontend were built from `b3e197b`. Addresses: the work is on branch `charlessavage90/drp-listen-prep`, PR
-#266, tracking issue #244; `git` and `gh` own the PR and merge state. Handoff:
-[`2026-09-30-HANDOFF-drp-stage5c.md`](2026-09-30-HANDOFF-drp-stage5c.md).
+**Last updated: 2026-10-01, at seam 5E of the #200 remedy: the stage-5 blind listen has run and been
+read.** The live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the
+image and frontend were built from `b3e197b`. Addresses: the work is on branch `dsl-listen-run` (the runner's
+worktree), PR #268, tracking issue #244; `git` and `gh` own the PR and merge state. Handoff:
+[`2026-10-01-HANDOFF-drp-stage5e.md`](2026-10-01-HANDOFF-drp-stage5e.md).
 
-# THE `DSL-` BLIND LISTEN IS PREPARED: PAIRS STRUCK AND PINNED, EVERY GATE DRY-RUN. NEXT: THE RUNNER.
+# THE `DSL-` LISTEN READ `DSL-R3`, FAIL ON COHERENCE. WHAT FOLLOWS IS THE OWNER'S.
+
+**The read is owned by [`findings/2026-10-01-dsl-listen-results.md`](findings/2026-10-01-dsl-listen-results.md)**:
+read its §0 and §4 before citing it. `DSL-P` and `DSL-E` did not fire. *What `DSL-R3` licenses
+(`DRP-AM7-7`): "`REQ-38` bars any offline figure from overriding it. What follows is his."*
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner merges PR #266.** The runner's worktree is cut from `origin/main` (`RUNNER-BRIEF.md`).
-2. **A fresh runner** (seam 5D), launched with the one prompt in the handoff and pointed **only** at
-   `RUNNER-BRIEF.md`, which names its worktree, `C:/Users/charl/worktrees/music-app-dsl-runner`. That
-   worktree must outlive it. He listens: 24 rows, with recognition and weak-step marks.
-3. **A fresh write-up session** (seam 5E) works in that worktree, unblinds it and writes the findings
-   note: the verdict (`DSL-R1`–`R4`), `DSL-P` and `DSL-E`. **Neither the designing session nor the
-   preparation session may run 5D or 5E** (`DRP-AM7-5`).
-4. **The owner:** his use gate (stage 6, `DRP-AM6`), then adoption (stage 7). What each listen read
-   licenses is in `DRP-AM7-7`–`-9`. If `DSL-P` fires, a proxy fix and a lattice re-run go first, by
-   his own rule. If `DSL-E` fires, reviving #249 is his decision.
-5. **Carried, his and not blocking:**
+1. **The owner merges PR #268.**
+2. **The owner decides what follows a FAIL** for #200's remedy: whether stage 6 (his use gate,
+   `DRP-AM6`) or stage 7 (adoption) proceed at all, and anything else. **No session starts any of it.**
+   By his own rules: `DSL-P` did not fire, so a proxy fix does not go first; `DSL-E` did not fire, so
+   #249 stays deferred unless he revives it.
+3. **The owner may then remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`)
+   once #268 has merged. Its `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics.
+4. **Carried, his and not blocking:**
    - press the unticked `TEST-QUEUE.md` boxes;
    - #237, pruning the previous frontend's assets, which needs his AWS access;
    - #233, the landing page's sample journeys;
-   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), **after the listen**, so that
-     its journeys cannot shape what he hears.
+   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), held until after the listen,
+     which has now been read.
 
 ---
 
@@ -169,6 +170,10 @@ old heading.)*
 
 ## Closed — do not re-plan or re-investigate
 
+- **The `DSL-` verdict is RUN-ONCE and FINAL (2026-10-01): `DSL-R3`, FAIL on coherence**
+  (`DRP-AM7-11`). No re-listen; no re-tally on strength, identification, marks or familiarity; no re-read
+  after any use gate; no attribution to the ceiling or the extra connections alone; no per-tier read
+  (`DRP-X8`). Bars and figures: [`findings/2026-10-01-dsl-listen-results.md`](findings/2026-10-01-dsl-listen-results.md) §4.
 - **#200 stage 4 is decided (owner, 2026-09-30, verbatim on #244): `DRP-S1P3`.** The fame proxy is
   **not** fixed before the listen; it is decided after it, from `DSL-P`. #249 is deferred, and is
   revived only by his decision. Do not re-offer `DRP-S0P3` or "none" before the listen reads.
