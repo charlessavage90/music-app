@@ -47,34 +47,37 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-10-01, at seam 5E of the #200 remedy: the stage-5 blind listen has run and been
-read.** The live site is unchanged since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the
-image and frontend were built from `b3e197b`. Addresses: the work is on branch `dsl-listen-run` (the runner's
-worktree), PR #268, tracking issue #244; `git` and `gh` own the PR and merge state. Handoff:
-[`2026-10-01-HANDOFF-drp-stage5e.md`](2026-10-01-HANDOFF-drp-stage5e.md).
+**Last updated: 2026-10-01, after the #264 Dig deeper exploration review.** The live site is unchanged
+since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and frontend were built from
+`b3e197b`. Addresses: this work is on branch `charlessavage90/exploration-review`; #244 is closed; the
+famous-to-famous defect now lives in #270. `git` and `gh` own PR and merge state. No handoff: the review's
+outputs are the issues below and `exploration/HANDOFF.md`'s discharge note.
 
-# THE `DSL-` LISTEN READ `DSL-R3`, FAIL ON COHERENCE. WHAT FOLLOWS IS THE OWNER'S.
+# #200'S REMEDY TRACK IS CLOSED AT STAGE 7. THE DEFECT CARRIES ON IN #270; EVERY LEAD IS THE OWNER'S TRIGGER.
 
-**The read is owned by [`findings/2026-10-01-dsl-listen-results.md`](findings/2026-10-01-dsl-listen-results.md)**:
-read its §0 and §4 before citing it. `DSL-P` and `DSL-E` did not fire. *What `DSL-R3` licenses
-(`DRP-AM7-7`): "`REQ-38` bars any offline figure from overriding it. What follows is his."*
+**The owner's stage-7 ruling is verbatim on [#244](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5939564235)**:
+`DRP-S1P3` is not adopted, stage 6 does not run, and #244 closed on its Done-when. The defect itself is
+**#270**, which records what is closed and by which record. Its leads, all `owner-decision`, none
+dispatchable:
+
+- **#271**: shared neighbours as a step measure, scored against the `DSL-` listen's weak-step marks.
+  **Blocked by #165**: scoring any coherence instrument against listening evidence waits on the owner
+  reopening the instrument line (PARKED below), under a cold pre-registration and `DRP-AM7-11`'s bars.
+- **#272**: a next listen of two digging variants side by side (the exploration's finalists), which
+  can pick a contender but cannot license adoption.
+- **#273**: a fame-proxy check in the band just below the top, against a second source.
 
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner merges PR #268.**
-2. **The owner decides what follows a FAIL** for #200's remedy: whether stage 6 (his use gate,
-   `DRP-AM6`) or stage 7 (adoption) proceed at all, and anything else. **No session starts any of it.**
-   By his own rules: `DSL-P` did not fire, so a proxy fix does not go first; `DSL-E` did not fire, so
-   #249 stays deferred unless he revives it.
-3. **The owner may then remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`)
-   once #268 has merged. Its `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics.
+1. **The owner merges this branch's PR** (the review's bookkeeping; no code).
+2. **The owner decides whether any lead on #270 starts**, and which. **No session starts any of it.**
+3. **The owner may remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`) once
+   #268 has merged. Its `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics.
 4. **Carried, his and not blocking:**
    - press the unticked `TEST-QUEUE.md` boxes;
    - #237, pruning the previous frontend's assets, which needs his AWS access;
-   - #233, the landing page's sample journeys;
-   - the #264 Dig deeper exploration review (`exploration/HANDOFF.md`), held until after the listen,
-     which has now been read.
+   - #233, the landing page's sample journeys.
 
 ---
 
@@ -170,6 +173,9 @@ old heading.)*
 
 ## Closed — do not re-plan or re-investigate
 
+- **#200's remedy is closed at stage 7 (owner, 2026-10-01, verbatim on #244): `DRP-S1P3` is not
+  adopted and stage 6 does not run.** #244 is closed; the defect is #270. Do not re-offer the use gate or
+  adoption for `DRP-S1P3`.
 - **The `DSL-` verdict is RUN-ONCE and FINAL (2026-10-01): `DSL-R3`, FAIL on coherence**
   (`DRP-AM7-11`). No re-listen; no re-tally on strength, identification, marks or familiarity; no re-read
   after any use gate; no attribution to the ceiling or the extra connections alone; no per-tier read
