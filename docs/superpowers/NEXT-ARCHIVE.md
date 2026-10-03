@@ -19,6 +19,44 @@ Newest first.
 
 ---
 
+## Demoted 2026-10-03 (#271 `SNW-` run) — the exploration-review top block
+
+**Last updated: 2026-10-01, after the #264 Dig deeper exploration review.** The live site is unchanged
+since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and frontend were built from
+`b3e197b`. Addresses: this work is on branch `charlessavage90/exploration-review`; #244 is closed; the
+famous-to-famous defect now lives in #270. `git` and `gh` own PR and merge state. No handoff: the review's
+outputs are the issues below and `exploration/HANDOFF.md`'s discharge note.
+
+# #200'S REMEDY TRACK IS CLOSED AT STAGE 7. THE DEFECT CARRIES ON IN #270; EVERY LEAD IS THE OWNER'S TRIGGER.
+
+**The owner's stage-7 ruling is verbatim on [#244](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5939564235)**:
+`DRP-S1P3` is not adopted, stage 6 does not run, and #244 closed on its Done-when. The defect itself is
+**#270**, which records what is closed and by which record. Its leads, all `owner-decision`, none
+dispatchable:
+
+- **#271**: shared neighbours as a step measure, scored against the `DSL-` listen's weak-step marks.
+  **Blocked by #165**: scoring any coherence instrument against listening evidence waits on the owner
+  reopening the instrument line (PARKED below), under a cold pre-registration and `DRP-AM7-11`'s bars.
+  ⚑ *Unblocked 2026-10-03: he reopened the line, and the cold pre-registration is in PR #275, not yet
+  run. A fresh session runs it once (its §9).*
+- **#272**: a next listen of two digging variants side by side (the exploration's finalists), which
+  can pick a contender but cannot license adoption.
+- **#273**: a fame-proxy check in the band just below the top, against a second source.
+
+**THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
+got.**
+
+1. **The owner merges this branch's PR** (the review's bookkeeping; no code).
+2. **The owner decides whether any lead on #270 starts**, and which. **No session starts any of it.**
+3. **The owner may remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`) once
+   #268 has merged. Its `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics.
+4. **Carried, his and not blocking:**
+   - press the unticked `TEST-QUEUE.md` boxes;
+   - #237, pruning the previous frontend's assets, which needs his AWS access;
+   - #233, the landing page's sample journeys.
+
+---
+
 ## Demoted 2026-10-01 (exploration review) — the seam-5E top block
 
 **Last updated: 2026-10-01, at seam 5E of the #200 remedy: the stage-5 blind listen has run and been
