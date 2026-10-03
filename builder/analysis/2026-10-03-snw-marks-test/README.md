@@ -1,6 +1,7 @@
 # `SNW-` harness — the `DSL-` listen's weak-step marks against three step measures (#271)
 
-**Role: ACTIVE harness, NOT YET RUN.** Governing document:
+**Role: COMPLETE harness — RUN ONCE 2026-10-03; a second scoring run is refused.** The read is
+`docs/superpowers/findings/2026-10-03-snw-marks-test.md`. Governing document:
 `docs/superpowers/specs/2026-10-03-issue-271-shared-neighbours-marks-preregistration.md`. It wins
 wherever this directory disagrees with it. **Owns no figures** beyond `snw_chance_estimate.json`, the
 pre-run synthetic estimate (`SNW-CH0`), and, once run, `snw_result.json`.

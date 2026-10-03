@@ -47,24 +47,24 @@ write the owner's remaining actions as an **ordered sequence** — never as a po
 > PR #114; the live `<title>` read `Unsung.fm` on 2026-09-25). *(This line said "still named
 > Artist Path… do not assume it has been deployed" until 2026-09-25 — false for 17 days.)*
 
-**Last updated: 2026-10-01, after the #264 Dig deeper exploration review.** The live site is unchanged
-since 2026-09-25: it serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and frontend were built from
-`b3e197b`. Addresses: this work is on branch `charlessavage90/exploration-review`; #244 is closed; the
-famous-to-famous defect now lives in #270. `git` and `gh` own PR and merge state. No handoff: the review's
-outputs are the issues below and `exploration/HANDOFF.md`'s discharge note.
+**Last updated: 2026-10-03, after the #271 `SNW-` run.** The live site is unchanged since 2026-09-25: it
+serves `graph-lba-a6.bin` (sha `28311d81…`), and the image and frontend were built from `b3e197b`.
+Addresses: this work is on branch `charlessavage90/snw-weak-step`, PR #276, issue #271. `git` and `gh` own
+PR and merge state. No handoff: the read is
+[`findings/2026-10-03-snw-marks-test.md`](findings/2026-10-03-snw-marks-test.md), and what follows is his.
 
-# #200'S REMEDY TRACK IS CLOSED AT STAGE 7. THE DEFECT CARRIES ON IN #270; EVERY LEAD IS THE OWNER'S TRIGGER.
+# #271 HAS RUN: SHARED NEIGHBOURS AND SIMILARITY DO NOT FIRE; THE MODEL RATER FIRES. THE NEXT CALL IS THE OWNER'S.
 
-**The owner's stage-7 ruling is verbatim on [#244](https://github.com/charlessavage90/music-app/issues/244#issuecomment-5939564235)**:
-`DRP-S1P3` is not adopted, stage 6 does not run, and #244 closed on its Done-when. The defect itself is
-**#270**, which records what is closed and by which record. Its leads, all `owner-decision`, none
-dispatchable:
+The cold `SNW-` pre-registration ran once, as written, with no refusal. The read, what it licenses and what
+cuts against it are owned by the findings note above (§0), and the barred reads are in its §3. **These marks
+are now spent**: any further rule scored on them is the instrument line's next attempt *and* their second use.
 
-- **#271**: shared neighbours as a step measure, scored against the `DSL-` listen's weak-step marks.
-  **Blocked by #165**: scoring any coherence instrument against listening evidence waits on the owner
-  reopening the instrument line (PARKED below), under a cold pre-registration and `DRP-AM7-11`'s bars.
-  ⚑ *Unblocked 2026-10-03: he reopened the line, and the cold pre-registration is in PR #275, not yet
-  run. A fresh session runs it once (its §9).*
+The defect itself is still **#270**. Its leads, all `owner-decision`, none dispatchable:
+
+- **#271**: run and read. **Still open on its second *Done when* clause: his decision whether a
+  pre-registration for shared neighbours as an edge price follows.** Under `SNW-R2` such a
+  pre-registration would have to rest on evidence other than these marks. An `ml-graph-analyst`
+  critique of shared neighbours is **recommended to him before any such pre-registration, and not run**.
 - **#272**: a next listen of two digging variants side by side (the exploration's finalists), which
   can pick a contender but cannot license adoption.
 - **#273**: a fame-proxy check in the band just below the top, against a second source.
@@ -72,11 +72,12 @@ dispatchable:
 **THE REMAINING ACTIONS, in this order. This file does not record how far down the list anyone has
 got.**
 
-1. **The owner merges this branch's PR** (the review's bookkeeping; no code).
-2. **The owner decides whether any lead on #270 starts**, and which. **No session starts any of it.**
-3. **The owner may remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`) once
-   #268 has merged. Its `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics.
-4. **Carried, his and not blocking:**
+1. **The owner merges PR #276** (the run's output and its read; no code).
+2. **The owner decides #271's edge-price question**, and whether to commission the analyst critique first.
+3. **The owner decides whether any other lead on #270 starts**, and which. **No session starts any of it.**
+4. **The owner may remove the runner's worktree** (`C:/Users/charl/worktrees/music-app-dsl-runner`). Its
+   `.superpowers/dsl/` holds the only copy of the sealed per-journey metrics. (`SNW-` did not need them.)
+5. **Carried, his and not blocking:**
    - press the unticked `TEST-QUEUE.md` boxes;
    - #237, pruning the previous frontend's assets, which needs his AWS access;
    - #233, the landing page's sample journeys.
@@ -112,7 +113,8 @@ read measured where it can and cannot be moved; the results note owns that readi
   pre-registration designed cold, never a re-read of the fired gate).
   **⚑ The instrument line was REOPENED by the owner 2026-10-03** (verbatim on #165). Its first use is
   #271's cold pre-registration, `specs/2026-10-03-issue-271-shared-neighbours-marks-preregistration.md`
-  (PR #275), **not yet run**; the 11 blind verdicts stay unconsumed. The structural half stays parked.
+  (PR #275), **run once 2026-10-03** and read in `findings/2026-10-03-snw-marks-test.md`; it spent the
+  `DSL-` weak-step marks, and the 11 blind verdicts stay unconsumed. The structural half stays parked.
   **⚠ The third strand was UNPARKED 2026-07-30 and has since CONCLUDED** — the `TAS-` tag
   discrimination probe ran to all eight tasks and found **neither architecture has an adoption
   case** (see "Closed" below). *Corrected 2026-09-05: this read "it is the live work; see
