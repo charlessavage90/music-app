@@ -1,0 +1,87 @@
+{
+  "layout": "SNW-CH0 synthetic, from findings 2026-10-01 \u00a73 totals",
+  "replicates": 400,
+  "draws": 2000,
+  "results": {
+    "continuous_trueAUC_0.50": {
+      "per_measure": {
+        "similarity": 0.0075,
+        "shared_neighbours": 0.005,
+        "rater": 0.0
+      },
+      "any": 0.0125
+    },
+    "continuous_trueAUC_0.65": {
+      "per_measure": {
+        "similarity": 0.45,
+        "shared_neighbours": 0.4475,
+        "rater": 0.375
+      },
+      "any": 0.8125
+    },
+    "continuous_trueAUC_0.70": {
+      "per_measure": {
+        "similarity": 0.7425,
+        "shared_neighbours": 0.7275,
+        "rater": 0.6775
+      },
+      "any": 0.98
+    },
+    "continuous_trueAUC_0.75": {
+      "per_measure": {
+        "similarity": 0.9075,
+        "shared_neighbours": 0.92,
+        "rater": 0.9325
+      },
+      "any": 1.0
+    },
+    "continuous_trueAUC_0.80": {
+      "per_measure": {
+        "similarity": 0.9675,
+        "shared_neighbours": 0.9725,
+        "rater": 0.96
+      },
+      "any": 1.0
+    },
+    "four_level_trueAUC_0.50": {
+      "per_measure": {
+        "similarity": 0.0,
+        "shared_neighbours": 0.0,
+        "rater": 0.0
+      },
+      "any": 0.0
+    },
+    "four_level_trueAUC_0.65": {
+      "per_measure": {
+        "similarity": 0.39,
+        "shared_neighbours": 0.3425,
+        "rater": 0.29
+      },
+      "any": 0.72
+    },
+    "four_level_trueAUC_0.70": {
+      "per_measure": {
+        "similarity": 0.6325,
+        "shared_neighbours": 0.6675,
+        "rater": 0.6275
+      },
+      "any": 0.9475
+    },
+    "four_level_trueAUC_0.75": {
+      "per_measure": {
+        "similarity": 0.8625,
+        "shared_neighbours": 0.8825,
+        "rater": 0.8925
+      },
+      "any": 0.995
+    },
+    "four_level_trueAUC_0.80": {
+      "per_measure": {
+        "similarity": 0.9725,
+        "shared_neighbours": 0.9475,
+        "rater": 0.9575
+      },
+      "any": 1.0
+    }
+  }
+}
