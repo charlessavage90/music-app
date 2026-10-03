@@ -149,13 +149,42 @@ def test_shared_neighbours_matches_the_exploration_source(store):
     assert np.allclose(ours, sh["jac"])
 
 
-def test_rater_prompt_is_rate_py_verbatim():
+def _rate_py_constants():
+    import ast
     src = (s.ROOT / "exploration" / "kit" / "rate.py").read_text(encoding="utf-8")
-    assert f'PROMPT_HEAD = """{s.PROMPT_HEAD}"""' in src
-    for part in ("You are a music expert", "including obscure ones.", "Answer only in the exact format requested."):
-        assert part in src and part in s.SYSTEM
+    out = {}
+    for node in ast.parse(src).body:
+        if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name):
+            try:
+                out[node.targets[0].id] = ast.literal_eval(node.value)
+            except ValueError:
+                pass
+    return src, out
+
+
+# fragments that must appear, character for character, in BOTH rate.py and snw_test.py
+SHARED_FRAGMENTS = (
+    '[0-3]|U)\\b", ',
+    '"--tools", ""',
+    '"--setting-sources", ""',
+    '"--strict-mcp-config", "--no-session-persistence"',
+    "len(got) >= len(batch) * 0.9",
+    "for _attempt in range(2):",
+    "]  ->  ",
+)
+
+
+def test_rater_prompt_is_rate_py_verbatim():
+    src, const = _rate_py_constants()
+    assert const["SYSTEM"] == s.SYSTEM and const["PROMPT_HEAD"] == s.PROMPT_HEAD
+    assert const["BATCH"] == s.RATER_BATCH
     assert 'os.environ.get("RATER_MODEL", "sonnet")' in src and s.RATER_MODEL == "sonnet"
-    assert "BATCH = 40" in src and s.RATER_BATCH == 40
+    ours = Path(s.__file__).read_text(encoding="utf-8")
+    for frag in SHARED_FRAGMENTS:
+        assert frag in src and frag in ours, frag
+    # the per-pair line, modulo variable names
+    assert 'f"{i+1}. {ctx.names[u]} [{meta(ctx, u)}]  ->  {ctx.names[v]} [{meta(ctx, v)}]"' in src
+    assert 'f"{i+1}. {nu} [{mu}]  ->  {nv} [{mv}]"' in ours
 
 
 def test_rater_parse_cache_and_lookup(tmp_path, monkeypatch, store):
@@ -216,12 +245,58 @@ def test_a_measure_that_only_separates_journeys_cannot_score():
         assert r["measures"][m]["outcome"] == "does_not_fire"
 
 
-def test_null_draws_keep_each_journeys_mark_count():
+def test_null_draws_keep_each_stratums_mark_count():
     st = synth_steps(seed=2)
     d = s.null_marks(st, 50, 3)
     for j in np.unique(st.journey):
-        idx = st.journey == j
-        assert (d[:, idx].sum(1) == st.marked[idx].sum()).all()
+        for end in (True, False):
+            idx = (st.journey == j) & (st.end == end)
+            assert (d[:, idx].sum(1) == st.marked[idx].sum()).all()
+
+
+def test_a_measure_that_only_tracks_position_cannot_score():
+    """SNR-1: lower on end steps, marks mostly on end steps -> no credit, because end steps are only
+    compared with end steps."""
+    st = synth_steps(seed=12)
+    rng = np.random.default_rng(0)
+    st.marked = st.end & (rng.random(len(st.end)) < 0.6)
+    for m in s.MEASURES:
+        st.values[m] = np.where(st.end, 0.0, 1.0)
+    r = s.evaluate(st, n_draws=300)
+    for m in s.MEASURES:
+        assert r["measures"][m]["C"]["pooled"] == pytest.approx(0.5)
+    assert s.descriptive(st)["similarity"]["within_journey_ignoring_position"] > 0.9   # it WOULD have scored
+
+
+def _find(pred, make, tries=300):
+    for seed in range(tries):
+        r = s.evaluate(make(seed), n_draws=600, seed=seed)["measures"]["similarity"]
+        if pred(r):
+            return r
+    raise AssertionError("no synthetic case found")
+
+
+def test_F2_alone_can_block_firing():
+    """C over the floor and both sides agreeing, but luck not ruled out -> does not fire."""
+    r = _find(lambda r: r["readable"] and r["F1_floor"] and r["F3_both_sides_agree"] and not r["F2_null"],
+              lambda seed: synth_steps(n_journeys_per_side=6, marks_per_side=(5, 5), seed=seed, signal=0.6))
+    assert r["outcome"] == "does_not_fire"
+
+
+def test_F1_alone_can_block_firing():
+    """Luck ruled out and both sides agreeing, but under the effect-size floor -> does not fire."""
+    r = _find(lambda r: r["readable"] and r["F2_null"] and r["F3_both_sides_agree"] and not r["F1_floor"],
+              lambda seed: synth_steps(steps_per_journey=(10, 12), marks_per_side=(60, 120), seed=seed,
+                                       signal=0.45))
+    assert r["outcome"] == "does_not_fire"
+
+
+def test_F2_alone_bounds_the_chance_rate(monkeypatch):
+    monkeypatch.setattr(s, "C_FLOOR", 0.0)
+    r = s.evaluate(synth_steps(seed=13, marks_per_side=(40, 43)), n_draws=4000)
+    for m in s.MEASURES:
+        assert r["measures"][m]["chance_firing_rate"] <= s.MEASURE_ALPHA + 0.006
+    assert r["chance_any_measure_fires"] <= s.FAMILY_ALPHA + 0.012
 
 
 def test_fires_on_strong_signal_and_not_on_the_null():
@@ -261,10 +336,13 @@ def test_descriptive_shift_moves_marks_and_drops_the_overflow():
     st9 = synth_steps(seed=9)
     d = s.descriptive(st9)
     assert d["decides"].startswith("nothing") and set(d) >= set(s.MEASURES)
-    assert d["rater_comparable_with_map_measures"] is True
-    marked_cand = np.nonzero(st9.marked & (st9.side == 1))[0]
-    st9.values["rater"][marked_cand[: len(marked_cand) // 5]] = np.nan   # 20 % unscorable
-    assert s.descriptive(st9)["rater_comparable_with_map_measures"] is False
+    assert d["SNW-V_rater_comparable_with_map_measures"] is True
+    marked_today = np.nonzero(st9.marked & (st9.side == 0))[0]
+    st9.values["rater"][marked_today[:1]] = np.nan          # one lost mark of 9: allowed, max(1, 10 %)
+    assert s.descriptive(st9)["SNW-V_rater_comparable_with_map_measures"] is True
+    st9.values["rater"][marked_today[:2]] = np.nan          # two: not
+    assert s.descriptive(st9)["SNW-V_rater_comparable_with_map_measures"] is False
+    assert set(d["counts"]["repeat_share_by_side"]) == set(s.ROLES)
 
 
 # ---- run state ---------------------------------------------------------------------------------
@@ -291,11 +369,55 @@ def test_rate_only_reads_no_answer_file(tmp_path, monkeypatch, store):
     monkeypatch.setattr(s, "check_run_state", lambda: None)
     monkeypatch.setattr(s, "check_inputs", lambda: None)
     monkeypatch.setattr(s, "load_store", lambda role: store)
+    monkeypatch.setattr(s, "RATING_PASSES", tmp_path / "passes.jsonl")
     monkeypatch.setattr(s, "rate_missing", lambda todo, call=None: {k: 2 for k, *_ in todo})
     assert s.main(["--rate-only"]) == 0
     assert not (tmp_path / "dsl_verdicts.json").exists()
-    with pytest.raises(FileNotFoundError):   # the read itself does need the answers
-        monkeypatch.setattr(s, "RATER_CACHE_OWN", tmp_path / "absent.jsonl")
+    assert s.rating_passes()[0]["unanswered"] == 0
+    with pytest.raises(s.Refused, match="rating step finished"):   # stopping rule: nothing left
+        s.main(["--rate-only"])
+
+    # the scoring run: needs the answers, and never calls the model
+    monkeypatch.setattr(s, "RATER_CACHE_OWN", tmp_path / "absent.jsonl")
+    monkeypatch.setattr(s, "RATING_PASSES", tmp_path / "absent_passes.jsonl")
+    monkeypatch.setattr(s, "rating_should_stop", lambda passes: "stub")
+    monkeypatch.setattr(s, "_git", lambda *a: "")
+    monkeypatch.setattr(s, "RESULT", tmp_path / "snw_result.json")
+    with pytest.raises(FileNotFoundError):
+        s.main([])
+    _p, verdicts, _r = page_and_answers()
+    (tmp_path / "dsl_verdicts.json").write_text(json.dumps(verdicts), encoding="utf-8")
+
+    def boom(todo, call=None):
+        raise AssertionError("the scoring run called the model")
+    monkeypatch.setattr(s, "rate_missing", boom)
+    assert s.main([]) == 0 and (tmp_path / "snw_result.json").exists()
+
+
+def test_rating_stopping_rule():
+    assert s.rating_should_stop([]) is None
+    assert s.rating_should_stop([{"unanswered": 0, "rated_fresh": 3}])
+    assert s.rating_should_stop([{"unanswered": 4, "rated_fresh": 0}])
+    assert s.rating_should_stop([{"unanswered": 4, "rated_fresh": 2}]) is None
+    assert s.rating_should_stop([{"unanswered": 4, "rated_fresh": 2}] * s.RATING_MAX_PASSES)
+
+
+def test_refuses_an_input_that_is_not_its_pinned_blob(monkeypatch):
+    monkeypatch.setattr(s, "INPUT_BLOBS", {**s.INPUT_BLOBS, "dsl_page_data.json": "0" * 40})
+    with pytest.raises(s.Refused, match="identity"):
+        s.check_inputs()
+
+
+def test_scoring_refuses_before_the_rating_step_finished(tmp_path, monkeypatch):
+    page, _v, res = page_and_answers()
+    (tmp_path / "dsl_page_data.json").write_text(json.dumps(page), encoding="utf-8")
+    (tmp_path / "dsl_result.json").write_text(json.dumps(res), encoding="utf-8")
+    monkeypatch.setattr(s, "DSL_DIR", tmp_path)
+    monkeypatch.setattr(s, "RATING_PASSES", tmp_path / "none.jsonl")
+    monkeypatch.setattr(s, "check_run_state", lambda: None)
+    monkeypatch.setattr(s, "check_inputs", lambda: None)
+    monkeypatch.setattr(s, "load_store", lambda role: None)
+    with pytest.raises(s.Refused, match="rating step"):
         s.main([])
 
 

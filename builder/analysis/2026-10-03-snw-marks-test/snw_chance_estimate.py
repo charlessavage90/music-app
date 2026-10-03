@@ -1,9 +1,10 @@
 """`SNW-CH0`: the chance-firing rate and power of `SNW-F`, ESTIMATED BEFORE THE RUN on a synthetic layout.
 
 Reads no answer file. The layout uses only the totals the `DSL-` findings note §3 publishes: today's
-side 119 steps and 9 marks, the candidate's 197 steps and 43 marks, 24 journeys a side. How those
-steps and marks spread over journeys is not published, so it is assumed: steps as evenly as the totals
-allow, marks uniformly at random over each side's steps. Values are synthetic: continuous N(0, 1), and
+side 119 steps and 9 marks (7 on end steps), the candidate's 197 steps and 43 marks (13 on end steps),
+24 journeys a side. How those spread over journeys is not published, so it is assumed: steps as evenly
+as the totals allow, end marks uniformly at random over each side's end steps and middle marks over its
+middle steps. Values are synthetic: continuous N(0, 1), and
 a four-level version standing in for the rater's 0-3 scale (ties). The three measures are drawn
 INDEPENDENT, which makes the any-measure chance rate an upper estimate (real measures correlate).
 
@@ -26,6 +27,7 @@ import snw_test as s  # noqa: E402
 
 LAYOUT = {0: [5] * 23 + [4], 1: [9] * 5 + [8] * 19}   # steps per journey: today 119, candidate 197
 MARKS = {0: 9, 1: 43}
+END_MARKS = {0: 7, 1: 13}   # findings §3: marks on end steps, per side (SNR-2: the design knew this)
 REPLICATES = 400          # synthetic datasets per setting
 DRAWS = 2000              # null draws inside each evaluate()
 
@@ -36,11 +38,15 @@ def layout(rng, auc: float, discrete: bool) -> s.Steps:
     for side, lens in LAYOUT.items():
         for n in lens:
             J += [j] * n; SIDE += [side] * n; I += list(range(n)); j += 1
-    J, SIDE = np.array(J), np.array(SIDE)
+    J, SIDE, I = np.array(J), np.array(SIDE), np.array(I)
+    n_steps = np.array([np.sum(J == j) for j in J])
+    END = (I == 0) | (I == n_steps - 1)
     marked = np.zeros(len(J), bool)
     for side, k in MARKS.items():
-        marked[rng.choice(np.nonzero(SIDE == side)[0], size=k, replace=False)] = True
-    st = s.Steps(J, np.array(I), SIDE, np.zeros(len(J), bool), np.ones(len(J), bool), marked)
+        e = END_MARKS[side]
+        marked[rng.choice(np.nonzero((SIDE == side) & END)[0], size=e, replace=False)] = True
+        marked[rng.choice(np.nonzero((SIDE == side) & ~END)[0], size=k - e, replace=False)] = True
+    st = s.Steps(J, I, SIDE, END, np.ones(len(J), bool), marked)
     delta = np.sqrt(2) * NormalDist().inv_cdf(auc)   # AUC of N(-delta,1) below N(0,1)
     for m in s.MEASURES:
         v = rng.normal(size=len(J)) - delta * marked

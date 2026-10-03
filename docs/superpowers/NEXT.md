@@ -63,6 +63,8 @@ dispatchable:
 - **#271**: shared neighbours as a step measure, scored against the `DSL-` listen's weak-step marks.
   **Blocked by #165**: scoring any coherence instrument against listening evidence waits on the owner
   reopening the instrument line (PARKED below), under a cold pre-registration and `DRP-AM7-11`'s bars.
+  ⚑ *Unblocked 2026-10-03: he reopened the line, and the cold pre-registration is in PR #275, not yet
+  run. A fresh session runs it once (its §9).*
 - **#272**: a next listen of two digging variants side by side (the exploration's finalists), which
   can pick a contender but cannot license adoption.
 - **#273**: a fame-proxy check in the band just below the top, against a second source.
@@ -108,6 +110,9 @@ read measured where it can and cannot be moved; the results note owns that readi
   **reopening of the instrument line on a route-population gate** (`COH-3`'s 74.2%
   on delivered interiors is the recorded argument; a reopening is a new
   pre-registration designed cold, never a re-read of the fired gate).
+  **⚑ The instrument line was REOPENED by the owner 2026-10-03** (verbatim on #165). Its first use is
+  #271's cold pre-registration, `specs/2026-10-03-issue-271-shared-neighbours-marks-preregistration.md`
+  (PR #275), **not yet run**; the 11 blind verdicts stay unconsumed. The structural half stays parked.
   **⚠ The third strand was UNPARKED 2026-07-30 and has since CONCLUDED** — the `TAS-` tag
   discrimination probe ran to all eight tasks and found **neither architecture has an adoption
   case** (see "Closed" below). *Corrected 2026-09-05: this read "it is the live work; see

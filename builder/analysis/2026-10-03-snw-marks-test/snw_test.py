@@ -66,6 +66,7 @@ MAPS = {   # absolute path, sha256 of the file's bytes (#271; `dsl_common`/`drp_
 RATER_CACHE_SRC = ROOT / "exploration" / "kit" / "step_cache.jsonl"
 RATER_CACHE_SRC_SHA_LF = "af527bb9b858b01b88ed8b42762bf8efcc07070fd700c78ebc32f2735daad54a"
 RATER_CACHE_OWN = HERE / "snw_rater_cache.jsonl"   # this test's fresh ratings; append-only
+RATING_PASSES = HERE / "snw_rating_passes.jsonl"   # one line per --rate-only pass (SNW-RS step 1)
 DEPTHS = ("5", "10", "20")
 TOKENS = ("L", "R")
 N_PAIRS = 8
@@ -78,7 +79,9 @@ MEASURE_ALPHA = FAMILY_ALPHA / len(MEASURES)   # SNW-F2: 1/60 per measure
 MIN_MARKED_PER_SIDE = 5           # SNW-U
 N_DRAWS = 20_000                  # SNW-N
 SEED = 271
-RATER_MAX_UNSCORABLE_MARKED = 0.10   # §5.2: above this, the rater's outcome is not compared with M1/M2
+RATER_MAX_UNSCORABLE_MARKED = 0.10   # SNW-V: more than max(1 step, 10 %) of a side's marks unscorable ->
+                                     # the rater's outcome is not compared with M1/M2
+RATING_MAX_PASSES = 3                # SNW-RS step 1's stopping rule
 
 # ---- the rater, restated verbatim from exploration/kit/rate.py ---------------------------------
 RATER_MODEL = "sonnet"
@@ -296,7 +299,12 @@ def score_steps(journeys: list[Journey], stores: dict, rater_lookup) -> Steps:
               marked=np.array([r[4] for r in rows]))
     s.values["similarity"] = np.array([edge_similarity(r[5], r[6], r[7]) for r in rows])
     s.values["shared_neighbours"] = np.array([shared_neighbours(r[5], r[6], r[7]) for r in rows])
-    ratings = rater_lookup([(r[5], r[6], r[7]) for r in rows])
+    def rater_triple(r):
+        a, b = r[8], r[9]
+        if a in today.id_by_mbid and b in today.id_by_mbid:   # the page's own source (`artist_source`)
+            return today, today.id_by_mbid[a], today.id_by_mbid[b]
+        return r[5], r[6], r[7]
+    ratings = rater_lookup([rater_triple(r) for r in rows])
     s.values["rater"] = np.array([float(x) if isinstance(x, int) else np.nan for x in ratings])
     s.ident = [(r[2], tuple(sorted((r[8], r[9])))) for r in rows]
     return s
@@ -335,15 +343,25 @@ def _journey_blocks(steps: Steps):
         yield j, np.nonzero(steps.journey == j)[0]
 
 
-def concordance_draws(steps: Steps, measure: str, marks: np.ndarray, side: int | None = None):
-    """For each draw (row of `marks`, a bool matrix draws x steps), the within-journey concordance
-    numerator and denominator: over every (marked, unmarked) pair of SCORABLE steps in the same
-    journey, 1 if the marked step's value is lower, 0.5 if equal. Returns (wins, pairs), each per draw.
-    `side` restricts to one side's journeys."""
+def _strata(steps: Steps, by_position: bool = True):
+    """`SNW-C`'s comparison groups: one journey's END steps, and the same journey's MIDDLE steps
+    (SNR-1: position is not held constant by the journey alone). `by_position=False` gives the
+    journey-only grouping, reported under `SNW-D`."""
+    key = steps.journey * 2 + steps.end.astype(int) if by_position else steps.journey
+    for k in np.unique(key):
+        yield k, np.nonzero(key == k)[0]
+
+
+def concordance_draws(steps: Steps, measure: str, marks: np.ndarray, side: int | None = None,
+                      by_position: bool = True):
+    """For each draw (row of `marks`, a bool matrix draws x steps), the concordance numerator and
+    denominator: over every (marked, unmarked) pair of SCORABLE steps in the same journey AND the same
+    position class (end / middle), 1 if the marked step's value is lower, 0.5 if equal. Returns
+    (wins, pairs), each per draw. `side` restricts to one side's journeys."""
     vals = steps.values[measure]
     D = marks.shape[0]
     wins, pairs = np.zeros(D), np.zeros(D)
-    for j, idx in _journey_blocks(steps):
+    for j, idx in _strata(steps, by_position):
         if side is not None and steps.side[idx[0]] != side:
             continue
         ok = idx[~np.isnan(vals[idx])]
@@ -363,11 +381,12 @@ def ratio(wins, pairs):
 
 
 def null_marks(steps: Steps, n_draws: int, seed: int) -> np.ndarray:
-    """`SNW-N`: each draw places every journey's own number of marks uniformly at random among that
-    journey's steps, independently across journeys. Draws x steps, bool."""
+    """`SNW-N`: each draw places every stratum's own number of marks (a journey's end steps, or its
+    middle steps) uniformly at random among that stratum's steps, independently across strata.
+    Draws x steps, bool."""
     rng = np.random.default_rng(seed)
     out = np.zeros((n_draws, len(steps.marked)), dtype=bool)
-    for _j, idx in _journey_blocks(steps):
+    for _j, idx in _strata(steps):
         k = int(steps.marked[idx].sum())
         if k == 0:
             continue
@@ -377,10 +396,10 @@ def null_marks(steps: Steps, n_draws: int, seed: int) -> np.ndarray:
 
 
 def readable_marks(steps: Steps, measure: str, side: int) -> int:
-    """`SNW-U`: marked scorable steps on this side in journeys that also hold an unmarked scorable step."""
+    """`SNW-U`: marked scorable steps on this side in strata that also hold an unmarked scorable step."""
     vals = steps.values[measure]
     n = 0
-    for _j, idx in _journey_blocks(steps):
+    for _j, idx in _strata(steps):
         if steps.side[idx[0]] != side:
             continue
         ok = idx[~np.isnan(vals[idx])]
@@ -454,9 +473,21 @@ def unstratified_auc(vals: np.ndarray, marked: np.ndarray) -> float | None:
     return float(((a[:, None] < b[None, :]).sum() + 0.5 * (a[:, None] == b[None, :]).sum()) / (len(a) * len(b)))
 
 
+def repeat_share(steps: Steps) -> dict:
+    """Share of each side's step instances whose connection is shown more than once on that side."""
+    from collections import Counter
+    c = Counter(steps.ident)
+    out = {}
+    for i, r in enumerate(ROLES):
+        idx = [k for k, key in enumerate(steps.ident) if key[0] == i]
+        out[r] = (sum(c[steps.ident[k]] > 1 for k in idx) / len(idx)) if idx else None
+    return out
+
+
 def descriptive(steps: Steps) -> dict:
     out: dict = {"decides": "nothing (SNW-D)"}
     one = lambda mk, m, side=None: float(ratio(*concordance_draws(steps, m, mk[None, :], side))[0])  # noqa: E731
+    one_jo = lambda mk, m: float(ratio(*concordance_draws(steps, m, mk[None, :], None, False))[0])  # noqa: E731
     for m in MEASURES:
         d: dict = {}
         d["shift_controls"] = {f"{by:+d}": one(shifted_marks(steps, by), m) for by in (-1, 1)}
@@ -476,9 +507,13 @@ def descriptive(steps: Steps) -> dict:
         for i, key in enumerate(steps.ident):
             v, mk = seen.get(key, (steps.values[m][i], False))
             seen[key] = (v, mk or bool(steps.marked[i]))
-        vals = np.array([v for v, _ in seen.values()], dtype=float)
-        mk = np.array([x for _, x in seen.values()])
-        d["unique_connections_unstratified_auc"] = unstratified_auc(vals, mk)
+        d["unique_connections_auc_by_side"] = {}
+        for i, r in enumerate(ROLES):
+            items = [(v, x) for (sd, _c), (v, x) in seen.items() if sd == i]
+            vals = np.array([v for v, _ in items], dtype=float)
+            mk = np.array([x for _, x in items], dtype=bool)
+            d["unique_connections_auc_by_side"][r] = unstratified_auc(vals, mk) if items else None
+        d["within_journey_ignoring_position"] = one_jo(steps.marked, m)
         out[m] = d
     out["head_to_head_pooled_C_minus_similarity"] = {
         m: one(steps.marked, m) - one(steps.marked, "similarity") for m in MEASURES if m != "similarity"}
@@ -486,16 +521,18 @@ def descriptive(steps: Steps) -> dict:
                      "by_side": {r: {"steps": int((steps.side == i).sum()),
                                      "marked": int(steps.marked[steps.side == i].sum())}
                                  for i, r in enumerate(ROLES)},
-                     "rater_unscorable": int(np.isnan(steps.values["rater"]).sum())}
+                     "rater_unscorable": int(np.isnan(steps.values["rater"]).sum()),
+                     "repeat_share_by_side": repeat_share(steps)}
     # SNW-M3 / §5.2: the rater is compared like-for-like with M1 and M2 only if it scored at least
     # 90 % of each side's marked steps
-    share = {}
+    share, ok = {}, True
     for i, r in enumerate(ROLES):
         mk = steps.marked & (steps.side == i)
-        share[r] = float(np.isnan(steps.values["rater"][mk]).mean()) if mk.any() else None
-    out["rater_unscorable_share_of_marked"] = share
-    out["rater_comparable_with_map_measures"] = all(v is not None and v <= RATER_MAX_UNSCORABLE_MARKED
-                                                    for v in share.values())
+        lost = int(np.isnan(steps.values["rater"][mk]).sum())
+        share[r] = {"unscorable_marked": lost, "marked": int(mk.sum())}
+        ok &= bool(mk.any()) and lost <= max(1, RATER_MAX_UNSCORABLE_MARKED * int(mk.sum()))
+    out["rater_unscorable_marked_by_side"] = share
+    out["SNW-V_rater_comparable_with_map_measures"] = ok
     return out
 
 
@@ -547,6 +584,27 @@ def load_store(role: str):
     return GraphStore.load(path)
 
 
+def rating_passes() -> list[dict]:
+    if not RATING_PASSES.exists():
+        return []
+    return [json.loads(x) for x in RATING_PASSES.read_text(encoding="utf-8").splitlines() if x.strip()]
+
+
+def rating_should_stop(passes: list[dict]) -> str | None:
+    """`SNW-RS` step 1: stop after a pass that left nothing unanswered, after a pass that added no new
+    answer, or after RATING_MAX_PASSES passes. None means another pass is owed."""
+    if not passes:
+        return None
+    last = passes[-1]
+    if last["unanswered"] == 0:
+        return "nothing left unanswered"
+    if last["rated_fresh"] == 0:
+        return "the last pass added no new answer"
+    if len(passes) >= RATING_MAX_PASSES:
+        return f"{RATING_MAX_PASSES} passes made"
+    return None
+
+
 def no_marks(page_data: dict) -> dict:
     """An all-empty weak map, so the rating step can build journeys without reading any answer."""
     return {p["key"]: {d: {t: [] for t in TOKENS} for d in DEPTHS} for p in page_data["pairs"]}
@@ -569,15 +627,25 @@ def main(argv: list[str] | None = None) -> int:
             raise Refused(f"identity: the listen recorded {r}'s map as {map_shas[r]}, not {MAPS[r][1]}")
     stores = {r: load_store(r) for r in ROLES}
     if args.rate_only:
+        passes = rating_passes()
+        stop = rating_should_stop(passes)
+        if stop:
+            raise Refused(f"rating step finished: {stop}. Commit the rater cache and the pass log, then score.")
         journeys = build_journeys(page, no_marks(page), mapping)
         lookup = make_rater_lookup(load_rater_cache(RATER_CACHE_SRC, RATER_CACHE_OWN))
-        score_steps(journeys, stores, lookup)
-        print(f"[snw] rate-only: {json.dumps(lookup.provenance)}; no answer file was read", flush=True)
+        steps = score_steps(journeys, stores, lookup)
+        record = {"pass": len(passes) + 1, **lookup.provenance, "repeat_share_by_side": repeat_share(steps)}
+        with RATING_PASSES.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(record) + "\n")
+        print(f"[snw] rate-only pass {record['pass']}: {json.dumps(record)}; no answer file was read", flush=True)
         return 0
-    if RATER_CACHE_OWN.exists():
-        rel = RATER_CACHE_OWN.relative_to(ROOT).as_posix()
-        if not _git("log", "-1", "--format=%H", "--", rel) or _git("status", "--porcelain", "--", rel):
-            raise Refused("run state: commit snw_rater_cache.jsonl after the rating step, before the read")
+    if not rating_should_stop(rating_passes()):
+        raise Refused("run state: the rating step (--rate-only) has not finished under its stopping rule")
+    for f in (RATER_CACHE_OWN, RATING_PASSES):
+        if f.exists():
+            rel = f.relative_to(ROOT).as_posix()
+            if not _git("log", "-1", "--format=%H", "--", rel) or _git("status", "--porcelain", "--", rel):
+                raise Refused(f"run state: commit {f.name} after the rating step, before the read")
     weak = weak_marks_only(json.loads((DSL_DIR / "dsl_verdicts.json").read_text("utf-8")))
     journeys = build_journeys(page, weak, mapping)
     print(f"[snw] {len(journeys)} journeys; maps verified; inputs pinned", flush=True)

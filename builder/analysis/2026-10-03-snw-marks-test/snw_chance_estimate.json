@@ -5,81 +5,81 @@
   "results": {
     "continuous_trueAUC_0.50": {
       "per_measure": {
-        "similarity": 0.0,
-        "shared_neighbours": 0.0025,
-        "rater": 0.0025
+        "similarity": 0.0075,
+        "shared_neighbours": 0.005,
+        "rater": 0.0
       },
-      "any": 0.005
+      "any": 0.0125
     },
     "continuous_trueAUC_0.65": {
       "per_measure": {
-        "similarity": 0.4475,
-        "shared_neighbours": 0.45,
-        "rater": 0.4775
+        "similarity": 0.45,
+        "shared_neighbours": 0.4475,
+        "rater": 0.375
       },
-      "any": 0.86
+      "any": 0.8125
     },
     "continuous_trueAUC_0.70": {
       "per_measure": {
-        "similarity": 0.8175,
-        "shared_neighbours": 0.8,
-        "rater": 0.795
+        "similarity": 0.7425,
+        "shared_neighbours": 0.7275,
+        "rater": 0.6775
       },
-      "any": 0.99
+      "any": 0.98
     },
     "continuous_trueAUC_0.75": {
       "per_measure": {
-        "similarity": 0.9575,
-        "shared_neighbours": 0.97,
-        "rater": 0.9675
+        "similarity": 0.9075,
+        "shared_neighbours": 0.92,
+        "rater": 0.9325
       },
       "any": 1.0
     },
     "continuous_trueAUC_0.80": {
       "per_measure": {
-        "similarity": 0.995,
-        "shared_neighbours": 1.0,
-        "rater": 0.9975
+        "similarity": 0.9675,
+        "shared_neighbours": 0.9725,
+        "rater": 0.96
       },
       "any": 1.0
     },
     "four_level_trueAUC_0.50": {
       "per_measure": {
-        "similarity": 0.0025,
+        "similarity": 0.0,
         "shared_neighbours": 0.0,
-        "rater": 0.0025
+        "rater": 0.0
       },
-      "any": 0.005
+      "any": 0.0
     },
     "four_level_trueAUC_0.65": {
       "per_measure": {
         "similarity": 0.39,
-        "shared_neighbours": 0.3625,
-        "rater": 0.3575
+        "shared_neighbours": 0.3425,
+        "rater": 0.29
       },
-      "any": 0.76
+      "any": 0.72
     },
     "four_level_trueAUC_0.70": {
       "per_measure": {
-        "similarity": 0.7675,
-        "shared_neighbours": 0.74,
-        "rater": 0.7375
+        "similarity": 0.6325,
+        "shared_neighbours": 0.6675,
+        "rater": 0.6275
       },
-      "any": 0.9825
+      "any": 0.9475
     },
     "four_level_trueAUC_0.75": {
       "per_measure": {
-        "similarity": 0.9525,
-        "shared_neighbours": 0.945,
-        "rater": 0.9625
+        "similarity": 0.8625,
+        "shared_neighbours": 0.8825,
+        "rater": 0.8925
       },
-      "any": 1.0
+      "any": 0.995
     },
     "four_level_trueAUC_0.80": {
       "per_measure": {
-        "similarity": 0.99,
-        "shared_neighbours": 0.9925,
-        "rater": 0.9975
+        "similarity": 0.9725,
+        "shared_neighbours": 0.9475,
+        "rater": 0.9575
       },
       "any": 1.0
     }
