@@ -1,0 +1,192 @@
+{
+  "test": "SNW-",
+  "governing": "docs/superpowers/specs/2026-10-03-issue-271-shared-neighbours-marks-preregistration.md",
+  "harness_commit": "dbdb6a06ac186ac978a42ccfaa48e3288ac1bc21",
+  "inputs": {
+    "commit": "273ec2715cbf828347b30e652ce406ad298150a7",
+    "blobs": {
+      "dsl_verdicts.json": "e5b474afeb42fa4c3c7cade64c92c320a440ca00",
+      "dsl_page_data.json": "f923b0bf734a8c768272a9316d464cc0af5d559f",
+      "dsl_result.json": "019140ec792753a000955597f89a239eb055a156"
+    },
+    "maps": {
+      "incumbent": {
+        "path": "C:\\dev\\music-app\\builder\\scratch\\graph-lba-a6.bin",
+        "sha256": "28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b"
+      },
+      "challenger": {
+        "path": "C:\\unsung-fast\\drp-stage3a\\graph-drp-s1.bin",
+        "sha256": "418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f"
+      }
+    },
+    "rater_cache_sha256_lf": "af527bb9b858b01b88ed8b42762bf8efcc07070fd700c78ebc32f2735daad54a",
+    "rater_model_alias": "sonnet",
+    "rater_provenance": {
+      "unique_pairs": 295,
+      "from_pinned_cache": 295,
+      "rated_fresh": 0,
+      "unanswered": 0
+    }
+  },
+  "result": {
+    "n_draws": 20000,
+    "seed": 271,
+    "measures": {
+      "similarity": {
+        "C": {
+          "pooled": 0.5849056603773585,
+          "today": 0.65,
+          "candidate": 0.5805369127516778
+        },
+        "p_pooled": 0.08564571771411429,
+        "readable_marks": {
+          "today": 7,
+          "candidate": 39
+        },
+        "readable": true,
+        "F1_floor": false,
+        "F2_null": false,
+        "F3_both_sides_agree": true,
+        "outcome": "does_not_fire",
+        "chance_firing_rate": 0.0043,
+        "null_pooled_C_quantiles": {
+          "0.5": 0.5,
+          "0.95": 0.60062893081761,
+          "0.9833333333333333": 0.6289308176100629
+        }
+      },
+      "shared_neighbours": {
+        "C": {
+          "pooled": 0.6132075471698113,
+          "today": 0.6,
+          "candidate": 0.6140939597315436
+        },
+        "p_pooled": 0.03674816259187041,
+        "readable_marks": {
+          "today": 7,
+          "candidate": 39
+        },
+        "readable": true,
+        "F1_floor": false,
+        "F2_null": false,
+        "F3_both_sides_agree": true,
+        "outcome": "does_not_fire",
+        "chance_firing_rate": 0.0047,
+        "null_pooled_C_quantiles": {
+          "0.5": 0.5,
+          "0.95": 0.6037735849056604,
+          "0.9833333333333333": 0.6352201257861635
+        }
+      },
+      "rater": {
+        "C": {
+          "pooled": 0.7547770700636943,
+          "today": 0.55,
+          "candidate": 0.7687074829931972
+        },
+        "p_pooled": 9.99950002499875e-05,
+        "readable_marks": {
+          "today": 7,
+          "candidate": 39
+        },
+        "readable": true,
+        "F1_floor": true,
+        "F2_null": true,
+        "F3_both_sides_agree": true,
+        "outcome": "fires",
+        "chance_firing_rate": 0.00275,
+        "null_pooled_C_quantiles": {
+          "0.5": 0.5,
+          "0.95": 0.5955414012738853,
+          "0.9833333333333333": 0.6242038216560509
+        }
+      }
+    },
+    "chance_any_measure_fires": 0.0115
+  },
+  "descriptive_only": {
+    "decides": "nothing (SNW-D)",
+    "similarity": {
+      "shift_controls": {
+        "-1": 0.5686274509803921,
+        "+1": 0.5573248407643312
+      },
+      "by_position": {
+        "end_steps": 0.9285714285714286,
+        "middle_steps": 0.5517241379310345
+      },
+      "candidate_steps_also_in_todays_map": 0.5629370629370629,
+      "unique_connections_auc_by_side": {
+        "incumbent": 0.5588942307692307,
+        "challenger": 0.5553492484526967
+      },
+      "within_journey_ignoring_position": 0.64568345323741
+    },
+    "shared_neighbours": {
+      "shift_controls": {
+        "-1": 0.6209150326797386,
+        "+1": 0.4426751592356688
+      },
+      "by_position": {
+        "end_steps": 0.9285714285714286,
+        "middle_steps": 0.5827586206896552
+      },
+      "candidate_steps_also_in_todays_map": 0.5979020979020979,
+      "unique_connections_auc_by_side": {
+        "incumbent": 0.4795673076923077,
+        "challenger": 0.5986737400530504
+      },
+      "within_journey_ignoring_position": 0.6420863309352518
+    },
+    "rater": {
+      "shift_controls": {
+        "-1": 0.5397350993377483,
+        "+1": 0.4774193548387097
+      },
+      "by_position": {
+        "end_steps": 0.8928571428571429,
+        "middle_steps": 0.7412587412587412
+      },
+      "candidate_steps_also_in_todays_map": 0.7588652482269503,
+      "unique_connections_auc_by_side": {
+        "incumbent": 0.6268028846153846,
+        "challenger": 0.7859960552268245
+      },
+      "within_journey_ignoring_position": 0.781021897810219
+    },
+    "head_to_head_pooled_C_minus_similarity": {
+      "shared_neighbours": 0.028301886792452824,
+      "rater": 0.16987140968633585
+    },
+    "counts": {
+      "step_instances": 316,
+      "marked": 52,
+      "by_side": {
+        "incumbent": {
+          "steps": 119,
+          "marked": 9
+        },
+        "challenger": {
+          "steps": 197,
+          "marked": 43
+        }
+      },
+      "rater_unscorable": 2,
+      "repeat_share_by_side": {
+        "incumbent": 0.1092436974789916,
+        "challenger": 0.12690355329949238
+      }
+    },
+    "rater_unscorable_marked_by_side": {
+      "incumbent": {
+        "unscorable_marked": 0,
+        "marked": 9
+      },
+      "challenger": {
+        "unscorable_marked": 0,
+        "marked": 43
+      }
+    },
+    "SNW-V_rater_comparable_with_map_measures": true
+  }
+}
