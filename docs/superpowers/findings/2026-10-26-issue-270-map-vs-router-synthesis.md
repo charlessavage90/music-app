@@ -106,8 +106,8 @@ layer has been changed alone and listened to.
 
 - **Are the deleted exits good connections or noise?** Named by trim-supply §4 (fourth bullet) and by
   the depth-remedy pre-registration's `DRP-X1` (*supply counts candidates, not good ones*). **Its
-  map-currency half is running now** (`builder/analysis/2026-10-26-issue-270-discarded-exit-quality/`,
-  design committed before the run). Its by-ear half (a listen or a coherence measure, trim-supply §3)
+  map-currency half has since run** (`builder/analysis/2026-10-26-issue-270-discarded-exit-quality/`,
+  design committed before the run, which owns its figures and its four-part read). Its by-ear half (a listen or a coherence measure, trim-supply §3)
   is not.
 - **The ceiling on today's map without the extra connections was never listened to** (#270, "What
   neither record closes").

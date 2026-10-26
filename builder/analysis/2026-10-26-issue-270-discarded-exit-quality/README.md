@@ -475,3 +475,122 @@ Per centre, rank of its best-ranked `DXQ-D` exit (`best_ranked_D_exit_per_centre
 - `DXQ-M3a`'s pre-ceiling degree is `|SUP-S3(v)|` restricted to lba-a6 nodes, as `SUP-S3` is defined in trim-supply's stage table. Groups are drawn from `SUP-S3` likewise restricted to nodes; the non-node deleted neighbours are the excluded count above.
 - `DXQ-M8`'s `e*` ties on price would break on lowest MBID.
 - Before the recorded run, `dxq.py`'s post-build code was exercised once against a namespace reconstructed from the `DRP-` stage-3a capture (`capture.pkl`), to catch code errors without spending a 20-minute build. Its outputs were written outside this directory and deleted; no figure here comes from it.
+
+## 2. What I infer from it (inference, labelled)
+
+*Written by the coordinating session after §1 was committed (`930697d`). The analyst's brief was
+derivation only.* Each sentence names the measure it rests on, so it can be disagreed with.
+
+- **Most of what the limit throws away is weak by the map's own data. The best of it is not.** The
+  typical lost exit sits about seven hundred places down the famous artist's own list of similar
+  artists. Its listening score is a small fraction of a kept connection's, and the app would show it
+  as under half-similar. (`DXQ-M5`, *how far down the famous artist's own list the lost exit sat*;
+  `DXQ-M1`, *how strongly the listening data links the two*; `DXQ-M2`, *the similarity the app would
+  show for this step*.) But the single best lost exit at each famous artist sits just under the
+  weakest connection it kept. On the app's similarity scale the gap is under a hundredth at the
+  median, and on the limit's own scale it is a small fraction of how much the kept connections vary
+  among themselves (`DXQ-M6`, *how far below the weakest kept connection the best lost exit sits*).
+  **So the limit cuts through a continuum, not at a cliff.** "Hundreds of discarded candidates per
+  famous artist" (trim-supply §2) overstates what a build change would have to work with: the usable
+  material is a short top slice, not the hundreds.
+- **The ten the earlier experiment put back were that top slice.** Those exits (`DXQ-DS1`, *the deleted
+  exits the extra-connections experiment put back, which the listen heard*) are far stronger than the
+  lost exits as a whole on every map measure, and closer to the fame of what was kept (`DXQ-M1`,
+  `M2`, `M4`, `M5`). That is by their selection rule: strongest first.
+- **The one noise proxy does not single out the lost exits.** Lost exits and kept exits name about
+  the same number of the most-listened 1 % among their own fifty most similar. The paired difference
+  sits near zero and goes either way across centres (`DXQ-M3b`, *how many of the most-listened 1 % this
+  artist names among its own fifty*). The proxy separates nothing here, so it supports neither
+  "noise" nor "not noise".
+- **What the router would charge to use them is far above what it charges now.** Stepping from a
+  famous artist to a typical lost exit costs roughly twelve times what a kept connection costs before
+  any press. Even the restored top ten cost about five times as much (`DXQ-M7`, *what the router would
+  charge for stepping from the famous artist to this one, before any press*). At today's per-press
+  pull, the best lost exit at a typical famous artist would need on the order of 150 presses to become
+  cheaper, as a single step, than the cheapest kept connection, and about 50 at three times the pull
+  (`DXQ-M8`, *how many presses before the best lost exit would be cheaper, as a single step*). This is
+  single-step arithmetic, not a routing outcome (§ "Reads", barred). The lattice did route, and found
+  the stronger pulls moved nothing. This shows **how large the gap is** that a per-press pull on fame
+  would have to close.
+
+**In the app's terms:** a map change that only lets famous artists keep a few more less-listened
+connections would be giving them links the listening data rates almost as highly as ones they keep
+today. But the router would price those links far above its current choices, and a fame pull of the
+size tried cannot close that gap. A larger map change would mostly be promoting links the data rates
+weakly, and nothing here says whether they *sound* right.
+
+## 3. Weakest link
+
+- **Every measure is the map's own.** The map's similarity did not track the owner's ear on the
+  `DSL-` weak-step marks (`SNW-R4`, *on his marked steps, map similarity did not score worse than on
+  the unmarked steps clearly enough to pass the bar*). So "weak by the map's data" is not "sounds
+  wrong", and "close to the kept edges" is not "sounds right". **I would defend** the structural
+  reading: the limit cuts a continuum, the usable slice is short, and the price gap is large. All of it
+  is arithmetic over one build that reproduces the served map. **I would give up cheaply** any
+  sentence that calls the lost exits good or bad links.
+- **The price is one step, not a journey.** `DXQ-M7` and `M8` leave out the floor term (its upper bound
+  is reported separately) and every downstream step. A route can pay one expensive exit and then
+  travel cheaply.
+- **Saturation.** Over a quarter of famous artists show a gap of exactly 0 on the app's similarity
+  scale, because both edges sit at the 1.0 clip (`DXQ-M6`, share exactly 0). On the limit's own
+  scale, where few are tied, the gap is still small beside the spread of kept connections. So
+  "continuum" does not rest on the clip, but its exact size on the app's scale does.
+- **The price is not decomposed.** Whether the exit price is mostly the similarity term or mostly
+  the popularity-jump term was not in the fixed statistics, so it is not reported. It matters for the
+  routing option below.
+- **What would falsify "the usable slice is short":** a listen or a coherence measure that finds the
+  lost exits ranked a few hundred places down sound as good as the top ten. Nothing in the record has
+  measured that.
+
+## 4. Options and their consequences
+
+**Which of these to pursue, if any, is the owner's decision:** it is a choice about what the app
+should do and what to spend his ear and others' time on (`CLAUDE.md`, "Whose decision is it"). Nothing
+here is a recommendation. Each option names the cheapest experiment that could decide it, and its cost.
+
+- **A build-side change at the trim**, for example reserving a few of a famous artist's fifty slots
+  for its strongest less-listened partners, displacing famous ones rather than adding beside them.
+  - *What this measurement says:* there is a short top slice to promote (`DXQ-M6`). The record
+    already holds the **additive** version at today's pull, and it moved nothing (lattice results
+    §1.2, the extra connections at today's pull).
+  - *Cheapest decisive experiment:* one displacing rebuild from the trim-supply instrumented build,
+    then one lattice cell at today's pull on the existing 80 pairs with the stage-3b harness. It reads
+    whether a map change alone moves fame on famous pairs. It cannot read whether the journeys still
+    hang together.
+  - *Cost:* a cold pre-registration, about 20 minutes of build, and a fraction of the stage-3b sweep's
+    2.5 hours for eight cells (`builder/analysis/2026-09-28-drp-stage3b/README.md`). No listening
+    unless it moves. The prior from this measurement and the lattice is that the router prices the
+    promoted exits out.
+- **A routing change that prices the exits, rather than pulling on fame per press.**
+  - *What this measurement says:* the exit price is many times a kept step's (`DXQ-M7`). The fame
+    pull of the size tried would need on the order of 150 presses to close it as a single step
+    (`DXQ-M8`).
+  - *Cheapest decisive experiment, in two steps.* First, split the exit price into its similarity and
+    popularity-jump parts. That is about 20 minutes of compute with no listening, a new descriptive with
+    its statistics fixed first, and it says which term a routing change would act on. Then one lattice
+    cell on the existing extra-connections map, where `DRP-R13` already reads the binding constraint as
+    pricing, with that term changed.
+  - *Cost:* a pre-registration for the cell, compute as above, and the owner's ear only if it moves.
+    The `DSL-` barred reads still bind: the earlier coherence loss cannot be pinned on any single cost
+    term (dsl-listen results §4).
+- **A second similarity source not derived from co-listening: audio embeddings of the Deezer preview
+  clips the app already resolves.**
+  - *What the record holds:* nothing.
+  - *Cheapest decisive experiment:* embed the clips of the artists on the journeys behind the 11
+    unconsumed blind verdicts, then test, under a cold pre-registration and once, whether embedding
+    similarity between neighbouring cards predicts those verdicts. That corpus is the record's named
+    falsifier for any coherence instrument (#165, reopened 2026-10-03). `ct_retrodict.py`'s
+    committed-but-unrun rule counts as the first attempt.
+  - *Cost:* a few hundred clips through the existing clip resolver, an off-the-shelf audio model on
+    CPU (roughly an hour; not measured here), and the pre-registration. No listening. **It spends the
+    11 verdicts, a one-shot resource, which is the owner's to spend.** Whether Deezer's terms allow
+    deriving features from previews is unchecked and is his question.
+- **Evaluation by more than one listener.**
+  - *What the record holds:* nothing.
+  - *Cheapest decisive experiment:* present the frozen `DSL-` stimulus (`dsl_page_data.json`, 24 rows,
+    harness existing) to one or two other listeners, blind, with the same questions. It reads whether
+    the coherence verdict holds beyond one ear.
+  - *Cost:* a pre-registration stating that it cannot re-read or overturn `DSL-R3` (run-once and final,
+    dsl-listen results §4), and an hour or two of each listener's time. Recruiting them is the owner's
+    hands. The tell that let him identify the new side, longer journeys with no stars, would reach them
+    too (dsl-listen results §0, item 1).
