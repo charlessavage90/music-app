@@ -1,0 +1,366 @@
+[dxq] sha256 OK  graph-drp-s1.bin 418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f (== sidecar == pin)
+[dxq] ApiConfig (C:\Users\charl\worktrees\music-app\hippocamp\api\src\artistpath_api\config.py): {'w_sim': 3.0, 'w_jump': 1.0, 'w_floor': 1.0, 'w_hop': 0.02, 'w_avoid': 1.0, 'w_degree_hub': 0.0, 'w_known_ramp_fame_pctl': 0.01}
+[dxq] trim_supply.py sha256 ace57c262aec0ebb2888a1d928e2cab1634ea079c4cb15502ec71ea3fd3da7f9; executing unmodified via runpy
+----------------------------------------------------------------------------------------------------
+sha256 OK  S4-A6 MANIFEST.json 950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3
+sha256 OK  graph-lba-a6.bin    28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b (== sidecar == pin)
+sha256 OK  population file     1bbff8fcfde78a07d276f727ccaf048c73da4bfd27709b64f6f6894d6d4d2d7b (== archive manifest)
+builder pipeline: C:\Users\charl\worktrees\music-app\hippocamp\builder\src\artistpath_builder\pipeline.py
+api graph_store:  C:\Users\charl\worktrees\music-app\hippocamp\api\src\artistpath_api\graph_store.py
+config: cap_strategy=trimmed_union union_top_j=50 union_degree_ceiling=50 damping=0.0 rescale=p99_log_clip filter_special_purpose=True drop_no_release_tail=True drop_featured_credit=True drop_unlistenable=True
+  builder: rescale p99 scale=2035 | saturated edges 148038 of 14793382 (1.001%)
+  builder: largest component: 87394 of 87764 artists
+build: 87,394 nodes, 2,490,728 CSR entries (16.7 min)
+REPRODUCTION: built node order, offsets, neighbours == graph-lba-a6.bin (shipped GraphStore): True
+lba-a6: N 87,394  CSR entries 2,490,728  null fame 3
+S4 rows == served rows for every node: True
+re-implemented trim == shipped trimmed_union_cap output on all 87,764 nodes: True
+reconstructed pre-Pass-1 drops reproduce the cap's input node set: True (87,764 artists; payloads 87,764; special 0, nameless 0, no-release 0, featured 0, un-listenable 0 among payload-holders; component prune 370)
+population P: 88,685 MBIDs
+
+====================================================================================================
+## top 1 % (fame percentile >= 0.99, lba-a6 frame): 874 centres
+
+(a) SUP-S0 raw archived list length (self-row excluded): median 1144  p10 180  p90 6491  mean 2496.86  min 100  max 32646
+    rows incl. any self-row: total 2,182,258 vs excl. 2,182,258; centres with duplicate MBIDs in S0: 0
+    SUP-S1 length (S0 on the map): median 1144  p10 180  p90 6482  mean 2493.11  min 100  max 32604
+
+    S0 entries by fate (pooled over 874 centres, 2,182,258 entries):
+    | fate | entries | share of S0 | centres with >= 1 |
+    |---|---:|---:|---:|
+    | lba-a6 node (-> S1) | 2,178,981 | 0.9985 | — |
+    | outside P | 0 | 0.0000 | 0 |
+    | special-purpose | 0 | 0.0000 | 0 |
+    | nameless / no identity row | 0 | 0.0000 | 0 |
+    | no archived payload of its own | 0 | 0.0000 | 0 |
+    | no-release-tail drop | 0 | 0.0000 | 0 |
+    | featured-credit drop | 0 | 0.0000 | 0 |
+    | un-listenable drop (20260809) | 0 | 0.0000 | 0 |
+    | lost to largest-component prune | 3,277 | 0.0015 | 582 |
+    | UNEXPLAINED | 0 | 0.0000 | 0 |
+    null-fame candidates excluded (entries, pooled): S1 17, S3 17, S5 0
+
+### top 1 %, candidates below 0.9 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 786  p10 64  p90 5171  mean 1898.08  min 0  max 27558
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 786 | 64 | 5171 | 1898.08 | 1 | 0.0011 |
+| SUP-S2 | 0 | 0 | 3 | 0.79 | 617 | 0.7059 |
+| SUP-S3 | 298 | 27 | 1879 | 736.06 | 2 | 0.0023 |
+| SUP-S4 | 1 | 0 | 15 | 4.73 | 381 | 0.4359 |
+| SUP-S5 | 1 | 0 | 15 | 4.73 | 381 | 0.4359 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 297 | 27 | 1879 | 735.88 | 3 | 0.0034 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 874 | 1.0000 |
+| rescue candidates surviving to S5 | 1 | 0 | 15 | 4.65 | 381 | 0.4359 |
+| union candidate set S1 ∪ rescue | 786 | 64 | 5171 | 1898.08 | 1 | 0.0011 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 4,132 of 1,658,922 (0.0025); per-centre share median 0.0007 over 873 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 694; outside own top-50 but rescued 642,624; neither 1,015,604
+    rescue direction: pooled 643,161 below-bar rescuers, 4,061 survive the ceiling (0.0063); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 639,186 (by the centre's own ceiling 639,100; by the neighbour's ceiling 86)
+    S5 zero count reproduces graph-descriptives §1 A 381 of 874: True
+
+### top 1 %, candidates below 0.5 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 296  p10 23  p90 2116  mean 752.72  min 0  max 12726
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 296 | 23 | 2116 | 752.72 | 7 | 0.0080 |
+| SUP-S2 | 0 | 0 | 0 | 0.01 | 868 | 0.9931 |
+| SUP-S3 | 116 | 10 | 828 | 312.04 | 14 | 0.0160 |
+| SUP-S4 | 0 | 0 | 3 | 0.91 | 706 | 0.8078 |
+| SUP-S5 | 0 | 0 | 3 | 0.91 | 706 | 0.8078 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 116 | 10 | 828 | 312.04 | 14 | 0.0160 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 874 | 1.0000 |
+| rescue candidates surviving to S5 | 0 | 0 | 3 | 0.91 | 706 | 0.8078 |
+| union candidate set S1 ∪ rescue | 296 | 23 | 2116 | 752.72 | 7 | 0.0080 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 795 of 657,881 (0.0012); per-centre share median 0.0000 over 867 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 10; outside own top-50 but rescued 272,710; neither 385,161
+    rescue direction: pooled 272,720 below-bar rescuers, 795 survive the ceiling (0.0029); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 271,925 (by the centre's own ceiling 271,925; by the neighbour's ceiling 0)
+    S5 zero count reproduces graph-descriptives §1 A 706 of 874: True
+
+====================================================================================================
+## top decile (fame percentile >= 0.9, lba-a6 frame): 8,740 centres
+
+(a) SUP-S0 raw archived list length (self-row excluded): median 225  p10 109  p90 1081  mean 581.45  min 3  max 32646
+    rows incl. any self-row: total 5,081,848 vs excl. 5,081,848; centres with duplicate MBIDs in S0: 0
+    SUP-S1 length (S0 on the map): median 225  p10 109  p90 1079  mean 580.87  min 3  max 32604
+
+    S0 entries by fate (pooled over 8,740 centres, 5,081,848 entries):
+    | fate | entries | share of S0 | centres with >= 1 |
+    |---|---:|---:|---:|
+    | lba-a6 node (-> S1) | 5,076,804 | 0.9990 | — |
+    | outside P | 0 | 0.0000 | 0 |
+    | special-purpose | 0 | 0.0000 | 0 |
+    | nameless / no identity row | 0 | 0.0000 | 0 |
+    | no archived payload of its own | 0 | 0.0000 | 0 |
+    | no-release-tail drop | 0 | 0.0000 | 0 |
+    | featured-credit drop | 0 | 0.0000 | 0 |
+    | un-listenable drop (20260809) | 0 | 0.0000 | 0 |
+    | lost to largest-component prune | 5,044 | 0.0010 | 1,666 |
+    | UNEXPLAINED | 0 | 0.0000 | 0 |
+    null-fame candidates excluded (entries, pooled): S1 33, S3 33, S5 0
+
+### top decile, candidates below 0.9 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 121  p10 15  p90 849  mean 411.84  min 0  max 27558
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 121 | 15 | 849 | 411.84 | 32 | 0.0037 |
+| SUP-S2 | 4 | 0 | 20 | 7.08 | 2,279 | 0.2608 |
+| SUP-S3 | 59 | 7 | 360 | 174.29 | 93 | 0.0106 |
+| SUP-S4 | 17 | 1 | 37 | 18.19 | 629 | 0.0720 |
+| SUP-S5 | 17 | 1 | 37 | 18.19 | 629 | 0.0720 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 56 | 6 | 359 | 172.41 | 116 | 0.0133 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 8,740 | 1.0000 |
+| rescue candidates surviving to S5 | 17 | 1 | 35 | 17.32 | 644 | 0.0737 |
+| union candidate set S1 ∪ rescue | 121 | 15 | 849 | 411.84 | 32 | 0.0037 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 158,955 of 3,599,445 (0.0442); per-centre share median 0.1944 over 8,708 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 61,877; outside own top-50 but rescued 1,461,386; neither 2,076,182
+    rescue direction: pooled 1,506,878 below-bar rescuers, 151,356 survive the ceiling (0.1004); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 1,364,308 (by the centre's own ceiling 1,355,522; by the neighbour's ceiling 8,786)
+    S5 zero count reproduces graph-descriptives §1 A 629 of 8740: True
+
+### top decile, candidates below 0.5 fame percentile (lba-a6 frame)
+(b) below-bar count in SUP-S1: median 43  p10 3  p90 353  mean 165.71  min 0  max 12726
+
+| stage | median | p10 | p90 | mean | ZERO: count | ZERO: fraction |
+|---|---:|---:|---:|---:|---:|---:|
+| SUP-S1 | 43 | 3 | 353 | 165.71 | 275 | 0.0315 |
+| SUP-S2 | 0 | 0 | 2 | 0.53 | 6,965 | 0.7969 |
+| SUP-S3 | 21 | 1 | 157 | 73.49 | 512 | 0.0586 |
+| SUP-S4 | 2 | 0 | 11 | 3.77 | 3,106 | 0.3554 |
+| SUP-S5 | 2 | 0 | 11 | 3.77 | 3,106 | 0.3554 |
+| rescue: below-bar nodes ranking the centre in THEIR top 50 | 20 | 1 | 157 | 73.41 | 524 | 0.0600 |
+| rescue, not already in S1 | 0 | 0 | 0 | 0.00 | 8,740 | 1.0000 |
+| rescue candidates surviving to S5 | 2 | 0 | 11 | 3.72 | 3,121 | 0.3571 |
+| union candidate set S1 ∪ rescue | 43 | 3 | 353 | 165.71 | 275 | 0.0315 |
+
+(c) S1 below-bar candidates surviving to S5: pooled 32,963 of 1,448,340 (0.0228); per-centre share median 0.0488 over 8,465 centres with >= 1
+    of S1 below-bar: in own top-50 (S2) 4,667; outside own top-50 but rescued 637,622; neither 806,051
+    rescue direction: pooled 641,635 below-bar rescuers, 32,507 survive the ceiling (0.0507); not already in S1: 0
+    S3 below-bar candidates deleted by the ceiling: 609,326 (by the centre's own ceiling 609,128; by the neighbour's ceiling 198)
+    S5 zero count reproduces graph-descriptives §1 A 3106 of 8740: True
+
+====================================================================================================
+## Reading rule (fixed before the run)
+top 1 %, bar 0.9: Z_pre 1/874 = 0.0011; Z_post 381/874 = 0.4359; median S1 below-bar 786; Z_pre/Z_post 0.0026 (trim share 0.9974); R1 clause True; R2 clause False; verdict SUP-R1
+top 1 %, bar 0.5: Z_pre 7/874 = 0.0080; Z_post 706/874 = 0.8078; median S1 below-bar 296; Z_pre/Z_post 0.0099 (trim share 0.9901); R1 clause True; R2 clause False; verdict (no verdict)
+top decile, bar 0.9: Z_pre 32/8740 = 0.0037; Z_post 629/8740 = 0.0720; median S1 below-bar 121; Z_pre/Z_post 0.0509 (trim share 0.9491); R1 clause True; R2 clause False; verdict (no verdict)
+top decile, bar 0.5: Z_pre 275/8740 = 0.0315; Z_post 3106/8740 = 0.3554; median S1 below-bar 43; Z_pre/Z_post 0.0885 (trim share 0.9115); R1 clause True; R2 clause False; verdict (no verdict)
+
+S4-A6 MANIFEST.json sha256 after the run unchanged: True
+wall time 19.7 min
+----------------------------------------------------------------------------------------------------
+[dxq] trim_supply.py completed; computing DXQ- on its globals
+[dxq] centres (measured fame_lb_pctl >= 0.99): 874
+[dxq] graph-drp-s1.bin edges not in lba-a6: 7,998; touching a centre 7,998; touching none 0; DRP-C10 (drp_g3.json) added_edges 7,998
+
+[dxq] DXQ-A1 emitted similarity (float32) == served score on every kept edge at every centre: True (40,776 edges checked, 0 mismatches)
+[dxq] DXQ-A2 deleted exits not in the centre's own ranked list: D 0, DS1 0 (expected 0); K (reference, M5) 0
+[dxq] DXQ-A3 added edges touching a centre that are not in that centre's DXQ-D: 0 (edges touching a centre 7,998; DRP-C10 added_edges 7,998)
+[dxq] DXQ-A4 negative-gap centres with no below-0.9 edge deleted by the neighbour's ceiling: sim 0, cap ranking value 0 (negative-gap centres: sim 57, capv 62)
+[dxq] listening score reconstructed as round(expm1(cap ranking value)): max |deviation| 2.55e-11
+
+====================================================================================================
+## DXQ- summaries (centres 874)
+exclusions: {'K_null_fame': 0, 'deleted_null_fame': 17, 'deleted_non_node': 2015}
+
+### M1_cap_ranking_value
+  K    centre-weighted: median 7.8477  p10 6.0531  p90 8.9915  n_centres 874
+       pooled:          median 7.9456  p10 5.9940  p25 7.1877  p75 8.5936  p90 9.1573  mean 7.7021  n 40776
+  KL   centre-weighted: median 6.8123  p10 3.6106  p90 8.4303  n_centres 493
+       pooled:          median 5.0999  p10 2.8904  p25 3.8712  p75 6.9756  p90 7.9076  mean 5.3092  n 4132
+  D    centre-weighted: median 3.4012  p10 2.8332  p90 4.0073  n_centres 817
+       pooled:          median 3.4012  p10 2.0794  p25 2.5649  p75 4.3307  p90 5.2257  mean 3.5576  n 639186
+  DH   centre-weighted: median 6.5539  p10 5.7266  p90 7.9972  n_centres 874
+       pooled:          median 6.2672  p10 4.6913  p25 5.3613  p75 7.3238  p90 8.1525  mean 6.3354  n 187651
+  DS1  centre-weighted: median 6.0799  p10 4.0757  p90 7.6331  n_centres 817
+       pooled:          median 6.1580  p10 4.2047  p25 5.3132  p75 6.9603  p90 7.7673  mean 6.0581  n 7998
+  paired D_minus_KL: median -3.5998  p10 -4.7532  p90 -1.5799  n_centres 438  share_negative 0.9863
+  paired D_minus_DH: median -3.0349  p10 -4.6823  p90 -2.2718  n_centres 817  share_negative 0.9976
+  paired D_minus_K: median -4.4475  p10 -5.5272  p90 -3.1599  n_centres 817  share_negative 0.9951
+  paired D_minus_DS1: median -2.6469  p10 -3.9619  p90 -0.8472  n_centres 817  share_negative 0.9559
+
+### M1_listening_score
+  K    centre-weighted: median 2558.7500  p10 424.6000  p90 8033.9500  n_centres 874
+       pooled:          median 2822.0000  p10 400.0000  p25 1322.0000  p75 5396.0000  p90 9482.0000  mean 4024.5812  n 40776
+  KL   centre-weighted: median 916.0000  p10 36.0000  p90 4584.2000  n_centres 493
+       pooled:          median 163.0000  p10 17.0000  p25 47.0000  p75 1069.2500  p90 2716.9000  mean 915.9668  n 4132
+  D    centre-weighted: median 29.0000  p10 16.0000  p90 54.0000  n_centres 817
+       pooled:          median 29.0000  p10 7.0000  p25 12.0000  p75 75.0000  p90 185.0000  mean 97.4073  n 639186
+  DH   centre-weighted: median 701.0000  p10 305.9500  p90 2971.6000  n_centres 874
+       pooled:          median 526.0000  p10 108.0000  p25 212.0000  p75 1515.0000  p90 3471.0000  mean 1252.9544  n 187651
+  DS1  centre-weighted: median 436.0000  p10 58.0000  p90 2077.9000  n_centres 817
+       pooled:          median 471.5000  p10 66.0000  p25 202.0000  p75 1053.0000  p90 2361.1000  mean 961.6848  n 7998
+  paired D_minus_KL: median -1053.7500  p10 -4961.7500  p90 -57.3500  n_centres 438  share_negative 0.9863
+  paired D_minus_DH: median -633.5000  p10 -2857.3000  p90 -274.1000  n_centres 817  share_negative 0.9976
+  paired D_minus_K: median -2741.5000  p10 -8091.4000  p90 -541.6000  n_centres 817  share_negative 0.9951
+  paired D_minus_DS1: median -401.5000  p10 -2026.5000  p90 -27.9000  n_centres 817  share_negative 0.9559
+
+### M2_emitted_similarity
+  K    centre-weighted: median 1.0000  p10 0.7945  p90 1.0000  n_centres 874
+       pooled:          median 1.0000  p10 0.7867  p25 0.9434  p75 1.0000  p90 1.0000  mean 0.9388  n 40776
+       pooled_bin_shares: [0.0, 0.5) 0.0249  [0.5, 0.6) 0.0183  [0.6, 0.7) 0.0256  [0.7, 0.8) 0.0379  [0.8, 0.9) 0.0776  [0.9, 1.0) 0.1912  exactly 1.0 0.6244
+  KL   centre-weighted: median 0.8942  p10 0.4739  p90 1.0000  n_centres 493
+       pooled:          median 0.6694  p10 0.3794  p25 0.5081  p75 0.9156  p90 1.0000  mean 0.6855  n 4132
+       pooled_bin_shares: [0.0, 0.5) 0.2430  [0.5, 0.6) 0.1583  [0.6, 0.7) 0.1375  [0.7, 0.8) 0.1055  [0.8, 0.9) 0.0825  [0.9, 1.0) 0.1251  exactly 1.0 0.1481
+  D    centre-weighted: median 0.4464  p10 0.3719  p90 0.5260  n_centres 817
+       pooled:          median 0.4464  p10 0.2729  p25 0.3367  p75 0.5684  p90 0.6859  mean 0.4667  n 639186
+       pooled_bin_shares: [0.0, 0.5) 0.6194  [0.5, 0.6) 0.1827  [0.6, 0.7) 0.1095  [0.7, 0.8) 0.0518  [0.8, 0.9) 0.0221  [0.9, 1.0) 0.0096  exactly 1.0 0.0049
+  DH   centre-weighted: median 0.8602  p10 0.7516  p90 1.0000  n_centres 874
+       pooled:          median 0.8226  p10 0.6158  p25 0.7037  p75 0.9613  p90 1.0000  mean 0.8158  n 187651
+       pooled_bin_shares: [0.0, 0.5) 0.0176  [0.5, 0.6) 0.0642  [0.6, 0.7) 0.1607  [0.7, 0.8) 0.2091  [0.8, 0.9) 0.1983  [0.9, 1.0) 0.1589  exactly 1.0 0.1912
+  DS1  centre-weighted: median 0.7980  p10 0.5350  p90 0.9973  n_centres 817
+       pooled:          median 0.8083  p10 0.5519  p25 0.6974  p75 0.9136  p90 1.0000  mean 0.7859  n 7998
+       pooled_bin_shares: [0.0, 0.5) 0.0688  [0.5, 0.6) 0.0655  [0.6, 0.7) 0.1202  [0.7, 0.8) 0.2229  [0.8, 0.9) 0.2439  [0.9, 1.0) 0.1558  exactly 1.0 0.1229
+  paired D_minus_KL: median -0.4436  p10 -0.5494  p90 -0.2074  n_centres 438  share_negative 0.9840
+  paired D_minus_DH: median -0.3980  p10 -0.5769  p90 -0.2982  n_centres 817  share_negative 0.9951
+  paired D_minus_K: median -0.5287  p10 -0.5943  p90 -0.4082  n_centres 817  share_negative 0.9927
+  paired D_minus_DS1: median -0.3474  p10 -0.4941  p90 -0.1112  n_centres 817  share_negative 0.9559
+
+### M3a_served_degree
+  K    centre-weighted: median 49.0000  p10 40.8000  p90 50.0000  n_centres 874
+       pooled:          median 49.0000  p10 26.0000  p25 46.0000  p75 50.0000  p90 50.0000  mean 44.3901  n 40776
+  KL   centre-weighted: median 46.0000  p10 14.0000  p90 50.0000  n_centres 493
+       pooled:          median 27.0000  p10 9.0000  p25 14.0000  p75 49.0000  p90 50.0000  mean 29.5995  n 4132
+  D    centre-weighted: median 16.0000  p10 12.0000  p90 20.0000  n_centres 817
+       pooled:          median 17.0000  p10 6.0000  p25 10.0000  p75 28.0000  p90 45.0000  mean 20.5799  n 639186
+  DH   centre-weighted: median 47.0000  p10 35.0000  p90 49.0000  n_centres 874
+       pooled:          median 46.0000  p10 11.0000  p25 23.0000  p75 50.0000  p90 50.0000  mean 36.7705  n 187651
+  DS1  centre-weighted: median 33.5000  p10 13.5000  p90 50.0000  n_centres 817
+       pooled:          median 34.0000  p10 9.0000  p25 17.0000  p75 50.0000  p90 50.0000  mean 32.3451  n 7998
+  paired D_minus_KL: median -28.7500  p10 -34.6500  p90 -0.5000  n_centres 438  share_negative 0.9018
+  paired D_minus_DH: median -29.0000  p10 -34.5000  p90 -19.0000  n_centres 817  share_negative 0.9963
+  paired D_minus_K: median -33.0000  p10 -36.0000  p90 -27.0000  n_centres 817  share_negative 0.9927
+  paired D_minus_DS1: median -16.5000  p10 -34.0000  p90 0.0000  n_centres 817  share_negative 0.8482
+
+### M3a_pre_ceiling_degree
+  K    centre-weighted: median 308.5000  p10 71.8000  p90 1149.3500  n_centres 874
+       pooled:          median 305.0000  p10 60.0000  p25 108.0000  p75 864.0000  p90 2156.0000  mean 837.3280  n 40776
+  KL   centre-weighted: median 84.0000  p10 51.0000  p90 505.0000  n_centres 493
+       pooled:          median 57.0000  p10 50.0000  p25 51.0000  p75 100.0000  p90 253.9000  mean 129.1191  n 4132
+  D    centre-weighted: median 52.0000  p10 51.0000  p90 53.0000  n_centres 817
+       pooled:          median 53.0000  p10 50.0000  p25 51.0000  p75 58.0000  p90 72.0000  mean 59.2527  n 639186
+  DH   centre-weighted: median 99.0000  p10 70.0000  p90 2449.7000  n_centres 874
+       pooled:          median 89.0000  p10 54.0000  p25 62.0000  p75 207.0000  p90 1198.0000  mean 593.9630  n 187651
+  DS1  centre-weighted: median 65.5000  p10 52.0000  p90 182.7000  n_centres 817
+       pooled:          median 65.0000  p10 51.0000  p25 54.0000  p75 112.7500  p90 234.0000  mean 128.6933  n 7998
+  paired D_minus_KL: median -47.7500  p10 -455.0000  p90 -2.0000  n_centres 438  share_negative 0.9498
+  paired D_minus_DH: median -42.0000  p10 -2322.8000  p90 -18.0000  n_centres 817  share_negative 1.0000
+  paired D_minus_K: median -280.0000  p10 -1130.0000  p90 -31.8000  n_centres 817  share_negative 0.9927
+  paired D_minus_DS1: median -12.0000  p10 -122.3000  p90 -1.0000  n_centres 817  share_negative 0.9364
+
+### M3b_centres_in_own_top50
+  D    centre-weighted: median 18.0000  p10 11.6000  p90 25.0000  n_centres 817
+       pooled:          median 16.0000  p10 5.0000  p25 9.0000  p75 24.0000  p90 32.0000  mean 17.3185  n 639186
+       pooled_share_ge_10: 0.7299
+  KL   centre-weighted: median 21.0000  p10 9.0000  p90 32.0000  n_centres 493
+       pooled:          median 19.0000  p10 6.0000  p25 11.0000  p75 28.0000  p90 36.0000  mean 20.2103  n 4132
+       pooled_share_ge_10: 0.8018
+  DS1  centre-weighted: median 19.5000  p10 9.0000  p90 31.0000  n_centres 817
+       pooled:          median 20.0000  p10 7.0000  p25 12.0000  p75 28.0000  p90 36.0000  mean 20.6915  n 7998
+       pooled_share_ge_10: 0.8253
+  paired D_minus_KL: median -3.0000  p10 -13.6500  p90 6.0000  n_centres 438  share_negative 0.6233
+  paired D_minus_DS1: median -1.5000  p10 -8.5000  p90 4.0000  n_centres 817  share_negative 0.5863
+
+### M4_fame_percentile
+  K    centre-weighted: median 0.9906  p10 0.9457  p90 0.9977  n_centres 874
+       pooled:          median 0.9914  p10 0.8977  p25 0.9748  p75 0.9969  p90 0.9989  mean 0.9552  n 40776
+       pooled_band_shares: [0.8, 0.9) 0.0425  [0.5, 0.8) 0.0394  [0.0, 0.5) 0.0195
+  KL   centre-weighted: median 0.8036  p10 0.6317  p90 0.8817  n_centres 493
+       pooled:          median 0.7694  p10 0.3158  p25 0.5839  p75 0.8544  p90 0.8836  mean 0.6827  n 4132
+       pooled_band_shares: [0.8, 0.9) 0.4192  [0.5, 0.8) 0.3884  [0.0, 0.5) 0.1924
+  D    centre-weighted: median 0.5760  p10 0.4554  p90 0.6605  n_centres 817
+       pooled:          median 0.5674  p10 0.1502  p25 0.3292  p75 0.7558  p90 0.8478  mean 0.5318  n 639186
+       pooled_band_shares: [0.8, 0.9) 0.1804  [0.5, 0.8) 0.3942  [0.0, 0.5) 0.4254
+  DH   centre-weighted: median 0.9672  p10 0.9522  p90 0.9993  n_centres 874
+       pooled:          median 0.9617  p10 0.9141  p25 0.9335  p75 0.9857  p90 0.9974  mean 0.9586  n 187651
+       pooled_band_shares: [0.8, 0.9) 0.0000  [0.5, 0.8) 0.0000  [0.0, 0.5) 0.0000
+  DS1  centre-weighted: median 0.8208  p10 0.6466  p90 0.8778  n_centres 817
+       pooled:          median 0.8226  p10 0.5290  p25 0.7075  p75 0.8748  p90 0.8924  mean 0.7564  n 7998
+       pooled_band_shares: [0.8, 0.9) 0.5651  [0.5, 0.8) 0.3455  [0.0, 0.5) 0.0894
+  paired D_minus_KL: median -0.2753  p10 -0.3858  p90 -0.1203  n_centres 438  share_negative 0.9635
+  paired D_minus_DH: median -0.3918  p10 -0.5312  p90 -0.3086  n_centres 817  share_negative 1.0000
+  paired D_minus_K: median -0.4141  p10 -0.5086  p90 -0.3274  n_centres 817  share_negative 0.9976
+  paired D_minus_DS1: median -0.2366  p10 -0.3395  p90 -0.0625  n_centres 817  share_negative 0.9364
+
+### M5_rank_in_centre_list
+  D    centre-weighted: median 703.0000  p10 201.5000  p90 3536.0000  n_centres 817
+       pooled:          median 2863.0000  p10 547.0000  p25 1197.0000  p75 6258.0000  p90 11358.0000  mean 4688.6440  n 639186
+       pooled_bucket_shares: 1-50 0.0001  51-100 0.0009  101-250 0.0228  251-500 0.0643  501-1000 0.1207  > 1000 0.7912
+  DS1  centre-weighted: median 196.5000  p10 119.8000  p90 387.8000  n_centres 817
+       pooled:          median 194.0000  p10 110.0000  p25 148.0000  p75 268.0000  p90 386.0000  mean 229.4875  n 7998
+       pooled_bucket_shares: 1-50 0.0091  51-100 0.0678  101-250 0.6332  251-500 0.2418  501-1000 0.0454  > 1000 0.0028
+  K    centre-weighted: median 43.5000  p10 26.5000  p90 113.8500  n_centres 874
+       pooled:          median 43.0000  p10 9.0000  p25 22.0000  p75 80.0000  p90 128.0000  mean 56.8312  n 40776
+       pooled_bucket_shares: 1-50 0.5829  51-100 0.2318  101-250 0.1839  251-500 0.0014  501-1000 0.0000  > 1000 0.0000
+  best-ranked D exit per centre: median 145.0000  p10 60.6000  p90 249.0000  n_centres 817
+  paired D_minus_K: median 656.0000  p10 114.5000  p90 3509.8000  n_centres 817  share_negative 0.0049
+  paired D_minus_DS1: median 494.0000  p10 30.5000  p90 3218.8000  n_centres 817  share_negative 0.0000
+
+### M5_rank_over_list_length
+  D    centre-weighted: median 0.5753  p10 0.4886  p90 0.7762  n_centres 817
+       pooled:          median 0.5376  p10 0.2047  p25 0.3422  p75 0.7480  p90 0.8934  mean 0.5425  n 639186
+  DS1  centre-weighted: median 0.1808  p10 0.0353  p90 0.6297  n_centres 817
+       pooled:          median 0.1654  p10 0.0313  p25 0.0689  p75 0.3439  p90 0.6091  mean 0.2455  n 7998
+  K    centre-weighted: median 0.0428  p10 0.0050  p90 0.4026  n_centres 874
+       pooled:          median 0.0337  p10 0.0029  p25 0.0091  p75 0.1286  p90 0.3778  mean 0.1183  n 40776
+  paired D_minus_K: median 0.5181  p10 0.4226  p90 0.5874  n_centres 817  share_negative 0.0049
+  paired D_minus_DS1: median 0.3859  p10 0.1191  p90 0.4897  n_centres 817  share_negative 0.0000
+
+### M7_router_price
+  K    centre-weighted: median 0.1574  p10 0.0930  p90 0.7338  n_centres 874
+       pooled:          median 0.1659  p10 0.0470  p25 0.0869  p75 0.3135  p90 0.7705  mean 0.3068  n 40776
+  KL   centre-weighted: median 0.4926  p10 0.1011  p90 1.6993  n_centres 493
+       pooled:          median 1.1250  p10 0.1395  p25 0.3971  p75 1.6031  p90 2.0181  mean 1.0811  n 4132
+  D    centre-weighted: median 1.9480  p10 1.6652  p90 2.2210  n_centres 817
+       pooled:          median 2.0453  p10 1.2747  p25 1.6559  p75 2.3972  p90 2.6527  mean 1.9930  n 639186
+  DH   centre-weighted: median 0.6251  p10 0.2886  p90 1.0140  n_centres 874
+       pooled:          median 0.8213  p10 0.1956  p25 0.3796  p75 1.2147  p90 1.5057  mean 0.8360  n 187651
+  DS1  centre-weighted: median 0.8197  p10 0.2629  p90 1.5385  n_centres 817
+       pooled:          median 0.7957  p10 0.2274  p25 0.4732  p75 1.0908  p90 1.4962  mean 0.8398  n 7998
+  paired D_minus_KL: median 1.4610  p10 0.6637  p90 1.8094  n_centres 438  share_negative 0.0160
+  paired D_minus_DH: median 1.2662  p10 0.9695  p90 1.6592  n_centres 817  share_negative 0.0061
+  paired D_minus_K: median 1.7211  p10 1.3267  p90 1.9972  n_centres 817  share_negative 0.0037
+  paired D_minus_DS1: median 1.1098  p10 0.3541  p90 1.6118  n_centres 817  share_negative 0.0000
+
+### M7_floor_upper_bound
+  K    centre-weighted: median 0.0572  p10 0.0000  p90 0.1323  n_centres 874
+       pooled:          median 0.0509  p10 0.0000  p25 0.0000  p75 0.1186  p90 0.1789  mean 0.0698  n 40776
+  KL   centre-weighted: median 0.1089  p10 0.0273  p90 0.1994  n_centres 493
+       pooled:          median 0.1101  p10 0.0431  p25 0.0818  p75 0.1420  p90 0.1888  mean 0.1140  n 4132
+  D    centre-weighted: median 0.2407  p10 0.1328  p90 0.3840  n_centres 817
+       pooled:          median 0.3773  p10 0.2385  p25 0.3044  p75 0.4425  p90 0.4999  mean 0.3730  n 639186
+  DH   centre-weighted: median 0.1504  p10 0.0000  p90 0.2976  n_centres 874
+       pooled:          median 0.2614  p10 0.0000  p25 0.1676  p75 0.3383  p90 0.3953  mean 0.2435  n 187651
+  DS1  centre-weighted: median 0.1712  p10 0.1007  p90 0.2682  n_centres 817
+       pooled:          median 0.1663  p10 0.0926  p25 0.1234  p75 0.2240  p90 0.2764  mean 0.1759  n 7998
+  paired D_minus_KL: median 0.0967  p10 0.0373  p90 0.2122  n_centres 438  share_negative 0.0137
+  paired D_minus_DH: median 0.0876  p10 0.0604  p90 0.1638  n_centres 817  share_negative 0.0000
+  paired D_minus_K: median 0.1820  p10 0.0897  p90 0.2943  n_centres 817  share_negative 0.0037
+  paired D_minus_DS1: median 0.0574  p10 0.0198  p90 0.1443  n_centres 817  share_negative 0.0012
+
+### M6
+  sim gap_weakest_kept_minus_strongest_deleted: median 0.0085  p10 0.0000  p90 0.1158  n_centres 817  share_exactly_0 0.2656  share_negative 0.0698
+  sim K_spread_strongest_minus_weakest_kept: median 0.0491  p10 0.0000  p90 0.5480  n_centres 874  share_exactly_0 0.3844  share_negative 0.0000
+  capv gap_weakest_kept_minus_strongest_deleted: median 0.1810  p10 0.0000  p90 1.2690  n_centres 817  share_exactly_0 0.0269  share_negative 0.0759
+  capv K_spread_strongest_minus_weakest_kept: median 1.5408  p10 0.9751  p90 4.6279  n_centres 874  share_exactly_0 0.0000  share_negative 0.0000
+  A4: {'negative_gap_centres_sim': 57, 'negative_gap_centres_capv': 62, 'violations_sim': 0, 'violations_capv': 0}
+
+### M8
+  centres_with_D: 817
+  centres_with_D_but_no_K_excluded: 0
+  w_known_ramp_fame_pctl: 0.0100
+  1x: median 146.6783  p10 43.1041  p90 205.2205  n_centres 817  share_le_10 0.0294  share_le_20 0.0477  share_finite 0.9976
+  2x: median 73.3391  p10 21.5520  p90 102.6103  n_centres 817  share_le_10 0.0477  share_le_20 0.0918  share_finite 0.9976
+  3x: median 48.8928  p10 14.3680  p90 68.4068  n_centres 817  share_le_10 0.0698  share_le_20 0.1457  share_finite 0.9976
+  diagnostic_centres_kstar_le_0: 8
+
+[dxq] wrote dxq_results.json sha256 9a807fe162f851f469999281a273910a8a68d6b7aeb14143c275fdc009153663
+[dxq] wrote dxq_centres.csv sha256 0495574541331d79bca406ab31cc9a43ff437cf000eaebae4fc153ab550eed30
+[dxq] wall time 20.0 min

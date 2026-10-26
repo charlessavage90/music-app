@@ -185,4 +185,293 @@ its refusal is recorded and nothing is reported in §1.
 
 ## 1. Measured
 
-*(Empty until the run. Written by the analyst from `dxq.out.txt` and `dxq_results.json` only.)*
+*Written from `dxq.out.txt` and `dxq_results.json` of the one recorded run (exit 0, wall time 20.0 min). Every figure below is a value in `dxq_results.json`; the key path is given per table. Measured only.*
+
+### Identity
+
+| input | sha256 as printed by the run | check |
+|---|---|---|
+| `graph-lba-a6.bin` | `28311d81d264b8ee950d855aef4a812c93073263433d131c0ad1a982e5395d5b` | == sidecar == pin (`trim_supply.py`) |
+| S4-A6 `MANIFEST.json`, before | `950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3` | == pin (`trim_supply.py`) |
+| S4-A6 `MANIFEST.json`, after | `950e3ee86e1156bd3c4b389ff5eef4ffabc0972d0bac3f6a2c6d37d74caa4af3` | unchanged (`trim_supply.py`) |
+| `graph-drp-s1.bin` | `418fe6660795f735c7dfe1960e65300c15f4401db2a15186fb6439d646dda15f` | == sidecar == pin (`dxq.py`, before anything else was read) |
+| `trim_supply.py` (executed unmodified) | `ace57c262aec0ebb2888a1d928e2cab1634ea079c4cb15502ec71ea3fd3da7f9` | — |
+
+Population file `1bbff8fcfde78a07d276f727ccaf048c73da4bfd27709b64f6f6894d6d4d2d7b` == archive manifest (`trim_supply.py`). `trim_supply.py`'s own reproductions all printed True, including its four graph-descriptives §1 A zero counts (`dxq.out.txt`).
+
+**Router weights, `ApiConfig()` at run time:** `w_sim` 3.0, `w_jump` 1.0, `w_floor` 1.0, `w_hop` 0.02, `w_avoid` 1.0, `w_degree_hub` 0.0, `w_known_ramp_fame_pctl` 0.01.
+
+**Centres:** 874 (lba-a6 nodes with measured fame percentile ≥ 0.99).
+
+**Excluded and counted** (`exclusions`): null-fame served neighbours of centres 0; null-fame deleted neighbours 17; deleted neighbours that are not lba-a6 nodes (no fame percentile; lost to the largest-component prune) 2,015.
+
+### Assertions
+
+- `DXQ-A1`: **pass** — 40,776 kept edges at the centres checked, 0 mismatches.
+- `DXQ-A2`: deleted exits missing from the centre's own ranked list: `DXQ-D` 0, `DXQ-DS1` 0 (expected 0); `DXQ-K`, for `DXQ-M5` reference, 0.
+- `DXQ-A3`: **pass** — 0 violations. Edges in `graph-drp-s1.bin` not in lba-a6: 7,998; touching a centre 7,998; touching none 0; `DRP-C10` added edges (`drp_g3.json`) 7,998.
+- `DXQ-A4`: **pass** — negative-gap centres with no below-0.9 edge deleted by the neighbour's ceiling: 0 (emitted similarity), 0 (cap ranking value). Negative-gap centres: 57 (emitted similarity), 62 (cap ranking value).
+- Listening score is reconstructed as `round(expm1(cap ranking value))`; max absolute deviation from an integer 2.5e-11.
+
+### How to read the tables
+
+**Centre-weighted (primary):** median within each centre, then median / p10 / p90 of those per-centre medians, with the centre count. **Pooled (secondary):** over all edges in the group. **Paired:** per-centre median of `DXQ-D` minus the other group's, over centres with both; "share < 0" is the share of those centres where the difference is negative. Group sizes in edges are the pooled `n`.
+
+### `DXQ-M1` — cap ranking value
+
+*how strongly the listening data links the famous artist to this one* — `results.groups.M1_cap_ranking_value`, `results.comparisons.M1_cap_ranking_value`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 7.848 | 6.053 | 8.992 | 7.946 | 5.994 | 7.188 | 8.594 | 9.157 | 7.702 | 40,776 |
+| `DXQ-KL` | 493 | 6.812 | 3.611 | 8.430 | 5.100 | 2.890 | 3.871 | 6.976 | 7.908 | 5.309 | 4,132 |
+| `DXQ-D` | 817 | 3.401 | 2.833 | 4.007 | 3.401 | 2.079 | 2.565 | 4.331 | 5.226 | 3.558 | 639,186 |
+| `DXQ-DH` | 874 | 6.554 | 5.727 | 7.997 | 6.267 | 4.691 | 5.361 | 7.324 | 8.152 | 6.335 | 187,651 |
+| `DXQ-DS1` | 817 | 6.080 | 4.076 | 7.633 | 6.158 | 4.205 | 5.313 | 6.960 | 7.767 | 6.058 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -3.600 | -4.753 | -1.580 | 0.9863 |
+| `DXQ-D` − `DXQ-DH` | 817 | -3.035 | -4.682 | -2.272 | 0.9976 |
+| `DXQ-D` − `DXQ-K` | 817 | -4.447 | -5.527 | -3.160 | 0.9951 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -2.647 | -3.962 | -0.847 | 0.9559 |
+
+### `DXQ-M1` — listening score (beside it)
+
+*how strongly the listening data links the famous artist to this one* — `results.groups.M1_listening_score`, `results.comparisons.M1_listening_score`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 2558.8 | 424.6 | 8033.9 | 2822.0 | 400.0 | 1322.0 | 5396.0 | 9482.0 | 4024.6 | 40,776 |
+| `DXQ-KL` | 493 | 916.0 | 36.0 | 4584.2 | 163.0 | 17.0 | 47.0 | 1069.2 | 2716.9 | 916.0 | 4,132 |
+| `DXQ-D` | 817 | 29.0 | 16.0 | 54.0 | 29.0 | 7.0 | 12.0 | 75.0 | 185.0 | 97.4 | 639,186 |
+| `DXQ-DH` | 874 | 701.0 | 305.9 | 2971.6 | 526.0 | 108.0 | 212.0 | 1515.0 | 3471.0 | 1253.0 | 187,651 |
+| `DXQ-DS1` | 817 | 436.0 | 58.0 | 2077.9 | 471.5 | 66.0 | 202.0 | 1053.0 | 2361.1 | 961.7 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -1053.8 | -4961.8 | -57.3 | 0.9863 |
+| `DXQ-D` − `DXQ-DH` | 817 | -633.5 | -2857.3 | -274.1 | 0.9976 |
+| `DXQ-D` − `DXQ-K` | 817 | -2741.5 | -8091.4 | -541.6 | 0.9951 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -401.5 | -2026.5 | -27.9 | 0.9559 |
+
+### `DXQ-M2` — emitted similarity
+
+*the similarity the app would show for this step* — `results.groups.M2_emitted_similarity`, `results.comparisons.M2_emitted_similarity`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 1.000 | 0.794 | 1.000 | 1.000 | 0.787 | 0.943 | 1.000 | 1.000 | 0.939 | 40,776 |
+| `DXQ-KL` | 493 | 0.894 | 0.474 | 1.000 | 0.669 | 0.379 | 0.508 | 0.916 | 1.000 | 0.685 | 4,132 |
+| `DXQ-D` | 817 | 0.446 | 0.372 | 0.526 | 0.446 | 0.273 | 0.337 | 0.568 | 0.686 | 0.467 | 639,186 |
+| `DXQ-DH` | 874 | 0.860 | 0.752 | 1.000 | 0.823 | 0.616 | 0.704 | 0.961 | 1.000 | 0.816 | 187,651 |
+| `DXQ-DS1` | 817 | 0.798 | 0.535 | 0.997 | 0.808 | 0.552 | 0.697 | 0.914 | 1.000 | 0.786 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -0.444 | -0.549 | -0.207 | 0.9840 |
+| `DXQ-D` − `DXQ-DH` | 817 | -0.398 | -0.577 | -0.298 | 0.9951 |
+| `DXQ-D` − `DXQ-K` | 817 | -0.529 | -0.594 | -0.408 | 0.9927 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -0.347 | -0.494 | -0.111 | 0.9559 |
+
+Pooled share by bin (`pooled_bin_shares`):
+
+| group | [0.0, 0.5) | [0.5, 0.6) | [0.6, 0.7) | [0.7, 0.8) | [0.8, 0.9) | [0.9, 1.0) | exactly 1.0 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 0.0249 | 0.0183 | 0.0256 | 0.0379 | 0.0776 | 0.1912 | 0.6244 |
+| `DXQ-KL` | 0.2430 | 0.1583 | 0.1375 | 0.1055 | 0.0825 | 0.1251 | 0.1481 |
+| `DXQ-D` | 0.6194 | 0.1827 | 0.1095 | 0.0518 | 0.0221 | 0.0096 | 0.0049 |
+| `DXQ-DH` | 0.0176 | 0.0642 | 0.1607 | 0.2091 | 0.1983 | 0.1589 | 0.1912 |
+| `DXQ-DS1` | 0.0688 | 0.0655 | 0.1202 | 0.2229 | 0.2439 | 0.1558 | 0.1229 |
+
+### `DXQ-M3a` — the neighbour's served degree on lba-a6
+
+*how many connections the less-listened artist has on the map, and had before the limit* — `results.groups.M3a_served_degree`, `results.comparisons.M3a_served_degree`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 49.0 | 40.8 | 50.0 | 49.0 | 26.0 | 46.0 | 50.0 | 50.0 | 44.4 | 40,776 |
+| `DXQ-KL` | 493 | 46.0 | 14.0 | 50.0 | 27.0 | 9.0 | 14.0 | 49.0 | 50.0 | 29.6 | 4,132 |
+| `DXQ-D` | 817 | 16.0 | 12.0 | 20.0 | 17.0 | 6.0 | 10.0 | 28.0 | 45.0 | 20.6 | 639,186 |
+| `DXQ-DH` | 874 | 47.0 | 35.0 | 49.0 | 46.0 | 11.0 | 23.0 | 50.0 | 50.0 | 36.8 | 187,651 |
+| `DXQ-DS1` | 817 | 33.5 | 13.5 | 50.0 | 34.0 | 9.0 | 17.0 | 50.0 | 50.0 | 32.3 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -28.8 | -34.6 | -0.5 | 0.9018 |
+| `DXQ-D` − `DXQ-DH` | 817 | -29.0 | -34.5 | -19.0 | 0.9963 |
+| `DXQ-D` − `DXQ-K` | 817 | -33.0 | -36.0 | -27.0 | 0.9927 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -16.5 | -34.0 | 0.0 | 0.8482 |
+
+### `DXQ-M3a` — the neighbour's pre-ceiling degree (`SUP-S3` size)
+
+*how many connections the less-listened artist has on the map, and had before the limit* — `results.groups.M3a_pre_ceiling_degree`, `results.comparisons.M3a_pre_ceiling_degree`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 308.5 | 71.8 | 1149.3 | 305.0 | 60.0 | 108.0 | 864.0 | 2156.0 | 837.3 | 40,776 |
+| `DXQ-KL` | 493 | 84.0 | 51.0 | 505.0 | 57.0 | 50.0 | 51.0 | 100.0 | 253.9 | 129.1 | 4,132 |
+| `DXQ-D` | 817 | 52.0 | 51.0 | 53.0 | 53.0 | 50.0 | 51.0 | 58.0 | 72.0 | 59.3 | 639,186 |
+| `DXQ-DH` | 874 | 99.0 | 70.0 | 2449.7 | 89.0 | 54.0 | 62.0 | 207.0 | 1198.0 | 594.0 | 187,651 |
+| `DXQ-DS1` | 817 | 65.5 | 52.0 | 182.7 | 65.0 | 51.0 | 54.0 | 112.8 | 234.0 | 128.7 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -47.8 | -455.0 | -2.0 | 0.9498 |
+| `DXQ-D` − `DXQ-DH` | 817 | -42.0 | -2322.8 | -18.0 | 1.0000 |
+| `DXQ-D` − `DXQ-K` | 817 | -280.0 | -1130.0 | -31.8 | 0.9927 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -12.0 | -122.3 | -1.0 | 0.9364 |
+
+### `DXQ-M3b` — top-1 % centres in the neighbour's own top-50 (a proxy, not a measure of sound)
+
+*how many of the most-listened 1 % this artist names among its own fifty most similar. A high count is a proxy for "names famous artists because everyone plays them", the noise trim-supply §3 worries about. It is a proxy, not a measure of sound* — `results.groups.M3b_centres_in_own_top50`, `results.comparisons.M3b_centres_in_own_top50`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-D` | 817 | 18.0 | 11.6 | 25.0 | 16.0 | 5.0 | 9.0 | 24.0 | 32.0 | 17.3 | 639,186 |
+| `DXQ-KL` | 493 | 21.0 | 9.0 | 32.0 | 19.0 | 6.0 | 11.0 | 28.0 | 36.0 | 20.2 | 4,132 |
+| `DXQ-DS1` | 817 | 19.5 | 9.0 | 31.0 | 20.0 | 7.0 | 12.0 | 28.0 | 36.0 | 20.7 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -3.0 | -13.6 | 6.0 | 0.6233 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -1.5 | -8.5 | 4.0 | 0.5863 |
+
+Pooled share of edges with ≥ 10 (`pooled_share_ge_10`): `DXQ-D` 0.7299; `DXQ-KL` 0.8018; `DXQ-DS1` 0.8253.
+
+### `DXQ-M4` — the neighbour's fame percentile
+
+*how far below the top the exit sits* — `results.groups.M4_fame_percentile`, `results.comparisons.M4_fame_percentile`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 0.991 | 0.946 | 0.998 | 0.991 | 0.898 | 0.975 | 0.997 | 0.999 | 0.955 | 40,776 |
+| `DXQ-KL` | 493 | 0.804 | 0.632 | 0.882 | 0.769 | 0.316 | 0.584 | 0.854 | 0.884 | 0.683 | 4,132 |
+| `DXQ-D` | 817 | 0.576 | 0.455 | 0.661 | 0.567 | 0.150 | 0.329 | 0.756 | 0.848 | 0.532 | 639,186 |
+| `DXQ-DH` | 874 | 0.967 | 0.952 | 0.999 | 0.962 | 0.914 | 0.934 | 0.986 | 0.997 | 0.959 | 187,651 |
+| `DXQ-DS1` | 817 | 0.821 | 0.647 | 0.878 | 0.823 | 0.529 | 0.708 | 0.875 | 0.892 | 0.756 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | -0.275 | -0.386 | -0.120 | 0.9635 |
+| `DXQ-D` − `DXQ-DH` | 817 | -0.392 | -0.531 | -0.309 | 1.0000 |
+| `DXQ-D` − `DXQ-K` | 817 | -0.414 | -0.509 | -0.327 | 0.9976 |
+| `DXQ-D` − `DXQ-DS1` | 817 | -0.237 | -0.340 | -0.062 | 0.9364 |
+
+Pooled share by band (`pooled_band_shares`):
+
+| group | [0.8, 0.9) | [0.5, 0.8) | [0.0, 0.5) |
+|---|---:|---:|---:|
+| `DXQ-K` | 0.0425 | 0.0394 | 0.0195 |
+| `DXQ-KL` | 0.4192 | 0.3884 | 0.1924 |
+| `DXQ-D` | 0.1804 | 0.3942 | 0.4254 |
+| `DXQ-DH` | 0.0000 | 0.0000 | 0.0000 |
+| `DXQ-DS1` | 0.5651 | 0.3455 | 0.0894 |
+
+### `DXQ-M5` — 1-based rank in the centre's own ranked list
+
+*how far down the famous artist's own list of similar artists the lost exit sat* — `results.groups.M5_rank_in_centre_list`, `results.comparisons.M5_rank_in_centre_list`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-D` | 817 | 703.0 | 201.5 | 3536.0 | 2863.0 | 547.0 | 1197.0 | 6258.0 | 11358.0 | 4688.6 | 639,186 |
+| `DXQ-DS1` | 817 | 196.5 | 119.8 | 387.8 | 194.0 | 110.0 | 148.0 | 268.0 | 386.0 | 229.5 | 7,998 |
+| `DXQ-K` | 874 | 43.5 | 26.5 | 113.9 | 43.0 | 9.0 | 22.0 | 80.0 | 128.0 | 56.8 | 40,776 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-K` | 817 | 656.0 | 114.5 | 3509.8 | 0.0049 |
+| `DXQ-D` − `DXQ-DS1` | 817 | 494.0 | 30.5 | 3218.8 | 0.0000 |
+
+Pooled share by rank bucket (`pooled_bucket_shares`):
+
+| group | 1-50 | 51-100 | 101-250 | 251-500 | 501-1000 | > 1000 |
+|---|---:|---:|---:|---:|---:|---:|
+| `DXQ-D` | 0.0001 | 0.0009 | 0.0228 | 0.0643 | 0.1207 | 0.7912 |
+| `DXQ-DS1` | 0.0091 | 0.0678 | 0.6332 | 0.2418 | 0.0454 | 0.0028 |
+| `DXQ-K` | 0.5829 | 0.2318 | 0.1839 | 0.0014 | 0.0000 | 0.0000 |
+
+Per centre, rank of its best-ranked `DXQ-D` exit (`best_ranked_D_exit_per_centre`): median 145.0, p10 60.6, p90 249.0, over 817 centres.
+
+### `DXQ-M5` — rank ÷ list length
+
+*how far down the famous artist's own list of similar artists the lost exit sat* — `results.groups.M5_rank_over_list_length`, `results.comparisons.M5_rank_over_list_length`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-D` | 817 | 0.575 | 0.489 | 0.776 | 0.538 | 0.205 | 0.342 | 0.748 | 0.893 | 0.543 | 639,186 |
+| `DXQ-DS1` | 817 | 0.181 | 0.035 | 0.630 | 0.165 | 0.031 | 0.069 | 0.344 | 0.609 | 0.245 | 7,998 |
+| `DXQ-K` | 874 | 0.043 | 0.005 | 0.403 | 0.034 | 0.003 | 0.009 | 0.129 | 0.378 | 0.118 | 40,776 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-K` | 817 | 0.518 | 0.423 | 0.587 | 0.0049 |
+| `DXQ-D` − `DXQ-DS1` | 817 | 0.386 | 0.119 | 0.490 | 0.0000 |
+
+### `DXQ-M7` — router price `w_sim·(1 − s) + w_jump·|Δpop_raw| + w_hop`
+
+*what the router would charge for stepping from the famous artist to this one, before any press* — `results.groups.M7_router_price`, `results.comparisons.M7_router_price`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 0.157 | 0.093 | 0.734 | 0.166 | 0.047 | 0.087 | 0.314 | 0.771 | 0.307 | 40,776 |
+| `DXQ-KL` | 493 | 0.493 | 0.101 | 1.699 | 1.125 | 0.139 | 0.397 | 1.603 | 2.018 | 1.081 | 4,132 |
+| `DXQ-D` | 817 | 1.948 | 1.665 | 2.221 | 2.045 | 1.275 | 1.656 | 2.397 | 2.653 | 1.993 | 639,186 |
+| `DXQ-DH` | 874 | 0.625 | 0.289 | 1.014 | 0.821 | 0.196 | 0.380 | 1.215 | 1.506 | 0.836 | 187,651 |
+| `DXQ-DS1` | 817 | 0.820 | 0.263 | 1.539 | 0.796 | 0.227 | 0.473 | 1.091 | 1.496 | 0.840 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | 1.461 | 0.664 | 1.809 | 0.0160 |
+| `DXQ-D` − `DXQ-DH` | 817 | 1.266 | 0.969 | 1.659 | 0.0061 |
+| `DXQ-D` − `DXQ-K` | 817 | 1.721 | 1.327 | 1.997 | 0.0037 |
+| `DXQ-D` − `DXQ-DS1` | 817 | 1.110 | 0.354 | 1.612 | 0.0000 |
+
+### `DXQ-M7` — floor term upper bound `w_floor·max(0, pop_raw_c − pop_raw_v)`, reported separately
+
+*what the router would charge for stepping from the famous artist to this one, before any press* — `results.groups.M7_floor_upper_bound`, `results.comparisons.M7_floor_upper_bound`
+
+| group | centres | centre-wtd median | p10 | p90 | pooled median | p10 | p25 | p75 | p90 | mean | n edges |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `DXQ-K` | 874 | 0.057 | 0.000 | 0.132 | 0.051 | 0.000 | 0.000 | 0.119 | 0.179 | 0.070 | 40,776 |
+| `DXQ-KL` | 493 | 0.109 | 0.027 | 0.199 | 0.110 | 0.043 | 0.082 | 0.142 | 0.189 | 0.114 | 4,132 |
+| `DXQ-D` | 817 | 0.241 | 0.133 | 0.384 | 0.377 | 0.239 | 0.304 | 0.442 | 0.500 | 0.373 | 639,186 |
+| `DXQ-DH` | 874 | 0.150 | 0.000 | 0.298 | 0.261 | 0.000 | 0.168 | 0.338 | 0.395 | 0.243 | 187,651 |
+| `DXQ-DS1` | 817 | 0.171 | 0.101 | 0.268 | 0.166 | 0.093 | 0.123 | 0.224 | 0.276 | 0.176 | 7,998 |
+
+| paired (per-centre medians) | centres | median | p10 | p90 | share < 0 |
+|---|---:|---:|---:|---:|---:|
+| `DXQ-D` − `DXQ-KL` | 438 | 0.097 | 0.037 | 0.212 | 0.0137 |
+| `DXQ-D` − `DXQ-DH` | 817 | 0.088 | 0.060 | 0.164 | 0.0000 |
+| `DXQ-D` − `DXQ-K` | 817 | 0.182 | 0.090 | 0.294 | 0.0037 |
+| `DXQ-D` − `DXQ-DS1` | 817 | 0.057 | 0.020 | 0.144 | 0.0012 |
+
+### `DXQ-M6` — weakest kept connection minus strongest deleted exit, per centre
+
+*how far below the famous artist's weakest kept connection its best lost exit sits* — `results.M6`. Gap over centres with ≥ 1 `DXQ-K` and ≥ 1 `DXQ-D`; spread of `DXQ-K` (strongest minus weakest kept) beside it, for scale.
+
+| currency | quantity | centres | median | p10 | p90 | share exactly 0 | share < 0 |
+|---|---|---:|---:|---:|---:|---:|---:|
+| emitted similarity | gap | 817 | 0.0085 | 0.0000 | 0.1158 | 0.2656 | 0.0698 |
+| emitted similarity | `DXQ-K` spread | 874 | 0.0491 | 0.0000 | 0.5480 | 0.3844 | 0.0000 |
+| cap ranking value | gap | 817 | 0.1810 | 0.0000 | 1.2690 | 0.0269 | 0.0759 |
+| cap ranking value | `DXQ-K` spread | 874 | 1.5408 | 0.9751 | 4.6279 | 0.0000 | 0.0000 |
+
+### `DXQ-M8` — single-step break-even `k*`, smallest per centre
+
+*how many Dig deeper presses before the best lost exit would be cheaper, as a single step, than the famous artist's cheapest kept connection* — `results.M8`. Single-step arithmetic, not a routing prediction. `w_known_ramp_fame_pctl` 0.01. Centres with ≥ 1 `DXQ-D`: 817; of those excluded for having no `DXQ-K`: 0. The 2× and 3× rows are `k*` ÷ 2 and ÷ 3, arithmetic only.
+
+| pull | centres | median | p10 | p90 | share `k*` ≤ 10 | share ≤ 20 | share finite |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 1× | 817 | 146.68 | 43.10 | 205.22 | 0.0294 | 0.0477 | 0.9976 |
+| 2× | 817 | 73.34 | 21.55 | 102.61 | 0.0477 | 0.0918 | 0.9976 |
+| 3× | 817 | 48.89 | 14.37 | 68.41 | 0.0698 | 0.1457 | 0.9976 |
+
+`k*` is reported as computed by the formula, including values ≤ 0 (the best lost exit already cheaper at zero presses and less famous than the cheapest kept connection): centres with smallest `k*` ≤ 0: 8 (`diagnostic_centres_kstar_le_0`). These fall inside the ≤ 10 and ≤ 20 shares.
+
+### Run notes
+
+- Emitted similarity is taken as float32, the width the artifact stores (`DXQ-A1` shows it equals the served score on every kept edge); `DXQ-M2`'s bins and `DXQ-M7`'s price use that value for every group.
+- `DXQ-M3a`'s pre-ceiling degree is `|SUP-S3(v)|` restricted to lba-a6 nodes, as `SUP-S3` is defined in trim-supply's stage table. Groups are drawn from `SUP-S3` likewise restricted to nodes; the non-node deleted neighbours are the excluded count above.
+- `DXQ-M8`'s `e*` ties on price would break on lowest MBID.
+- Before the recorded run, `dxq.py`'s post-build code was exercised once against a namespace reconstructed from the `DRP-` stage-3a capture (`capture.pkl`), to catch code errors without spending a 20-minute build. Its outputs were written outside this directory and deleted; no figure here comes from it.
