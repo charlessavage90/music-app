@@ -475,3 +475,60 @@ arriving through a reopened source still goes through an adoption rule fixed *be
 runs — beat the incumbent on the primary and fire no falsifier, the anti-proxy-shopping
 guard in `2026-07-23-repair-and-retune-execution-log.md` — and still validates under the
 novelty-likelihood construct in this document's Definitions. Cited, not restated.
+
+> **Forward note, 2026-10-26 — REQ-44 confirmation for Last.fm, owner, verbatim intent; the
+> terms read against source the same day. Changes no requirement.**
+>
+> **The confirmation.** Last.fm may be used, under its non-commercial terms with attribution.
+> Named uses so far: a second fame source for #273, tags, and coverage of artists ListenBrainz
+> barely knows. **On #270, no measurement has been made.** The expectation, from the record and
+> not from a test, is that a second co-listening source adds supply of the kind the trim already
+> discards and the router already declines (`builder/analysis/2026-09-27-issue-200-trim-supply`
+> `SUP-R1`; `findings/2026-09-28-drp-lattice-results.md` `DRP-R13`), so it would not by itself
+> move that defect. That is a reason to prioritise other leads, not a finding, and it says
+> nothing about uses of the data not yet thought of. A session with a specific use in mind for
+> #270 should state it and pre-register it like any other lead, not treat this note as having
+> closed the question.
+>
+> **Item 1 above is now read against source** (`last.fm/api/tos`, fetched 2026-10-26; the page
+> carries no revision date and says it may be updated at any time, so re-read before any crawl).
+> This is a session's reading of the clauses, not legal advice; the page itself recommends
+> independent advice. What it says, and what each clause means for a use here:
+>
+> - **Non-commercial only** (3.1–3.2); commercial use needs a separate agreement. Donations and
+>   cost recovery are not mentioned in either direction; 3.1 says to contact them if unsure.
+>   "Donations-only sits inside non-commercial" therefore stays **plausible, not verified** — the
+>   terms do not settle it, only Last.fm can.
+> - **Derived works are licensed, not forbidden** (4.1): a royalty-free licence to copy, adapt,
+>   and build "Derivative Works" and publish them, subject to 4.2–4.3. A similarity graph or a
+>   fame table built from the data is within the grant.
+> - **The storage cap is the binding clause for this project** (4.3.4): the licence is
+>   "restricted to a small portion of Last.fm Data … not to exceed the Reasonable Usage Cap in
+>   total at any time", **100 MB**, with use or storage above it "strictly prohibited" and a
+>   larger portion needing prior written consent. The ListenBrainz archive this project keeps is
+>   hundreds of MB of raw payloads; a Last.fm similarity crawl of the whole map on the same
+>   pattern would exceed the cap by an order of magnitude and needs their consent first. A
+>   bounded fame cross-check (#273's band, listener counts only, raw payloads not retained)
+>   plausibly fits under it — size it before running, and record the size.
+> - **Public pages need written approval** (2.7): "You agree to only give public access to pages
+>   using Last.fm's web services that have been previously approved by Last.fm in writing", with
+>   a "powered by AudioScrobbler" button and catalogue links, placements subject to their
+>   approval. An **offline** analysis never shown in the app is not caught by this; **anything
+>   Last.fm-derived that reaches the served app is**, and that needs their written approval
+>   before deploy, not after.
+> - **Terminable at will, with deletion** (9.2–9.3): Last.fm may terminate "at any time in its
+>   sole discretion … with or without cause", and on termination all Last.fm Data in your
+>   possession must be deleted. **This is item 2 above, answered in part:** the commercial worry
+>   was not the constraint's whole load. A map whose edges depend on Last.fm data is a map that
+>   can be ordered deleted, which is the "load-bearing" risk the alpha design named, and it
+>   stands independently of REQ-43. An offline cross-check carries it trivially; a structural
+>   dependency does not.
+> - Also binding: a registered account is required (2.2); only the documented web services, no
+>   other gathering (2.6); no sub-licensing (4.3.3); rate limits at their discretion (4.4); no
+>   publicity about the use without their consent (8.2); the API's audio and images are excluded
+>   from the licence entirely (5.1.8 — moot here, clips come from Deezer); governed by English
+>   law (10.7).
+>
+> **What this leaves:** item 3 (setlist.fm, and any other source) is unchanged — an untaken
+> decision under REQ-44. The standing guards above bind any fame or novelty candidate arriving
+> through Last.fm exactly as before.
