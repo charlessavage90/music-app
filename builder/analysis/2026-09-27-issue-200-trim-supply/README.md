@@ -15,6 +15,12 @@ config or archive was changed, and nothing is proposed. Resuming path-quality wo
 trigger. There is no pre-registration. The reading rule below was fixed by the coordinating session
 before the run.
 
+**Follow-up, 2026-10-26 (#270):** §4's "measure the quality of the discarded candidates first" has run,
+in map currency only: `../2026-10-26-issue-270-discarded-exit-quality/README.md`, which owns those
+figures. Its read qualifies, and does not reverse, the "hundreds" framing in §2 and §4 here: it finds
+that only a short top slice of each famous artist's list sits near the connections kept. Its barred
+reads travel with that sentence: nothing there says whether the deleted exits *sound* good or bad.
+
 **Currency on every figure: fame percentile, lba-a6 frame.** That is an artist's ListenBrainz
 listener count ranked 0 to 1 within lba-a6's own measured population, via the shipped
 `GraphStore`. It is not `pop_raw`, not degree, and not Spotify monthly listeners.

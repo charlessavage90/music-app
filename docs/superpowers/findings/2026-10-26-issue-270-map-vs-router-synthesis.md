@@ -6,7 +6,9 @@ a sentence below uses a proportion, it is quoting that owner's own plain-languag
 decides nothing.** Which lead to pursue, or whether to accept the defect, is the owner's (#270, *Whose*).
 
 **The defect, in one sentence:** pick two famous artists, press Dig deeper many times, and the artists
-in the middle of the journey stay famous (#270).
+in the middle of the journey stay famous (#270). Throughout, "famous" means the adopted proxy,
+`fame_lb_pctl` (`PRODUCT-REQUIREMENTS.md`, Definitions): a listener-count percentile, not worldly fame,
+not degree and not `pop_raw`.
 
 ## What is established
 
@@ -22,7 +24,8 @@ bullet).
 
 **2. The wall is made by the fifty-connection limit, not by missing data.** Before the limit, all but
 one of the most-listened 1 % have less-listened artists among their candidates, and the typical one
-has hundreds. After it, close to half have none. The pre-fixed rule read this as `SUP-R1`: *most famous
+has hundreds. (Counted, not judged: #270's follow-up finds that only a short top slice of each list
+sits near the connections kept; open questions, first bullet.) After it, close to half have none. The pre-fixed rule read this as `SUP-R1`: *most famous
 artists do have less-listened similar artists in the data, and the fifty-connection rule is what throws
 them away.* The mechanism is the famous artist's **own** limit: it keeps its fifty strongest
 connections, ranked on raw co-listening with no correction for how much an artist is played overall,
@@ -43,12 +46,13 @@ it.**
   *the candidate data then*), under that period's fame frame, not on today's map. On the candidate
   data, journeys between famous artists did sometimes pass below the top tenth, even under the rule
   then in production (same section): it cuts against reading the router as the only constraint.
-- On today's map, pressing twice or three times as hard did nothing on either famous tier: after
-  seven to ten presses, the middle of the journey was exactly as famous as today's app gives. *Source:*
+- On today's map, pressing twice or three times as hard did not make the middle of the journey less
+  famous on either famous tier after seven to ten presses. *Source:*
   `docs/superpowers/findings/2026-09-28-drp-lattice-results.md` §1.2 (every ramp cell reads NO
-  MOVEMENT) and §2, first paragraph.
+  MOVEMENT) and §2, first paragraph. Every such cell carries the lattice's qualifier (vi): *"the scale
+  is capped here: this result cannot rule out that the cell made famous journeys more famous."*
 - Giving the most-listened 1 % their deleted less-listened connections back (up to ten each) also did
-  nothing at today's pull or the stronger pulls. Every famous journey passed within one step of an
+  not make famous journeys less famous at today's pull or the stronger pulls (qualifier (vi) again). Every famous journey passed within one step of an
   added connection, and few took one. *Source:* lattice results §1.2 and §2, second paragraph.
 - **Which of the two binds, by tier:** `DRP-R13` (*if a fame ceiling had to rise a lot to find any
   route, the map is missing the connections; if it hardly had to rise, yet stronger pulls moved
@@ -64,6 +68,8 @@ listen on coherence.**
   added it moved both tiers (`DRP-S1P3`, *the ceiling with the extra connections*). The lattice's own
   reading is that the ceiling moved fame **because it forbids famous artists**, not because the router
   found less-listened ones. The router accepted weaker steps to obey it, and journeys got longer.
+  Every ceiling cell carries the lattice's qualifier (vii): *"the ceiling forced this descent; it says
+  nothing about whether the journeys still hang together, which no offline number here measures."*
   *Source:* lattice results §1.2, §2 third to fifth paragraphs, and §3.
 - **What it cost:** in the blind listen of today's app against `DRP-S1P3`, the owner picked today's
   app on coherence by a margin past the pre-set bar, and the candidate on novelty on every row. The
@@ -91,7 +97,8 @@ Exploratory by its own brief, and not evidence.
 doesn't fit" marks from the listen, neither the map's similarity nor shared neighbours scored his
 marked steps worse clearly enough to pass the bar. The exploration's model rater did. *Source:*
 `docs/superpowers/findings/2026-10-03-snw-marks-test.md` §0. This bears on any measure of link
-quality that uses the map's own similarity, including the descriptive now running for #270.
+quality that uses the map's own similarity, including #270's discarded-exit descriptive (open questions,
+first bullet).
 
 ## Read together (inference, labelled)
 
@@ -102,13 +109,17 @@ pricing** declines them at every pull strength tried (item 3). Only forbidding f
 moved fame, and the one version that did so on both tiers was heard as less coherent (item 4). Neither
 layer has been changed alone and listened to.
 
+**Weakest link of this reading:** the router half rests on lattice cells that read NO MOVEMENT, and
+those can say fame did not fall but not that nothing happened (qualifier (vi), item 3). And no part of
+it says whether the withheld exits would sound right (item 6).
+
 ## Open questions the record names and has not run
 
 - **Are the deleted exits good connections or noise?** Named by trim-supply §4 (fourth bullet) and by
   the depth-remedy pre-registration's `DRP-X1` (*supply counts candidates, not good ones*). **Its
   map-currency half has since run** (`builder/analysis/2026-10-26-issue-270-discarded-exit-quality/`,
-  design committed before the run, which owns its figures and its four-part read). Its by-ear half (a listen or a coherence measure, trim-supply §3)
-  is not.
+  design committed before the run, which owns its figures and its four-part read). Its by-ear half (a
+  listen or a coherence measure, trim-supply §3) is not.
 - **The ceiling on today's map without the extra connections was never listened to** (#270, "What
   neither record closes").
 - **Which part of building the map made the wall:** the new similarity scores or the wider crawl

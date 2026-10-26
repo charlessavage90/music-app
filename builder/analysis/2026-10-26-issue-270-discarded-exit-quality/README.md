@@ -1,8 +1,9 @@
 # Issue #270: the less-listened exits the fifty-connection limit deleted, against the connections it kept
 
-**Role: FIGURES OWNER for this measurement, once §1 is filled.** Until then this file is the design,
-fixed and committed **before any figure was computed**. The git timestamp of the commit that adds this
-file without a §1 is the evidence of that order.
+**Role: FIGURES OWNER for this measurement.** Its design (everything above §1) was fixed and
+committed **before any figure was computed**. The git timestamp of the commit that adds this file
+without a §1 (`9d48176`) is the evidence of that order. A pre-run code exercise came after that
+commit, and no figure from it is reported (§1, run notes).
 
 **What this is.** The descriptive that
 `../2026-09-27-issue-200-trim-supply/README.md` §4, fourth bullet, names and nobody has run: *"measure the
@@ -185,7 +186,7 @@ its refusal is recorded and nothing is reported in §1.
 
 ## 1. Measured
 
-*Written from `dxq.out.txt` and `dxq_results.json` of the one recorded run (exit 0, wall time 20.0 min). Every figure below is a value in `dxq_results.json`; the key path is given per table. Measured only.*
+*Written from `dxq.out.txt` and `dxq_results.json` of the one recorded run (exit 0 and wall time 20.0 min as reported by the analyst's shell; neither is printed in `dxq.out.txt`). Every figure below is a value in `dxq_results.json`; the key path is given per table. Measured only.*
 
 ### Identity
 
@@ -484,46 +485,54 @@ derivation only.* Each sentence names the measure it rests on, so it can be disa
 - **Most of what the limit throws away is weak by the map's own data. The best of it is not.** The
   typical lost exit sits about seven hundred places down the famous artist's own list of similar
   artists. Its listening score is a small fraction of a kept connection's, and the app would show it
-  as under half-similar. (`DXQ-M5`, *how far down the famous artist's own list the lost exit sat*;
-  `DXQ-M1`, *how strongly the listening data links the two*; `DXQ-M2`, *the similarity the app would
-  show for this step*.) But the single best lost exit at each famous artist sits just under the
-  weakest connection it kept. On the app's similarity scale the gap is under a hundredth at the
-  median, and on the limit's own scale it is a small fraction of how much the kept connections vary
-  among themselves (`DXQ-M6`, *how far below the weakest kept connection the best lost exit sits*).
-  **So the limit cuts through a continuum, not at a cliff.** "Hundreds of discarded candidates per
-  famous artist" (trim-supply §2) overstates what a build change would have to work with: the usable
-  material is a short top slice, not the hundreds.
+  as under half-similar. (`DXQ-M5`, *how far down the famous artist's own list of similar artists the
+  lost exit sat*; `DXQ-M1`, *how strongly the listening data links the famous artist to this one*;
+  `DXQ-M2`, *the similarity the app would show for this step*.) But at the median famous artist, the
+  best lost exit sits just under the weakest connection it kept. On the app's similarity scale the gap
+  is under a hundredth; on the cap ranking value (the score the limit sorts by) it is a small fraction
+  of how much the kept connections vary among themselves. At the far end of famous artists (the p90
+  row of the §1 table) the gap is much wider (`DXQ-M6`, *how far below the famous artist's weakest kept
+  connection its best lost exit sits*). **So, for most famous artists, the limit cuts through a
+  continuum, not at a cliff.** "Hundreds of discarded candidates per famous artist" (trim-supply §2)
+  overstates what a build change would have to work with: what sits near the kept connections is a
+  short top slice of each list (`DXQ-M5`, best deleted-exit rank per centre), not the hundreds.
 - **The ten the earlier experiment put back were that top slice.** Those exits (`DXQ-DS1`, *the deleted
   exits the extra-connections experiment put back, which the listen heard*) are far stronger than the
-  lost exits as a whole on every map measure, and closer to the fame of what was kept (`DXQ-M1`,
-  `M2`, `M4`, `M5`). That is by their selection rule: strongest first.
-- **The one noise proxy does not single out the lost exits.** Lost exits and kept exits name about
-  the same number of the most-listened 1 % among their own fifty most similar. The paired difference
-  sits near zero and goes either way across centres (`DXQ-M3b`, *how many of the most-listened 1 % this
-  artist names among its own fifty*). The proxy separates nothing here, so it supports neither
-  "noise" nor "not noise".
+  lost exits as a whole on listening score, shown similarity and list position (`DXQ-M1`, `DXQ-M2`,
+  `DXQ-M5`, sentences above), and closer to the fame of what was kept (`DXQ-M4`, *how far below the
+  top the exit sits*). That is by their selection rule: strongest first. They are not separated on the
+  noise proxy below.
+- **The one noise proxy does not single out the lost exits.** At a typical famous artist, its lost
+  exits name slightly *fewer* of the most-listened 1 % among their own fifty most similar than its
+  kept less-listened connections do. The difference is small and leans that way at only somewhat more
+  than half the famous artists (`DXQ-M3b`, *how many of the most-listened 1 % this artist names among
+  its own fifty most similar*; §1 paired rows). So the proxy gives no sign that the lost exits are
+  more "famous-because-everyone-plays-them" than what was kept. It is a proxy, not a measure of sound.
 - **What the router would charge to use them is far above what it charges now.** Stepping from a
   famous artist to a typical lost exit costs roughly twelve times what a kept connection costs before
   any press. Even the restored top ten cost about five times as much (`DXQ-M7`, *what the router would
   charge for stepping from the famous artist to this one, before any press*). At today's per-press
   pull, the best lost exit at a typical famous artist would need on the order of 150 presses to become
   cheaper, as a single step, than the cheapest kept connection, and about 50 at three times the pull
-  (`DXQ-M8`, *how many presses before the best lost exit would be cheaper, as a single step*). This is
-  single-step arithmetic, not a routing outcome (§ "Reads", barred). The lattice did route, and found
-  the stronger pulls moved nothing. This shows **how large the gap is** that a per-press pull on fame
-  would have to close.
+  (`DXQ-M8`, *how many Dig deeper presses before the best lost exit would be cheaper, as a single step,
+  than the famous artist's cheapest kept connection*). This is single-step arithmetic, not a routing
+  outcome (§ "Reads", barred). The lattice did route, and found the stronger pulls did not make famous
+  journeys less famous (lattice results §1.2, with its qualifier (vi): *"the scale is capped here: this
+  result cannot rule out that the cell made famous journeys more famous"*). This shows **how large the
+  single-step gap is** that a per-press pull on fame would have to close.
 
 **In the app's terms:** a map change that only lets famous artists keep a few more less-listened
 connections would be giving them links the listening data rates almost as highly as ones they keep
-today. But the router would price those links far above its current choices, and a fame pull of the
-size tried cannot close that gap. A larger map change would mostly be promoting links the data rates
+today. But the router would price each of those links, as a single step, far above its current
+choices, and a fame pull of the size tried closes that single-step gap only after far more presses
+than anyone makes (§3 says why one step is not a journey). A larger map change would mostly be promoting links the data rates
 weakly, and nothing here says whether they *sound* right.
 
 ## 3. Weakest link
 
 - **Every measure is the map's own.** The map's similarity did not track the owner's ear on the
-  `DSL-` weak-step marks (`SNW-R4`, *on his marked steps, map similarity did not score worse than on
-  the unmarked steps clearly enough to pass the bar*). So "weak by the map's data" is not "sounds
+  `DSL-` weak-step marks (`SNW-R4`, *"On his marked steps, map similarity did not score worse than on
+  the unmarked steps of the same journey clearly enough to pass the bar."*). So "weak by the map's data" is not "sounds
   wrong", and "close to the kept edges" is not "sounds right". **I would defend** the structural
   reading: the limit cuts a continuum, the usable slice is short, and the price gap is large. All of it
   is arithmetic over one build that reproduces the served map. **I would give up cheaply** any
@@ -532,8 +541,8 @@ weakly, and nothing here says whether they *sound* right.
   is reported separately) and every downstream step. A route can pay one expensive exit and then
   travel cheaply.
 - **Saturation.** Over a quarter of famous artists show a gap of exactly 0 on the app's similarity
-  scale, because both edges sit at the 1.0 clip (`DXQ-M6`, share exactly 0). On the limit's own
-  scale, where few are tied, the gap is still small beside the spread of kept connections. So
+  scale, because both edges sit at the 1.0 clip (`DXQ-M6`, share exactly 0). On the cap ranking value,
+  where few are tied, the gap is still small beside the spread of kept connections. So
   "continuum" does not rest on the clip, but its exact size on the app's scale does.
 - **The price is not decomposed.** Whether the exit price is mostly the similarity term or mostly
   the popularity-jump term was not in the fixed statistics, so it is not reported. It matters for the
@@ -550,26 +559,33 @@ here is a recommendation. Each option names the cheapest experiment that could d
 
 - **A build-side change at the trim**, for example reserving a few of a famous artist's fifty slots
   for its strongest less-listened partners, displacing famous ones rather than adding beside them.
-  - *What this measurement says:* there is a short top slice to promote (`DXQ-M6`). The record
-    already holds the **additive** version at today's pull, and it moved nothing (lattice results
-    §1.2, the extra connections at today's pull).
+  - *What this measurement says:* there is a short top slice to promote (`DXQ-M6`, *how far below the
+    famous artist's weakest kept connection its best lost exit sits*). The record already holds the
+    **additive** version at today's pull, and it did not make famous journeys less famous (lattice
+    results §1.2, the extra connections at today's pull, qualifier (vi) attached).
   - *Cheapest decisive experiment:* one displacing rebuild from the trim-supply instrumented build,
-    then one lattice cell at today's pull on the existing 80 pairs with the stage-3b harness. It reads
-    whether a map change alone moves fame on famous pairs. It cannot read whether the journeys still
+    then one lattice cell at today's pull on the existing `DRP-T1` and `DRP-T2` famous-pair strata
+    (`drp_pairs.json`) with the stage-3b harness. It reads whether a map change alone makes famous
+    journeys less famous; like every lattice null, a no-movement result there could not rule out
+    journeys getting more famous (lattice qualifier (vi)). It cannot read whether the journeys still
     hang together.
   - *Cost:* a cold pre-registration, about 20 minutes of build, and a fraction of the stage-3b sweep's
     2.5 hours for eight cells (`builder/analysis/2026-09-28-drp-stage3b/README.md`). No listening
     unless it moves. The prior from this measurement and the lattice is that the router prices the
     promoted exits out.
 - **A routing change that prices the exits, rather than pulling on fame per press.**
-  - *What this measurement says:* the exit price is many times a kept step's (`DXQ-M7`). The fame
+  - *What this measurement says:* the exit price is many times a kept step's (`DXQ-M7`, *what the
+    router would charge for stepping from the famous artist to this one, before any press*). The fame
     pull of the size tried would need on the order of 150 presses to close it as a single step
-    (`DXQ-M8`).
+    (`DXQ-M8`, *how many Dig deeper presses before the best lost exit would be cheaper, as a single
+    step, than the famous artist's cheapest kept connection*).
   - *Cheapest decisive experiment, in two steps.* First, split the exit price into its similarity and
     popularity-jump parts. That is about 20 minutes of compute with no listening, a new descriptive with
     its statistics fixed first, and it says which term a routing change would act on. Then one lattice
-    cell on the existing extra-connections map, where `DRP-R13` already reads the binding constraint as
-    pricing, with that term changed.
+    cell on the existing extra-connections map, with that term changed. On that map `DRP-R13` (*if a
+    fame ceiling hardly had to rise to find a route, yet stronger pulls moved nothing, the connections
+    exist and the pull does not take them*) already reads the binding constraint as pricing (lattice
+    results §1.6).
   - *Cost:* a pre-registration for the cell, compute as above, and the owner's ear only if it moves.
     The `DSL-` barred reads still bind: the earlier coherence loss cannot be pinned on any single cost
     term (dsl-listen results §4).
